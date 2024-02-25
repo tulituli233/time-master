@@ -1,0 +1,90 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "时间管家"
+			},
+			"meta": {
+				"tabBar": true
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "时间管家"
+			},
+			"meta": {
+				"tabBar": true
+			}
+		},
+		{
+			"path": "pages/note/index",
+			"style": {
+				"navigationBarTitleText": "事项"
+			},
+			"meta": {
+				"tabBar": true
+			}
+		},
+		{
+			"path": "pages/plan/index",
+			"style": {
+				"navigationBarTitleText": "规划"
+			},
+			"meta": {
+				"tabBar": true
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "subPackages/jizhang",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "记账管家"
+					}
+				}
+			]
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#474747",
+		"selectedColor": "#9BC6FC",
+		"backgroundColor": "#F2F2F2",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "应用",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			},
+			{
+				"pagePath": "pages/note/index",
+				"text": "事项",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			},
+			{
+				"pagePath": "subPackages/jizhang/index/index",
+				"text": "规划",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"text": "我的",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png"
+			}
+		]
+	}
+}
