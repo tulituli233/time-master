@@ -1,17 +1,56 @@
 <template>
 	<view class="content">
 		<view class="select">
-			<view class="uni-padding-wrap">
-				<uni-segmented-control :current="current" :values="items" :style-type="styleType"
-					:active-color="activeColor" @clickItem="onClickItem" />
+			<view class="select-header">
+				<view class="uni-padding-wrap">
+					<uni-segmented-control :current="current" :values="items" :style-type="styleType"
+						:active-color="activeColor" @clickItem="onClickItem" />
+				</view>
 			</view>
 			<view class="content">
-				<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>
-				<view v-if="current === 1"><text class="content-text">选项卡2的内容</text></view>
-				<view v-if="current === 2"><text class="content-text">选项卡3的内容</text></view>
+				<view>
+					<view class="plan-list">
+						<view :class="['plan-item', index === 0 ? 'first' : '']" v-for="(item, index) in newPlanList"
+							:key="index">
+							<view v-if="item.plans && item.plans.length">
+								<view class="plan-header" @click="item.isShow = !item.isShow">
+									<view class="header-title">
+										<text class="title">{{ item.title }}</text>
+									</view>
+									<view class="header-desc">
+										<text class="plan-num">{{ item.plans.length }}</text>
+										<uni-icons :type="item.isShow ? 'top' : 'bottom'" size="20"></uni-icons>
+									</view>
+								</view>
+								<view class="plan-body" v-show="item.isShow">
+									<view class="body-item" v-for="item1 in item.plans" :key="item1.planID">
+										<uni-swipe-action>
+											<uni-swipe-action-item :right-options="options2"
+												@click="bindClick(item1.planID)">
+												<view class="content-box">
+													<view class="box-left">
+														<checkbox value="cb" />
+													</view>
+													<view class="box-right">
+														<view class="plan-title">
+															<text class="title">{{ item1.title }}</text>
+														</view>
+														<view class="plan-desc">
+															<text class="desc">{{ item1.date }}</text>
+														</view>
+													</view>
+												</view>
+											</uni-swipe-action-item>
+										</uni-swipe-action>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
-		<!-- 在线客服小浮窗 -->
+		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
 				<button class="win-service">
@@ -23,17 +62,288 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 const current = ref(0);
 const items = ['全部', '工作', '生活'];
 const styleType = 'button';
 const activeColor = '#1baf59';
 const onClickItem = (e) => {
 	current.value = e.currentIndex
+	// switch (current.value) {
+	// 	case 0:
+	// 		newPlanList.value = allPlanList;
+	// 		console.log('all', newPlanList.value);
+	// 		break
+	// 	case 1:
+	// 		newPlanList.value = workPlanList;
+	// 		console.log('work', newPlanList.value);
+	// 		break
+	// 	case 2:
+	// 		newPlanList.value = lifePlanList;
+	// 		console.log('life', newPlanList.value);
+	// 		break
+	// }
 }
 
 const x = ref('740rpx');
 const y = ref('1000rpx');
+
+const options2 = ref([
+	{
+		text: '置顶',
+		style: {
+			backgroundColor: '#007aff'
+		}
+	},
+	{
+		text: '失败',
+		style: {
+			backgroundColor: '#007aff'
+		}
+	},
+	{
+		text: '删除 ',
+		style: {
+			backgroundColor: '#F56C6C'
+		}
+	}
+])
+const bindClick = (e) => {
+	console.log(e)
+}
+// 状态 0 未完成 1 已完成 2 已删除 3 失败 
+// 是否置顶 0 不置顶 1 置顶
+// 类型 1 工作 2 生活
+const planList = [
+	{
+		planID: 1,
+		status: 0,
+		isTop: 0,
+		type: 1,
+		title: '吃饭',
+		date: '2022-02-01'
+	},
+	{
+		planID: 2,
+		status: 0,
+		isTop: 1,
+		type: 1,
+		title: '睡觉',
+		date: '2022-02-02'
+	},
+	{
+		planID: 3,
+		status: 1,
+		isTop: 0,
+		type: 1,
+		title: '学习',
+		date: '2022-02-03'
+	},
+	{
+		planID: 4,
+		status: 3,
+		isTop: 0,
+		type: 1,
+		title: '写代码',
+		date: '2022-02-04'
+	},
+	{
+		planID: 5,
+		status: 0,
+		isTop: 0,
+		type: 2,
+		title: '运动',
+		date: '2022-03-05'
+	},
+	{
+		planID: 6,
+		status: 0,
+		isTop: 0,
+		type: 1,
+		title: '看电影',
+		date: '2024-02-27'
+	},
+	{
+		planID: 7,
+		status: 0,
+		isTop: 0,
+		type: 2,
+		title: '跑步',
+		date: '2024-02-28'
+	},
+	{
+		planID: 8,
+		status: 0,
+		isTop: 0,
+		type: 2,
+		title: '打篮球',
+		date: '2024-03-01'
+	},
+	{
+		planID: 9,
+		status: 0,
+		isTop: 0,
+		type: 2,
+		title: '游泳',
+		date: '2024-04-02'
+	},
+	{
+		planID: 10,
+		status: 0,
+		isTop: 0,
+		type: 2,
+		title: '跳绳',
+		date: '2024-02-26'
+	}
+]
+const modelCateList = ref([
+	{
+		title: '置顶',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '过去',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '今天',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '明后天',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '7天内',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '未来',
+		isShow: true,
+		plans: []
+	}, {
+		title: '已完成',
+		isShow: true,
+		plans: []
+	},
+	{
+		title: '已失败',
+		isShow: true,
+		plans: []
+	}
+])
+// 全部
+const allPlanList = computed(() => {
+	console.log('allPlanList', planList);
+	return handleData(planList)
+})
+// 工作
+const workPlanList = computed(() => {
+	console.log('workPlanList', planList);
+	return handleData(planList.filter(item => {
+		return item.type === 1
+	}))
+})
+// 生活
+const lifePlanList = computed(() => {
+	return handleData(planList.filter(item => {
+		return item.type === 2
+	}))
+})
+let newPlanList = computed(() => {
+	let currPlanList = []
+	clearPlans();
+	switch (current.value) {
+		case 0:
+			currPlanList = handleData(planList);
+			console.log('all', currPlanList);
+			break
+		case 1:
+			currPlanList = handleData(planList.filter(item => {
+				return item.type === 1
+			}))
+			console.log('work', currPlanList);
+			break
+		case 2:
+			currPlanList = handleData(planList.filter(item => {
+				return item.type === 2
+			}))
+			console.log('life', currPlanList);
+			break
+	}
+	return currPlanList
+})
+
+// 处理数据
+const handleData = (list) => {
+	let cateList = modelCateList
+	// let cateList = JSON.parse(JSON.stringify(modelCateList));
+	console.log('cateList', cateList.value);
+	list.forEach(item => {
+		console.log('--------------', item.title);
+		const date = new Date(item.date)
+		console.log('date', date);
+		// 今天取去到day
+		const today = new Date()
+		let todayString = ''
+		let year = today.getFullYear();
+		let month = today.getMonth() + 1;
+		let day = today.getDate();
+		month = month < 10 ? '0' + month : month
+		day = day < 10 ? '0' + day : day
+		todayString = year + '-' + month + '-' + day;
+		console.log('todayString', todayString);
+		const todayTime = new Date(todayString)
+		console.log('todayTime', todayTime);
+		const diff = date - todayTime
+		console.log('diff----------', diff);
+		// 置顶
+		if (item.isTop === 1 && item.status === 0) {
+			cateList.value[0].plans.push(item)
+		}
+		// 过去
+		else if (diff < 0 && item.status === 0) {
+			cateList.value[1].plans.push(item)
+		}
+		// 今天
+		else if (diff === 0 && item.status === 0) {
+			cateList.value[2].plans.push(item)
+		}
+		// 明后天
+		else if (diff >= 1 * 24 * 60 * 60 * 1000 && diff <= 2 * 24 * 60 * 60 * 1000 && item.status === 0) {
+			cateList.value[3].plans.push(item)
+		}
+		// 7天内
+		else if (diff <= 7 * 24 * 60 * 60 * 1000 && item.status === 0) {
+			cateList.value[4].plans.push(item)
+		}
+		// 未来
+		else if (diff > 7 * 24 * 60 * 60 * 1000 && item.status === 0) {
+			cateList.value[5].plans.push(item)
+		}
+		// 已完成
+		else if (item.status === 1) {
+			cateList.value[6].plans.push(item)
+		}
+		// 已失败
+		else if (item.status === 3) {
+			cateList.value[7].plans.push(item)
+		}
+	})
+	console.log('cateList', cateList);
+	return cateList.value
+}
+// 清空modelCateList中每个对象的plans数组
+const clearPlans = () => {
+	modelCateList.value.forEach(item => {
+		item.plans = []
+	})
+}
 </script>
 
 <style lang="scss">
@@ -42,56 +352,72 @@ const y = ref('1000rpx');
 }
 
 .select {
-	padding-top: 20rpx;
+	.select-header {
+		position: fixed;
+		width: 100%;
+		z-index: 1;
+		background-color: #f2f2f2;
+		padding: 20rpx 0;
+	}
 }
 
-.movableArea {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: calc(100vh - 150rpx);
-	pointer-events: none;
-}
-
-.movableView {
-	position: absolute;
-	top: 164rpx;
-	width: 100rpx;
-	height: 100rpx;
-	margin-top: 164rpx;
-	pointer-events: auto;
-}
-
-/* 在线客服小浮窗 */
 .win-service {
-	width: 100%;
-	height: 100%;
-	padding: 10rpx;
-	border-radius: 100%;
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-	align-items: center;
-	color: #fff;
 	background-color: #17b00e;
-	opacity: 1;
+}
 
-	.iconfont {
-		flex: 1;
-		font-size: 60rpx;
-		width: 60rpx;
-		height: 60rpx;
-		line-height: 60rpx;
+.plan-list {
+	padding: 20rpx;
+
+	.first {
+		margin-top: 100rpx;
 	}
 
-	.text {
-		font-size: 20rpx;
-		line-height: 20rpx;
-	}
+	.plan-item {
+		margin-bottom: 20rpx;
+		background-color: #fff;
+		border-radius: 20rpx;
 
-	&::before,
-	&::after {
-		border: none;
+		.plan-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20rpx;
+
+			.header-title {
+				.title {
+					font-size: 30rpx;
+					font-weight: bold;
+				}
+			}
+		}
 	}
-}</style>
+}
+
+.body-item {
+	height: 100rpx;
+
+	.content-box {
+		display: flex;
+		align-items: center;
+
+		.box-left {
+			margin: 20rpx;
+		}
+
+		.box-right {
+			.plan-title {
+				.title {
+					font-size: 30rpx;
+				}
+			}
+
+			.plan-desc {
+				.desc {
+					font-size: 24rpx;
+					color: #888;
+				}
+			}
+		}
+	}
+}
+</style>

@@ -27,7 +27,7 @@
 				<view class="right">
 					<view class="title">{{ item.title }}</view>
 					<view class="arrow">
-						<uni-icons type="plusempty" size="30"></uni-icons>
+						<uni-icons type="right" size="30"></uni-icons>
 					</view>
 				</view>
 			</view>

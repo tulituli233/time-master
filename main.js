@@ -13,11 +13,14 @@ app.$mount()
 
 // 引入全局样式
 import '@/assets/css/index.scss';
+// 引入全局方法
+import * as utils from '@/utils/utils.js'
 
 // #ifdef VUE3
 import { createSSRApp } from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
+  app.config.globalProperties.$utils = utils
   return {
     app
   }

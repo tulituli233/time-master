@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="list">
-			<view class="item" @click="uni.navigateTo({ url: item.url })" v-for="item in list" :key="item.title">
+			<view class="item" @click="$utils.navTo(item.url)" v-for="item in list" :key="item.title">
 				<view class="left">
 					<view class="icon" :style="{ backgroundColor: item.color }">
 						<uni-icons custom-prefix="iconfont" :type="item.unicode" color="#fff" size="30"></uni-icons>
@@ -62,6 +62,12 @@ const list = ref([
 		desc: '总数：2个，未完成：1个'
 	}
 ])
+// const navTo = (url) => {
+// 	console.log('url', url);
+// 	uni.navigateTo({
+// 		url
+// 	})
+// }
 </script>
 
 <style lang="scss">

@@ -74,7 +74,7 @@
 				"selectedIconPath": "static/logo.png"
 			},
 			{
-				"pagePath": "subPackages/jizhang/index/index",
+				"pagePath": "pages/plan/index",
 				"text": "规划",
 				"iconPath": "static/logo.png",
 				"selectedIconPath": "static/logo.png"
