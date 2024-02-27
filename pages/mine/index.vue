@@ -3,7 +3,7 @@
 		<view class="top">
 			<view class="left">
 				<view class="head">
-					<img src="../../static/logo.png" />
+					<img src="../../static/head.png" />
 				</view>
 			</view>
 			<view class="right">
@@ -40,25 +40,25 @@ import { ref } from 'vue'
 const middleList = ref([
 	{
 		title: '自定义APP',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-shoujizhendong',
 		color:'#f75e3c',
 		url: '/pages/index/index'
 	},
 	{
 		title: '应用管理',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-yingyong',
 		color:'#1baf59',
 		url: '/pages/index/index'
 	},
 	{
 		title: '高级功能',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-gaojigongneng',
 		color:'#7e7cea',
 		url: '/pages/index/index'
 	},
 	{
 		title: '桌面小组件',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-zhuomianzujianguanli',
 		color:'#4c8bf0',
 		url: '/pages/index/index'
 	}
@@ -66,17 +66,17 @@ const middleList = ref([
 const list = ref([
 	{
 		title: '我的消息',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-xiaoxi',
 		url: '/pages/index/index'
 	},
 	{
 		title: '帮助中心',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-bangzhu',
 		url: '/pages/index/index'
 	},
 	{
 		title: '设置',
-		unicode: 'icon-biaoqian',
+		unicode: 'icon-shezhi',
 		url: '/pages/index/index'
 	}
 ])

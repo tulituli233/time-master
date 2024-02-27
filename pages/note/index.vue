@@ -69,20 +69,6 @@ const styleType = 'button';
 const activeColor = '#1baf59';
 const onClickItem = (e) => {
 	current.value = e.currentIndex
-	// switch (current.value) {
-	// 	case 0:
-	// 		newPlanList.value = allPlanList;
-	// 		console.log('all', newPlanList.value);
-	// 		break
-	// 	case 1:
-	// 		newPlanList.value = workPlanList;
-	// 		console.log('work', newPlanList.value);
-	// 		break
-	// 	case 2:
-	// 		newPlanList.value = lifePlanList;
-	// 		console.log('life', newPlanList.value);
-	// 		break
-	// }
 }
 
 const x = ref('740rpx');
@@ -237,24 +223,6 @@ const modelCateList = ref([
 		plans: []
 	}
 ])
-// 全部
-const allPlanList = computed(() => {
-	console.log('allPlanList', planList);
-	return handleData(planList)
-})
-// 工作
-const workPlanList = computed(() => {
-	console.log('workPlanList', planList);
-	return handleData(planList.filter(item => {
-		return item.type === 1
-	}))
-})
-// 生活
-const lifePlanList = computed(() => {
-	return handleData(planList.filter(item => {
-		return item.type === 2
-	}))
-})
 let newPlanList = computed(() => {
 	let currPlanList = []
 	clearPlans();
@@ -283,11 +251,8 @@ let newPlanList = computed(() => {
 const handleData = (list) => {
 	let cateList = modelCateList
 	// let cateList = JSON.parse(JSON.stringify(modelCateList));
-	console.log('cateList', cateList.value);
 	list.forEach(item => {
-		console.log('--------------', item.title);
 		const date = new Date(item.date)
-		console.log('date', date);
 		// 今天取去到day
 		const today = new Date()
 		let todayString = ''
@@ -297,11 +262,8 @@ const handleData = (list) => {
 		month = month < 10 ? '0' + month : month
 		day = day < 10 ? '0' + day : day
 		todayString = year + '-' + month + '-' + day;
-		console.log('todayString', todayString);
 		const todayTime = new Date(todayString)
-		console.log('todayTime', todayTime);
 		const diff = date - todayTime
-		console.log('diff----------', diff);
 		// 置顶
 		if (item.isTop === 1 && item.status === 0) {
 			cateList.value[0].plans.push(item)

@@ -62,12 +62,6 @@ const list = ref([
 		desc: '总数：2个，未完成：1个'
 	}
 ])
-// const navTo = (url) => {
-// 	console.log('url', url);
-// 	uni.navigateTo({
-// 		url
-// 	})
-// }
 </script>
 
 <style lang="scss">
@@ -82,7 +76,7 @@ const list = ref([
 		height: 100rpx;
 		padding: 20rpx;
 		background-color: #fff;
-		border-radius: 10rpx;
+		border-radius: 20rpx;
 		display: flex;
 		align-items: center;
 		margin-bottom: 20rpx;

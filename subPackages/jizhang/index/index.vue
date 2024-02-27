@@ -1,125 +1,140 @@
 <template>
 	<view class="content">
-		jizhang
+		<view class="fixed-box">
+			<view class="top">
+				<view class="date">
+					<view class="top-title">2024年</view>
+					<view class="month">2月</view>
+				</view>
+				<view class="money">
+					<view class="item">
+						<view class="top-title">收入</view>
+						<view class="num">0.00</view>
+					</view>
+					<view class="item">
+						<view class="top-title">支出</view>
+						<view class="num">0.00</view>
+					</view>
+				</view>
+			</view>
+			<!-- 功能列表 -->
+			<view class="function-box">
+				<view class="function-list">
+					<view class="function-item">
+						<view class="icon">
+							<uni-icons type="calendar" size="30" :color="themeColor"></uni-icons>
+						</view>
+						<view class="title">资产</view>
+					</view>
+					<view class="function-item">
+						<view class="icon">
+							<uni-icons type="calendar" size="30" :color="themeColor"></uni-icons>
+						</view>
+						<view class="title">统计</view>
+					</view>
+					<view class="function-item">
+						<view class="icon">
+							<uni-icons type="calendar" size="30" :color="themeColor"></uni-icons>
+						</view>
+						<view class="title">预算</view>
+					</view>
+					<view class="function-item">
+						<view class="icon">
+							<uni-icons type="calendar" size="30" :color="themeColor"></uni-icons>
+						</view>
+						<view class="title">导入</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 账目列表 -->
+		<view class="account-list" v-if="accountList && accountList.length">
+			<view class="account-item" v-for="item in accountList"></view>
+		</view>
+		<view class="no-data" v-else>暂无数据</view>
+
 	</view>
 </template>
 
 <script setup>
-// 输入：
-// [
-// 	{ status: 0, isTop: 1, date: '2023-10-01' },
-// 	{ status: 0, isTop: 0, date: '2023-10-02' },
-// 	{ status: 0, isTop: 0, date: '2023-10-03' },
-// 	{ status: 0, isTop: 0, date: '2023-10-04' },
-// 	{ status: 0, isTop: 0, date: '2023-10-05' },
-// 	{ status: 0, isTop: 0, date: '2023-10-06' },
-// 	{ status: 0, isTop: 0, date: '2023-10-07' },
-// 	{ status: 0, isTop: 0, date: '2023-10-08' },
-// 	{ status: 0, isTop: 0, date: '2023-10-09' },
-// 	{ status: 0, isTop: 0, date: '2023-10-10' },
-// 	{ status: 1, isTop: 0, date: '2023-10-11' },
-// 	{ status: 2, isTop: 0, date: '2023-10-12' }
-// ]
-// 输出：
-// [
-// 	{
-// 		title: '置顶', plans: [
-// 			{ status: 0, isTop: 1, date: '2023-10-01' }
-// 		]
-// 	},
-// 	{
-// 		title: '今天', plans: [
-// 			{ status: 0, isTop: 0, date: '2023-10-02' }
-// 		]
-// 	},
-// 	{
-// 		title: '明后天', plans: [
-// 			{ status: 0, isTop: 0, date: '2023-10-03' },
-// 			{ status: 0, isTop: 0, date: '2023-10-04' }
-// 		]
-// 	},
-// 	{
-// 		title: '7天内', plans: [
-// 			{ status: 0, isTop: 0, date: '2023-10-05' },
-// 			{ status: 0, isTop: 0, date: '2023-10-06' },
-// 			{ status: 0, isTop: 0, date: '2023-10-07' },
-// 			{ status: 0, isTop: 0, date: '2023-10-08' },
-// 			{ status: 0, isTop: 0, date: '2023-10-09' }
-// 		]
-// 	},
-// 	{
-// 		title: '未来', plans: [
-// 			{ status: 0, isTop: 0, date: '2023-10-10' }
-// 		]
-// 	},
-// 	{
-// 		title: '完成', plans: [
-// 			{ status: 1, isTop: 0, date: '2023-10-11' }
-// 		]
-// 	},
-// 	{
-// 		title: '失败', plans: [
-// 			{ status: 2, isTop: 0, date: '2023-10-12' }
-// 		]
-// 	}
-// ]
-function groupPlansByTitle(input) {
-  const output = [];
+import { ref } from 'vue';
+// 页面主题色
+const themeColor = ref('#1baf59');
 
-  // Group plans by title
-  const groups = input.reduce((acc, plan) => {
-    const title = getTitle(plan.date);
-    if (!acc[title]) {
-      acc[title] = [];
-    }
-    acc[title].push(plan);
-    return acc;
-  }, {});
+const accountList = [
 
-  // Convert groups to the desired output format
-  for (const title in groups) {
-    output.push({ title, plans: groups[title] });
-  }
-
-  return output;
-}
-
-function getTitle(dateString) {
-  const today = new Date();
-  const date = new Date(dateString);
-  const diffTime = date - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  if (diffDays === 0) {
-    return '今天';
-  } else if (diffDays === 1 || diffDays === 2) {
-    return '明后天';
-  } else if (diffDays <= 7) {
-    return '7天内';
-  } else if (diffDays > 7) {
-    return '未来';
-  } else {
-    return '未知';
-  }
-}
-
-const input = [
-  { status: 0, isTop: 1, date: '2023-10-01' },
-  { status: 0, isTop: 0, date: '2023-10-02' },
-  { status: 0, isTop: 0, date: '2023-10-03' },
-  { status: 0, isTop: 0, date: '2023-10-04' },
-  { status: 0, isTop: 0, date: '2023-10-05' },
-  { status: 0, isTop: 0, date: '2023-10-06' },
-  { status: 0, isTop: 0, date: '2023-10-07' },
-  { status: 0, isTop: 0, date: '2023-10-08' },
-  { status: 0, isTop: 0, date: '2023-10-09' },
-  { status: 0, isTop: 0, date: '2023-10-10' },
-  { status: 1, isTop: 0, date: '2023-10-11' },
-  { status: 2, isTop: 0, date: '2023-10-12' }
-];
-
-const output = groupPlansByTitle(input);
-console.log(output);
+]
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.fixed-box {
+	position: fixed;
+	width: 100%;
+}
+
+.top {
+	display: flex;
+	align-items: center;
+	background-color: v-bind(themeColor);
+	padding: 20rpx 20rpx 100rpx;
+	color: #fff;
+
+	.date {
+		display: flex;
+		flex-direction: column;
+		width: 200rpx;
+		padding-left: 20rpx;
+
+		.month {
+			font-size: 40rpx;
+		}
+		.top-title {
+			margin-bottom: 10rpx;
+		}
+	}
+
+	.money {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		width: 400rpx;
+
+		.item {
+			display: flex;
+			flex-direction: column;
+
+			.num {
+				font-size: 36rpx;
+			}
+		}
+	}
+}
+
+.function-box {
+	height: 70rpx;
+	background-color: #f2f2f2;
+}
+
+.function-list {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 690rpx;
+	margin: 0 auto;
+	padding: 20rpx 0 15rpx;
+	background-color: #fff;
+	border-radius: 20rpx;
+	// 向上偏移60%
+	transform: translateY(-60%);
+
+	.function-item {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		font-size: 24rpx;
+		.icon {
+			margin-bottom: 10rpx;
+		}
+	}
+}
+</style>
