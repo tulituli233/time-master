@@ -40,8 +40,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { timestampToTime } from '@/utils/utils.js';
-const x = ref('740rpx');
+import { timestampToTime, getWeek } from '@/utils/utils.js';
+const x = ref('600rpx');
 const y = ref('1000rpx');
 onMounted(() => {
 	// 使用filterPlan筛选昨天，今天，明天的计划
@@ -143,11 +143,6 @@ const planList = [
 		date: '2024-02-27'
 	}
 ]
-// 根据2024-03-01返回星期
-const getWeek = (date) => {
-	let week = new Date(date).getDay() === 0 ? '周日' : '周' + '日一二三四五六'.charAt(new Date(date).getDay())
-	return week
-}
 const currDate = ref(timestampToTime(new Date().getTime()))
 const currWeek = ref(getWeek(new Date().getTime()))
 const list = ref([])

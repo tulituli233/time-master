@@ -71,7 +71,7 @@ const onClickItem = (e) => {
 	current.value = e.currentIndex
 }
 
-const x = ref('740rpx');
+const x = ref('600rpx');
 const y = ref('1000rpx');
 
 const options2 = ref([

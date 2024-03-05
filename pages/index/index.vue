@@ -60,6 +60,20 @@ const list = ref([
 		url: '/pages/note/index',
 		color: '#ffa851',
 		desc: '总数：2个，未完成：1个'
+	},
+	{
+		title: '喝水',
+		unicode: 'icon-quan',
+		url: '/pages/note/index',
+		color: '#0fb9a0',
+		desc: '今日：0/1700ml'
+	},
+	{
+		title: '习惯打卡',
+		unicode: 'icon-a-rilidaka',
+		url: '/pages/note/index',
+		color: '#7e7de8',
+		desc: '习惯成自然'
 	}
 ])
 </script>

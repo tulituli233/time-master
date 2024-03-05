@@ -48,6 +48,23 @@
 						"navigationBarBackgroundColor": "#1baf59",
 						"navigationBarTextStyle": "white"
 					}
+				},
+				{
+					"path": "add/index",
+					"style": {
+						"navigationBarTitleText": "记一笔"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/test",
+			"pages": [
+				{
+					"path": "NumericKeypad/index",
+					"style": {
+						"navigationBarTitleText": "测试"
+					}
 				}
 			]
 		}
