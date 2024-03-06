@@ -110,11 +110,8 @@ import { getWeek } from '@/utils/utils.js';
 import { incomeCateEnum, expenseCateEnum } from '@/enums/accountCateEnum';
 import { apiGetUserExpenses } from '@/services/api/expenses';
 import { onShow } from '@dcloudio/uni-app';
-console.log('incomeCateEnum.getAllCategories', incomeCateEnum.getAllCategories());
-console.log('expenseCateEnum.getAllCategories', expenseCateEnum.getAllCategories());
-console.log('expenseCateEnum.getCategory(1).color', expenseCateEnum.getCategory(1).color);
 
-// 在适当的生命周期中获取数据
+// 获取数据
 onShow(() => {
     getExpenses();
 })

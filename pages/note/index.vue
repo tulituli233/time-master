@@ -23,20 +23,20 @@
 									</view>
 								</view>
 								<view class="plan-body" v-show="item.isShow">
-									<view class="body-item" v-for="item1 in item.plans" :key="item1.planID">
+									<view class="body-item" v-for="item1 in item.plans" :key="item1.TaskID">
 										<uni-swipe-action>
 											<uni-swipe-action-item :right-options="options2"
-												@click="bindClick(item1.planID)">
+												@click="bindClick(item1.TaskID)">
 												<view class="content-box">
 													<view class="box-left">
 														<checkbox value="cb" />
 													</view>
 													<view class="box-right">
 														<view class="plan-title">
-															<text class="title">{{ item1.title }}</text>
+															<text class="title">{{ item1.Title }}</text>
 														</view>
 														<view class="plan-desc">
-															<text class="desc">{{ item1.date }}</text>
+															<text class="desc">{{ formatDateTime(item1.DueDate) }}</text>
 														</view>
 													</view>
 												</view>
@@ -53,16 +53,60 @@
 		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-				<button class="win-service">
+				<button class="win-service" @click="$refs.popupRef.open('bottom')">
 					<uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
 				</button>
 			</movable-view>
 		</movable-area>
+		<!-- 添加弹窗 -->
+		<uni-popup ref="popupRef" background-color="#fff">
+			<view class="popup-content">
+				<view class="input-box">
+					<input class="input" type="text" v-model="planTitle" placeholder="把事情记录下来吧~" />
+					<view class="btn">
+						<uni-icons custom-prefix="iconfont" type="icon-duigou" size="20" color="#4c8bf0"
+							@click="addPlan"></uni-icons>
+					</view>
+				</view>
+				<!-- 属性 -->
+				<view class="attr">
+					<view class="date">
+						<uni-datetime-picker class="no-border" type="datetime" v-model="planDate" />
+					</view>
+					<view class="type-list">
+						<view class="type-box"
+							:style="{ border: selectedType === index ? '5rpx solid ' + item.color : 'none' }"
+							v-for="(item, index) in typeList" :key="index" @click="selectedType = index">
+							<view class="type" :style="{ backgroundColor: item.color }">
+								<uni-icons custom-prefix="iconfont" :type="item.icon" size="20"
+									color="#fff"></uni-icons>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import { apiAddTask } from '@/services/api/tasks';
+import { formatDateTime } from '@/utils/utils.js';
+import { onShow } from '@dcloudio/uni-app';
+import { apiGetUserTasks } from '@/services/api/tasks';
+
+// 获取任务列表
+let tasks = ref([]);
+onShow(() => {
+	getTasks();
+})
+const getTasks = () => {
+	apiGetUserTasks(1).then(res => {
+		tasks.value = res.data
+		console.log('tasks', tasks)
+	})
+}
 const current = ref(0);
 const items = ['全部', '工作', '生活'];
 const styleType = 'button';
@@ -228,31 +272,33 @@ let newPlanList = computed(() => {
 	clearPlans();
 	switch (current.value) {
 		case 0:
-			currPlanList = handleData(planList);
+			currPlanList = handleData(tasks.value);
 			console.log('all', currPlanList);
 			break
 		case 1:
-			currPlanList = handleData(planList.filter(item => {
-				return item.type === 1
+			currPlanList = handleData(tasks.value.filter(item => {
+				return item.Type === 0
 			}))
 			console.log('work', currPlanList);
 			break
 		case 2:
-			currPlanList = handleData(planList.filter(item => {
-				return item.type === 2
+			currPlanList = handleData(tasks.value.filter(item => {
+				return item.Type === 1
 			}))
 			console.log('life', currPlanList);
 			break
 	}
+	console.log('currPlanList', currPlanList);
 	return currPlanList
 })
 
 // 处理数据
 const handleData = (list) => {
+	console.log('tasks.value', tasks.value);
 	let cateList = modelCateList
 	// let cateList = JSON.parse(JSON.stringify(modelCateList));
 	list.forEach(item => {
-		const date = new Date(item.date)
+		const date = new Date(item.DueDate)
 		// 今天取去到day
 		const today = new Date()
 		let todayString = ''
@@ -265,35 +311,35 @@ const handleData = (list) => {
 		const todayTime = new Date(todayString)
 		const diff = date - todayTime
 		// 置顶
-		if (item.isTop === 1 && item.status === 0) {
+		if (item.Priority === 1 && item.Status === 0) {
 			cateList.value[0].plans.push(item)
 		}
 		// 过去
-		else if (diff < 0 && item.status === 0) {
+		else if (diff < 0 && item.Status === 0) {
 			cateList.value[1].plans.push(item)
 		}
 		// 今天
-		else if (diff === 0 && item.status === 0) {
+		else if (diff === 0 && item.Status === 0) {
 			cateList.value[2].plans.push(item)
 		}
 		// 明后天
-		else if (diff >= 1 * 24 * 60 * 60 * 1000 && diff <= 2 * 24 * 60 * 60 * 1000 && item.status === 0) {
+		else if (diff >= 1 * 24 * 60 * 60 * 1000 && diff <= 2 * 24 * 60 * 60 * 1000 && item.Status === 0) {
 			cateList.value[3].plans.push(item)
 		}
 		// 7天内
-		else if (diff <= 7 * 24 * 60 * 60 * 1000 && item.status === 0) {
+		else if (diff <= 7 * 24 * 60 * 60 * 1000 && item.Status === 0) {
 			cateList.value[4].plans.push(item)
 		}
 		// 未来
-		else if (diff > 7 * 24 * 60 * 60 * 1000 && item.status === 0) {
+		else if (diff > 7 * 24 * 60 * 60 * 1000 && item.Status === 0) {
 			cateList.value[5].plans.push(item)
 		}
 		// 已完成
-		else if (item.status === 1) {
+		else if (item.Status === 1) {
 			cateList.value[6].plans.push(item)
 		}
 		// 已失败
-		else if (item.status === 3) {
+		else if (item.Status === 3) {
 			cateList.value[7].plans.push(item)
 		}
 	})
@@ -304,6 +350,43 @@ const handleData = (list) => {
 const clearPlans = () => {
 	modelCateList.value.forEach(item => {
 		item.plans = []
+	})
+}
+const planTitle = ref('');
+const planDate = ref(formatDateTime(new Date()));
+console.log('planDate', planDate.value);
+let typeList = [
+	{
+		name: '工作',
+		icon: 'icon-jianzhi',
+		color: '#76c681',
+	},
+	{
+		name: '生活',
+		icon: 'icon-xuexi',
+		color: '#13bceb',
+	}
+]
+const selectedType = ref(0);
+const addPlan = () => {
+	let plan = {
+		UserId: 1,
+		Title: planTitle.value,
+		DueDate: planDate.value,
+		Type: selectedType.value,
+	}
+	console.log('plan', plan);
+	apiAddTask(plan).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+		}
 	})
 }
 </script>
@@ -377,6 +460,54 @@ const clearPlans = () => {
 				.desc {
 					font-size: 24rpx;
 					color: #888;
+				}
+			}
+		}
+	}
+}
+
+.popup-content {
+	padding: 20rpx;
+	height: 400rpx;
+
+	.input-box {
+		display: flex;
+		align-items: center;
+		padding: 20rpx;
+
+		.input {
+			width: 600rpx;
+		}
+
+		.btn {
+			width: 100rpx;
+			text-align: center;
+		}
+	}
+
+	.attr {
+		display: flex;
+		align-items: center;
+		padding: 20rpx 0;
+
+		.date {
+			width: 400rpx;
+			margin-right: 20rpx;
+			padding: 20rpx;
+		}
+
+		.type-list {
+			display: flex;
+			align-items: center;
+
+			.type-box {
+				padding: 5rpx;
+				border-radius: 50%;
+				margin: 0 20rpx;
+
+				.type {
+					padding: 10rpx;
+					border-radius: 50%;
 				}
 			}
 		}

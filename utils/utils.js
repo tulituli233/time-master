@@ -17,6 +17,20 @@ export const timestampToTime = (timestamp) => {
 
 // 将时间戳转换为周几
 export const getWeek = (date) => {
-	let week = new Date(date).getDay() === 0 ? '周日' : '周' + '日一二三四五六'.charAt(new Date(date).getDay())
-	return week
+    let week = new Date(date).getDay() === 0 ? '周日' : '周' + '日一二三四五六'.charAt(new Date(date).getDay())
+    return week
+}
+
+// 格式化时间，格式为 YYYY-MM-DD
+export function formatDate(date) {
+    date = new Date(date);
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    return formattedDate;
+}
+// 格式化时间，格式为 YYYY-MM-DD HH:mm:ss
+export function formatDateTime(date) {
+    date = new Date(date);
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    const formattedTime = date.toLocaleTimeString('en-US', { hour12: false });
+    return `${formattedDate} ${formattedTime}`;
 }

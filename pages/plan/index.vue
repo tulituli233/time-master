@@ -30,17 +30,22 @@
 		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-				<button class="win-service">
+				<button class="win-service" @click="openPopup">
 					<uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
 				</button>
 			</movable-view>
 		</movable-area>
+		<!-- 普通弹窗 -->
+		<uni-popup ref="popupRef" background-color="#fff" type="bottom">
+			<view class="popup-content" ><text
+					class="text">popup 内容</text></view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { timestampToTime, getWeek } from '@/utils/utils.js';
+import { timestampToTime, getWeek, formatDateTime } from '@/utils/utils.js';
 const x = ref('600rpx');
 const y = ref('1000rpx');
 onMounted(() => {
@@ -172,7 +177,11 @@ const swiperChange = (e) => {
 	}
 	currentIndex.value = e.detail.current
 }
-
+const popupRef = ref(null);
+// 打开uni-popup
+const openPopup = () => {
+	popupRef.value.open('bottom');
+}
 </script>
 
 <style lang="scss">
