@@ -9,23 +9,37 @@
         </view>
         <!-- 分类选择 -->
         <view class="select" v-if="activeTab === 0">
-            <view class="select-item" v-for="(cate, index) in accountCateEnum.getAllCategories()" :key="index">
-                <view class="icon" :style="{ backgroundColor: cate.color }">
-                    <uni-icons custom-prefix="iconfont" :type="cate.icon" color="#fff" size="30"></uni-icons>
+            <view class="select-item" v-for="(cate, index) in expenseCateEnum.getAllCategories()" :key="index"
+                @click="selectCate(cate.id)">
+                <view class="icon"
+                    :style="{ border: selectedExpenseCateID === cate.id ? `5rpx solid ${cate.color}` : 'none' }">
+                    <view class="padding" :style="{ backgroundColor: cate.color }">
+                        <uni-icons custom-prefix="iconfont" :type="cate.icon" color="#fff" size="30"></uni-icons>
+                    </view>
                 </view>
                 <view class="name">{{ cate.name }}</view>
             </view>
         </view>
-        <view class="select" v-if="activeTab === 1">收入</view>
+        <view class="select" v-if="activeTab === 1">
+            <view class="select-item" v-for="(cate, index) in incomeCateEnum.getAllCategories()" :key="index"
+                @click="selectCate(cate.id)">
+                <view class="icon"
+                    :style="{ border: selectedIncomeCateID === cate.id ? `5rpx solid ${cate.color}` : 'none' }">
+                    <view class="padding" :style="{ backgroundColor: cate.color }">
+                        <uni-icons custom-prefix="iconfont" :type="cate.icon" color="#fff" size="30"></uni-icons>
+                    </view>
+                </view>
+                <view class="name">{{ cate.name }}</view>
+            </view>
+        </view>
         <view class="select" v-if="activeTab === 2">转账</view>
         <!-- 记账输入器固定在页面底部，互动包括备注添加、金额输入（数字键盘）、分类选择 -->
         <view class="numeric-keypad">
+            <view class="date">
+                <uni-datetime-picker class="no-border" type="datetime" v-model="dateValue" @change="selectDate" />
+            </view>
             <view class="display">
                 <input class="note" type="text" placeholder="添加备注" v-model="noteValue" />
-                <view class="date">
-                    <uni-icons custom-prefix="iconfont" type="icon-riji" size="20"></uni-icons>
-                    <text class="date-text">今天</text>
-                </view>
                 <view class="input">{{ inputValue }}</view>
             </view>
             <table>
@@ -41,14 +55,29 @@
 
 <script setup>
 import { ref } from 'vue';
-import accountCateEnum from '/enums/accountCateEnum.ts';
+import { incomeCateEnum, expenseCateEnum } from '@/enums/accountCateEnum';
+import { apiAddExpense } from '@/services/api/expenses';
 
 const tabs = ['支出', '收入', '转账'];
 const activeTab = ref(0);
 
 const selectTab = (index) => {
     activeTab.value = index;
+    uni.showToast({
+        title: `切换到${tabs[index]}`,
+    })
 };
+// 选中的支出分类
+const selectedExpenseCateID = ref(1);
+// 选中的收入分类
+const selectedIncomeCateID = ref(1);
+const selectCate = (cateID) => {
+    if (activeTab.value === 0) {
+        selectedExpenseCateID.value = cateID;
+    } else {
+        selectedIncomeCateID.value = cateID;
+    }
+}
 
 // 数字键盘
 const keypadLayout = [
@@ -70,16 +99,39 @@ const handleKeyPress = (key) => {
     } else if (key === '完成') {
         // Handle done key press
         // Example: Submit the form or close the keypad
-        hideKeypad();
+        addExpense();
     } else {
         // Append the pressed key to the input value
         inputValue.value += key;
     }
 };
-
-const hideKeypad = () => {
-    // Emit an event to parent component to hide the keypad
-    // Example: this.$emit('hide-keypad');
+const dateValue = ref('');
+// 选择日期
+const selectDate = (e) => {
+    // 弹出uni日期选择器
+    console.log('选择日期', e);
+}
+const addExpense = async () => {
+    let Amount = activeTab.value === 0 ? -inputValue.value : inputValue.value;
+    let Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
+    let expense = {
+        UserID: 1,
+        Amount,
+        Category,
+        Date: dateValue.value,
+        Note: noteValue.value
+    }
+    console.log('expense', expense);
+    let res = await apiAddExpense(expense);
+    if (res.code === 0) {
+        uni.showToast({
+            title: res.msg,
+        })
+    } else {
+        uni.showToast({
+            title: res.msg,
+        })
+    }
 };
 </script>
 
@@ -101,31 +153,60 @@ const hideKeypad = () => {
     font-weight: bold;
     border-bottom: #1baf59 5rpx solid;
 }
+
 .select {
     width: 750rpx;
     display: flex;
     flex-wrap: wrap;
+
     .select-item {
-        width: 150rpx;
+        width: 149rpx;
         height: 180rpx;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+
         .icon {
-            padding: 10rpx;
+            padding: 5rpx;
             border-radius: 50%;
+            border: 5rpx solid #1baf59;
+
+            .padding {
+                padding: 10rpx;
+                border-radius: 50%;
+            }
         }
+
         .name {
             font-size: 24rpx;
         }
     }
 }
+
+::v-deep .uni-date-x--border {
+    border: none;
+}
+
 .numeric-keypad {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 750rpx;
+
+    .date {
+        width: 750rpx;
+        height: 100rpx;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+
+        .date-text {
+            margin-left: 10rpx;
+            font-size: 24rpx;
+        }
+    }
 
     .display {
         width: 750rpx;
@@ -135,19 +216,12 @@ const hideKeypad = () => {
         justify-content: space-between;
         background-color: #fff;
         border-top: 1px solid #ddd;
+
         .note {
-            width: 250rpx;
+            width: 350rpx;
             margin-left: 20rpx;
         }
-        .date {
-            width: 200rpx;
-            display: flex;
-            align-items: center;
-            .date-text {
-                margin-left: 10rpx;
-                font-size: 24rpx;
-            }
-        }
+
         .input {
             width: 250rpx;
             margin-right: 20rpx;

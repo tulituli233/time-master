@@ -116,7 +116,7 @@ const planList = [
 		isTop: 0,
 		type: 2,
 		title: '打篮球',
-		date: '2024-03-01'
+		date: '2024-03-06'
 	},
 	{
 		planID: 9,
@@ -124,7 +124,7 @@ const planList = [
 		isTop: 0,
 		type: 2,
 		title: '游泳',
-		date: '2024-04-02'
+		date: '2024-03-06'
 	},
 	{
 		planID: 10,
@@ -132,7 +132,7 @@ const planList = [
 		isTop: 0,
 		type: 2,
 		title: '跳绳',
-		date: '2024-02-26'
+		date: '2024-03-07'
 	},
 	{
 		planID: 11,

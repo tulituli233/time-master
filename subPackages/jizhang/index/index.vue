@@ -4,7 +4,7 @@
             <view class="top">
                 <view class="date">
                     <view class="top-title">2024年</view>
-                    <view class="month">2月</view>
+                    <view class="month">3月</view>
                 </view>
                 <view class="money">
                     <view class="item">
@@ -71,13 +71,13 @@
                     <view class="body-item" v-for="expense in expenses" :key="expense.ExpenseID">
                         <view class="content-box">
                             <view class="box-left"
-                                :style="{ backgroundColor: accountCateEnum.getCategory(expense.Category).color }">
-                                <uni-icons custom-prefix="iconfont" :type="getIconType(expense.Category)" color="#fff"
+                                :style="{ backgroundColor: getCategoryInfo(expense).color }">
+                                <uni-icons custom-prefix="iconfont" :type="getCategoryInfo(expense).icon" color="#fff"
                                     size="24"></uni-icons>
                             </view>
                             <view class="box-right">
                                 <view class="plan-title">
-                                    <text class="title">{{ expense.Category }}</text>
+                                    <text class="title">{{ getCategoryInfo(expense).name }}</text>
                                 </view>
                                 <view class="plan-desc">
                                     <text class="desc">{{ expense.Note }}</text>
@@ -107,55 +107,29 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { getWeek } from '@/utils/utils.js';
-import accountCateEnum from '/enums/accountCateEnum';
+import { incomeCateEnum, expenseCateEnum } from '@/enums/accountCateEnum';
+import { apiGetUserExpenses } from '@/services/api/expenses';
+import { onShow } from '@dcloudio/uni-app';
+console.log('incomeCateEnum.getAllCategories', incomeCateEnum.getAllCategories());
+console.log('expenseCateEnum.getAllCategories', expenseCateEnum.getAllCategories());
+console.log('expenseCateEnum.getCategory(1).color', expenseCateEnum.getCategory(1).color);
+
+// 在适当的生命周期中获取数据
+onShow(() => {
+    getExpenses();
+})
+let accountList = ref([]);
+const getExpenses = () => {
+    apiGetUserExpenses(1).then(res => {
+        accountList.value = res.data;
+        console.log('accountList', accountList.value);
+    })
+}
 // 页面主题色
 const themeColor = ref('#1baf59');
 const x = ref('600rpx');
 const y = ref('1000rpx');
 
-// 账单列表
-const accountList = [
-    {
-        ExpenseID: 1,
-        UserID: 1,
-        Amount: -50.00,
-        Category: 1,
-        Date: '2024-03-01T12:00:00Z',
-        Note: 'Bought groceries for the week'
-    },
-    {
-        ExpenseID: 2,
-        UserID: 1,
-        Amount: -30.00,
-        Category: 2,
-        Date: '2024-03-02T12:00:00Z',
-        Note: 'Dinner with friends'
-    },
-    {
-        ExpenseID: 3,
-        UserID: 2,
-        Amount: -20.00,
-        Category: 1,
-        Date: '2024-03-02T12:00:00Z',
-        Note: 'Bus fare'
-    },
-    {
-        ExpenseID: 4,
-        UserID: 1,
-        Amount: -100.00,
-        Category: 2,
-        Date: '2024-03-03T12:00:00Z',
-        Note: 'Bought new clothes'
-    },
-    {
-        ExpenseID: 5,
-        UserID: 1,
-        Amount: 5000.00,
-        Category: 3,
-        Date: '2024-03-03T12:00:00Z',
-        Note: '工资'
-    }
-];
 // 收入计算
 const incomesNum = (accountList) => {
     return accountList.reduce((sum, expense) => {
@@ -180,7 +154,7 @@ function formatDate(dateString) {
 // 按日期分组的计算属性
 const groupedExpenses = computed(() => {
     const grouped = {};
-    accountList.forEach(expense => {
+    accountList.value.forEach(expense => {
         const dateKey = formatDate(expense.Date);
         if (!grouped[dateKey]) {
             grouped[dateKey] = [];
@@ -191,11 +165,14 @@ const groupedExpenses = computed(() => {
     return grouped;
 });
 
-// 根据类别获取对应的图标类型
-const getIconType = (category) => {
-    return accountCateEnum.getCategory(category).icon || 'icon-shoujizhendong';
-};
-
+// 获取分类信息
+const getCategoryInfo = (expense) => {
+    if (expense.Amount <= 0) {
+        return expenseCateEnum.getCategory(expense.Category);
+    }else{
+        return incomeCateEnum.getCategory(expense.Category);
+    }
+}
 // 增加一条记录
 const addExpense = () => {
     uni.navigateTo({
@@ -204,6 +181,7 @@ const addExpense = () => {
     // uni.navigateTo({
     //     url: '/subPackages/test/NumericKeypad/index'
     // })
+
 }
 </script>
 
@@ -284,6 +262,12 @@ const addExpense = () => {
             margin-bottom: 10rpx;
         }
     }
+}
+
+.no-data {
+    height: 90vh;
+    text-align: center;
+    line-height: 90vh;
 }
 
 .account-list {

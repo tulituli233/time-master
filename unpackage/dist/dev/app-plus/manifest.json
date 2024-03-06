@@ -72,7 +72,7 @@
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "dark",
-      "background": "#F8F8F8"
+      "background": "#F2F2F2"
     },
     "uniStatistics": {
       "enable": false
@@ -101,7 +101,7 @@
     "tabBar": {
       "position": "bottom",
       "color": "#474747",
-      "selectedColor": "#9BC6FC",
+      "selectedColor": "#4c8bf0",
       "borderStyle": "rgba(0,0,0,0.4)",
       "blurEffect": "none",
       "fontSize": "10px",
@@ -113,26 +113,26 @@
         {
           "pagePath": "pages/index/index",
           "text": "应用",
-          "iconPath": "/static/logo.png",
-          "selectedIconPath": "/static/logo.png"
+          "iconPath": "/static/icon/app.png",
+          "selectedIconPath": "/static/icon/app-active.png"
         },
         {
           "pagePath": "pages/note/index",
           "text": "事项",
-          "iconPath": "/static/logo.png",
-          "selectedIconPath": "/static/logo.png"
+          "iconPath": "/static/icon/note.png",
+          "selectedIconPath": "/static/icon/note-active.png"
         },
         {
           "pagePath": "pages/plan/index",
           "text": "规划",
-          "iconPath": "/static/logo.png",
-          "selectedIconPath": "/static/logo.png"
+          "iconPath": "/static/icon/plan.png",
+          "selectedIconPath": "/static/icon/plan-active.png"
         },
         {
           "pagePath": "pages/mine/index",
           "text": "我的",
-          "iconPath": "/static/logo.png",
-          "selectedIconPath": "/static/logo.png"
+          "iconPath": "/static/icon/mine.png",
+          "selectedIconPath": "/static/icon/mine-active.png"
         }
       ],
       "selectedIndex": 0,
