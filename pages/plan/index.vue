@@ -6,18 +6,19 @@
 		</view>
 		<view class="swiper-box">
 			<swiper class="swiper" disable-programmatic-animation :current="currentIndex" @change="swiperChange">
-				<swiper-item v-for="item in list" :key="item.date">
+				<swiper-item v-for="item in dayPlan" :key="item.date">
 					<view class="swiper-item" v-if="item.plans && item.plans.length">
-						<view class="content-box" v-for="item1 in item.plans" :key="item1.planID">
-							<view class="box-left">
-								<checkbox value="cb" />
+						<view class="content-box" v-for="item1 in item.plans" :key="item1.TaskID">
+							<view class="box-left" @click="updateStatus(item1)">
+								<uni-icons custom-prefix="iconfont" :type="statusIcon(item1.Status)" size="20"
+									color="#4c8bf0"></uni-icons>
 							</view>
 							<view class="box-right">
 								<view class="plan-title">
-									<text class="title">{{ item1.title }}</text>
+									<text class="title">{{ item1.Title }}</text>
 								</view>
 								<view class="plan-desc">
-									<text class="desc">{{ item1.date }}</text>
+									<text class="desc">{{ formatDateTime(item1.DueDate) }}</text>
 								</view>
 							</view>
 						</view>
@@ -30,163 +31,211 @@
 		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-				<button class="win-service" @click="openPopup">
+				<button class="win-service" @click="$refs.popupRef.open('bottom')">
 					<uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
 				</button>
 			</movable-view>
 		</movable-area>
-		<!-- 普通弹窗 -->
-		<uni-popup ref="popupRef" background-color="#fff" type="bottom">
-			<view class="popup-content" ><text
-					class="text">popup 内容</text></view>
+		<!-- 今天小浮窗 -->
+		<movable-area class="movableArea">
+			<movable-view class="movableView" direction="all" :x="todayX" :y="todayY" :out-of-bounds="false">
+				<button class="win-service" @click="currentIndex = todayIndex">
+					<uni-icons class="today-icon" custom-prefix="iconfont" type="icon-jinri" size="30"
+						color="#fff"></uni-icons>
+				</button>
+			</movable-view>
+		</movable-area>
+		<!-- 添加弹窗 -->
+		<uni-popup ref="popupRef" background-color="#fff">
+			<view class="popup-content">
+				<view class="input-box">
+					<input class="input" type="text" v-model="planTitle" placeholder="把事情记录下来吧~" />
+					<view class="btn">
+						<uni-icons custom-prefix="iconfont" type="icon-send" size="30" color="#4c8bf0"
+							@click="addPlan"></uni-icons>
+					</view>
+				</view>
+				<!-- 属性 -->
+				<view class="attr">
+					<view class="date">
+						<uni-datetime-picker class="no-border" type="datetime" v-model="planDate" />
+					</view>
+					<view class="type-list">
+						<view class="type-box"
+							:style="{ border: selectedType === index ? '5rpx solid ' + item.color : 'none' }"
+							v-for="(item, index) in typeList" :key="index" @click="selectedType = index">
+							<view class="type" :style="{ backgroundColor: item.color }">
+								<uni-icons custom-prefix="iconfont" :type="item.icon" size="20"
+									color="#fff"></uni-icons>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { timestampToTime, getWeek, formatDateTime } from '@/utils/utils.js';
+import { timestampToTime, getWeek, formatDateTime, formatDate } from '@/utils/utils.js';
+import { onShow } from '@dcloudio/uni-app';
+import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks';
+
+const previewDays = 31;//预览天数
 const x = ref('600rpx');
 const y = ref('1000rpx');
-onMounted(() => {
-	// 使用filterPlan筛选昨天，今天，明天的计划
-	const now = new Date().getTime();
-	const yesterday = new Date(now - 24 * 60 * 60 * 1000);
-	const tomorrow = new Date(now + 24 * 60 * 60 * 1000);
-	list.value.push(filterPlan(timestampToTime(yesterday)));
-	list.value.push(filterPlan(timestampToTime(now)));
-	list.value.push(filterPlan(timestampToTime(tomorrow)));
-	console.log(list.value);
-})
-const planList = [
-	{
-		planID: 1,
-		status: 0,
-		isTop: 0,
-		type: 1,
-		title: '吃饭',
-		date: '2022-02-01'
-	},
-	{
-		planID: 2,
-		status: 0,
-		isTop: 1,
-		type: 1,
-		title: '睡觉',
-		date: '2022-02-02'
-	},
-	{
-		planID: 3,
-		status: 1,
-		isTop: 0,
-		type: 1,
-		title: '学习',
-		date: '2022-02-03'
-	},
-	{
-		planID: 4,
-		status: 3,
-		isTop: 0,
-		type: 1,
-		title: '写代码',
-		date: '2022-02-04'
-	},
-	{
-		planID: 5,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '运动',
-		date: '2022-03-05'
-	},
-	{
-		planID: 6,
-		status: 0,
-		isTop: 0,
-		type: 1,
-		title: '看电影',
-		date: '2024-02-27'
-	},
-	{
-		planID: 7,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '跑步',
-		date: '2024-02-28'
-	},
-	{
-		planID: 8,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '打篮球',
-		date: '2024-03-06'
-	},
-	{
-		planID: 9,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '游泳',
-		date: '2024-03-06'
-	},
-	{
-		planID: 10,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '跳绳',
-		date: '2024-03-07'
-	},
-	{
-		planID: 11,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '羽毛球',
-		date: '2024-02-27'
-	}
-]
+
+const todayX = ref('600rpx');
+const todayY = ref('850rpx');
+
+// 获取任务列表
+let tasks = ref([]);
+const getTasks = () => {
+	return new Promise((resolve, reject) => {
+		apiGetUserTasks(1).then(res => {
+			tasks.value = res.data;
+			console.log('tasks', tasks.value);
+			filterPlans(previewDays, tasks, dayPlan);
+			resolve();
+		}).catch(error => {
+			reject(error);
+		});
+	});
+};
+
+onShow(async () => {
+	await getTasks();
+});
+
 const currDate = ref(timestampToTime(new Date().getTime()))
 const currWeek = ref(getWeek(new Date().getTime()))
-const list = ref([])
-// 根据date筛选指定日期的计划
-const filterPlan = (date) => {
-	let dayPlan = {
-		date,
-		plans: []
-	}
-	dayPlan.plans = planList.filter(item => item.date === date)
-	return dayPlan
+
+// 初始化dayPlan数组，包含30个元素，每个元素为一个对象，包含日期和计划数组
+const initializeDayPlanArray = (days) => {
+	const dayPlanArray = Array(days).fill().map((_, index) => {
+		const currentDate = new Date();
+		currentDate.setDate(currentDate.getDate() - (Math.floor(days / 2) - index)); // 计算近指定天数的日期
+		return { date: currentDate.toISOString().split('T')[0], plans: [] };
+	});
+	return dayPlanArray;
+};
+
+// 使用示例
+const dayPlan = ref(initializeDayPlanArray(previewDays));
+
+// 使用forEach方法将tasks中的数据按照日期分组加入到dayPlan数组中
+const filterPlans = (days, tasks, dayPlan) => {
+	// 重新初始化dayPlan数组
+	dayPlan.value = initializeDayPlanArray(days);
+
+	// 使用forEach方法将tasks中的数据按照日期分组加入到dayPlan数组中
+	tasks.value.forEach(task => {
+		const taskDate = new Date(formatDate(task.DueDate));
+		const firstDate = new Date(formatDate(dayPlan.value[0].date)); // 数组第一天的日期
+		const diffTime = Math.abs(firstDate - taskDate);
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		if (diffDays <= days) {
+			const index = diffDays; // 计算日期在dayPlan数组中的索引
+			dayPlan.value[index].plans.push(task);
+		}
+	});
 }
-let currentIndex = ref(1)
+const todayIndex = Math.ceil(previewDays / 2 - 1)
+let currentIndex = ref(todayIndex);
 const swiperChange = (e) => {
-	currDate.value = timestampToTime(list.value[e.detail.current].date)
-	currWeek.value = getWeek(list.value[e.detail.current].date)
-	console.log('currentIndex', currentIndex.value);
-	console.log('e', e.detail.current);
-	if (currentIndex.value < e.detail.current && !list.value[e.detail.current + 1]) {
-		list.value.push(filterPlan(timestampToTime(new Date(list.value[e.detail.current].date).getTime() + 24 * 60 * 60 * 1000)))
-		console.log('push', list.value);
-		// currentIndex.value = e.detail.current
-	}
-	else if (currentIndex.value > e.detail.current && !list.value[e.detail.current - 1]) {
-		list.value.unshift(filterPlan(timestampToTime(new Date(list.value[e.detail.current].date).getTime() - 24 * 60 * 60 * 1000)))
-		console.log('unshift', list.value);
-	}
+	currDate.value = timestampToTime(dayPlan.value[e.detail.current].date)
+	currWeek.value = getWeek(dayPlan.value[e.detail.current].date)
+	planDate.value = currDate.value
 	currentIndex.value = e.detail.current
 }
+const planTitle = ref('');
+const planDate = ref(formatDateTime(currDate.value));
+let typeList = [
+	{
+		name: '工作',
+		icon: 'icon-gongzuo',
+		color: '#76c681',
+	},
+	{
+		name: '生活',
+		icon: 'icon-zhufang',
+		color: '#13bceb',
+	}
+]
+// 状态 0 未完成 1 已完成 2 已删除 3 失败 
+// 是否置顶 0 不置顶 1 置顶
+// 类型 1 工作 2 生活
+const statusIcon = (status) => {
+	switch (status) {
+		case 0:
+			return 'icon-quan'
+		case 1:
+			return 'icon-duigou'
+		case 3:
+			return 'icon-cuo'
+		default:
+			return 'icon-quan'
+	}
+}
+const updateTaskStatus = (item, newStatus) => {
+	apiUpdateTask({
+		TaskID: item.TaskID,
+		Status: newStatus
+	}).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			item.Status = newStatus;
+		}
+	})
+}
+
+const updateStatus = (item) => {
+	const newStatus = item.Status === 0 ? 1 : 0;
+	updateTaskStatus(item, newStatus);
+}
+const selectedType = ref(0);
 const popupRef = ref(null);
-// 打开uni-popup
-const openPopup = () => {
-	popupRef.value.open('bottom');
+const addPlan = () => {
+	let plan = {
+		UserId: 1,
+		Title: planTitle.value,
+		DueDate: planDate.value,
+		Type: selectedType.value,
+	}
+	console.log('plan', plan);
+	apiAddTask(plan).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			getTasks()
+			popupRef.value.close()
+		}
+	})
 }
 </script>
 
 <style lang="scss">
 .win-service {
 	background-color: #4c8bf0;
+}
+
+.today-icon {
+	display: flex;
+	align-items: center;
 }
 
 .time {
@@ -210,9 +259,13 @@ const openPopup = () => {
 	}
 }
 
+::v-deep uni-swiper-item {
+	overflow: scroll;
+}
+
 .swiper-box {
 	.swiper {
-		height: 90vh;
+		height: 100vh;
 	}
 
 	.swiper-item {
@@ -253,6 +306,54 @@ const openPopup = () => {
 		text-align: center;
 		font-size: 30rpx;
 		color: #888;
+	}
+}
+
+.popup-content {
+	padding: 20rpx;
+	height: 400rpx;
+
+	.input-box {
+		display: flex;
+		align-items: center;
+		padding: 20rpx;
+
+		.input {
+			width: 600rpx;
+		}
+
+		.btn {
+			width: 100rpx;
+			text-align: center;
+		}
+	}
+
+	.attr {
+		display: flex;
+		align-items: center;
+		padding: 20rpx 0;
+
+		.date {
+			width: 400rpx;
+			margin-right: 20rpx;
+			padding: 20rpx;
+		}
+
+		.type-list {
+			display: flex;
+			align-items: center;
+
+			.type-box {
+				padding: 5rpx;
+				border-radius: 50%;
+				margin: 0 20rpx;
+
+				.type {
+					padding: 10rpx;
+					border-radius: 50%;
+				}
+			}
+		}
 	}
 }
 </style>

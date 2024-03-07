@@ -28,15 +28,18 @@
 											<uni-swipe-action-item :right-options="options2"
 												@click="bindClick(item1.TaskID)">
 												<view class="content-box">
-													<view class="box-left">
-														<checkbox value="cb" />
+													<view class="box-left" @click="updateStatus(item1)">
+														<uni-icons custom-prefix="iconfont"
+															:type="statusIcon(item1.Status)" size="20"
+															color="#4c8bf0"></uni-icons>
 													</view>
 													<view class="box-right">
 														<view class="plan-title">
 															<text class="title">{{ item1.Title }}</text>
 														</view>
 														<view class="plan-desc">
-															<text class="desc">{{ formatDateTime(item1.DueDate) }}</text>
+															<text class="desc">{{ formatDateTime(item1.DueDate)
+																}}</text>
 														</view>
 													</view>
 												</view>
@@ -91,10 +94,9 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { apiAddTask } from '@/services/api/tasks';
-import { formatDateTime } from '@/utils/utils.js';
+import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks';
+import { formatDateTime, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
-import { apiGetUserTasks } from '@/services/api/tasks';
 
 // 获取任务列表
 let tasks = ref([]);
@@ -141,91 +143,7 @@ const options2 = ref([
 const bindClick = (e) => {
 	console.log(e)
 }
-// 状态 0 未完成 1 已完成 2 已删除 3 失败 
-// 是否置顶 0 不置顶 1 置顶
-// 类型 1 工作 2 生活
-const planList = [
-	{
-		planID: 1,
-		status: 0,
-		isTop: 0,
-		type: 1,
-		title: '吃饭',
-		date: '2022-02-01'
-	},
-	{
-		planID: 2,
-		status: 0,
-		isTop: 1,
-		type: 1,
-		title: '睡觉',
-		date: '2022-02-02'
-	},
-	{
-		planID: 3,
-		status: 1,
-		isTop: 0,
-		type: 1,
-		title: '学习',
-		date: '2022-02-03'
-	},
-	{
-		planID: 4,
-		status: 3,
-		isTop: 0,
-		type: 1,
-		title: '写代码',
-		date: '2022-02-04'
-	},
-	{
-		planID: 5,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '运动',
-		date: '2022-03-05'
-	},
-	{
-		planID: 6,
-		status: 0,
-		isTop: 0,
-		type: 1,
-		title: '看电影',
-		date: '2024-02-27'
-	},
-	{
-		planID: 7,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '跑步',
-		date: '2024-02-28'
-	},
-	{
-		planID: 8,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '打篮球',
-		date: '2024-03-01'
-	},
-	{
-		planID: 9,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '游泳',
-		date: '2024-04-02'
-	},
-	{
-		planID: 10,
-		status: 0,
-		isTop: 0,
-		type: 2,
-		title: '跳绳',
-		date: '2024-02-26'
-	}
-]
+// 选中的类型
 const modelCateList = ref([
 	{
 		title: '置顶',
@@ -294,21 +212,11 @@ let newPlanList = computed(() => {
 
 // 处理数据
 const handleData = (list) => {
-	console.log('tasks.value', tasks.value);
 	let cateList = modelCateList
-	// let cateList = JSON.parse(JSON.stringify(modelCateList));
+	let today = formatDate(new Date())
 	list.forEach(item => {
-		const date = new Date(item.DueDate)
-		// 今天取去到day
-		const today = new Date()
-		let todayString = ''
-		let year = today.getFullYear();
-		let month = today.getMonth() + 1;
-		let day = today.getDate();
-		month = month < 10 ? '0' + month : month
-		day = day < 10 ? '0' + day : day
-		todayString = year + '-' + month + '-' + day;
-		const todayTime = new Date(todayString)
+		const date = new Date(formatDate(item.DueDate))
+		const todayTime = new Date(today)
 		const diff = date - todayTime
 		// 置顶
 		if (item.Priority === 1 && item.Status === 0) {
@@ -367,6 +275,45 @@ let typeList = [
 		color: '#13bceb',
 	}
 ]
+
+// 状态 0 未完成 1 已完成 2 已删除 3 失败 
+// 是否置顶 0 不置顶 1 置顶
+// 类型 1 工作 2 生活
+const statusIcon = (status) => {
+	switch (status) {
+		case 0:
+			return 'icon-quan'
+		case 1:
+			return 'icon-duigou'
+		case 3:
+			return 'icon-cuo'
+		default:
+			return 'icon-quan'
+	}
+}
+const updateTaskStatus = (item, newStatus) => {
+	apiUpdateTask({
+		TaskID: item.TaskID,
+		Status: newStatus
+	}).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			item.Status = newStatus;
+		}
+	})
+}
+
+const updateStatus = (item) => {
+	const newStatus = item.Status === 0 ? 1 : 0;
+	updateTaskStatus(item, newStatus);
+}
 const selectedType = ref(0);
 const addPlan = () => {
 	let plan = {

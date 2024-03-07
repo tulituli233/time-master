@@ -36,3 +36,11 @@ export const apiAddTask = (task: Task): Promise<Task> => {
         data: task
     });
 }
+// 修改tasks
+export const apiUpdateTask = (task: Task): Promise<Task> => {
+    return request({
+        url: `tasks/update`,
+        method: 'POST',
+        data: task
+    });
+}

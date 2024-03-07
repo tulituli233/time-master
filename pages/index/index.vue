@@ -71,7 +71,7 @@ const list = ref([
 	{
 		title: '习惯打卡',
 		unicode: 'icon-a-rilidaka',
-		url: '/pages/note/index',
+		url: '/subPackages/test/NumericKeypad/index',
 		color: '#7e7de8',
 		desc: '习惯成自然'
 	}
