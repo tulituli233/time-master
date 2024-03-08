@@ -22,14 +22,14 @@ const list = ref([
 	{
 		title: '备忘录',
 		unicode: 'icon-biaoqian',
-		url: '/pages/index/index',
+		url: '/subPackages/memos/index/index',
 		color: '#1baf59',
 		desc: '记事本'
 	},
 	{
 		title: '记账',
-		unicode: 'icon-jizhang',
-		url: '/subPackages/jizhang/index/index',
+		unicode: 'icon-expenses',
+		url: '/subPackages/expenses/index/index',
 		color: '#7e7cea',
 		desc: '本月：收入5000，支出3000，结余2000'
 	},

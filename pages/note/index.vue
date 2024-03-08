@@ -102,6 +102,9 @@ import { onShow } from '@dcloudio/uni-app';
 let tasks = ref([]);
 onShow(() => {
 	getTasks();
+	uni.onKeyboardHeightChange(res => {
+		console.log('键盘高度变化----', res.height)
+	})
 })
 const getTasks = () => {
 	apiGetUserTasks(1).then(res => {
@@ -191,22 +194,18 @@ let newPlanList = computed(() => {
 	switch (current.value) {
 		case 0:
 			currPlanList = handleData(tasks.value);
-			console.log('all', currPlanList);
 			break
 		case 1:
 			currPlanList = handleData(tasks.value.filter(item => {
 				return item.Type === 0
 			}))
-			console.log('work', currPlanList);
 			break
 		case 2:
 			currPlanList = handleData(tasks.value.filter(item => {
 				return item.Type === 1
 			}))
-			console.log('life', currPlanList);
 			break
 	}
-	console.log('currPlanList', currPlanList);
 	return currPlanList
 })
 

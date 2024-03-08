@@ -15,6 +15,8 @@ app.$mount()
 import '@/assets/css/index.scss';
 // 引入全局方法
 import * as utils from '@/utils/utils.js'
+// 引入富文本编辑器
+
 
 // #ifdef VUE3
 import { createSSRApp } from 'vue'
