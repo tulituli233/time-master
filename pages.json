@@ -75,6 +75,17 @@
 			]
 		},
 		{
+			"root": "subPackages/water",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "喝水"
+					}
+				}
+			]	
+		},
+		{
 			"root": "subPackages/test",
 			"pages": [
 				{

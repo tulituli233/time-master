@@ -102,9 +102,9 @@ import { onShow } from '@dcloudio/uni-app';
 let tasks = ref([]);
 onShow(() => {
 	getTasks();
-	uni.onKeyboardHeightChange(res => {
-		console.log('键盘高度变化----', res.height)
-	})
+	// uni.onKeyboardHeightChange(res => {
+	// 	console.log('键盘高度变化----', res.height)
+	// })
 })
 const getTasks = () => {
 	apiGetUserTasks(1).then(res => {

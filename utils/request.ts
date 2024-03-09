@@ -2,8 +2,8 @@
 
 import { UniAppRequestOptions, UniAppRequestSuccessCallback, UniAppRequestFailCallback } from 'uni';
 
-// const BASE_URL = 'http://localhost:3838/';
-const BASE_URL = 'http://192.168.0.106:3838/';
+const BASE_URL = 'http://localhost:3838/';
+// const BASE_URL = 'http://192.168.0.106:3838/';
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json'

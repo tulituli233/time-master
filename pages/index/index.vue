@@ -28,7 +28,7 @@ const list = ref([
 	},
 	{
 		title: '记账',
-		unicode: 'icon-expenses',
+		unicode: 'icon-jizhang',
 		url: '/subPackages/expenses/index/index',
 		color: '#7e7cea',
 		desc: '本月：收入5000，支出3000，结余2000'
@@ -64,7 +64,7 @@ const list = ref([
 	{
 		title: '喝水',
 		unicode: 'icon-quan',
-		url: '/pages/note/index',
+		url: '/subPackages/water/index/index',
 		color: '#0fb9a0',
 		desc: '今日：0/1700ml'
 	},
