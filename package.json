@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "lunar-calendar": "^0.1.4",
     "mp-html": "^2.4.3"
   }
 }

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="list">
-			<view class="item" @click="$utils.navTo(item.url)" v-for="item in list" :key="item.title">
+			<view class="item" @click="linkTo(item.url)" v-for="item in list" :key="item.title">
 				<view class="left">
 					<view class="icon" :style="{ backgroundColor: item.color }">
 						<uni-icons custom-prefix="iconfont" :type="item.unicode" color="#fff" size="30"></uni-icons>
@@ -18,6 +18,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { navTo } from '@/utils/utils'
 const list = ref([
 	{
 		title: '备忘录',
@@ -36,14 +37,14 @@ const list = ref([
 	{
 		title: '日记',
 		unicode: 'icon-rijix',
-		url: '/pages/note/index',
+		url: '/subPackages/diary/index/index',
 		color: '#4c8bf0',
 		desc: '今天是个好日子，明天也是个好日子'
 	},
 	{
 		title: '纪念日倒数',
 		unicode: 'icon-jinianriyingxiao',
-		url: '/pages/note/index',
+		url: '/subPackages/countdowns/index/index',
 		color: '#f75e3c',
 		desc: '2024年2月24日，距离2024年3月1日还有5天'
 	},
@@ -63,9 +64,9 @@ const list = ref([
 	},
 	{
 		title: '喝水',
-		unicode: 'icon-quan',
+		unicode: 'icon-shui',
 		url: '/subPackages/water/index/index',
-		color: '#0fb9a0',
+		color: '#00b5ff',
 		desc: '今日：0/1700ml'
 	},
 	{
@@ -76,6 +77,15 @@ const list = ref([
 		desc: '习惯成自然'
 	}
 ])
+const linkTo = (url) => {
+	if (url !== '/pages/note/index') {
+		navTo(url)
+	} else {
+		uni.switchTab({
+			url: '/pages/note/index'
+		})
+	}
+}
 </script>
 
 <style lang="scss">

@@ -15,11 +15,11 @@
         </view>
         <!-- 已喝(ml)、目标(ml)、剩余(ml) -->
         <view class="info">
-            <view class="info-item">
+            <view class="info-item" @click="$refs.recordPopupRef.open('bottom')">
                 <view class="label">已喝(ml)</view>
                 <view class="value">{{ consumedWater }}</view>
             </view>
-            <view class="info-item">
+            <view class="info-item" @click="$refs.setTargetRef.open('bottom')">
                 <view class="label">目标(ml)</view>
                 <view class="value">{{ targetWater }}</view>
             </view>
@@ -81,7 +81,49 @@
                 </view>
             </view>
         </uni-popup>
-
+        <!-- 饮水记录弹出层 -->
+        <uni-popup class="record-popup" ref="recordPopupRef" background-color="#fff">
+            <view class="record-popup-content">
+                <view class="record-header">
+                    <view class="title">饮水记录</view>
+                </view>
+                <view class="record-list" v-if="waterRecords.length > 0">
+                    <view class="record-item" v-for="(item, index) in waterRecords" :key="index">
+                        <view class="record-icon">
+                            <uni-icons custom-prefix="iconfont" :type="getWaterObject(item.WaterID).icon" size="40"
+                                color="#00b7ff" />
+                        </view>
+                        <view class="record-date">
+                            {{ getTime(item.DateTime) }}
+                        </view>
+                        <view class="record-water">
+                            {{ getWaterObject(item.WaterID).name }}
+                        </view>
+                        <view class="record-amount">
+                            {{ item.Amount }}ml
+                        </view>
+                    </view>
+                </view>
+                <view class="record-empty" v-else>
+                    今天还没有喝水哦
+                </view>
+            </view>
+        </uni-popup>
+        <!-- 设置饮水目标 -->
+        <uni-popup class="set-target" ref="setTargetRef" background-color="#fff">
+            <view class="set-target-content">
+                <view class="set-target-header">
+                    <view class="title">设置饮水目标</view>
+                </view>
+                <view class="set-target-input">
+                    <uni-number-box :width="100" :value="targetWaterTemp" :step="100" />
+                </view>
+                <view class="set-target-btn">
+                    <view class="btn" @click="$refs.setTargetRef.close()">取消</view>
+                    <view class="btn btn-primary" @click="setTarget()">确定</view>
+                </view>
+            </view>
+        </uni-popup>
     </view>
 </template>
 
@@ -105,7 +147,7 @@ const getWaterRecords = () => {
 const percent = computed(() => {
     return Math.floor((consumedWater.value / targetWater.value) * 100).toFixed(0)
 })
-const tips = ref('')
+const tips = ref('每天都要喝水哦')
 const targetWater = ref(2000)
 // 计算已喝水的量
 const consumedWater = computed(() => {
@@ -115,6 +157,8 @@ const consumedWater = computed(() => {
     })
     return sum
 })
+
+const popupRef = ref(null)
 // 水的种类
 const waterType = ref([
     {
@@ -262,6 +306,8 @@ const addWater = () => {
             uni.showToast({
                 title: res.msg
             })
+            getWaterRecords()
+            popupRef.value.close()
         }
     })
 }
@@ -275,6 +321,17 @@ const convertToTodayTime = (timeString) => {
     today.setMilliseconds(0);
 
     return today;
+}
+// 根据WaterID获取对象
+const getWaterObject = (WaterID) => {
+    return waterType.value.find(item => item.WaterID === WaterID)
+}
+
+const setTargetRef = ref(null)
+const targetWaterTemp = ref(1700)
+const setTarget = () => {
+    targetWater.value = targetWaterTemp.value
+    setTargetRef.value.close()
 }
 </script>
 
@@ -298,7 +355,6 @@ const convertToTodayTime = (timeString) => {
 }
 
 .tips {
-    width: 750rpx;
     height: 45vh;
     text-align: center;
     padding: 20rpx;
@@ -452,6 +508,85 @@ const convertToTodayTime = (timeString) => {
 
         &:hover {
             background-color: #ddd;
+        }
+    }
+}
+
+.record-popup-content {
+    padding: 20rpx;
+    color: #000;
+
+    .record-header {
+        padding: 20rpx;
+        text-align: center;
+        font-size: 36rpx;
+    }
+
+    .record-list {
+        padding: 20rpx;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .record-icon {
+            padding: 20rpx;
+        }
+
+        .record-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+
+            .record-water {
+                padding-left: 20rpx;
+                width: 400rpx;
+            }
+        }
+    }
+
+    .record-empty {
+        height: 100rpx;
+        line-height: 100rpx;
+        text-align: center;
+    }
+}
+
+.set-target-content {
+    padding: 20rpx;
+    color: #000;
+
+    .set-target-header {
+        padding: 20rpx;
+        text-align: center;
+        font-size: 36rpx;
+    }
+
+    .set-target-input {
+        padding: 40rpx;
+        font-size: 40rpx;
+        display: flex;
+        justify-content: center;
+    }
+
+    .set-target-btn {
+        padding: 20rpx;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .btn {
+            width: 150rpx;
+            height: 80rpx;
+            line-height: 80rpx;
+            text-align: center;
+            border-radius: 50rpx;
+            border: 1px solid #aaa;
+        }
+
+        .btn-primary {
+            background-color: #00b7ff;
+            color: #fff;
         }
     }
 }

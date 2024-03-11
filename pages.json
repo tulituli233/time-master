@@ -86,6 +86,34 @@
 			]	
 		},
 		{
+			"root": "subPackages/diary",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "日记"
+					}
+				},
+				{
+					"path": "add/index",
+					"style": {
+						"navigationBarTitleText": "添加日记"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/countdowns",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "倒计时"
+					}
+				}
+			]
+		},
+		{
 			"root": "subPackages/test",
 			"pages": [
 				{
