@@ -39,6 +39,17 @@
 	],
 	"subPackages": [
 		{
+			"root": "subPackages/login",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				}
+			]
+		},
+		{
 			"root": "subPackages/expenses",
 			"pages": [
 				{

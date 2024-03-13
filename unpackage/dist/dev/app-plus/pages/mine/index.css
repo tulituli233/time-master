@@ -567,7 +567,7 @@
 .top .left {
   margin-left: 0.625rem;
 }
-.top .left img {
+.top .left uni-image {
   width: 3.75rem;
   height: 3.75rem;
   border-radius: 50%;

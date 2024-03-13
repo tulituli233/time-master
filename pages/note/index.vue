@@ -67,7 +67,7 @@
 				<view class="input-box">
 					<input class="input" type="text" v-model="planTitle" placeholder="把事情记录下来吧~" />
 					<view class="btn">
-						<uni-icons custom-prefix="iconfont" type="icon-duigou" size="20" color="#4c8bf0"
+						<uni-icons custom-prefix="iconfont" type="icon-send" size="30" color="#4c8bf0"
 							@click="addPlan"></uni-icons>
 					</view>
 				</view>
@@ -265,12 +265,12 @@ console.log('planDate', planDate.value);
 let typeList = [
 	{
 		name: '工作',
-		icon: 'icon-jianzhi',
+		icon: 'icon-gongzuo',
 		color: '#76c681',
 	},
 	{
 		name: '生活',
-		icon: 'icon-xuexi',
+		icon: 'icon-zhufang',
 		color: '#13bceb',
 	}
 ]
@@ -313,6 +313,7 @@ const updateStatus = (item) => {
 	const newStatus = item.Status === 0 ? 1 : 0;
 	updateTaskStatus(item, newStatus);
 }
+const popupRef = ref(null);
 const selectedType = ref(0);
 const addPlan = () => {
 	let plan = {
@@ -329,9 +330,8 @@ const addPlan = () => {
 				title: res.msg || '网络异常'
 			})
 		} else {
-			uni.showToast({
-				title: res.msg
-			})
+			getTasks();
+			popupRef.value.close()
 		}
 	})
 }

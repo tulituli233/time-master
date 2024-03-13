@@ -3,11 +3,11 @@
 		<view class="top">
 			<view class="left">
 				<view class="head">
-					<img src="../../static/head.png" />
+					<image src="@/static/head.png" />
 				</view>
 			</view>
 			<view class="right">
-				<text class="name">昵称</text>
+				<text class="name" v-if="userInfo">{{ userInfo.Username || userInfo.Phone || '昵称' }}</text>
 				<text class="desc">用一句话让人记住你！</text>
 			</view>
 		</view>
@@ -36,30 +36,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { onLoad } from '@dcloudio/uni-app';
+
+const userInfo = ref(null)
+onMounted(() => {
+	userInfo.value = uni.getStorageSync('userInfo')
+	console.log('userInfo', userInfo.value);
+	console.log('userInfo', userInfo.value.Username);
+})
+
 const middleList = ref([
 	{
 		title: '自定义APP',
 		unicode: 'icon-shoujizhendong',
-		color:'#f75e3c',
+		color: '#f75e3c',
 		url: '/pages/index/index'
 	},
 	{
 		title: '应用管理',
 		unicode: 'icon-yingyong',
-		color:'#1baf59',
+		color: '#1baf59',
 		url: '/pages/index/index'
 	},
 	{
 		title: '高级功能',
 		unicode: 'icon-gaojigongneng',
-		color:'#7e7cea',
+		color: '#7e7cea',
 		url: '/pages/index/index'
 	},
 	{
 		title: '桌面小组件',
 		unicode: 'icon-zhuomianzujianguanli',
-		color:'#4c8bf0',
+		color: '#4c8bf0',
 		url: '/pages/index/index'
 	}
 ])
@@ -94,7 +103,8 @@ const list = ref([
 
 	.left {
 		margin-left: 20rpx;
-		img {
+
+		image {
 			width: 120rpx;
 			height: 120rpx;
 			border-radius: 50%;
@@ -130,7 +140,8 @@ const list = ref([
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		.mtop{
+
+		.mtop {
 			margin-bottom: 40rpx;
 			padding: 15rpx;
 			border: #d5d5d5 solid 1rpx;
