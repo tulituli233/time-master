@@ -70,11 +70,25 @@ const list = ref([
 		desc: '今日：0/1700ml'
 	},
 	{
+		title: '课程表',
+		unicode: 'icon-kechengbiao',
+		url: '/pages/note/index',
+		color: '#ff4962',
+		desc: '小初高大学课程表'
+	},
+	{
 		title: '习惯打卡',
 		unicode: 'icon-a-rilidaka',
 		url: '/subPackages/test/NumericKeypad/index',
 		color: '#7e7de8',
 		desc: '习惯成自然'
+	},
+	{
+		title: '小说',
+		unicode: 'icon-xuexi',
+		url: '/subPackages/book/index/index',
+		color: '#ce9178',
+		desc: '已读：1章，未读：5章'
 	}
 ])
 const linkTo = (url) => {

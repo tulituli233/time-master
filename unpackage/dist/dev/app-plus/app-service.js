@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$s = {
+  const _sfc_main$w = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -742,7 +742,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$f], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -1309,7 +1309,7 @@ if (uni.restoreGlobal) {
     navTo,
     timestampToTime
   }, Symbol.toStringTag, { value: "Module" }));
-  const _sfc_main$r = {
+  const _sfc_main$v = {
     __name: "index",
     setup(__props2) {
       const list = vue.ref([
@@ -1363,11 +1363,25 @@ if (uni.restoreGlobal) {
           desc: "今日：0/1700ml"
         },
         {
+          title: "课程表",
+          unicode: "icon-kechengbiao",
+          url: "/pages/note/index",
+          color: "#ff4962",
+          desc: "小初高大学课程表"
+        },
+        {
           title: "习惯打卡",
           unicode: "icon-a-rilidaka",
           url: "/subPackages/test/NumericKeypad/index",
           color: "#7e7de8",
           desc: "习惯成自然"
+        },
+        {
+          title: "小说",
+          unicode: "icon-xuexi",
+          url: "/subPackages/book/index/index",
+          color: "#ce9178",
+          desc: "已读：1章，未读：5章"
         }
       ]);
       const linkTo = (url) => {
@@ -1437,9 +1451,9 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
   const _imports_0 = "/static/head.png";
-  const _sfc_main$q = {
+  const _sfc_main$u = {
     __name: "index",
     setup(__props2) {
       const userInfo = vue.ref(null);
@@ -1585,8 +1599,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
-  const _sfc_main$p = {
+  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
+  const _sfc_main$t = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -1635,7 +1649,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1680,7 +1694,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$e], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$g], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -1752,7 +1766,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$o = {
+  const _sfc_main$s = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -1822,7 +1836,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -1919,11 +1933,11 @@ if (uni.restoreGlobal) {
     );
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$o);
+    block0$1(_sfc_main$s);
   if (typeof block1 === "function")
-    block1(_sfc_main$o);
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$d], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$n = {
+    block1(_sfc_main$s);
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$f], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$r = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -1949,12 +1963,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$c], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$e], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -2310,7 +2324,7 @@ if (uni.restoreGlobal) {
     }
     return value;
   }
-  const _sfc_main$m = {
+  const _sfc_main$q = {
     props: {
       weeks: {
         type: Object,
@@ -2344,7 +2358,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2400,7 +2414,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$b], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$d], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -2757,7 +2771,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t: t$3 } = initVueI18n(i18nMessages);
-  const _sfc_main$l = {
+  const _sfc_main$p = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -3358,7 +3372,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -3635,9 +3649,9 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$a], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$c], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$2 } = initVueI18n(i18nMessages);
-  const _sfc_main$k = {
+  const _sfc_main$o = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -4113,7 +4127,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -4406,8 +4420,8 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$9], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$j = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$b], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$n = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -5058,7 +5072,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -5401,12 +5415,12 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$8], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$a], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
-    constructor(options, _this) {
-      this.options = options;
+    constructor(options2, _this) {
+      this.options = options2;
       this.animation = uni.createAnimation({
-        ...options
+        ...options2
       });
       this.currentStepAnimates = {};
       this.next = 0;
@@ -5514,7 +5528,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$i = {
+  const _sfc_main$m = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -5765,7 +5779,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -5778,8 +5792,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$7], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$h = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$9], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$l = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -6106,7 +6120,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -6166,18 +6180,18 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$6], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const BASE_URL = "http://192.168.0.104:3838/";
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const BASE_URL = "http://192.168.0.102:3838/";
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
   };
-  const request = (options) => {
+  const request = (options2) => {
     const requestOptions = {
-      ...options,
-      url: `${BASE_URL}${options.url}`,
+      ...options2,
+      url: `${BASE_URL}${options2.url}`,
       header: {
         ...DEFAULT_HEADERS,
-        ...options.header
+        ...options2.header
       }
     };
     return new Promise((resolve, reject) => {
@@ -6212,7 +6226,7 @@ if (uni.restoreGlobal) {
       data: task
     });
   };
-  const _sfc_main$g = {
+  const _sfc_main$k = {
     __name: "index",
     setup(__props2) {
       let tasks = vue.ref([]);
@@ -6428,7 +6442,7 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_2$2);
         const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_3);
-        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1);
+        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "select" }, [
@@ -6689,8 +6703,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
-  const _sfc_main$f = {
+  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
+  const _sfc_main$j = {
     __name: "index",
     setup(__props2) {
       const previewDays = 31;
@@ -6821,7 +6835,7 @@ if (uni.restoreGlobal) {
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1);
+        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "time" }, [
@@ -7050,7 +7064,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
+  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
   const apiLogin = (credentials) => {
     return request({
       url: `users/login`,
@@ -7065,7 +7079,7 @@ if (uni.restoreGlobal) {
       data: userData
     });
   };
-  const _sfc_main$e = {
+  const _sfc_main$i = {
     __name: "index",
     setup(__props2) {
       const isRegister = vue.ref(false);
@@ -7291,7 +7305,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
+  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
   class CategoryManager {
     constructor() {
       this.categories = /* @__PURE__ */ new Map();
@@ -7360,7 +7374,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$d = {
+  const _sfc_main$h = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -7657,8 +7671,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
-  const _sfc_main$c = {
+  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
+  const _sfc_main$g = {
     __name: "index",
     setup(__props) {
       const tabs = ["支出", "收入", "转账"];
@@ -7725,7 +7739,7 @@ if (uni.restoreGlobal) {
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1);
+        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createCommentVNode(" tabbar选择栏 "),
           vue.createElementVNode("view", { class: "tabbar" }, [
@@ -7919,7 +7933,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
+  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
   const apiGetUserMemos = (userID) => {
     return request({
       url: `memos/list?userID=${userID}`,
@@ -7933,7 +7947,7 @@ if (uni.restoreGlobal) {
       data: memo
     });
   };
-  const _sfc_main$b = {
+  const _sfc_main$f = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -8059,7 +8073,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
+  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
   const config$1 = {
     // 信任的标签（保持标签名不变）
     trustTags: makeMap("card,a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,ruby,rt,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video"),
@@ -9062,7 +9076,7 @@ if (uni.restoreGlobal) {
       this.i++;
     }
   };
-  const _sfc_main$a = {
+  const _sfc_main$e = {
     props: {
       mode: {
         type: Boolean,
@@ -9097,7 +9111,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "card",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args)),
@@ -9143,7 +9157,7 @@ if (uni.restoreGlobal) {
       })
     ], 12, ["data-i"]);
   }
-  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$5], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
+  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$7], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
   const block0 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("handler");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["handler"] = "3052a0dc";
@@ -9159,7 +9173,7 @@ if (uni.restoreGlobal) {
     }
     return top - 30;
   }
-  const _sfc_main$9 = {
+  const _sfc_main$d = {
     name: "node",
     options: {},
     data() {
@@ -9760,7 +9774,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node", true);
     const _component_my_card = vue.resolveComponent("my-card");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -10099,8 +10113,8 @@ if (uni.restoreGlobal) {
     ], 14, ["id"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$9);
-  const node = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$4], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
+    block0(_sfc_main$d);
+  const node = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$6], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
   /*!
    * marked - a markdown parser
    * Copyright (c) 2011-2020, Christopher Jeffrey. (MIT Licensed)
@@ -15796,7 +15810,7 @@ if (uni.restoreGlobal) {
     }
   };
   const plugins = [Markdown, Emoji, Highlight, Latex, Search, Style, ImgCache, Card, Editable];
-  const _sfc_main$8 = {
+  const _sfc_main$c = {
     name: "mp-html",
     data() {
       return {
@@ -16081,7 +16095,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node");
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -16187,7 +16201,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$3], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
+  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$5], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
   function upload$1(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/memos/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -16508,8 +16522,8 @@ if (uni.restoreGlobal) {
     __injectCSSVars__$1();
     return __setup__$1(props, ctx);
   } : __injectCSSVars__$1;
-  const _sfc_main$7 = __default__$1;
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$b = __default__$1;
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -16785,8 +16799,8 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
-  const _sfc_main$6 = {
+  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$4], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
+  const _sfc_main$a = {
     name: "UniNumberBox",
     emits: ["change", "input", "update:modelValue", "blur", "focus"],
     props: {
@@ -16915,7 +16929,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-numbox" }, [
       vue.createElementVNode(
         "view",
@@ -16974,7 +16988,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$3], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
   const apiAddWaterRecord = (record) => {
     return request({
       url: `water/add`,
@@ -16988,7 +17002,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$5 = {
+  const _sfc_main$9 = {
     __name: "index",
     setup(__props2) {
       let waterRecords = vue.ref([]);
@@ -17531,7 +17545,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
+  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
   const apiGetUserDiaries = (userID) => {
     return request({
       url: `diary/list?userID=${userID}`,
@@ -17545,7 +17559,7 @@ if (uni.restoreGlobal) {
       data: diary
     });
   };
-  const _sfc_main$4 = {
+  const _sfc_main$8 = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -17639,7 +17653,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
+  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
   function upload(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/diary/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -17954,8 +17968,8 @@ if (uni.restoreGlobal) {
     __injectCSSVars__();
     return __setup__(props, ctx);
   } : __injectCSSVars__;
-  const _sfc_main$3 = __default__;
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$7 = __default__;
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -18231,7 +18245,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
+  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
   const apiGetUserCountdowns = (userID) => {
     return request({
       url: `countdown/list?userID=${userID}`,
@@ -18245,7 +18259,7 @@ if (uni.restoreGlobal) {
       data: countdown
     });
   };
-  const _sfc_main$2 = {
+  const _sfc_main$6 = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -18300,7 +18314,7 @@ if (uni.restoreGlobal) {
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1);
+        const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "countdown-list" }, [
@@ -18450,7 +18464,778 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
+  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
+  const getRootDir = () => {
+    if (uni.getSystemInfoSync().platform !== "android") {
+      plus.nativeUI.alert("这个组件只能在安卓下使用");
+      return;
+    }
+    let environment = plus.android.importClass("android.os.Environment");
+    if (environment.getExternalStorageState() !== environment.MEDIA_MOUNTED) {
+      plus.nativeUI.alert("SD卡没有挂载");
+    }
+    let sdRoot = environment.getExternalStorageDirectory();
+    formatAppLog("log", "at components/yt-uploads/files.js:17", "sdRoot", sdRoot);
+    let sdRootList = plus.android.invoke(sdRoot, "listFiles");
+    formatAppLog("log", "at components/yt-uploads/files.js:19", "sdRootList", sdRootList);
+    let sdRootPathList = [];
+    sdRootList.forEach((v) => {
+      if (plus.android.invoke(v, "isHidden") == true) {
+        return false;
+      }
+      let pathName = v.toString().split("/");
+      if (plus.android.invoke(v, "isDirectory") === true) {
+        sdRootPathList.push({
+          isDirectory: true,
+          path: v,
+          pathName: pathName[pathName.length - 1]
+        });
+      } else {
+        sdRootPathList.push({
+          isDirectory: false,
+          path: v,
+          pathName: pathName[pathName.length - 1]
+        });
+      }
+    });
+    formatAppLog("log", "at components/yt-uploads/files.js:46", "sdRootPathList", sdRootPathList);
+    return sdRootPathList;
+  };
+  const getSubDir = (path) => {
+    try {
+      if (plus.android.invoke(path, "isDirectory") !== true) {
+        return null;
+      }
+      let pathList = plus.android.invoke(path, "listFiles");
+      let subPathList = [];
+      pathList.forEach((v) => {
+        if (plus.android.invoke(v, "isHidden") == true) {
+          return false;
+        }
+        let pathName = v.toString().split("/");
+        if (plus.android.invoke(v, "isDirectory") === true) {
+          subPathList.push({
+            isDirectory: true,
+            path: v,
+            pathName: pathName[pathName.length - 1]
+          });
+        } else {
+          subPathList.push({
+            isDirectory: false,
+            path: v,
+            pathName: pathName[pathName.length - 1]
+          });
+        }
+      });
+      return subPathList;
+    } catch (e) {
+      return null;
+    }
+  };
+  const files = {
+    getRootDir,
+    getSubDir
+  };
+  const _sfc_main$5 = {
+    props: {
+      autoclose: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {
+        title: "Hello",
+        flileList: [],
+        treeList: ["root"],
+        checkList: [],
+        // 文件选择标记
+        checkDataList: [],
+        // 最终数据
+        flag: 0,
+        source: {
+          file: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABDklEQVRYR+3XwQnCQBAF0D+oZy3BDrQDXW8eEtwS7MAOjBWIHdhBQAVvbuwgJViCnhVGIqggq8xggh4218zuPj4bMkP48UM/Ph8fAena9WvMLEXG8WAvrb3XeQFp6lpUhwPQVW3IWI5iM9as8QM2bkKMuXQjZj4RUfNWr0T4AatdRkQ9MQCwACcE6mgRZQEMLshR50yLKA1gI5MVd0eLKBVQxK9FlA7QIioB+BAMLGxkJq8XuzLAK4KZ9zYe9CsBSD7XAAgJhARCAiGBkEBIQJfA2iUETCW/WWkNAzMbmUTWD2xdG2fOH72+9JQ3dcXcgAZ17dAcRIBnN6OcjN5BL8itNUff6/8eTr9MXrT8CtDv/iF3ze/VAAAAAElFTkSuQmCC",
+          folder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA30lEQVRYR+2XsQ3CMBBF/0F6MkKYgBXikoIQTwCMwAhskg1cpKDDGSEjZITQgw5FIkgRUmQLi6Q4d5a+v5+fXNiEiQdNvD8EYF4GjLHxIsKBgXzsbhCj3mfqHOL+DAyY8lYTaONUzCjyTJ2csiOhD4ApbUqA9SoMAPEbgBctAEbDwEVnquiX/hfgvStHWOutarrpNACA0jtVCYAYEANiQAyIATEwNGBsjCU3RLTyfWf45Jn5jiclWqt2ANBNzNUmeOAI5tSn1DlLVCFC0T9GvgCciwIG5/UvCHgw5yox8AJDX48hEgn/egAAAABJRU5ErkJggg==",
+          checked: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABjElEQVRYR+3XwU3DMBQG4P+p5QwjlAnoBtS9IZRQb1A2KBNQJkBMQJkgokXihtMJyAiMUM4UfpSUlBLSYiuOKhC5JIdn+3tPtvIs2PIjW14fGwHRxHQaJG2RYdid2sbmcaWAKDJ70oQB0HaakBj1QnXqMqYccGcGQlzaTkTyWUR2s3hHRDlg/BCLyKE1ANAAhwI5cEX4AijMkaDJ2BXhDaADFad7xxXhFZCW3xXhHeCKqAVQhiBwpQM1KG7s2gBFBMmpDrudWgA2x/Uf8PcrQOJWBCfr9kOtFSBwowPVj8amL4LrMkRtgHzx/NhJA48QtIoILwAKzvDGXv6n/Lb4hh6iMoDAhQ7UMMt0YkbpOy37MvMfGpjKABAzNqD0sUpWy2vbPVUHLLqdGV+xr7Wa2WaeY/0AFrMlnEOlHy59o09AhvjIzLpp9Q2w+f98ifllgIkZCnDunOaGAavHeDWsvCG5Ny28MFn2+hUl6b0BO9LWR+rJqiH57GYcb0broHMk+dG1BlRM2nr41m/H78OTNzAWzjUaAAAAAElFTkSuQmCC"
+        },
+        isChoose: false
+      };
+    },
+    onLoad() {
+    },
+    methods: {
+      closeHandle() {
+        this.treeList = ["root"];
+        this.checkList = [];
+        this.checkDataList = [];
+        this.isChoose = false;
+      },
+      _autoClose() {
+        if (this.autoclose !== true) {
+          return;
+        }
+        this.checkList = [];
+        this.checkDataList = [];
+        this.isChoose = false;
+      },
+      okeyHandle() {
+        this.$emit("selected", this.checkDataList);
+        this.closeHandle();
+      },
+      choose() {
+        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:85", "choose");
+        this.isChoose = true;
+        this.flileList = files.getRootDir();
+        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:106", "this.flileList===", this.flileList);
+      },
+      backToPrevent() {
+        let r = this.flag - 1;
+        if (r === 0) {
+          this.flileList = files.getRootDir();
+          this.treeList = ["root"];
+        } else {
+          this.flileList = files.getSubDir(this.treeList[r]);
+        }
+        this.flag = r;
+      },
+      setOrDelSelectData(path, size) {
+        let index2 = this.checkList.indexOf(path);
+        if (index2 > -1) {
+          this.$delete(this.checkList, index2);
+          this.$delete(this.checkDataList, index2);
+        } else {
+          this.checkList.push(path);
+          this.checkDataList.push({
+            path: "file://" + path,
+            size
+          });
+        }
+      },
+      showDir(isDir, path) {
+        let _this = this;
+        if (isDir) {
+          this.treeList.push(path);
+          this.flileList = files.getSubDir(path);
+          this.flag += 1;
+        } else {
+          uni.getFileInfo({
+            filePath: "file:///" + path.toString(),
+            success(r) {
+              _this.setOrDelSelectData(path.toString(), r.size);
+            },
+            fail(err) {
+              formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:144", "err:", err);
+            }
+          });
+        }
+      }
+    }
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "yt-content" }, [
+      $data.isChoose === true ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "file-select-container",
+        onClick: _cache[4] || (_cache[4] = (...args) => $options._autoClose && $options._autoClose(...args))
+      }, [
+        vue.createElementVNode("view", {
+          class: "file-select-wrap",
+          onClick: _cache[3] || (_cache[3] = vue.withModifiers(() => {
+          }, ["stop"]))
+        }, [
+          vue.createElementVNode("view", { class: "file-select-header" }, [
+            vue.createElementVNode("text", null, "文件选择")
+          ]),
+          vue.createElementVNode("scroll-view", {
+            class: "s-f-scroll-view",
+            "scroll-y": ""
+          }, [
+            vue.createElementVNode("view", null, [
+              $data.treeList.length > 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.backToPrevent && $options.backToPrevent(...args), ["stop"])),
+                class: "s-f-item"
+              }, [
+                vue.createElementVNode("view", { class: "s-f-item-path-name" }, [
+                  vue.createElementVNode("image", {
+                    class: "s-f-icon",
+                    src: $data.source.folder
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode("view", null, "上级目录")
+                ])
+              ])) : vue.createCommentVNode("v-if", true),
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($data.flileList, (item, i) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    onClick: vue.withModifiers(($event) => $options.showDir(item.isDirectory, item.path), ["stop"]),
+                    class: "s-f-item",
+                    key: i
+                  }, [
+                    vue.createElementVNode("view", { class: "s-f-item-path-name" }, [
+                      item.isDirectory ? (vue.openBlock(), vue.createElementBlock("image", {
+                        key: 0,
+                        class: "s-f-icon",
+                        src: $data.source.folder
+                      }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                      !item.isDirectory ? (vue.openBlock(), vue.createElementBlock("image", {
+                        key: 1,
+                        class: "s-f-icon",
+                        src: $data.source.file
+                      }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                      vue.createElementVNode("view", { class: "s-f-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          vue.toDisplayString(item.pathName),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    $data.checkList.indexOf(item.path.toString()) > -1 ? (vue.openBlock(), vue.createElementBlock("image", {
+                      key: 0,
+                      src: $data.source.checked,
+                      class: "s-f-icon"
+                    }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
+                  ], 8, ["onClick"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
+          ]),
+          vue.createElementVNode("view", { class: "file-select-footer" }, [
+            vue.createElementVNode("view", {
+              class: "s-f-btn s-f-cancel",
+              onClick: _cache[1] || (_cache[1] = (...args) => $options.closeHandle && $options.closeHandle(...args))
+            }, "取消"),
+            vue.createElementVNode("view", {
+              class: "s-f-btn s-f-okey",
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.okeyHandle && $options.okeyHandle(...args))
+            }, "确定")
+          ])
+        ])
+      ])) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$1], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
+  let options = {
+    // 选则图片或者视频 图片:0 视频:1
+    type: 0,
+    // 上传文件的key 后台根据这个key取得文件
+    name: "file",
+    // header请求头
+    headers: {},
+    // 额外的传输数据
+    data: {},
+    // 上传的地址
+    host: "",
+    // 选择数量
+    count: 5,
+    // 在上传之前调用
+    beforeUpload: () => {
+      return true;
+    },
+    // 创建成功钩子
+    created: () => {
+    },
+    // 是否自动上传
+    autoUpload: true
+  };
+  const _sfc_main$4 = {
+    components: {
+      ytFileSelector
+    },
+    props: {
+      options: {
+        type: Object,
+        default: () => {
+          return null;
+        }
+      }
+    },
+    created() {
+      this._uploadsinit();
+      formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:44", "yt-uploads created");
+    },
+    data() {
+      return {
+        loadingStaus: false,
+        chooseList: [],
+        uploadList: []
+      };
+    },
+    computed: {
+      opts() {
+        if (this._type(this.options) === "object") {
+          options = Object.assign(options, this.options);
+        }
+        return options;
+      }
+    },
+    methods: {
+      _selectedHandler(r) {
+        this._success({
+          "errMsg": "chooseImage:ok",
+          "tempFiles": r
+        });
+      },
+      // 初始化
+      _uploadsinit() {
+        if (this.opts.host === "") {
+          throw new Error("props options[host] is not exist at uploads plugs");
+        }
+        this.opts.created(this);
+      },
+      _type(val) {
+        return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+      },
+      upload() {
+        let before = this.opts.beforeUpload(this);
+        if (!before) {
+          return;
+        }
+        this._sendData();
+      },
+      select() {
+        this._choose();
+      },
+      // 选择文件方法
+      _choose() {
+        switch (this.opts.type) {
+          case 0:
+            this._chooseImages();
+            break;
+          case 1:
+            this._chooseVideos();
+            break;
+          default:
+            this._chooseFiles();
+        }
+      },
+      _chooseFiles() {
+        this.$refs.fileSelector.choose();
+      },
+      // 选择图片
+      _chooseImages() {
+        let _this = this;
+        uni.chooseImage({
+          count: this.opts.count - 0,
+          success(ret) {
+            _this._success(ret);
+          },
+          fail(ret) {
+            this.$emit("fail", { type: 0, data: ret.errMsg });
+          }
+        });
+      },
+      // 选择视频
+      _chooseVideos() {
+        let _this = this;
+        uni.chooseVideo({
+          count: this.count - this.chooseList.length,
+          success(ret) {
+            _this._success(ret);
+          },
+          fail(ret) {
+            this.$emit("fail", { type: 0, data: ret.errMsg });
+          }
+        });
+      },
+      // 成功的方法
+      _success(ret) {
+        let _this = this;
+        if (ret.errMsg === "chooseImage:ok") {
+          let tmp = [];
+          ret.tempFiles.forEach((o) => {
+            tmp.push({
+              state: 0,
+              path: o.path,
+              size: o.size
+            });
+          });
+          _this.chooseList = tmp;
+          if (_this.opts.autoUpload) {
+            _this.upload();
+            _this.$set(_this, "loadingStaus", true);
+          }
+          this.$emit("selected", _this.chooseList);
+        } else {
+          this.$emit("fail", { type: 0, data: ret.errMsg });
+        }
+      },
+      _sendData() {
+        let _this = this;
+        _this.uploadList = [];
+        if (_this.chooseList.length < 1) {
+          this.$emit("fail", { type: 0, data: "还没有选择附件" });
+          return;
+        }
+        let flag = 0;
+        _this.chooseList.forEach((o, i) => {
+          if (o.state === 0) {
+            uni.uploadFile({
+              url: this.opts.host,
+              filePath: o.path,
+              name: this.opts.name,
+              header: this.opts.headers === null ? {} : this.opts.headers,
+              formData: this.opts.data === null ? {} : this.opts.data,
+              success(ret) {
+                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:181", "success:", ret);
+                if (_this._type(ret.data) === "string") {
+                  _this.uploadList.push(JSON.parse(ret.data));
+                } else {
+                  _this.uploadList.push(ret.data);
+                }
+                _this.$emit("process", { index: flag, state: 1 });
+                flag += 1;
+                if (flag >= _this.chooseList.length) {
+                  _this.$emit("success", _this.uploadList);
+                  _this.chooseList = [];
+                  _this.uploadList = [];
+                  _this.$set(_this, "loadingStaus", false);
+                }
+              },
+              fail(ret) {
+                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:199", "fail:", ret);
+                _this.$emit("process", { index: flag, state: 2 });
+                if (_this._type(ret.data) === "string") {
+                  _this.uploadList.push(JSON.parse(ret.data));
+                } else {
+                  _this.uploadList.push(ret.data);
+                }
+                flag += 1;
+                if (flag >= _this.chooseList.length) {
+                  _this.$emit("success", _this.uploadList);
+                  _this.chooseList = [];
+                  _this.uploadList = [];
+                  _this.$set(_this, "loadingStaus", false);
+                }
+              }
+            });
+          } else {
+            flag += 1;
+          }
+        });
+      }
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_yt_file_selector = vue.resolveComponent("yt-file-selector");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "yt-uploads" }, [
+      vue.createVNode(_component_yt_file_selector, {
+        ref: "fileSelector",
+        autoclose: false,
+        onSelected: $options._selectedHandler
+      }, null, 8, ["onSelected"])
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
+  const apiGetNovels = () => {
+    return request({
+      url: "book/list",
+      method: "GET"
+    });
+  };
+  const _sfc_main$3 = {
+    __name: "index",
+    setup(__props2) {
+      onShow(() => {
+        getNovels();
+      });
+      const novels = vue.ref([]);
+      const getNovels = () => {
+        apiGetNovels().then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            novels.value = res.data;
+            novels.value.push({});
+            formatAppLog("log", "at subPackages/book/index/index.vue:53", "novels", novels.value);
+          }
+        });
+      };
+      const options2 = vue.ref({
+        type: 2,
+        host: "http://192.168.0.102:3838/book/upload"
+      });
+      const selectedHandler = (selectedData) => {
+        formatAppLog("log", "at subPackages/book/index/index.vue:64", "Selected data:", selectedData);
+      };
+      const successHandler = (successData) => {
+        formatAppLog("log", "at subPackages/book/index/index.vue:68", "Success data:", successData);
+        let res = successData[0];
+        if (res.code === 0 || !res.code) {
+          uni.showToast({
+            icon: "error",
+            title: res.msg || "网络异常"
+          });
+        } else {
+          uni.showToast({
+            title: res.msg
+          });
+          getNovels();
+        }
+      };
+      const failHandler = (error) => {
+        formatAppLog("error", "at subPackages/book/index/index.vue:84", "Error:", error);
+        uni.showToast({
+          icon: "error",
+          title: "fail上传失败"
+        });
+      };
+      const processHandler = (progress) => {
+        formatAppLog("log", "at subPackages/book/index/index.vue:92", "Upload progress:", progress);
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        const _component_yt_uploads = resolveEasycom(vue.resolveDynamicComponent("yt-uploads"), __easycom_1);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
+          vue.createElementVNode("view", { class: "book-list" }, [
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList(novels.value, (item, index2) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: vue.normalizeClass(["book-item", index2 % 3 == 1 ? "book-middle" : ""]),
+                  key: index2,
+                  onClick: ($event) => vue.unref(navTo)(`/subPackages/book/read/index?id=${item.ID}`)
+                }, [
+                  index2 != novels.value.length - 1 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
+                    vue.createElementVNode("view", { class: "book-img" }, [
+                      vue.createElementVNode("view", { class: "book-pad" }, [
+                        vue.createElementVNode(
+                          "view",
+                          { class: "book-text ellipsis" },
+                          vue.toDisplayString(item.Title),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "book-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "book-title ellipsis" },
+                        vue.toDisplayString(item.Title),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createCommentVNode(' <view class="book-plan">读到第1章</view> ')
+                    ])
+                  ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 1,
+                    class: "book-add",
+                    onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.uploads.select())
+                  }, [
+                    vue.createElementVNode("view", { class: "add-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "plusempty",
+                        size: "50",
+                        color: "#ccc"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "add-text" }, "上传本地书")
+                  ]))
+                ], 10, ["onClick"]);
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ]),
+          vue.createVNode(_component_yt_uploads, {
+            ref: "uploads",
+            options: options2.value,
+            onSelected: selectedHandler,
+            onSuccess: successHandler,
+            onFail: failHandler,
+            onProcess: processHandler
+          }, null, 8, ["options"])
+        ]);
+      };
+    }
+  };
+  const SubPackagesBookIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-7b29b7df"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/index/index.vue"]]);
+  const _sfc_main$2 = {
+    __name: "index",
+    setup(__props2) {
+      const brightness = vue.ref(100);
+      const fontSize = vue.ref(16);
+      const bgColor = vue.ref("#ffffff");
+      const nightMode = vue.ref(false);
+      const sidebarVisible = vue.ref([false, false, false]);
+      const chapters = [
+        { id: 1, title: "Chapter 1" },
+        { id: 2, title: "Chapter 2" },
+        { id: 3, title: "Chapter 3" }
+        // Add more chapters as needed
+      ];
+      function goToChapter(chapterId) {
+      }
+      function showSidebar(index2) {
+        sidebarVisible.value = sidebarVisible.value.map((item, i) => i === index2);
+      }
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            class: vue.normalizeClass(["novel-reader", { "night-mode": nightMode.value }])
+          },
+          [
+            vue.createElementVNode(
+              "view",
+              {
+                class: "novel-content",
+                style: vue.normalizeStyle({ "font-size": fontSize.value + "px", "opacity": brightness.value / 100 })
+              },
+              [
+                vue.createCommentVNode(" Novel content will be displayed here ")
+              ],
+              4
+              /* STYLE */
+            ),
+            vue.createElementVNode("view", { class: "navbar" }, [
+              vue.createElementVNode("view", {
+                onClick: _cache[0] || (_cache[0] = ($event) => showSidebar(0)),
+                class: "navbar-item"
+              }, [
+                vue.createElementVNode("text", { class: "navbar-icon" }, "目录")
+              ]),
+              vue.createElementVNode("view", {
+                onClick: _cache[1] || (_cache[1] = ($event) => showSidebar(1)),
+                class: "navbar-item"
+              }, [
+                vue.createElementVNode("text", { class: "navbar-icon" }, "设置")
+              ]),
+              vue.createElementVNode("view", {
+                onClick: _cache[2] || (_cache[2] = ($event) => showSidebar(2)),
+                class: "navbar-item"
+              }, [
+                vue.createElementVNode("text", { class: "navbar-icon" }, "模式切换")
+              ])
+            ]),
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              { class: "sidebar" },
+              [
+                vue.createElementVNode("text", { class: "sidebar-title" }, "目录"),
+                vue.createElementVNode("scroll-view", {
+                  class: "chapter-list",
+                  "scroll-y": ""
+                }, [
+                  (vue.openBlock(), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(chapters, (chapter) => {
+                      return vue.createElementVNode("view", {
+                        key: chapter.id
+                      }, [
+                        vue.createElementVNode("text", {
+                          onClick: ($event) => goToChapter(chapter.id)
+                        }, vue.toDisplayString(chapter.title), 9, ["onClick"])
+                      ]);
+                    }),
+                    64
+                    /* STABLE_FRAGMENT */
+                  ))
+                ])
+              ],
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, sidebarVisible.value[0]]
+            ]),
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              { class: "sidebar" },
+              [
+                vue.createElementVNode("text", { class: "sidebar-title" }, "设置"),
+                vue.withDirectives(vue.createElementVNode(
+                  "input",
+                  {
+                    type: "range",
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => brightness.value = $event),
+                    min: "0",
+                    max: "100"
+                  },
+                  null,
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vModelText, brightness.value]
+                ]),
+                vue.withDirectives(vue.createElementVNode(
+                  "input",
+                  {
+                    type: "range",
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => fontSize.value = $event),
+                    min: "12",
+                    max: "24"
+                  },
+                  null,
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vModelText, fontSize.value]
+                ]),
+                vue.withDirectives(vue.createElementVNode(
+                  "select",
+                  {
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => bgColor.value = $event)
+                  },
+                  [
+                    vue.createElementVNode("option", { value: "#ffffff" }, "白色"),
+                    vue.createElementVNode("option", { value: "#f0f0f0" }, "浅灰色"),
+                    vue.createElementVNode("option", { value: "#d3d3d3" }, "灰色")
+                  ],
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vModelSelect, bgColor.value]
+                ])
+              ],
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, sidebarVisible.value[1]]
+            ]),
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              { class: "sidebar" },
+              [
+                vue.createElementVNode("text", { class: "sidebar-title" }, "模式切换"),
+                vue.withDirectives(vue.createElementVNode(
+                  "input",
+                  {
+                    type: "checkbox",
+                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => nightMode.value = $event)
+                  },
+                  null,
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vModelCheckbox, nightMode.value]
+                ]),
+                vue.createTextVNode("黑夜模式 ")
+              ],
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, sidebarVisible.value[2]]
+            ])
+          ],
+          2
+          /* CLASS */
+        );
+      };
+    }
+  };
+  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
   const _sfc_main$1 = {
     __name: "index",
     setup(__props) {
@@ -18523,6 +19308,8 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/diary/index/index", SubPackagesDiaryIndexIndex);
   __definePage("subPackages/diary/add/index", SubPackagesDiaryAddIndex);
   __definePage("subPackages/countdowns/index/index", SubPackagesCountdownsIndexIndex);
+  __definePage("subPackages/book/index/index", SubPackagesBookIndexIndex);
+  __definePage("subPackages/book/read/index", SubPackagesBookReadIndex);
   __definePage("subPackages/test/NumericKeypad/index", SubPackagesTestNumericKeypadIndex);
   const _sfc_main = {
     onLaunch: function() {

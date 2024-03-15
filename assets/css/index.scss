@@ -58,3 +58,12 @@
 		border: none;
 	}
 }
+
+// 文字内容超出隐藏
+.ellipsis {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

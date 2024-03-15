@@ -299,3 +299,9 @@ unpackage/dist/dev/app-plus/app-service.js
 unpackage/dist/dev/app-plus/app.css
 unpackage/dist/dev/app-plus/pages/mine/index.css
 unpackage/dist/dev/app-plus/subPackages/login/index/index.css
+unpackage/dist/dev/app-plus/app-config-service.js
+unpackage/dist/dev/app-plus/app-service.js
+unpackage/dist/dev/app-plus/app.css
+unpackage/dist/dev/app-plus/manifest.json
+unpackage/dist/dev/app-plus/subPackages/book/index/index.css
+unpackage/dist/dev/app-plus/subPackages/book/read/index.css

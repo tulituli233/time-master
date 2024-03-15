@@ -125,6 +125,23 @@
 			]
 		},
 		{
+			"root": "subPackages/book",
+			"pages": [
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "书架"
+					}
+				},
+				{
+					"path": "read/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				}
+			]
+		},
+		{
 			"root": "subPackages/test",
 			"pages": [
 				{
