@@ -759,6 +759,7 @@ if (uni.restoreGlobal) {
   }
   const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
+  const ON_LOAD = "onLoad";
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -773,6 +774,7 @@ if (uni.restoreGlobal) {
     !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
   };
   const onShow = /* @__PURE__ */ createHook(ON_SHOW);
+  const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
   var LunarCalendarExports = {};
   var LunarCalendar$1 = {
     get exports() {
@@ -6181,7 +6183,8 @@ if (uni.restoreGlobal) {
     )) : vue.createCommentVNode("v-if", true);
   }
   const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const BASE_URL = "http://192.168.0.102:3838/";
+  const BASE_URL = "http://192.168.0.103:3838/";
+  uni.setStorageSync("BASE_URL", BASE_URL);
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
   };
@@ -18939,6 +18942,18 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
+  const apiGetNovelChapters = (novelID) => {
+    return request({
+      url: `book/chapters?NovelID=${novelID}`,
+      method: "GET"
+    });
+  };
+  const apiGetNovelChapter = (novelID, chapterNumber) => {
+    return request({
+      url: `book/chapter?NovelID=${novelID}&ChapterNumber=${chapterNumber}`,
+      method: "GET"
+    });
+  };
   const _sfc_main$3 = {
     __name: "index",
     setup(__props2) {
@@ -18956,19 +18971,20 @@ if (uni.restoreGlobal) {
           } else {
             novels.value = res.data;
             novels.value.push({});
-            formatAppLog("log", "at subPackages/book/index/index.vue:53", "novels", novels.value);
+            formatAppLog("log", "at subPackages/book/index/index.vue:54", "novels", novels.value);
           }
         });
       };
+      formatAppLog("log", "at subPackages/book/index/index.vue:59", "uni.getStorageSync---", uni.getStorageSync("BASE_URL"));
       const options2 = vue.ref({
         type: 2,
-        host: "http://192.168.0.102:3838/book/upload"
+        host: "http://192.168.0.103:3838/book/upload"
       });
       const selectedHandler = (selectedData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:64", "Selected data:", selectedData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:66", "Selected data:", selectedData);
       };
       const successHandler = (successData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:68", "Success data:", successData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:70", "Success data:", successData);
         let res = successData[0];
         if (res.code === 0 || !res.code) {
           uni.showToast({
@@ -18983,14 +18999,14 @@ if (uni.restoreGlobal) {
         }
       };
       const failHandler = (error) => {
-        formatAppLog("error", "at subPackages/book/index/index.vue:84", "Error:", error);
+        formatAppLog("error", "at subPackages/book/index/index.vue:86", "Error:", error);
         uni.showToast({
           icon: "error",
           title: "fail上传失败"
         });
       };
       const processHandler = (progress) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:92", "Upload progress:", progress);
+        formatAppLog("log", "at subPackages/book/index/index.vue:94", "Upload progress:", progress);
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -19001,48 +19017,56 @@ if (uni.restoreGlobal) {
               vue.Fragment,
               null,
               vue.renderList(novels.value, (item, index2) => {
-                return vue.openBlock(), vue.createElementBlock("view", {
-                  class: vue.normalizeClass(["book-item", index2 % 3 == 1 ? "book-middle" : ""]),
-                  key: index2,
-                  onClick: ($event) => vue.unref(navTo)(`/subPackages/book/read/index?id=${item.ID}`)
-                }, [
-                  index2 != novels.value.length - 1 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
-                    vue.createElementVNode("view", { class: "book-img" }, [
-                      vue.createElementVNode("view", { class: "book-pad" }, [
+                return vue.openBlock(), vue.createElementBlock(
+                  "view",
+                  {
+                    class: vue.normalizeClass(["book-item", index2 % 3 == 1 ? "book-middle" : ""]),
+                    key: index2
+                  },
+                  [
+                    index2 != novels.value.length - 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      onClick: ($event) => vue.unref(navTo)(`/subPackages/book/read/index?id=${item.NovelID}&name=${item.Title}`)
+                    }, [
+                      vue.createElementVNode("view", { class: "book-img" }, [
+                        vue.createElementVNode("view", { class: "book-pad" }, [
+                          vue.createElementVNode(
+                            "view",
+                            { class: "book-text ellipsis" },
+                            vue.toDisplayString(item.Title),
+                            1
+                            /* TEXT */
+                          )
+                        ])
+                      ]),
+                      vue.createElementVNode("view", { class: "book-info" }, [
                         vue.createElementVNode(
                           "view",
-                          { class: "book-text ellipsis" },
+                          { class: "book-title ellipsis" },
                           vue.toDisplayString(item.Title),
                           1
                           /* TEXT */
-                        )
+                        ),
+                        vue.createCommentVNode(' <view class="book-plan">读到第1章</view> ')
                       ])
-                    ]),
-                    vue.createElementVNode("view", { class: "book-info" }, [
-                      vue.createElementVNode(
-                        "view",
-                        { class: "book-title ellipsis" },
-                        vue.toDisplayString(item.Title),
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createCommentVNode(' <view class="book-plan">读到第1章</view> ')
-                    ])
-                  ])) : (vue.openBlock(), vue.createElementBlock("view", {
-                    key: 1,
-                    class: "book-add",
-                    onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.uploads.select())
-                  }, [
-                    vue.createElementVNode("view", { class: "add-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "plusempty",
-                        size: "50",
-                        color: "#ccc"
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "add-text" }, "上传本地书")
-                  ]))
-                ], 10, ["onClick"]);
+                    ], 8, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 1,
+                      class: "book-add",
+                      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.uploads.select())
+                    }, [
+                      vue.createElementVNode("view", { class: "add-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "plusempty",
+                          size: "50",
+                          color: "#ccc"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "add-text" }, "上传本地书")
+                    ]))
+                  ],
+                  2
+                  /* CLASS */
+                );
               }),
               128
               /* KEYED_FRAGMENT */
@@ -19064,170 +19088,489 @@ if (uni.restoreGlobal) {
   const _sfc_main$2 = {
     __name: "index",
     setup(__props2) {
-      const brightness = vue.ref(100);
-      const fontSize = vue.ref(16);
-      const bgColor = vue.ref("#ffffff");
-      const nightMode = vue.ref(false);
-      const sidebarVisible = vue.ref([false, false, false]);
-      const chapters = [
-        { id: 1, title: "Chapter 1" },
-        { id: 2, title: "Chapter 2" },
-        { id: 3, title: "Chapter 3" }
-        // Add more chapters as needed
+      const novelID = vue.ref(0);
+      const novelName = vue.ref("");
+      onLoad((query) => {
+        novelID.value = query.id;
+        novelName.value = query.name;
+        init();
+        getNovelChapters();
+      });
+      onShow(() => {
+      });
+      const novelHistory = vue.computed(() => {
+        let novelHistoryArr = uni.getStorageSync("readHistory");
+        if (novelHistoryArr) {
+          let novelHistory3 = novelHistoryArr.find((item) => {
+            return item.NovelID == novelID.value;
+          });
+          return novelHistory3;
+        }
+        let novelHistory2 = {
+          ChapterNumber: 1,
+          Title: novelName.value,
+          NovelID: novelID.value,
+          ChapterProgress: 0
+        };
+        return novelHistory2;
+      });
+      const init = async () => {
+        let initChapterNumber = novelHistory.value.ChapterNumber;
+        let chapter = await getNovelChapter(initChapterNumber);
+        novelChapterArr.value.push(chapter);
+        let chapter1 = await getNovelChapter(initChapterNumber + 1);
+        novelChapterArr.value.push(chapter1);
+      };
+      const scrollToLastRead = (validHeight) => {
+        setTimeout(() => {
+          let st = validHeight * novelHistory.value.ChapterProgress;
+          scrollTop.value = st;
+          isInitialized.value = false;
+        }, 100);
+      };
+      const getTotalHeight = () => {
+        let totalHeight = 0;
+        const promiseList = novelChapterArr.value.map((item, index2) => {
+          return getElementHeightById(`novel-chapter-${index2}`).then((height) => {
+            totalHeight += height;
+            return totalHeight;
+          });
+        });
+        return Promise.all(promiseList).then(() => totalHeight);
+      };
+      const preloadNextChapter = async () => {
+        let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
+        novelChapterArr.value.push(chapter);
+      };
+      const addStartEnd = () => {
+        novelChapterArr.value.forEach(async (item, index2) => {
+          if (!item.start && !item.end) {
+            item.start = index2 > 0 ? novelChapterArr.value[index2 - 1].end : 0;
+            let eleHeight = await getElementHeightById(`novel-chapter-${index2}`);
+            item.end = item.start + eleHeight;
+          }
+        });
+      };
+      const novelChapters = vue.ref([]);
+      const novelChapterArr = vue.ref([]);
+      const getNovelChapters = () => {
+        apiGetNovelChapters(novelID.value).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            novelChapters.value = res.data;
+          }
+        });
+      };
+      const isLoading = vue.ref(false);
+      const getNovelChapter = (chapterNumber = 1, callback) => {
+        return new Promise((resolve, reject) => {
+          apiGetNovelChapter(novelID.value, chapterNumber).then((res) => {
+            if (res.code === 0 || !res.code) {
+              uni.showToast({
+                icon: "error",
+                title: res.msg || "网络异常"
+              });
+              reject(new Error("Error in API response"));
+            } else {
+              callback && callback();
+              isLoading.value = false;
+              let chapter = res.data[0];
+              chapter.ChapterContent = chapter.ChapterContent.replace(/\r\n|\r|\n/g, "<br>").replace(/ {4}/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+              resolve(chapter);
+            }
+          }).catch((error) => {
+            reject(error);
+          });
+        });
+      };
+      const brightnessPercent = vue.ref(70);
+      const updateBrightness = (e) => {
+        brightnessPercent.value = e.detail.value;
+      };
+      const fontSizePercent = vue.ref(30);
+      const fontSize = vue.computed(() => {
+        return fontSizePercent.value / 100 * 24 + 12;
+      });
+      const updateFontSize = (e) => {
+        fontSizePercent.value = e.detail.value;
+      };
+      const colorList = [
+        { color: "#f8f8f8", type: 1 },
+        { color: "#f7f0e6", type: 2 },
+        { color: "#dff2dc", type: 3 }
       ];
-      function goToChapter(chapterId) {
-      }
-      function showSidebar(index2) {
-        sidebarVisible.value = sidebarVisible.value.map((item, i) => i === index2);
-      }
+      const goBack = () => {
+        uni.navigateBack();
+      };
+      const showTab = vue.ref(false);
+      const clickContent = () => {
+        showTab.value = !showTab.value;
+        showMenu.value = false;
+        showSetting.value = false;
+      };
+      const showMenu = vue.ref(false);
+      const openMenu = () => {
+        showMenu.value = true;
+      };
+      const showSetting = vue.ref(false);
+      const openSetting = () => {
+        showSetting.value = true;
+      };
+      const theme = vue.ref("day-mode");
+      const themeType = vue.ref(1);
+      const switchTheme = (type) => {
+        if (type === 1) {
+          theme.value = "day-mode";
+        } else if (type === 2) {
+          theme.value = "brown-mode";
+        } else if (type === 3) {
+          theme.value = "green-mode";
+        } else if (type === 4) {
+          if (themeType.value === 4) {
+            theme.value = "day-mode";
+            themeType.value = 1;
+            return;
+          }
+          theme.value = "night-mode";
+        }
+        themeType.value = type;
+      };
+      const scrollTop = vue.ref(1);
+      const goTop = vue.ref(false);
+      const goToChapter = async (ChapterNumber) => {
+        let chapter = await getNovelChapter(ChapterNumber, () => {
+          showMenu.value = false;
+          novelChapterArr.value = [];
+          ccIndex.value = 0;
+          ccProgress.value = 0;
+          goTop.value = true;
+          scrollTop.value = 0;
+        });
+        novelChapterArr.value.push(chapter);
+      };
+      const ccIndex = vue.ref(0);
+      const ccProgress = vue.ref(0);
+      const handleScroll = (e) => {
+        if (goTop.value) {
+          goTop.value = false;
+          scrollTop.value = 1;
+        }
+        if (!novelChapterArr.value[novelChapterArr.value.length - 1].end) {
+          addStartEnd();
+        } else {
+          ccIndex.value = currentChapter(e.detail.scrollTop);
+          ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
+          if (!isLoading.value && ccProgress.value > 0.5 && novelChapterArr.value.length === ccIndex.value + 1) {
+            isLoading.value = true;
+            preloadNextChapter();
+          }
+        }
+      };
+      const currentChapter = (scrollTop2) => {
+        let currIndex = 0;
+        novelChapterArr.value.forEach((item, index2) => {
+          if (scrollTop2 >= item.start && scrollTop2 < item.end) {
+            currIndex = index2;
+          }
+        });
+        return currIndex;
+      };
+      const currentChapterProgress = (scrollTop2, currentChapterIndex) => {
+        let progress = (scrollTop2 - novelChapterArr.value[currentChapterIndex].start) / (novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start);
+        return progress;
+      };
+      const getElementHeightById = (elementId) => {
+        return new Promise((resolve, reject) => {
+          const query = uni.createSelectorQuery().in(this);
+          query.select("#" + elementId).boundingClientRect((data2) => {
+            if (data2) {
+              const height = data2.height;
+              resolve(height);
+            } else {
+              reject();
+            }
+          }).exec();
+        });
+      };
+      const isInitialized = vue.ref(true);
+      vue.onUpdated(async () => {
+        if (isInitialized.value) {
+          ccProgress.value = novelHistory.value.ChapterProgress;
+          let totalHeight = await getTotalHeight();
+          let eleHeight = await getElementHeightById(`novel-chapter-1`);
+          scrollToLastRead(totalHeight - eleHeight);
+        }
+      });
+      vue.onBeforeUnmount(() => {
+        saveReadRecord();
+      });
+      const saveReadRecord = () => {
+        let nHistory = {
+          NovelID: novelID.value,
+          NovelName: novelName.value,
+          ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
+          ChapterProgress: ccProgress.value
+        };
+        let readHistory = uni.getStorageSync("readHistory") || [];
+        let index2 = readHistory.findIndex((item) => {
+          return item.NovelID === nHistory.NovelID;
+        });
+        if (index2 > -1) {
+          readHistory.splice(index2, 1);
+          readHistory.push(nHistory);
+        } else {
+          readHistory.push(nHistory);
+        }
+        uni.setStorageSync("readHistory", readHistory);
+      };
       return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock(
           "view",
           {
-            class: vue.normalizeClass(["novel-reader", { "night-mode": nightMode.value }])
+            class: vue.normalizeClass(theme.value)
           },
           [
             vue.createElementVNode(
               "view",
               {
-                class: "novel-content",
-                style: vue.normalizeStyle({ "font-size": fontSize.value + "px", "opacity": brightness.value / 100 })
+                class: "novel-reader",
+                style: vue.normalizeStyle({ "opacity": brightnessPercent.value / 100 })
               },
               [
-                vue.createCommentVNode(" Novel content will be displayed here ")
-              ],
-              4
-              /* STYLE */
-            ),
-            vue.createElementVNode("view", { class: "navbar" }, [
-              vue.createElementVNode("view", {
-                onClick: _cache[0] || (_cache[0] = ($event) => showSidebar(0)),
-                class: "navbar-item"
-              }, [
-                vue.createElementVNode("text", { class: "navbar-icon" }, "目录")
-              ]),
-              vue.createElementVNode("view", {
-                onClick: _cache[1] || (_cache[1] = ($event) => showSidebar(1)),
-                class: "navbar-item"
-              }, [
-                vue.createElementVNode("text", { class: "navbar-icon" }, "设置")
-              ]),
-              vue.createElementVNode("view", {
-                onClick: _cache[2] || (_cache[2] = ($event) => showSidebar(2)),
-                class: "navbar-item"
-              }, [
-                vue.createElementVNode("text", { class: "navbar-icon" }, "模式切换")
-              ])
-            ]),
-            vue.withDirectives(vue.createElementVNode(
-              "view",
-              { class: "sidebar" },
-              [
-                vue.createElementVNode("text", { class: "sidebar-title" }, "目录"),
-                vue.createElementVNode("scroll-view", {
-                  class: "chapter-list",
-                  "scroll-y": ""
-                }, [
-                  (vue.openBlock(), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList(chapters, (chapter) => {
-                      return vue.createElementVNode("view", {
-                        key: chapter.id
-                      }, [
-                        vue.createElementVNode("text", {
-                          onClick: ($event) => goToChapter(chapter.id)
-                        }, vue.toDisplayString(chapter.title), 9, ["onClick"])
-                      ]);
-                    }),
-                    64
-                    /* STABLE_FRAGMENT */
-                  ))
-                ])
-              ],
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vShow, sidebarVisible.value[0]]
-            ]),
-            vue.withDirectives(vue.createElementVNode(
-              "view",
-              { class: "sidebar" },
-              [
-                vue.createElementVNode("text", { class: "sidebar-title" }, "设置"),
-                vue.withDirectives(vue.createElementVNode(
-                  "input",
-                  {
-                    type: "range",
-                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => brightness.value = $event),
-                    min: "0",
-                    max: "100"
-                  },
-                  null,
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vModelText, brightness.value]
+                vue.createElementVNode("view", { class: "novel-header theme-bgc" }, [
+                  vue.createElementVNode("view", {
+                    class: "back",
+                    onClick: goBack
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      class: "theme-font",
+                      type: "arrow-left",
+                      size: "30"
+                    })
+                  ]),
+                  novelChapterArr.value[ccIndex.value] ? (vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      key: 0,
+                      class: "chapter-title ellipsis"
+                    },
+                    " 第" + vue.toDisplayString(novelChapterArr.value[ccIndex.value].ChapterNumber) + "章  " + vue.toDisplayString(novelChapterArr.value[ccIndex.value].ChapterTitle),
+                    1
+                    /* TEXT */
+                  )) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "chapter-progress" },
+                    vue.toDisplayString((ccProgress.value * 100).toFixed(0)) + "%",
+                    1
+                    /* TEXT */
+                  )
                 ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "input",
+                vue.createElementVNode(
+                  "view",
                   {
-                    type: "range",
-                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => fontSize.value = $event),
-                    min: "12",
-                    max: "24"
-                  },
-                  null,
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vModelText, fontSize.value]
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "select",
-                  {
-                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => bgColor.value = $event)
+                    class: "novel-content",
+                    style: vue.normalizeStyle({ "font-size": vue.unref(fontSize) + "px!important" }),
+                    onClick: clickContent
                   },
                   [
-                    vue.createElementVNode("option", { value: "#ffffff" }, "白色"),
-                    vue.createElementVNode("option", { value: "#f0f0f0" }, "浅灰色"),
-                    vue.createElementVNode("option", { value: "#d3d3d3" }, "灰色")
+                    vue.createElementVNode("scroll-view", {
+                      style: { "height": "100vh" },
+                      "scroll-y": "",
+                      "scroll-top": scrollTop.value,
+                      onScroll: handleScroll
+                    }, [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(novelChapterArr.value, (item, index2) => {
+                          return vue.openBlock(), vue.createElementBlock("view", {
+                            class: "novel-chapter",
+                            id: `novel-chapter-${index2}`,
+                            key: index2,
+                            innerHTML: item.ChapterContent
+                          }, null, 8, ["id", "innerHTML"]);
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      ))
+                    ], 40, ["scroll-top"])
+                  ],
+                  4
+                  /* STYLE */
+                ),
+                vue.withDirectives(vue.createElementVNode(
+                  "view",
+                  { class: "navbar theme-bgc" },
+                  [
+                    vue.createElementVNode("view", {
+                      onClick: openMenu,
+                      class: "navbar-item"
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-catalog",
+                        size: "30"
+                      })
+                    ]),
+                    vue.createElementVNode("view", {
+                      onClick: openSetting,
+                      class: "navbar-item"
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-setup",
+                        size: "30"
+                      })
+                    ]),
+                    vue.createElementVNode("view", {
+                      onClick: _cache[0] || (_cache[0] = ($event) => switchTheme(4)),
+                      class: "navbar-item"
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-shuimian",
+                        size: "30"
+                      })
+                    ])
                   ],
                   512
                   /* NEED_PATCH */
                 ), [
-                  [vue.vModelSelect, bgColor.value]
-                ])
-              ],
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vShow, sidebarVisible.value[1]]
-            ]),
-            vue.withDirectives(vue.createElementVNode(
-              "view",
-              { class: "sidebar" },
-              [
-                vue.createElementVNode("text", { class: "sidebar-title" }, "模式切换"),
+                  [vue.vShow, showTab.value]
+                ]),
                 vue.withDirectives(vue.createElementVNode(
-                  "input",
+                  "view",
                   {
-                    type: "checkbox",
-                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => nightMode.value = $event)
+                    class: "sidebar-menu",
+                    onClick: _cache[1] || (_cache[1] = ($event) => showMenu.value = false)
                   },
-                  null,
+                  [
+                    vue.createElementVNode("view", { class: "menu-left" }, [
+                      vue.createElementVNode("view", { class: "menu-header theme-bgc-4" }, [
+                        vue.createElementVNode("view", { class: "novel-title ellipsis" }, "名称"),
+                        vue.createElementVNode(
+                          "view",
+                          { class: "chapter-num" },
+                          "共" + vue.toDisplayString(novelChapters.value.length) + "章",
+                          1
+                          /* TEXT */
+                        )
+                      ]),
+                      vue.createElementVNode("scroll-view", {
+                        class: "chapter-list theme-bgc",
+                        "scroll-y": ""
+                      }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(novelChapters.value, (chapter) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "chapter-item ellipsis",
+                              key: chapter.ChapterID
+                            }, [
+                              vue.createElementVNode("view", {
+                                onClick: vue.withModifiers(($event) => goToChapter(chapter.ChapterNumber), ["stop"])
+                              }, " 第" + vue.toDisplayString(chapter.ChapterNumber) + "章  " + vue.toDisplayString(chapter.ChapterTitle), 9, ["onClick"])
+                            ]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
+                    ])
+                  ],
                   512
                   /* NEED_PATCH */
                 ), [
-                  [vue.vModelCheckbox, nightMode.value]
+                  [vue.vShow, showMenu.value]
                 ]),
-                vue.createTextVNode("黑夜模式 ")
+                vue.withDirectives(vue.createElementVNode(
+                  "view",
+                  { class: "sidebar-setting theme-bgc" },
+                  [
+                    vue.createElementVNode("view", { class: "setting-item" }, [
+                      vue.createElementVNode("view", { class: "setting-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          class: "theme-font",
+                          "custom-prefix": "iconfont",
+                          type: "icon-liangdu-4",
+                          size: "30"
+                        })
+                      ]),
+                      vue.createElementVNode("input", {
+                        class: "range-input",
+                        type: "range",
+                        value: brightnessPercent.value,
+                        onInput: updateBrightness
+                      }, null, 40, ["value"]),
+                      vue.createElementVNode("view", { class: "setting-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          class: "theme-font",
+                          "custom-prefix": "iconfont",
+                          type: "icon-liang-8",
+                          size: "30"
+                        })
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "setting-item" }, [
+                      vue.createElementVNode("view", { class: "setting-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          class: "theme-font",
+                          "custom-prefix": "iconfont",
+                          type: "icon-ziti-jian",
+                          size: "30"
+                        })
+                      ]),
+                      vue.createElementVNode("input", {
+                        class: "range-input",
+                        type: "range",
+                        value: fontSizePercent.value,
+                        onInput: updateFontSize
+                      }, null, 40, ["value"]),
+                      vue.createElementVNode("view", { class: "setting-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          class: "theme-font",
+                          "custom-prefix": "iconfont",
+                          type: "icon-ziti-jia",
+                          size: "30"
+                        })
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "bgc-setting" }, [
+                      (vue.openBlock(), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(colorList, (item) => {
+                          return vue.createElementVNode("view", {
+                            class: "color-item",
+                            style: vue.normalizeStyle({ "background-color": item.color }),
+                            key: item.color,
+                            onClick: ($event) => switchTheme(item.type)
+                          }, null, 12, ["onClick"]);
+                        }),
+                        64
+                        /* STABLE_FRAGMENT */
+                      ))
+                    ])
+                  ],
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vShow, showSetting.value]
+                ])
               ],
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vShow, sidebarVisible.value[2]]
-            ])
+              4
+              /* STYLE */
+            )
           ],
           2
           /* CLASS */
@@ -19235,61 +19578,47 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
+  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-24f694c0"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
   const _sfc_main$1 = {
     __name: "index",
-    setup(__props) {
-      const keypadLayout = [
-        [1, 2, 3, "+"],
-        [4, 5, 6, "-"],
-        [7, 8, 9, "完成"],
-        [".", 0, "DEL", "="]
-      ];
-      const inputValue = vue.ref("");
-      const handleKeyPress = (key) => {
-        if (key === "DEL") {
-          inputValue.value = inputValue.value.slice(0, -1);
-        } else if (key === "=") {
-          inputValue.value = eval(inputValue.value);
-        } else if (key === "完成")
-          ;
-        else {
-          inputValue.value += key;
-        }
+    setup(__props2) {
+      const scrollTop = vue.ref(0);
+      const handleScroll = (event) => {
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:14", event.detail.scrollTop);
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:15", "scrollTop", scrollTop.value);
+        scrollTop.value = 1e3;
+      };
+      const setScrollTop = (value) => {
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:20", "setScrollTop", value);
+        scrollTop.value = value;
       };
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("div", { class: "numeric-keypad" }, [
-          vue.createElementVNode(
-            "div",
-            { class: "display" },
-            vue.toDisplayString(inputValue.value),
-            1
-            /* TEXT */
-          ),
-          vue.createElementVNode("table", null, [
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createElementVNode("scroll-view", {
+            class: "sv",
+            "scroll-y": "",
+            "scroll-top": scrollTop.value,
+            onScroll: handleScroll
+          }, [
             (vue.openBlock(), vue.createElementBlock(
               vue.Fragment,
               null,
-              vue.renderList(keypadLayout, (row, rowIndex) => {
-                return vue.createElementVNode("tr", { key: rowIndex }, [
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList(row, (key2, keyIndex) => {
-                      return vue.openBlock(), vue.createElementBlock("td", {
-                        key: keyIndex,
-                        onClick: ($event) => handleKeyPress(key2)
-                      }, vue.toDisplayString(key2), 9, ["onClick"]);
-                    }),
-                    128
-                    /* KEYED_FRAGMENT */
-                  ))
-                ]);
+              vue.renderList(100, (item) => {
+                return vue.createElementVNode(
+                  "view",
+                  { key: item },
+                  vue.toDisplayString(item),
+                  1
+                  /* TEXT */
+                );
               }),
               64
               /* STABLE_FRAGMENT */
             ))
-          ])
+          ], 40, ["scroll-top"]),
+          vue.createElementVNode("view", {
+            onClick: _cache[0] || (_cache[0] = ($event) => setScrollTop(0))
+          }, "回到顶部")
         ]);
       };
     }

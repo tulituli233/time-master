@@ -11,6 +11,54 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shuimian:before {
+  content: "\e613";
+}
+
+.icon-liangdu-4:before {
+  content: "\e63e";
+}
+
+.icon-ziti-jian:before {
+  content: "\e63f";
+}
+
+.icon-ziti-jia:before {
+  content: "\e640";
+}
+
+.icon-catalog:before {
+  content: "\e618";
+}
+
+.icon-liang-8:before {
+  content: "\e619";
+}
+
+.icon-setup:before {
+  content: "\e61b";
+}
+
+.icon-timemanager:before {
+  content: "\e612";
+}
+
+.icon-shengri:before {
+  content: "\e695";
+}
+
+.icon-jinianri:before {
+  content: "\e6a1";
+}
+
+.icon-shalou:before {
+  content: "\e790";
+}
+
+.icon-jieri:before {
+  content: "\e7b2";
+}
+
 .icon-water:before {
   content: "\e610";
 }

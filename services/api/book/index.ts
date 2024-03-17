@@ -54,10 +54,10 @@ export const apiGetNovelChapters = (novelID: number): Promise<NovelChapter[]> =>
     })
 }
 
-// 根据NovelID或者ChapterID获取指定小说章节
-export const apiGetNovelChapter = ({ chapterID, novelID }: { chapterID?: number, novelID?: number }): Promise<NovelChapter> => {
+// 根据小说ID和ChapterNumber获取小说章节
+export const apiGetNovelChapter = (novelID: number, chapterNumber: number): Promise<NovelChapter> => {
     return request({
-        url: `book/chapter?${chapterID ? `ChapterID=${chapterID}` : `NovelID=${novelID}`}`,
+        url: `book/chapter?NovelID=${novelID}&ChapterNumber=${chapterNumber}`,
         method: 'GET',
     })
 }

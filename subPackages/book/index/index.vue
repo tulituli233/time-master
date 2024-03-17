@@ -2,8 +2,9 @@
     <view class="content">
         <view class="book-list">
             <view :class="['book-item', index % 3 == 1 ? 'book-middle' : '']" v-for="(item, index) in novels"
-                :key="index" @click="navTo(`/subPackages/book/read/index?id=${item.NovelID}`)">
-                <view v-if="index != novels.length - 1">
+                :key="index">
+                <view v-if="index != novels.length - 1"
+                    @click="navTo(`/subPackages/book/read/index?id=${item.NovelID}&name=${item.Title}`)">
                     <view class="book-img">
                         <view class="book-pad">
                             <view class="book-text ellipsis">
@@ -55,9 +56,10 @@ const getNovels = () => {
     })
 }
 
+console.log('uni.getStorageSync---', uni.getStorageSync('BASE_URL'));
 const options = ref({
     type: 2,
-    host: 'http://192.168.0.102:3838/book/upload',
+    host: 'http://192.168.0.103:3838/book/upload',
 });
 
 const selectedHandler = (selectedData) => {

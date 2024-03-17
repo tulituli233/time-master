@@ -1,9 +1,9 @@
 // request.ts
-
 import { UniAppRequestOptions, UniAppRequestSuccessCallback, UniAppRequestFailCallback } from 'uni';
 
-// const BASE_URL = 'http://localhost:3838/';
-const BASE_URL = 'http://192.168.0.102:3838/';
+// const BASE_URL = 'http://127.0.0.1:3838/';
+const BASE_URL = 'http://192.168.0.103:3838/';
+uni.setStorageSync('BASE_URL', BASE_URL);
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export const request = (options: UniAppRequestOptions): Promise<any> => {
             ...options.header
         }
     };
-    
+
     return new Promise((resolve, reject) => {
         uni.request({
             ...requestOptions,
