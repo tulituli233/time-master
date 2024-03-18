@@ -61,3 +61,12 @@ export const apiGetNovelChapter = (novelID: number, chapterNumber: number): Prom
         method: 'GET',
     })
 }
+
+// 根据chapterID修改小说章节内容
+export const apiUpdateNovelChapter = (data: { ChapterID: number, ChapterContent: string }): Promise<NovelChapter> => {
+    return request({
+        url: `book/updateChapter`,
+        method: 'POST',
+        data
+    })
+}

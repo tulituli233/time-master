@@ -50,18 +50,18 @@ const getNovels = () => {
             })
         } else {
             novels.value = res.data
-            novels.value.push({})
             console.log('novels', novels.value)
         }
+        novels.value.push({})
     })
 }
 
-console.log('uni.getStorageSync---', uni.getStorageSync('BASE_URL'));
+const baseUrl = uni.getStorageSync('BASE_URL');
 const options = ref({
     type: 2,
-    host: 'http://192.168.0.103:3838/book/upload',
+    host: `${baseUrl}book/upload`,
 });
-
+console.log('options', options);
 const selectedHandler = (selectedData) => {
     console.log('Selected data:', selectedData);
 };

@@ -138,6 +138,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "edit/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

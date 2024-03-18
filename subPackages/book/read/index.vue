@@ -1,6 +1,6 @@
 <template>
     <view :class="theme">
-        <view class="novel-reader" :style="{ 'opacity': brightnessPercent / 100 }">
+        <view class="novel-reader" :style="{ 'opacity': readSetting.brightnessPercent / 100 }">
             <view class="novel-header theme-bgc">
                 <view class="back" @click="goBack">
                     <uni-icons class="theme-font" type="arrow-left" size="30"></uni-icons>
@@ -31,7 +31,7 @@
             <view v-show="showMenu" class="sidebar-menu" @click="showMenu = false">
                 <view class="menu-left">
                     <view class="menu-header theme-bgc-4">
-                        <view class="novel-title ellipsis">名称</view>
+                        <view class="novel-title ellipsis">{{ novelName }}</view>
                         <view class="chapter-num">共{{ novelChapters.length }}章</view>
                     </view>
                     <scroll-view class="chapter-list theme-bgc" scroll-y>
@@ -50,7 +50,8 @@
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liangdu-4"
                             size="30"></uni-icons>
                     </view>
-                    <input class="range-input" type="range" :value="brightnessPercent" @input="updateBrightness" />
+                    <input class="range-input" type="range" :value="readSetting.brightnessPercent"
+                        @input="updateBrightness" />
                     <view class="setting-icon">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liang-8"
                             size="30"></uni-icons>
@@ -61,7 +62,8 @@
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jian"
                             size="30"></uni-icons>
                     </view>
-                    <input class="range-input" type="range" :value="fontSizePercent" @input="updateFontSize" />
+                    <input class="range-input" type="range" :value="readSetting.fontSizePercent"
+                        @input="updateFontSize" />
                     <view class="setting-icon">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jia"
                             size="30"></uni-icons>
@@ -73,51 +75,69 @@
                 </view>
             </view>
         </view>
+        <!-- 小浮窗 -->
+        <movable-area class="movableArea">
+            <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
+                <button class="win-service theme-bgc" @click="editChapter">
+                    <uni-icons type="gear" size="30" color="#fff"></uni-icons>
+                </button>
+            </movable-view>
+        </movable-area>
     </view>
 </template>
 
 <script setup>
 import { ref, computed, onUpdated, onBeforeUnmount } from 'vue';
 import { apiGetNovelChapter, apiGetNovelChapters } from '@/services/api/book';
-import { onShow, onLoad } from '@dcloudio/uni-app';
+import { onShow, onLoad, onUnload } from '@dcloudio/uni-app';
+import { navTo } from '@/utils/utils'
 
 const novelID = ref(0);
 const novelName = ref('');
+const novelHistory = ref({});
+const readSetting = ref({});
+const x = ref('600rpx');
+const y = ref('500rpx');
 onLoad((query) => {
     // 获取路由参数
     novelID.value = query.id
     novelName.value = query.name
+    novelHistory.value = getNovelHistory()
+    readSetting.value = uni.getStorageSync('readSetting') || {
+        fontSizePercent: 30,
+        brightnessPercent: 70,
+        themeType: 1
+    }
     init()
     getNovelChapters()
 })
 onShow(() => {
-    // init()
-    // getNovelChapters()
+    // #ifdef APP-PLUS
+    plus.navigator.setFullscreen(true);
+    // #endif
+    uni.$on('updateOk', (newChapter) => {
+        novelChapterArr.value[ccIndex.value].oldContent = newChapter;
+        novelChapterArr.value[ccIndex.value].ChapterContent = newChapter.replace(/\r\n|\r|\n/g, '<br>').replace(/ {4}/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+    })
 })
-// #ifdef APP-PLUS
-// 页面数据更新时调用addStartEnd
-// onUpdated(() => {
-//     addStartEnd();
-//     console.log('novelChapterArr----------', novelChapterArr.value);
-// })
-// #endif
-// 获取当前小说的历史阅读记录
-const novelHistory = computed(() => {
+const getNovelHistory = () => {
     let novelHistoryArr = uni.getStorageSync('readHistory')
     if (novelHistoryArr) {
         let novelHistory = novelHistoryArr.find((item) => {
             return item.NovelID == novelID.value
         })
+        if (novelHistory) {
+            return novelHistory
+        }
+        novelHistory = {
+            ChapterNumber: 1,
+            Title: novelName.value,
+            NovelID: novelID.value,
+            ChapterProgress: 0
+        }
         return novelHistory
     }
-    let novelHistory = {
-        ChapterNumber: 1,
-        Title: novelName.value,
-        NovelID: novelID.value,
-        ChapterProgress: 0
-    }
-    return novelHistory
-})
+}
 
 // 初始化页面
 const init = async () => {
@@ -192,6 +212,7 @@ const getNovelChapter = (chapterNumber = 1, callback) => {
                 callback && callback();
                 isLoading.value = false;
                 let chapter = res.data[0];
+                chapter.oldContent = chapter.ChapterContent;
                 chapter.ChapterContent = chapter.ChapterContent.replace(/\r\n|\r|\n/g, '<br>').replace(/ {4}/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
                 resolve(chapter);
             }
@@ -201,16 +222,14 @@ const getNovelChapter = (chapterNumber = 1, callback) => {
     });
 }
 
-const brightnessPercent = ref(70);
 const updateBrightness = (e) => {
-    brightnessPercent.value = e.detail.value
+    readSetting.value.brightnessPercent = e.detail.value
 }
-const fontSizePercent = ref(30);
 const fontSize = computed(() => {
-    return fontSizePercent.value / 100 * 24 + 12;
+    return readSetting.value.fontSizePercent / 100 * 24 + 12;
 })
 const updateFontSize = (e) => {
-    fontSizePercent.value = e.detail.value
+    readSetting.value.fontSizePercent = e.detail.value
 }
 
 const colorList = [
@@ -239,24 +258,29 @@ const showSetting = ref(false);
 const openSetting = () => {
     showSetting.value = true;
 };
-const theme = ref('day-mode');
-const themeType = ref(1);
+const theme = computed(() => {
+    switch (readSetting.value.themeType) {
+        case 1:
+            return 'day-mode';
+        case 2:
+            return 'brown-mode';
+        case 3:
+            return 'green-mode';
+        case 4:
+            return 'night-mode';
+        default:
+            return 'day-mode';
+    }
+});
 const switchTheme = (type) => {
-    if (type === 1) {
-        theme.value = 'day-mode';
-    } else if (type === 2) {
-        theme.value = 'brown-mode';
-    } else if (type === 3) {
-        theme.value = 'green-mode';
-    } else if (type === 4) {
-        if (themeType.value === 4) {
-            theme.value = 'day-mode';
-            themeType.value = 1;
+    if (type === 4) {
+        if (readSetting.value.themeType === 4) {
+            readSetting.value.themeType = 1;
             return;
         }
-        theme.value = 'night-mode';
     }
-    themeType.value = type;
+    readSetting.value.themeType = type;
+    console.log('readSetting', readSetting.value);
 };
 const scrollTop = ref(1);
 const goTop = ref(false);
@@ -334,10 +358,16 @@ function getElementDistanceToTop(elementId) {
 
     return distanceToTop;
 }
+// 编辑章节内容
+const editChapter = () => {
+    uni.setStorageSync('editChapter', novelChapterArr.value[ccIndex.value]);
+    navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value}`);
+}
+
 const isInitialized = ref(true);
 onUpdated(async () => {
     if (isInitialized.value) {
-        ccProgress.value = novelHistory.value.ChapterProgress;
+        ccProgress.value = novelHistory.value ? novelHistory.value.ChapterProgress : 0;
         let totalHeight = await getTotalHeight();
         let eleHeight = await getElementHeightById(`novel-chapter-1`);
         scrollToLastRead(totalHeight - eleHeight);
@@ -345,7 +375,18 @@ onUpdated(async () => {
 })
 onBeforeUnmount(() => {
     saveReadRecord()
+    saveReadSetting()
 })
+//如果不加这句，会导致跳转到别的页面后也是全屏
+onUnload(() => {
+    // #ifdef APP-PLUS
+    plus.navigator.setFullscreen(false);
+    // #endif
+})
+// 保存阅读配置
+const saveReadSetting = () => {
+    uni.setStorageSync('readSetting', readSetting.value);
+}
 // 退出页面保存阅读记录
 const saveReadRecord = () => {
     let nHistory = {
@@ -369,41 +410,14 @@ const saveReadRecord = () => {
 </script>
 
 <style lang="scss" scoped>
+.win-service {
+    background-color: #aaa;
+    opacity: 0.7;
+}
+
 .novel-reader {
     display: flex;
     flex-direction: column;
-}
-
-.day-mode {
-    background-color: #f8f8f8;
-    color: #000000;
-}
-
-.brown-mode {
-    background-color: #f7f0e6;
-    color: #000000;
-}
-
-.green-mode {
-    background-color: #dff2dc;
-    color: #000000;
-}
-
-.night-mode {
-    background-color: #000000;
-    color: #ffffff;
-
-    .theme-font {
-        color: #ffffff !important;
-    }
-
-    .theme-bgc {
-        background-color: #333 !important;
-    }
-
-    .theme-bgc-4 {
-        background-color: #444 !important;
-    }
 }
 
 .novel-header {

@@ -2,7 +2,7 @@
 import { UniAppRequestOptions, UniAppRequestSuccessCallback, UniAppRequestFailCallback } from 'uni';
 
 // const BASE_URL = 'http://127.0.0.1:3838/';
-const BASE_URL = 'http://192.168.0.103:3838/';
+const BASE_URL = 'http://192.168.0.104:3838/';
 uni.setStorageSync('BASE_URL', BASE_URL);
 
 const DEFAULT_HEADERS = {

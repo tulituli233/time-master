@@ -67,3 +67,36 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+// 模式切换
+.day-mode {
+	background-color: #f8f8f8;
+	color: #000000;
+}
+
+.brown-mode {
+	background-color: #f7f0e6;
+	color: #000000;
+}
+
+.green-mode {
+	background-color: #dff2dc;
+	color: #000000;
+}
+
+.night-mode {
+	background-color: #000000;
+	color: #ffffff;
+
+	.theme-font {
+		color: #ffffff !important;
+	}
+
+	.theme-bgc {
+		background-color: #333 !important;
+	}
+
+	.theme-bgc-4 {
+		background-color: #444 !important;
+	}
+}

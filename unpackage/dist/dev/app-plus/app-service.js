@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$w = {
+  const _sfc_main$x = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -757,9 +757,10 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
+  const ON_UNLOAD = "onUnload";
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -775,6 +776,7 @@ if (uni.restoreGlobal) {
   };
   const onShow = /* @__PURE__ */ createHook(ON_SHOW);
   const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
+  const onUnload = /* @__PURE__ */ createHook(ON_UNLOAD);
   var LunarCalendarExports = {};
   var LunarCalendar$1 = {
     get exports() {
@@ -1311,7 +1313,7 @@ if (uni.restoreGlobal) {
     navTo,
     timestampToTime
   }, Symbol.toStringTag, { value: "Module" }));
-  const _sfc_main$v = {
+  const _sfc_main$w = {
     __name: "index",
     setup(__props2) {
       const list = vue.ref([
@@ -1453,9 +1455,9 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
   const _imports_0 = "/static/head.png";
-  const _sfc_main$u = {
+  const _sfc_main$v = {
     __name: "index",
     setup(__props2) {
       const userInfo = vue.ref(null);
@@ -1601,8 +1603,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
-  const _sfc_main$t = {
+  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
+  const _sfc_main$u = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -1696,7 +1698,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$g], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$g], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -1768,7 +1770,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$s = {
+  const _sfc_main$t = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -1935,11 +1937,11 @@ if (uni.restoreGlobal) {
     );
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$s);
+    block0$1(_sfc_main$t);
   if (typeof block1 === "function")
-    block1(_sfc_main$s);
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$f], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$r = {
+    block1(_sfc_main$t);
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$f], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$s = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -1970,7 +1972,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$e], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$e], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -2326,7 +2328,7 @@ if (uni.restoreGlobal) {
     }
     return value;
   }
-  const _sfc_main$q = {
+  const _sfc_main$r = {
     props: {
       weeks: {
         type: Object,
@@ -2416,7 +2418,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$d], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$d], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -2773,7 +2775,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t: t$3 } = initVueI18n(i18nMessages);
-  const _sfc_main$p = {
+  const _sfc_main$q = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -3651,9 +3653,9 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$c], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$c], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$2 } = initVueI18n(i18nMessages);
-  const _sfc_main$o = {
+  const _sfc_main$p = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -4422,8 +4424,8 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$b], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$n = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$b], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$o = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -5417,7 +5419,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$a], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$a], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
     constructor(options2, _this) {
       this.options = options2;
@@ -5530,7 +5532,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$m = {
+  const _sfc_main$n = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -5794,8 +5796,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$9], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$l = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$9], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$m = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -6182,8 +6184,8 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const BASE_URL = "http://192.168.0.103:3838/";
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const BASE_URL = "http://192.168.0.104:3838/";
   uni.setStorageSync("BASE_URL", BASE_URL);
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
@@ -6229,7 +6231,7 @@ if (uni.restoreGlobal) {
       data: task
     });
   };
-  const _sfc_main$k = {
+  const _sfc_main$l = {
     __name: "index",
     setup(__props2) {
       let tasks = vue.ref([]);
@@ -6706,8 +6708,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
-  const _sfc_main$j = {
+  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
+  const _sfc_main$k = {
     __name: "index",
     setup(__props2) {
       const previewDays = 31;
@@ -7067,7 +7069,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
+  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
   const apiLogin = (credentials) => {
     return request({
       url: `users/login`,
@@ -7082,7 +7084,7 @@ if (uni.restoreGlobal) {
       data: userData
     });
   };
-  const _sfc_main$i = {
+  const _sfc_main$j = {
     __name: "index",
     setup(__props2) {
       const isRegister = vue.ref(false);
@@ -7308,7 +7310,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
+  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
   class CategoryManager {
     constructor() {
       this.categories = /* @__PURE__ */ new Map();
@@ -7377,7 +7379,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -7674,8 +7676,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
-  const _sfc_main$g = {
+  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
+  const _sfc_main$h = {
     __name: "index",
     setup(__props) {
       const tabs = ["支出", "收入", "转账"];
@@ -7936,7 +7938,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
+  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
   const apiGetUserMemos = (userID) => {
     return request({
       url: `memos/list?userID=${userID}`,
@@ -7950,7 +7952,7 @@ if (uni.restoreGlobal) {
       data: memo
     });
   };
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -8076,7 +8078,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
+  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
   const config$1 = {
     // 信任的标签（保持标签名不变）
     trustTags: makeMap("card,a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,ruby,rt,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video"),
@@ -9079,7 +9081,7 @@ if (uni.restoreGlobal) {
       this.i++;
     }
   };
-  const _sfc_main$e = {
+  const _sfc_main$f = {
     props: {
       mode: {
         type: Boolean,
@@ -9160,7 +9162,7 @@ if (uni.restoreGlobal) {
       })
     ], 12, ["data-i"]);
   }
-  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$7], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
+  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$7], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
   const block0 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("handler");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["handler"] = "3052a0dc";
@@ -9176,7 +9178,7 @@ if (uni.restoreGlobal) {
     }
     return top - 30;
   }
-  const _sfc_main$d = {
+  const _sfc_main$e = {
     name: "node",
     options: {},
     data() {
@@ -10116,8 +10118,8 @@ if (uni.restoreGlobal) {
     ], 14, ["id"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$d);
-  const node = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$6], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
+    block0(_sfc_main$e);
+  const node = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$6], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
   /*!
    * marked - a markdown parser
    * Copyright (c) 2011-2020, Christopher Jeffrey. (MIT Licensed)
@@ -15813,7 +15815,7 @@ if (uni.restoreGlobal) {
     }
   };
   const plugins = [Markdown, Emoji, Highlight, Latex, Search, Style, ImgCache, Card, Editable];
-  const _sfc_main$c = {
+  const _sfc_main$d = {
     name: "mp-html",
     data() {
       return {
@@ -16204,7 +16206,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$5], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
+  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$5], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
   function upload$1(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/memos/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -16525,7 +16527,7 @@ if (uni.restoreGlobal) {
     __injectCSSVars__$1();
     return __setup__$1(props, ctx);
   } : __injectCSSVars__$1;
-  const _sfc_main$b = __default__$1;
+  const _sfc_main$c = __default__$1;
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -16802,8 +16804,8 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$4], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
-  const _sfc_main$a = {
+  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$4], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
+  const _sfc_main$b = {
     name: "UniNumberBox",
     emits: ["change", "input", "update:modelValue", "blur", "focus"],
     props: {
@@ -16991,7 +16993,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$3], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$3], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
   const apiAddWaterRecord = (record) => {
     return request({
       url: `water/add`,
@@ -17005,7 +17007,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$9 = {
+  const _sfc_main$a = {
     __name: "index",
     setup(__props2) {
       let waterRecords = vue.ref([]);
@@ -17548,7 +17550,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
+  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
   const apiGetUserDiaries = (userID) => {
     return request({
       url: `diary/list?userID=${userID}`,
@@ -17562,7 +17564,7 @@ if (uni.restoreGlobal) {
       data: diary
     });
   };
-  const _sfc_main$8 = {
+  const _sfc_main$9 = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -17656,7 +17658,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
+  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
   function upload(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/diary/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -17971,7 +17973,7 @@ if (uni.restoreGlobal) {
     __injectCSSVars__();
     return __setup__(props, ctx);
   } : __injectCSSVars__;
-  const _sfc_main$7 = __default__;
+  const _sfc_main$8 = __default__;
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -18248,7 +18250,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
+  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
   const apiGetUserCountdowns = (userID) => {
     return request({
       url: `countdown/list?userID=${userID}`,
@@ -18262,7 +18264,7 @@ if (uni.restoreGlobal) {
       data: countdown
     });
   };
-  const _sfc_main$6 = {
+  const _sfc_main$7 = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -18467,7 +18469,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
+  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
   const getRootDir = () => {
     if (uni.getSystemInfoSync().platform !== "android") {
       plus.nativeUI.alert("这个组件只能在安卓下使用");
@@ -18539,7 +18541,7 @@ if (uni.restoreGlobal) {
     getRootDir,
     getSubDir
   };
-  const _sfc_main$5 = {
+  const _sfc_main$6 = {
     props: {
       autoclose: {
         type: Boolean,
@@ -18723,7 +18725,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$1], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
+  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
   let options = {
     // 选则图片或者视频 图片:0 视频:1
     type: 0,
@@ -18747,7 +18749,7 @@ if (uni.restoreGlobal) {
     // 是否自动上传
     autoUpload: true
   };
-  const _sfc_main$4 = {
+  const _sfc_main$5 = {
     components: {
       ytFileSelector
     },
@@ -18935,7 +18937,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["onSelected"])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
   const apiGetNovels = () => {
     return request({
       url: "book/list",
@@ -18954,7 +18956,14 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$3 = {
+  const apiUpdateNovelChapter = (data2) => {
+    return request({
+      url: `book/updateChapter`,
+      method: "POST",
+      data: data2
+    });
+  };
+  const _sfc_main$4 = {
     __name: "index",
     setup(__props2) {
       onShow(() => {
@@ -18970,16 +18979,17 @@ if (uni.restoreGlobal) {
             });
           } else {
             novels.value = res.data;
-            novels.value.push({});
-            formatAppLog("log", "at subPackages/book/index/index.vue:54", "novels", novels.value);
+            formatAppLog("log", "at subPackages/book/index/index.vue:53", "novels", novels.value);
           }
+          novels.value.push({});
         });
       };
-      formatAppLog("log", "at subPackages/book/index/index.vue:59", "uni.getStorageSync---", uni.getStorageSync("BASE_URL"));
+      const baseUrl = uni.getStorageSync("BASE_URL");
       const options2 = vue.ref({
         type: 2,
-        host: "http://192.168.0.103:3838/book/upload"
+        host: `${baseUrl}book/upload`
       });
+      formatAppLog("log", "at subPackages/book/index/index.vue:64", "options", options2);
       const selectedHandler = (selectedData) => {
         formatAppLog("log", "at subPackages/book/index/index.vue:66", "Selected data:", selectedData);
       };
@@ -19084,36 +19094,53 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesBookIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-7b29b7df"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/index/index.vue"]]);
-  const _sfc_main$2 = {
+  const SubPackagesBookIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-7b29b7df"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/index/index.vue"]]);
+  const _sfc_main$3 = {
     __name: "index",
     setup(__props2) {
       const novelID = vue.ref(0);
       const novelName = vue.ref("");
+      const novelHistory = vue.ref({});
+      const readSetting = vue.ref({});
+      const x = vue.ref("600rpx");
+      const y = vue.ref("500rpx");
       onLoad((query) => {
         novelID.value = query.id;
         novelName.value = query.name;
+        novelHistory.value = getNovelHistory();
+        readSetting.value = uni.getStorageSync("readSetting") || {
+          fontSizePercent: 30,
+          brightnessPercent: 70,
+          themeType: 1
+        };
         init();
         getNovelChapters();
       });
       onShow(() => {
+        plus.navigator.setFullscreen(true);
+        uni.$on("updateOk", (newChapter) => {
+          novelChapterArr.value[ccIndex.value].oldContent = newChapter;
+          novelChapterArr.value[ccIndex.value].ChapterContent = newChapter.replace(/\r\n|\r|\n/g, "<br>").replace(/ {4}/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+        });
       });
-      const novelHistory = vue.computed(() => {
+      const getNovelHistory = () => {
         let novelHistoryArr = uni.getStorageSync("readHistory");
         if (novelHistoryArr) {
-          let novelHistory3 = novelHistoryArr.find((item) => {
+          let novelHistory2 = novelHistoryArr.find((item) => {
             return item.NovelID == novelID.value;
           });
-          return novelHistory3;
+          if (novelHistory2) {
+            return novelHistory2;
+          }
+          novelHistory2 = {
+            ChapterNumber: 1,
+            Title: novelName.value,
+            NovelID: novelID.value,
+            ChapterProgress: 0
+          };
+          return novelHistory2;
         }
-        let novelHistory2 = {
-          ChapterNumber: 1,
-          Title: novelName.value,
-          NovelID: novelID.value,
-          ChapterProgress: 0
-        };
-        return novelHistory2;
-      });
+      };
       const init = async () => {
         let initChapterNumber = novelHistory.value.ChapterNumber;
         let chapter = await getNovelChapter(initChapterNumber);
@@ -19179,6 +19206,7 @@ if (uni.restoreGlobal) {
               callback && callback();
               isLoading.value = false;
               let chapter = res.data[0];
+              chapter.oldContent = chapter.ChapterContent;
               chapter.ChapterContent = chapter.ChapterContent.replace(/\r\n|\r|\n/g, "<br>").replace(/ {4}/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
               resolve(chapter);
             }
@@ -19187,16 +19215,14 @@ if (uni.restoreGlobal) {
           });
         });
       };
-      const brightnessPercent = vue.ref(70);
       const updateBrightness = (e) => {
-        brightnessPercent.value = e.detail.value;
+        readSetting.value.brightnessPercent = e.detail.value;
       };
-      const fontSizePercent = vue.ref(30);
       const fontSize = vue.computed(() => {
-        return fontSizePercent.value / 100 * 24 + 12;
+        return readSetting.value.fontSizePercent / 100 * 24 + 12;
       });
       const updateFontSize = (e) => {
-        fontSizePercent.value = e.detail.value;
+        readSetting.value.fontSizePercent = e.detail.value;
       };
       const colorList = [
         { color: "#f8f8f8", type: 1 },
@@ -19220,24 +19246,29 @@ if (uni.restoreGlobal) {
       const openSetting = () => {
         showSetting.value = true;
       };
-      const theme = vue.ref("day-mode");
-      const themeType = vue.ref(1);
+      const theme = vue.computed(() => {
+        switch (readSetting.value.themeType) {
+          case 1:
+            return "day-mode";
+          case 2:
+            return "brown-mode";
+          case 3:
+            return "green-mode";
+          case 4:
+            return "night-mode";
+          default:
+            return "day-mode";
+        }
+      });
       const switchTheme = (type) => {
-        if (type === 1) {
-          theme.value = "day-mode";
-        } else if (type === 2) {
-          theme.value = "brown-mode";
-        } else if (type === 3) {
-          theme.value = "green-mode";
-        } else if (type === 4) {
-          if (themeType.value === 4) {
-            theme.value = "day-mode";
-            themeType.value = 1;
+        if (type === 4) {
+          if (readSetting.value.themeType === 4) {
+            readSetting.value.themeType = 1;
             return;
           }
-          theme.value = "night-mode";
         }
-        themeType.value = type;
+        readSetting.value.themeType = type;
+        formatAppLog("log", "at subPackages/book/read/index.vue:283", "readSetting", readSetting.value);
       };
       const scrollTop = vue.ref(1);
       const goTop = vue.ref(false);
@@ -19296,10 +19327,14 @@ if (uni.restoreGlobal) {
           }).exec();
         });
       };
+      const editChapter = () => {
+        uni.setStorageSync("editChapter", novelChapterArr.value[ccIndex.value]);
+        navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value}`);
+      };
       const isInitialized = vue.ref(true);
       vue.onUpdated(async () => {
         if (isInitialized.value) {
-          ccProgress.value = novelHistory.value.ChapterProgress;
+          ccProgress.value = novelHistory.value ? novelHistory.value.ChapterProgress : 0;
           let totalHeight = await getTotalHeight();
           let eleHeight = await getElementHeightById(`novel-chapter-1`);
           scrollToLastRead(totalHeight - eleHeight);
@@ -19307,7 +19342,14 @@ if (uni.restoreGlobal) {
       });
       vue.onBeforeUnmount(() => {
         saveReadRecord();
+        saveReadSetting();
       });
+      onUnload(() => {
+        plus.navigator.setFullscreen(false);
+      });
+      const saveReadSetting = () => {
+        uni.setStorageSync("readSetting", readSetting.value);
+      };
       const saveReadRecord = () => {
         let nHistory = {
           NovelID: novelID.value,
@@ -19332,14 +19374,14 @@ if (uni.restoreGlobal) {
         return vue.openBlock(), vue.createElementBlock(
           "view",
           {
-            class: vue.normalizeClass(theme.value)
+            class: vue.normalizeClass(vue.unref(theme))
           },
           [
             vue.createElementVNode(
               "view",
               {
                 class: "novel-reader",
-                style: vue.normalizeStyle({ "opacity": brightnessPercent.value / 100 })
+                style: vue.normalizeStyle({ "opacity": readSetting.value.brightnessPercent / 100 })
               },
               [
                 vue.createElementVNode("view", { class: "novel-header theme-bgc" }, [
@@ -19456,7 +19498,13 @@ if (uni.restoreGlobal) {
                   [
                     vue.createElementVNode("view", { class: "menu-left" }, [
                       vue.createElementVNode("view", { class: "menu-header theme-bgc-4" }, [
-                        vue.createElementVNode("view", { class: "novel-title ellipsis" }, "名称"),
+                        vue.createElementVNode(
+                          "view",
+                          { class: "novel-title ellipsis" },
+                          vue.toDisplayString(novelName.value),
+                          1
+                          /* TEXT */
+                        ),
                         vue.createElementVNode(
                           "view",
                           { class: "chapter-num" },
@@ -19509,7 +19557,7 @@ if (uni.restoreGlobal) {
                       vue.createElementVNode("input", {
                         class: "range-input",
                         type: "range",
-                        value: brightnessPercent.value,
+                        value: readSetting.value.brightnessPercent,
                         onInput: updateBrightness
                       }, null, 40, ["value"]),
                       vue.createElementVNode("view", { class: "setting-icon" }, [
@@ -19533,7 +19581,7 @@ if (uni.restoreGlobal) {
                       vue.createElementVNode("input", {
                         class: "range-input",
                         type: "range",
-                        value: fontSizePercent.value,
+                        value: readSetting.value.fontSizePercent,
                         onInput: updateFontSize
                       }, null, 40, ["value"]),
                       vue.createElementVNode("view", { class: "setting-icon" }, [
@@ -19570,7 +19618,28 @@ if (uni.restoreGlobal) {
               ],
               4
               /* STYLE */
-            )
+            ),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service theme-bgc",
+                  onClick: editChapter
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "gear",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ])
           ],
           2
           /* CLASS */
@@ -19578,7 +19647,131 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-24f694c0"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
+  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-24f694c0"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
+  const _sfc_main$2 = {
+    __name: "index",
+    setup(__props2) {
+      const x = vue.ref("600rpx");
+      const y = vue.ref("500rpx");
+      const windowHeight = vue.ref(0);
+      const chapter = vue.ref({});
+      const themeColor = vue.ref("day-mode");
+      onLoad(async (query) => {
+        let progress = query.progress;
+        themeColor.value = query.themeColor;
+        chapter.value = uni.getStorageSync("editChapter") || "";
+        windowHeight.value = await getScreenHeight();
+        formatAppLog("log", "at subPackages/book/edit/index.vue:33", "windowHeight", windowHeight.value);
+        setTimeout(async () => {
+          let eleHeight = await getElementHeightById("edit-textarea");
+          formatAppLog("log", "at subPackages/book/edit/index.vue:36", "eleHeight", eleHeight);
+          scrollTop.value = (eleHeight - windowHeight.value / 2) * progress - windowHeight.value / 3;
+        }, 1e3);
+      });
+      const scrollTop = vue.ref(1);
+      const getScreenHeight = () => {
+        return new Promise((resolve, reject) => {
+          uni.getSystemInfo({
+            success: function(res) {
+              resolve(res.windowHeight);
+            }
+          });
+        });
+      };
+      const getElementHeightById = (elementId) => {
+        return new Promise((resolve, reject) => {
+          const query = uni.createSelectorQuery().in(this);
+          query.select("#" + elementId).boundingClientRect((data2) => {
+            if (data2) {
+              const height = data2.height;
+              resolve(height);
+            } else {
+              reject();
+            }
+          }).exec();
+        });
+      };
+      const saveChapter = () => {
+        formatAppLog("log", "at subPackages/book/edit/index.vue:69", "chapter", chapter.value);
+        apiUpdateNovelChapter({
+          ChapterID: chapter.value.ChapterID,
+          ChapterContent: chapter.value.oldContent
+        }).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.showToast({
+              title: res.msg
+            });
+            uni.$emit("updateOk", chapter.value.oldContent);
+            uni.navigateBack();
+          }
+        });
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            class: vue.normalizeClass(themeColor.value)
+          },
+          [
+            vue.createElementVNode("scroll-view", {
+              "scroll-y": "",
+              class: "edit-scroll",
+              "scroll-top": scrollTop.value
+            }, [
+              vue.withDirectives(vue.createElementVNode(
+                "textarea",
+                {
+                  id: "edit-textarea",
+                  class: "content-textarea",
+                  style: vue.normalizeStyle({ "padding-bottom": windowHeight.value / 2 + "px" }),
+                  cursor: 20,
+                  "auto-height": "",
+                  "adjust-position": false,
+                  maxlength: "-1",
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => chapter.value.oldContent = $event)
+                },
+                null,
+                4
+                /* STYLE */
+              ), [
+                [vue.vModelText, chapter.value.oldContent]
+              ])
+            ], 8, ["scroll-top"]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service theme-bgc",
+                  onClick: saveChapter
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "cloud-upload",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ])
+          ],
+          2
+          /* CLASS */
+        );
+      };
+    }
+  };
+  const SubPackagesBookEditIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d2bf280f"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/edit/index.vue"]]);
   const _sfc_main$1 = {
     __name: "index",
     setup(__props2) {
@@ -19639,6 +19832,7 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/countdowns/index/index", SubPackagesCountdownsIndexIndex);
   __definePage("subPackages/book/index/index", SubPackagesBookIndexIndex);
   __definePage("subPackages/book/read/index", SubPackagesBookReadIndex);
+  __definePage("subPackages/book/edit/index", SubPackagesBookEditIndex);
   __definePage("subPackages/test/NumericKeypad/index", SubPackagesTestNumericKeypadIndex);
   const _sfc_main = {
     onLaunch: function() {
