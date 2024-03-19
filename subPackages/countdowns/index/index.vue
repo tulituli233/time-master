@@ -68,7 +68,7 @@ onShow(() => {
 })
 
 const getCountdowns = () => {
-    apiGetUserCountdowns(1).then(res => {
+    apiGetUserCountdowns(getApp().globalData.userInfo.UserID).then(res => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',

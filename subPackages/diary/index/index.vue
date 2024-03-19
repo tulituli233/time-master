@@ -46,7 +46,7 @@ onShow(() => {
 	getDiaries();
 })
 const getDiaries = () => {
-	apiGetUserDiaries(1).then(res => {
+	apiGetUserDiaries(getApp().globalData.userInfo.UserID).then(res => {
 		diaries.value = res.data
 		console.log('diaries', diaries.value)
 	})

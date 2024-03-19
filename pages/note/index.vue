@@ -107,7 +107,7 @@ onShow(() => {
 	// })
 })
 const getTasks = () => {
-	apiGetUserTasks(1).then(res => {
+	apiGetUserTasks(getApp().globalData.userInfo.UserID).then(res => {
 		tasks.value = res.data
 		console.log('tasks', tasks)
 	})

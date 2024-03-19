@@ -93,7 +93,7 @@ const todayY = ref('850rpx');
 let tasks = ref([]);
 const getTasks = () => {
 	return new Promise((resolve, reject) => {
-		apiGetUserTasks(1).then(res => {
+		apiGetUserTasks(getApp().globalData.userInfo.UserID).then(res => {
 			tasks.value = res.data;
 			console.log('tasks', tasks.value);
 			filterPlans(previewDays, tasks, dayPlan);

@@ -15,9 +15,14 @@
                         placeholder="请输入手机号" />
                 </view>
                 <view class="input-box">
-                    <input class="input" type="text" v-model="password" placeholder-style="color:#ccc"
+                    <input class="input" :type="passwordType" v-model="password" placeholder-style="color:#ccc"
                         placeholder="请输入密码" />
+                    <view class="icon" @click="switchPasswordType">
+                        <uni-icons :type="passwordType === 'password' ? 'eye-slash-filled' : 'eye-filled'" size="24"
+                            color="#fff" />
+                    </view>
                 </view>
+
                 <view class="register">
                     <view class="register-text" @click="isRegister = true">
                         注册
@@ -45,12 +50,20 @@
                         placeholder="请输入手机号" />
                 </view>
                 <view class="input-box">
-                    <input class="input" type="text" v-model="newPassword" placeholder-style="color:#ccc"
+                    <input class="input" :type="newPasswordType" v-model="newPassword" placeholder-style="color:#ccc"
                         placeholder="请输入密码" />
+                    <view class="icon" @click="switchNewPasswordType">
+                        <uni-icons :type="newPasswordType === 'password' ? 'eye-slash-filled' : 'eye-filled'" size="24"
+                            color="#fff" />
+                    </view>
                 </view>
                 <view class="input-box">
-                    <input class="input" type="text" v-model="confirmPassword" placeholder-style="color:#ccc"
+                    <input class="input" :type="confirmPasswordType" v-model="confirmPassword" placeholder-style="color:#ccc"
                         placeholder="请再次输入密码" />
+                    <view class="icon" @click="switchConfirmPasswordType">
+                        <uni-icons :type="confirmPasswordType === 'password' ? 'eye-slash-filled' : 'eye-filled'" size="24"
+                            color="#fff" />
+                    </view>
                 </view>
                 <view class="register">
                     <view class="register-btn" @click="register()">
@@ -67,9 +80,13 @@ import { ref } from 'vue';
 import { apiLogin, apiRegister } from '@/services/api/users';
 
 const isRegister = ref(false);
-
+// #region 登录
 const phone = ref('');
 const password = ref('');
+const passwordType = ref('password');
+const switchPasswordType = () => {
+    passwordType.value = passwordType.value === 'password' ? 'text' : 'password';
+}
 
 const login = () => {
     console.log('login', phone.value, password.value);
@@ -100,6 +117,7 @@ const login = () => {
         } else {
             console.log('res', res);
             uni.setStorageSync('userInfo', res.data)
+            getApp().globalData.userInfo = res.data
             uni.setStorageSync('token', res.data.token)
             uni.switchTab({ url: '/pages/index/index' })
         }
@@ -107,9 +125,19 @@ const login = () => {
         console.log('err', err);
     })
 }
+// #endregion
 
+// #region 注册
 const newPassword = ref('');
+const newPasswordType = ref('password');
+const switchNewPasswordType = () => {
+    newPasswordType.value = newPasswordType.value === 'password' ? 'text' : 'password';
+}
 const confirmPassword = ref('');
+const confirmPasswordType = ref('password');
+const switchConfirmPasswordType = () => {
+    confirmPasswordType.value = confirmPasswordType.value === 'password' ? 'text' : 'password';
+}
 
 const register = () => {
     if (!phone.value || !newPassword.value || !confirmPassword.value || newPassword.value !== confirmPassword.value) {
@@ -148,6 +176,7 @@ const register = () => {
         }
     })
 };
+// #endregion
 </script>
 
 <style lang="scss" scoped>
@@ -166,7 +195,7 @@ const register = () => {
         height: 100rpx;
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: space-between;
         margin-bottom: 40rpx;
         padding-left: 40rpx;
         border-radius: 50rpx;
@@ -174,6 +203,10 @@ const register = () => {
 
         .input {
             font-size: 34rpx;
+        }
+
+        .icon {
+            padding: 40rpx;
         }
     }
 }

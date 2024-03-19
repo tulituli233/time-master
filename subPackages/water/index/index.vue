@@ -139,7 +139,7 @@ onShow(() => {
     getWaterRecords()
 })
 const getWaterRecords = () => {
-    apiGetUserWaterRecords(1).then(res => {
+    apiGetUserWaterRecords(getApp().globalData.userInfo.UserID).then(res => {
         waterRecords.value = res.data
         console.log('waterRecords', waterRecords.value)
     })

@@ -8,11 +8,16 @@ export default {
 		}
 	},
 	onShow: function () {
+		getApp().globalData.userInfo = uni.getStorageSync('userInfo');
 		console.log('App Show')
 	},
 	onHide: function () {
 		console.log('App Hide')
-	}
+	},
+	globalData: {
+		// 定义全局变量
+		userInfo: null
+	},
 }
 </script>
 

@@ -50,7 +50,7 @@ onShow(() => {
 	getMemos();
 })
 const getMemos = () => {
-	apiGetUserMemos(1).then(res => {
+	apiGetUserMemos(getApp().globalData.userInfo.UserID).then(res => {
 		memos.value = res.data
 		console.log('memos', memos)
 	})

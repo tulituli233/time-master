@@ -9,27 +9,29 @@
         </view>
         <!-- 分类选择 -->
         <view class="select" v-if="activeTab === 0">
-            <view class="select-item" v-for="(cate, index) in expenseCateEnum.getAllCategories()" :key="index"
-                @click="selectCate(cate.id)">
+            <view class="select-item" v-for="(cate, index) in incomeCate" :key="index"
+                @click="selectCate(cate.CategoryID)">
                 <view class="icon"
-                    :style="{ border: selectedExpenseCateID === cate.id ? `5rpx solid ${cate.color}` : 'none' }">
-                    <view class="padding" :style="{ backgroundColor: cate.color }">
-                        <uni-icons custom-prefix="iconfont" :type="cate.icon" color="#fff" size="30"></uni-icons>
+                    :style="{ border: selectedExpenseCateID === cate.CategoryID ? `5rpx solid ${cate.CategoryColor}` : 'none' }">
+                    <view class="padding" :style="{ backgroundColor: cate.CategoryColor }">
+                        <uni-icons custom-prefix="iconfont" :type="cate.CategoryIcon" color="#fff"
+                            size="30"></uni-icons>
                     </view>
                 </view>
-                <view class="name">{{ cate.name }}</view>
+                <view class="name">{{ cate.CategoryName }}</view>
             </view>
         </view>
         <view class="select" v-if="activeTab === 1">
-            <view class="select-item" v-for="(cate, index) in incomeCateEnum.getAllCategories()" :key="index"
-                @click="selectCate(cate.id)">
+            <view class="select-item" v-for="(cate, index) in expenseCate" :key="index"
+                @click="selectCate(cate.CategoryID)">
                 <view class="icon"
-                    :style="{ border: selectedIncomeCateID === cate.id ? `5rpx solid ${cate.color}` : 'none' }">
-                    <view class="padding" :style="{ backgroundColor: cate.color }">
-                        <uni-icons custom-prefix="iconfont" :type="cate.icon" color="#fff" size="30"></uni-icons>
+                    :style="{ border: selectedIncomeCateID === cate.CategoryID ? `5rpx solid ${cate.CategoryColor}` : 'none' }">
+                    <view class="padding" :style="{ backgroundColor: cate.CategoryColor }">
+                        <uni-icons custom-prefix="iconfont" :type="cate.CategoryIcon" color="#fff"
+                            size="30"></uni-icons>
                     </view>
                 </view>
-                <view class="name">{{ cate.name }}</view>
+                <view class="name">{{ cate.CategoryName }}</view>
             </view>
         </view>
         <view class="select" v-if="activeTab === 2">转账</view>
@@ -54,18 +56,42 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { incomeCateEnum, expenseCateEnum } from '@/enums/accountCateEnum';
-import { apiAddExpense } from '@/services/api/expenses';
+import { ref, computed } from 'vue';
+import { apiGetAllExpensesCategory, apiAddExpense } from '@/services/api/expenses';
+import { onLoad } from '@dcloudio/uni-app';
+import { formatDateTime } from '@/utils/utils.js';
+
+// 获取分类数据
+onLoad(() => {
+    getExpenseCate();
+})
+let expenseCateList = ref([]);
+const getExpenseCate = () => {
+    apiGetAllExpensesCategory().then((res) => {
+        expenseCateList.value = res.data;
+        console.log('expenseCateList', expenseCateList.value);
+    })
+}
+
+const incomeCate = computed(() => {
+    return expenseCateList.value.filter(cate => {
+        return cate.CategoryType === 1
+    })
+})
+const expenseCate = computed(() => {
+    return expenseCateList.value.filter(cate => {
+        return cate.CategoryType === 2
+    })
+})
 
 const tabs = ['支出', '收入', '转账'];
 const activeTab = ref(0);
 
 const selectTab = (index) => {
     activeTab.value = index;
-    uni.showToast({
-        title: `切换到${tabs[index]}`,
-    })
+    // uni.showToast({
+    //     title: `切换到${tabs[index]}`,
+    // })
 };
 // 选中的支出分类
 const selectedExpenseCateID = ref(1);
@@ -105,17 +131,18 @@ const handleKeyPress = (key) => {
         inputValue.value += key;
     }
 };
-const dateValue = ref('');
+const dateValue = ref(formatDateTime(new Date()));
 // 选择日期
 const selectDate = (e) => {
     // 弹出uni日期选择器
     console.log('选择日期', e);
 }
+// ##region 新增记账
 const addExpense = async () => {
     let Amount = activeTab.value === 0 ? -inputValue.value : inputValue.value;
     let Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
     let expense = {
-        UserID: 1,
+        UserID: getApp().globalData.userInfo.UserID,
         Amount,
         Category,
         Date: dateValue.value,
@@ -133,6 +160,7 @@ const addExpense = async () => {
         })
     }
 };
+// ##endregion
 </script>
 
 <style lang="scss">
