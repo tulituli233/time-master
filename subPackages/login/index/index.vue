@@ -58,11 +58,11 @@
                     </view>
                 </view>
                 <view class="input-box">
-                    <input class="input" :type="confirmPasswordType" v-model="confirmPassword" placeholder-style="color:#ccc"
-                        placeholder="请再次输入密码" />
+                    <input class="input" :type="confirmPasswordType" v-model="confirmPassword"
+                        placeholder-style="color:#ccc" placeholder="请再次输入密码" />
                     <view class="icon" @click="switchConfirmPasswordType">
-                        <uni-icons :type="confirmPasswordType === 'password' ? 'eye-slash-filled' : 'eye-filled'" size="24"
-                            color="#fff" />
+                        <uni-icons :type="confirmPasswordType === 'password' ? 'eye-slash-filled' : 'eye-filled'"
+                            size="24" color="#fff" />
                     </view>
                 </view>
                 <view class="register">
@@ -88,26 +88,37 @@ const switchPasswordType = () => {
     passwordType.value = passwordType.value === 'password' ? 'text' : 'password';
 }
 
-const login = () => {
-    console.log('login', phone.value, password.value);
-    if (!phone.value || !password.value) {
-        let errorMessage = '';
-        if (!phone.value) {
-            errorMessage = '请输入手机号';
-        } else if (!password.value) {
-            errorMessage = '请输入密码';
-        }
-
-        uni.showToast({
-            icon: 'error',
-            title: errorMessage,
-        })
-        return;
+const isValidLoginParams = (params) => {
+    let errorMessage = '';
+    if (!params.Phone) {
+        errorMessage = '请输入手机号'
+    } else if (!params.Password) {
+        errorMessage = '请输入密码'
+    } else if (!/^1[3-9]\d{9}$/.test(params.Phone)) {
+        errorMessage = '手机号格式错误'
+    } else if (!/^[0-9A-Za-z]{6,18}$/.test(params.Password)) {
+        errorMessage = '密码至少6到18位的数字或字母'
     }
-    apiLogin({
+    return {
+        isValid: !errorMessage,
+        errorMessage
+    }
+}
+
+const login = () => {
+    const params = {
         Phone: phone.value,
         Password: password.value
-    }).then(res => {
+    };
+    const result = isValidLoginParams(params);
+    if (!result.isValid) {
+        uni.showToast({
+            icon: 'error',
+            title: result.errorMessage,
+        });
+        return;
+    }
+    apiLogin(params).then(res => {
         console.log('res', res);
         if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -139,29 +150,42 @@ const switchConfirmPasswordType = () => {
     confirmPasswordType.value = confirmPasswordType.value === 'password' ? 'text' : 'password';
 }
 
-const register = () => {
-    if (!phone.value || !newPassword.value || !confirmPassword.value || newPassword.value !== confirmPassword.value) {
-        let errorMessage = '';
-        if (!phone.value) {
-            errorMessage = '请输入手机号';
-        } else if (!newPassword.value) {
-            errorMessage = '请输入密码';
-        } else if (!confirmPassword.value) {
-            errorMessage = '请再次输入密码';
-        } else {
-            errorMessage = '两次密码不一致';
-        }
+const isValid = (obj) => {
+    let errorMessage = '';
+    if (!obj.phone) {
+        errorMessage = '请输入手机号';
+    } else if (!obj.newPassword) {
+        errorMessage = '请输入密码';
+    } else if (!obj.confirmPassword) {
+        errorMessage = '请再次输入密码';
+    } else if (obj.newPassword !== obj.confirmPassword) {
+        errorMessage = '两次密码不一致';
+    } else if (!/^1[3-9]\d{9}$/.test(obj.phone)) {
+        errorMessage = '手机号格式错误';
+    } else if (!/^[0-9A-Za-z]{6,18}$/.test(obj.newPassword) || !/^[0-9A-Za-z]{6,18}$/.test(obj.confirmPassword)) {
+        errorMessage = '密码至少6到18位的数字或字母';
+    }
+    return {
+        isValid: !errorMessage,
+        errorMessage
+    };
+};
 
+const register = () => {
+    const obj = {
+        phone: phone.value,
+        newPassword: newPassword.value,
+        confirmPassword: confirmPassword.value
+    };
+    const result = isValid(obj);
+    if (!result.isValid) {
         uni.showToast({
             icon: 'error',
-            title: errorMessage,
+            title: result.errorMessage,
         });
         return;
     }
-    apiRegister({
-        Phone: phone.value,
-        Password: newPassword.value
-    }).then(res => {
+    apiRegister({ Phone: obj.phone, Password: obj.newPassword }).then(res => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',
@@ -225,7 +249,12 @@ const register = () => {
     }
 
     .register {
-        width: 550rpx;
+        width: 600rpx;
+
+        .register-text {
+            width: 100rpx;
+            padding: 20rpx;
+        }
     }
 
     .login {

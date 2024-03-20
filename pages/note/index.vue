@@ -317,10 +317,23 @@ const popupRef = ref(null);
 const selectedType = ref(0);
 const addPlan = () => {
 	let plan = {
-		UserId: 1,
+		UserId: getApp().globalData.userInfo.UserID,
 		Title: planTitle.value,
 		DueDate: planDate.value,
 		Type: selectedType.value,
+	}
+	let errMsg = ''
+	if (!plan.Title) {
+		errMsg = '请填写计划标题'
+	} else if (!plan.DueDate) {
+		errMsg = '请选择计划日期'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
 	}
 	console.log('plan', plan);
 	apiAddTask(plan).then(res => {

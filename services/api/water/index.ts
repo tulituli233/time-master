@@ -10,11 +10,28 @@ import { request } from '@/utils/request.ts';
 //     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 // );
 
+// -- 创建喝水类型
+// CREATE TABLE WaterTypes (
+//     WaterID INT PRIMARY KEY AUTO_INCREMENT,
+//     WaterName VARCHAR(10),
+//     WaterIcon VARCHAR(30),
+//     WaterColor VARCHAR(10) DEFAULT '',
+//     HydratePercent INT DEFAULT 100
+// );
+
 export interface WaterRecord {
     UserID: number,
     WaterID: number,
     DateTime: string,
     Amount: number
+}
+
+export interface WaterType {
+    WaterID: number,
+    WaterName: string,
+    WaterIcon: string,
+    WaterColor: string,
+    HydratePercent: number
 }
 
 // 添加喝水记录
@@ -30,6 +47,14 @@ export const apiAddWaterRecord = (record: WaterRecord): Promise<WaterRecord> => 
 export const apiGetUserWaterRecords = (userID: number): Promise<WaterRecord[]> => {
     return request({
         url: `water/list?userID=${userID}`,
+        method: 'GET',
+    })
+}
+
+// 获取所有喝水类型
+export const apiGetAllWaterTypes = (): Promise<WaterType[]> => {
+    return request({
+        url: `water/allTypes`,
         method: 'GET',
     })
 }

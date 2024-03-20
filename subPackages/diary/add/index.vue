@@ -429,9 +429,20 @@ export default {
                 if (this.editable) {
                     var content = this.$refs.article.getContent()
                     let diary = {
-                        UserID: 1,
+                        UserID: getApp().globalData.userInfo.UserID,
                         Title: this.diaryTitle,
                         Content: content,
+                    }
+                    let errMsg = ''
+                    if (!diary.Title) {
+                        errMsg = '请填写日记标题'
+                    }
+                    if (errMsg) {
+                        uni.showToast({
+                            icon: 'error',
+                            title: errMsg
+                        })
+                        return
                     }
                     console.log('diary', diary);
                     this.saveDiary(diary)

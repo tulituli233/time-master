@@ -31,7 +31,7 @@
         <!-- 喝水 -->
         <view class="water-btn">
             <uni-icons custom-prefix="iconfont" type="icon-water" size="50" color="#00b7ff"
-                @click="$refs.popupRef.open('bottom')" />
+                @click="openWaterPopup" />
         </view>
         <!-- 水位 -->
         <view class="water-level" :style="{ height: percent + '%' }"></view>
@@ -47,10 +47,10 @@
                             <view class="water-item" v-for="(item1, index) in item" :key="index"
                                 @click="selectWater(item1.WaterID)">
                                 <view :class="['water-icon', currentWaterType == item1.WaterID ? 'active' : '']">
-                                    <uni-icons custom-prefix="iconfont" :type="item1.icon" size="50" color="#00b7ff" />
+                                    <uni-icons custom-prefix="iconfont" :type="item1.WaterIcon" size="50" color="#00b7ff" />
                                 </view>
                                 <view class="water-name">
-                                    {{ item1.name }}
+                                    {{ item1.WaterName }}
                                 </view>
                             </view>
                         </swiper-item>
@@ -90,14 +90,14 @@
                 <view class="record-list" v-if="waterRecords.length > 0">
                     <view class="record-item" v-for="(item, index) in waterRecords" :key="index">
                         <view class="record-icon">
-                            <uni-icons custom-prefix="iconfont" :type="getWaterObject(item.WaterID).icon" size="40"
+                            <uni-icons custom-prefix="iconfont" :type="getWaterObject(item.WaterID).WaterIcon" size="40"
                                 color="#00b7ff" />
                         </view>
                         <view class="record-date">
                             {{ getTime(item.DateTime) }}
                         </view>
                         <view class="record-water">
-                            {{ getWaterObject(item.WaterID).name }}
+                            {{ getWaterObject(item.WaterID).WaterName }}
                         </view>
                         <view class="record-amount">
                             {{ item.Amount }}ml
@@ -129,9 +129,22 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { apiAddWaterRecord, apiGetUserWaterRecords } from '@/services/api/water'
+import { apiAddWaterRecord, apiGetUserWaterRecords, apiGetAllWaterTypes } from '@/services/api/water'
 import { formatDateTime } from '@/utils/utils.js';
-import { onShow } from '@dcloudio/uni-app'
+import { onShow, onLoad } from '@dcloudio/uni-app'
+
+onLoad(() => {
+    getAllWaterTypes()
+})
+
+// 获取所有饮水种类
+let waterTypes = ref([])
+const getAllWaterTypes = () => {
+    apiGetAllWaterTypes().then(res => {
+        waterTypes.value = res.data
+        console.log('waterTypes', waterTypes.value);
+    })
+}
 
 // 获取饮水记录
 let waterRecords = ref([])
@@ -145,7 +158,7 @@ const getWaterRecords = () => {
     })
 }
 const percent = computed(() => {
-    return Math.floor((consumedWater.value / targetWater.value) * 100).toFixed(0)
+    return Math.floor((consumedWater.value / targetWater.value) * 100 + 15).toFixed(0)
 })
 const tips = ref('每天都要喝水哦')
 const targetWater = ref(2000)
@@ -159,89 +172,11 @@ const consumedWater = computed(() => {
 })
 
 const popupRef = ref(null)
-// 水的种类
-const waterType = ref([
-    {
-        WaterID: 1,
-        name: '水',
-        icon: 'icon-shuibei',
-    },
-    {
-        WaterID: 2,
-        name: '矿泉水',
-        icon: 'icon-kuang',
-    },
-    {
-        WaterID: 3,
-        name: '碳酸饮料',
-        icon: 'icon-kele',
-    },
-    {
-        WaterID: 4,
-        name: '汤',
-        icon: 'icon-tang',
-    },
-    {
-        WaterID: 5,
-        name: '豆奶',
-        icon: 'icon-dounai',
-    },
-    {
-        WaterID: 6,
-        name: '牛奶',
-        icon: 'icon-milk',
-    },
-    {
-        WaterID: 7,
-        name: '奶茶',
-        icon: 'icon-naicha',
-    },
-    {
-        WaterID: 8,
-        name: '果汁',
-        icon: 'icon-guozhi',
-    },
-    {
-        WaterID: 9,
-        name: '茶',
-        icon: 'icon-cha',
-    },
-    {
-        WaterID: 10,
-        name: '咖啡',
-        icon: 'icon-kafei',
-    },
-    {
-        WaterID: 11,
-        name: '椰汁',
-        icon: 'icon-yezi',
-    },
-    {
-        WaterID: 12,
-        name: '啤酒',
-        icon: 'icon-pijiu',
-    },
-    {
-        WaterID: 13,
-        name: '蜂蜜水',
-        icon: 'icon-fengmi',
-    },
-    {
-        WaterID: 14,
-        name: '红酒',
-        icon: 'icon-xianxinghongjiu',
-    },
-    {
-        WaterID: 15,
-        name: '柠檬茶',
-        icon: 'icon-ningmengcha',
-    },
-])
-// 将waterType中的元素按每10个元素拆分一个swiper数组
+// 将waterTypes中的元素按每10个元素拆分一个swiper数组
 const swiperList = computed(() => {
     const arr = []
-    for (let i = 0; i < waterType.value.length; i += 10) {
-        arr.push(waterType.value.slice(i, i + 10))
+    for (let i = 0; i < waterTypes.value.length; i += 10) {
+        arr.push(waterTypes.value.slice(i, i + 10))
     }
     console.log('arr', arr);
     return arr
@@ -287,14 +222,32 @@ const waterTime = ref(getTime());
 const bindTimeChange = (e) => {
     waterTime.value = e.detail.value
 }
+
+const openWaterPopup = () => {
+    inputValue.value = ''
+    waterTime.value = getTime()
+    currentWaterType.value = 1
+    popupRef.value.open('bottom')
+}
 // 添加饮水记录
 const addWater = () => {
     let water = {
-        UserID: 1,
+        UserID: getApp().globalData.userInfo.UserID,
         WaterID: currentWaterType.value,
         DateTime: formatDateTime(convertToTodayTime(waterTime.value)),
         Amount: inputValue.value
     }
+    let errMsg = ''
+	if (!water.Amount) {
+		errMsg = '请输入饮水量'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
+	}
     console.log('water', water);
     apiAddWaterRecord(water).then(res => {
         if (res.code === 0 || !res.code) {
@@ -324,7 +277,7 @@ const convertToTodayTime = (timeString) => {
 }
 // 根据WaterID获取对象
 const getWaterObject = (WaterID) => {
-    return waterType.value.find(item => item.WaterID === WaterID)
+    return waterTypes.value.find(item => item.WaterID === WaterID)
 }
 
 const setTargetRef = ref(null)

@@ -20,7 +20,7 @@
 			</div>
 		</view>
 		<view class="bottom">
-			<view class="list-item" v-for="item in list" :key="item.unicode">
+			<view class="list-item" v-for="item in list" :key="item.unicode" @click="navTo(item.url)">
 				<view class="left">
 					<uni-icons custom-prefix="iconfont" :type="item.unicode" size="30"></uni-icons>
 				</view>
@@ -38,6 +38,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app';
+import { navTo } from '@/utils/utils'
 
 const userInfo = ref(null)
 onMounted(() => {
@@ -86,7 +87,7 @@ const list = ref([
 	{
 		title: '设置',
 		unicode: 'icon-shezhi',
-		url: '/pages/index/index'
+		url: '/subPackages/mine/setting/index'
 	}
 ])
 </script>

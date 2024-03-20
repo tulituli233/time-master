@@ -69,6 +69,17 @@
 			]
 		},
 		{
+			"root": "subPackages/mine",
+			"pages": [
+				{
+					"path": "setting/index",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				}
+			]
+		},
+		{
 			"root": "subPackages/memos",
 			"pages": [
 				{

@@ -148,6 +148,19 @@ const addExpense = async () => {
         Date: dateValue.value,
         Note: noteValue.value
     }
+    let errMsg = ''
+	if (!expense.Amount) {
+		errMsg = '请输入金额'
+	} else if (!expense.Date) {
+		errMsg = '请选择日期'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
+	}
     console.log('expense', expense);
     let res = await apiAddExpense(expense);
     if (res.code === 0) {

@@ -95,10 +95,23 @@ const countdownDate = ref('')
 
 const addCountdown = () => {
     let countdown = {
-        UserId: 1,
+        UserId: getApp().globalData.userInfo.UserID,
         Name: countdownName.value,
         TargetDate: countdownDate.value
     }
+    let errMsg = ''
+	if (!countdown.Name) {
+		errMsg = '请输入倒计时名称'
+	} else if (!countdown.TargetDate) {
+		errMsg = '请选择目标日期'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
+	}
     console.log('countdown', countdown);
     apiAddCountdown(countdown).then(res => {
         if (res.code === 0 || !res.code) {
