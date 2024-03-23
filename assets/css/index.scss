@@ -100,3 +100,29 @@
 		background-color: #444 !important;
 	}
 }
+// 公用弹窗
+.popup-list {
+	background-color: #f8f8f8;
+
+	.popup-item {
+		display: flex;
+		align-items: center;
+		padding: 40rpx 20rpx;
+		background-color: #fff;
+
+		.popup-icon {
+			margin-right: 20rpx;
+		}
+
+		.popup-text {
+			font-size: 30rpx;
+		}
+	}
+
+	.popup-close {
+		padding: 40rpx;
+		margin-top: 10rpx;
+		text-align: center;
+		background-color: #fff;
+	}
+}

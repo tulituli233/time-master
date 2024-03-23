@@ -30,3 +30,19 @@ export const apiAddDiary = (diary: Diary): Promise<Diary> => {
         data: diary
     });
 }
+// 修改日记
+export const apiUpdateDiary = (diary: Diary): Promise<Diary> => {
+    return request({
+        url: `diary/update`,
+        method: 'POST',
+        data: diary
+    });
+}
+
+// 删除日记
+export const apiDeleteDiary = (diaryID: number): Promise<Diary> => {
+    return request({
+        url: `diary/delete?DiaryID=${diaryID}`,
+        method: 'GET',
+    });
+}

@@ -90,7 +90,7 @@
 
 <script>
 import mpHtml from '@/uni-app/components/mp-html/mp-html'
-import { apiAddDiary } from '@/services/api/diary'
+import { apiAddDiary, apiUpdateDiary } from '@/services/api/diary'
 // import content from './content'
 // 上传图片方法
 function upload(src, type) {
@@ -119,7 +119,7 @@ function remove(src) {
 export default {
     data() {
         return {
-            content: '',
+            content: '<div>Hello World!</div>',
             keyboardHeight: 0,
             modal: null,
             dialog: false,
@@ -146,13 +146,22 @@ export default {
                 '<div style="border: 1px solid gray; box-shadow: 3px 3px 0px #cfcfce; padding: 10px; margin: 10px 0">段落</div>'
             ],
             diaryTitle: '',
+            diary: '',
+            isEdit: false   // 是否为编辑模式
         }
     },
     components: {
         mpHtml
     },
-    mounted() {
-
+    onLoad(e) {
+        this.isEdit = e.isEdit ? true : false
+        if (this.isEdit) {
+            let diary = JSON.parse(e.diary)
+            this.diary = diary
+            this.diaryTitle = diary.Title
+            this.content = diary.Content
+            this.type = diary.Type
+        }
     },
     onReady() {
         // #ifdef APP
@@ -409,7 +418,10 @@ export default {
         },
         // 保存备忘录
         saveDiary(diary) {
-            apiAddDiary(diary).then(res => {
+            if (this.isEdit) diary.DiaryID = this.diary.DiaryID
+            let api = this.editable ? apiUpdateDiary : apiAddDiary
+            api(diary).then(res => {
+                console.log('res', res);
                 if (res.code === 0 || !res.code) {
                     uni.showToast({
                         icon: 'error',

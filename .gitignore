@@ -1,3 +1,5 @@
+node_modules
+unpackage
 unpackage/dist/dev/.nvue/assets/iconfont.a0b6c6c5.ttf
 unpackage/dist/dev/app-plus/__uniappview.html
 unpackage/dist/dev/app-plus/app-config-service.js
@@ -313,3 +315,10 @@ unpackage/dist/dev/app-plus/app-config-service.js
 unpackage/dist/dev/app-plus/app-service.js
 unpackage/dist/dev/app-plus/app.css
 unpackage/dist/dev/app-plus/subPackages/book/edit/index.css
+unpackage/dist/dev/app-plus/app-config-service.js
+unpackage/dist/dev/app-plus/app-service.js
+unpackage/dist/dev/app-plus/app.css
+unpackage/dist/dev/app-plus/pages/note/index.css
+unpackage/dist/dev/app-plus/pages/plan/index.css
+unpackage/dist/dev/app-plus/subPackages/mine/setting/index.css
+unpackage/dist/dev/app-plus/pages/plan/index.css

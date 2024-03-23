@@ -11,7 +11,8 @@
 				<view>
 					<view class="note-list">
 						<view :class="{ 'note-item': true, 'top': index < 3, 'middle': index % 3 == 1 }"
-							v-for="(item, index) in newPlanList" :key="item.MemoID">
+							v-for="(item, index) in newPlanList" :key="item.MemoID" @click="editMemo(item)"
+							@longpress="openPopup(item)">
 							<view class="note-title">
 								{{ item.Title }}
 							</view>
@@ -33,12 +34,26 @@
 				</button>
 			</movable-view>
 		</movable-area>
+		<!-- 更多功能 -->
+		<uni-popup ref="popupRef" background-color="#fff">
+			<view class="popup-list">
+				<view class="popup-item" @click="deleteMemo">
+					<view class="popup-icon">
+						<uni-icons type="trash" size="30" color="#999"></uni-icons>
+					</view>
+					<view class="popup-text">
+						删除
+					</view>
+				</view>
+				<view class="popup-close" @click="$refs.popupRef.close()">取消</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { apiGetUserMemos } from '@/services/api/memos';
+import { apiGetUserMemos, apiDeleteMemo } from '@/services/api/memos';
 import { navTo, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
 
@@ -81,9 +96,42 @@ let newPlanList = computed(() => {
 	}
 	return currPlanList
 })
+// #region 改
+const editMemo = (memo) => {
+	// 编辑
+	navTo(`/subPackages/memos/add/index?isEdit=true&memo=${JSON.stringify(memo)}`)
+}
+// #endregion
+// #region 删
+const popupRef = ref(null)
+const activeMemo = ref(null)
+const openPopup = (memo) => {
+	activeMemo.value = memo
+	popupRef.value.open('bottom')
+	// 触发手机抖动
+	uni.vibrateShort();
+}
+const deleteMemo = () => {
+	// 删除
+	apiDeleteMemo(activeMemo.value.MemoID).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			popupRef.value.close()
+			getMemos();
+		}
+	})
+}
+// #endregion
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .uni-padding-wrap {
 	padding: 0px 40rpx
 }

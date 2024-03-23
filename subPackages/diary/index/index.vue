@@ -1,7 +1,8 @@
 <template>
 	<view class="content">
 		<view class="diary-list">
-			<view class="diary-item" v-for="item in diaries" :key="item.DiaryID">
+			<view class="diary-item" v-for="item in diaries" :key="item.DiaryID" @click="editDiary(item)"
+				@longpress="openPopup(item)">
 				<view class="diary-left">
 					<view class="month">
 						{{ formatDateToMonth(item.Date) }}
@@ -29,12 +30,26 @@
 				</button>
 			</movable-view>
 		</movable-area>
+		<!-- 更多功能 -->
+		<uni-popup ref="popupRef" background-color="#fff">
+			<view class="popup-list">
+				<view class="popup-item" @click="deleteDiary">
+					<view class="popup-icon">
+						<uni-icons type="trash" size="30" color="#999"></uni-icons>
+					</view>
+					<view class="popup-text">
+						删除
+					</view>
+				</view>
+				<view class="popup-close" @click="$refs.popupRef.close()">取消</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { apiGetUserDiaries } from '@/services/api/diary';
+import { apiGetUserDiaries, apiDeleteDiary } from '@/services/api/diary';
 import { navTo, formatDateToMonth, formatDateToDay, formatDateToTime } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
 
@@ -51,12 +66,46 @@ const getDiaries = () => {
 		console.log('diaries', diaries.value)
 	})
 }
+
+// #region 改
+const editDiary = (item) => {
+	navTo(`/subPackages/diary/add/index?isEdit=true&diary=${JSON.stringify(item)}`)
+}
+// #endregion
+// #region 删
+const popupRef = ref(null)
+const activeDiary = ref(null)
+const openPopup = (diary) => {
+	activeDiary.value = diary
+	popupRef.value.open('bottom')
+	// 触发手机抖动
+	uni.vibrateShort();
+}
+const deleteDiary = () => {
+	// 删除
+	apiDeleteDiary(activeDiary.value.DiaryID).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			popupRef.value.close()
+			getDiaries();
+		}
+	})
+}
+// #endregion
 </script>
 
 <style lang="scss">
 .win-service {
 	background-color: #db4ef8;
 }
+
 .content {
 	width: 100vw;
 	background-image: url('@/static/diary-bg.webp');

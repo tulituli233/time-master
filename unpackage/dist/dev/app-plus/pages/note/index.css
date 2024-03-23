@@ -1483,9 +1483,12 @@
   font-size: 0.75rem;
   color: #888;
 }
+ [name=content] {
+  bottom: var(--fbfe11c7-popupBottom\ \+\ \'px\') !important;
+}
 .popup-content {
   padding: 0.625rem;
-  height: 12.5rem;
+  height: 10.9375rem;
 }
 .popup-content .input-box {
   display: flex;

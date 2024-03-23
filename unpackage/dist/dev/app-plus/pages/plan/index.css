@@ -1355,6 +1355,9 @@
   font-size: 0.9375rem;
   color: #888;
 }
+ [name=content] {
+  bottom: var(--d8d50c43-popupBottom\ \+\ \'px\') !important;
+}
 .popup-content {
   padding: 0.625rem;
   height: 12.5rem;

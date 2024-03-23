@@ -26,14 +26,14 @@
 									<view class="body-item" v-for="item1 in item.plans" :key="item1.TaskID">
 										<uni-swipe-action>
 											<uni-swipe-action-item :right-options="options2"
-												@click="bindClick(item1.TaskID)">
+												@click="bindClick($event, item1)">
 												<view class="content-box">
 													<view class="box-left" @click="updateStatus(item1)">
 														<uni-icons custom-prefix="iconfont"
 															:type="statusIcon(item1.Status)" size="20"
 															color="#4c8bf0"></uni-icons>
 													</view>
-													<view class="box-right">
+													<view class="box-right" @click="editTask(item1)">
 														<view class="plan-title">
 															<text class="title">{{ item1.Title }}</text>
 														</view>
@@ -56,7 +56,7 @@
 		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-				<button class="win-service" @click="$refs.popupRef.open('bottom')">
+				<button class="win-service" @click="openAddPopup">
 					<uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
 				</button>
 			</movable-view>
@@ -68,7 +68,7 @@
 					<input class="input" type="text" v-model="planTitle" placeholder="把事情记录下来吧~" />
 					<view class="btn">
 						<uni-icons custom-prefix="iconfont" type="icon-send" size="30" color="#4c8bf0"
-							@click="addPlan"></uni-icons>
+							@click="addOrEdit"></uni-icons>
 					</view>
 				</view>
 				<!-- 属性 -->
@@ -98,13 +98,23 @@ import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks
 import { formatDateTime, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
 
+const x = ref('600rpx');
+const y = ref('1000rpx');
+const popupBottom = ref(0);
 // 获取任务列表
 let tasks = ref([]);
 onShow(() => {
 	getTasks();
-	// uni.onKeyboardHeightChange(res => {
-	// 	console.log('键盘高度变化----', res.height)
-	// })
+	// #ifdef APP-PLUS
+	uni.onKeyboardHeightChange(res => {
+		console.log('键盘高度变化----', res.height)
+		if (res.height === 0) {
+			popupBottom.value = 0
+		} else {
+			popupBottom.value = 100
+		}
+	})
+	// #endif
 })
 const getTasks = () => {
 	apiGetUserTasks(getApp().globalData.userInfo.UserID).then(res => {
@@ -119,9 +129,6 @@ const activeColor = '#1baf59';
 const onClickItem = (e) => {
 	current.value = e.currentIndex
 }
-
-const x = ref('600rpx');
-const y = ref('1000rpx');
 
 const options2 = ref([
 	{
@@ -143,8 +150,17 @@ const options2 = ref([
 		}
 	}
 ])
-const bindClick = (e) => {
-	console.log(e)
+const bindClick = (e, note) => {
+	if (e.index === 0) {
+		// 置顶
+		updateTaskStatus(note, { Priority: 1 });
+	} else if (e.index === 1) {
+		// 失败
+		updateTaskStatus(note, { Status: 3 });
+	} else if (e.index === 2) {
+		// 删除
+		updateTaskStatus(note, { Status: 2 });
+	}
 }
 // 选中的类型
 const modelCateList = ref([
@@ -290,11 +306,13 @@ const statusIcon = (status) => {
 			return 'icon-quan'
 	}
 }
-const updateTaskStatus = (item, newStatus) => {
-	apiUpdateTask({
+// #region 改
+const updateTaskStatus = (item, params = {}) => {
+	const data = {
 		TaskID: item.TaskID,
-		Status: newStatus
-	}).then(res => {
+		...params
+	}
+	apiUpdateTask(data).then(res => {
 		if (res.code === 0 || !res.code) {
 			uni.showToast({
 				icon: 'error',
@@ -304,17 +322,31 @@ const updateTaskStatus = (item, newStatus) => {
 			uni.showToast({
 				title: res.msg
 			})
-			item.Status = newStatus;
+			Object.assign(item, params);
 		}
 	})
 }
 
 const updateStatus = (item) => {
 	const newStatus = item.Status === 0 ? 1 : 0;
-	updateTaskStatus(item, newStatus);
+	updateTaskStatus(item, { Status: newStatus });
 }
 const popupRef = ref(null);
 const selectedType = ref(0);
+const isEdit = ref(false);
+const addOrEdit = () => {
+	if (isEdit.value) {
+		updatePlan()
+	} else {
+		addPlan()
+	}
+}
+const openAddPopup = () => {
+	isEdit.value = false
+	popupRef.value.open('bottom')
+	planTitle.value = ''
+	planDate.value = formatDateTime(new Date())
+}
 const addPlan = () => {
 	let plan = {
 		UserId: getApp().globalData.userInfo.UserID,
@@ -348,6 +380,48 @@ const addPlan = () => {
 		}
 	})
 }
+const editTask = (item) => {
+	isEdit.value = true
+	editTaskID.value = item.TaskID
+	planTitle.value = item.Title
+	planDate.value = item.DueDate
+	selectedType.value = item.Type
+	popupRef.value.open('bottom')
+}
+const editTaskID = ref(0)
+const updatePlan = () => {
+	let plan = {
+		TaskID: editTaskID.value,
+		Title: planTitle.value,
+		DueDate: formatDateTime(new Date(planDate.value)),
+		Type: selectedType.value,
+	}
+	let errMsg = ''
+	if (!plan.Title) {
+		errMsg = '请填写计划标题'
+	} else if (!plan.DueDate) {
+		errMsg = '请选择计划日期'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
+	}
+	apiUpdateTask(plan).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			getTasks();
+			popupRef.value.close()
+		}
+	})
+}
+// #endregion
 </script>
 
 <style lang="scss">
@@ -425,9 +499,13 @@ const addPlan = () => {
 	}
 }
 
+::v-deep [name="content"] {
+	bottom: v-bind("popupBottom + 'px'")!important;
+}
+
 .popup-content {
 	padding: 20rpx;
-	height: 400rpx;
+	height: 350rpx;
 
 	.input-box {
 		display: flex;

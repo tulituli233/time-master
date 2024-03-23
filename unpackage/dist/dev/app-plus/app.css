@@ -425,3 +425,25 @@
 .night-mode .theme-bgc-4 {
   background-color: #444 !important;
 }
+
+.popup-list {
+  background-color: #f8f8f8;
+}
+.popup-list .popup-item {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 0.625rem;
+  background-color: #fff;
+}
+.popup-list .popup-item .popup-icon {
+  margin-right: 0.625rem;
+}
+.popup-list .popup-item .popup-text {
+  font-size: 0.9375rem;
+}
+.popup-list .popup-close {
+  padding: 1.25rem;
+  margin-top: 0.3125rem;
+  text-align: center;
+  background-color: #fff;
+}

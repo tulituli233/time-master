@@ -13,7 +13,7 @@
 								<uni-icons custom-prefix="iconfont" :type="statusIcon(item1.Status)" size="20"
 									color="#4c8bf0"></uni-icons>
 							</view>
-							<view class="box-right">
+							<view class="box-right" @click="editTask(item1)">
 								<view class="plan-title">
 									<text class="title">{{ item1.Title }}</text>
 								</view>
@@ -31,7 +31,7 @@
 		<!-- 小浮窗 -->
 		<movable-area class="movableArea">
 			<movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-				<button class="win-service" @click="$refs.popupRef.open('bottom')">
+				<button class="win-service" @click="openAddPopup">
 					<uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
 				</button>
 			</movable-view>
@@ -52,7 +52,7 @@
 					<input class="input" type="text" v-model="planTitle" placeholder="把事情记录下来吧~" />
 					<view class="btn">
 						<uni-icons custom-prefix="iconfont" type="icon-send" size="30" color="#4c8bf0"
-							@click="addPlan"></uni-icons>
+							@click="addOrEdit"></uni-icons>
 					</view>
 				</view>
 				<!-- 属性 -->
@@ -104,8 +104,19 @@ const getTasks = () => {
 	});
 };
 
+const popupBottom = ref(0);
 onShow(async () => {
 	await getTasks();
+	// #ifdef APP-PLUS
+	uni.onKeyboardHeightChange(res => {
+		console.log('键盘高度变化----', res.height)
+		if (res.height === 0) {
+			popupBottom.value = 0
+		} else {
+			popupBottom.value = 100
+		}
+	})
+	// #endif
 });
 
 const currDate = ref(timestampToTime(new Date().getTime()))
@@ -203,6 +214,20 @@ const updateStatus = (item) => {
 }
 const selectedType = ref(0);
 const popupRef = ref(null);
+const isEdit = ref(false);
+const addOrEdit = () => {
+	if (isEdit.value) {
+		updatePlan()
+	} else {
+		addPlan()
+	}
+}
+const openAddPopup = () => {
+	isEdit.value = false
+	popupRef.value.open('bottom')
+	planTitle.value = ''
+	planDate.value = formatDateTime(new Date())
+}
 const addPlan = () => {
 	let plan = {
 		UserId: getApp().globalData.userInfo.UserID,
@@ -239,6 +264,49 @@ const addPlan = () => {
 		}
 	})
 }
+// #region 编辑
+const editTask = (item) => {
+	isEdit.value = true
+	editTaskID.value = item.TaskID
+	planTitle.value = item.Title
+	planDate.value = item.DueDate
+	selectedType.value = item.Type
+	popupRef.value.open('bottom')
+}
+const editTaskID = ref(0)
+const updatePlan = () => {
+	let plan = {
+		TaskID: editTaskID.value,
+		Title: planTitle.value,
+		DueDate: formatDateTime(new Date(planDate.value)),
+		Type: selectedType.value,
+	}
+	let errMsg = ''
+	if (!plan.Title) {
+		errMsg = '请填写计划标题'
+	} else if (!plan.DueDate) {
+		errMsg = '请选择计划日期'
+	}
+	if (errMsg) {
+		uni.showToast({
+			icon: 'error',
+			title: errMsg
+		})
+		return
+	}
+	apiUpdateTask(plan).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			getTasks();
+			popupRef.value.close()
+		}
+	})
+}
+// #endregion
 </script>
 
 <style lang="scss">
@@ -320,6 +388,10 @@ const addPlan = () => {
 		font-size: 30rpx;
 		color: #888;
 	}
+}
+
+::v-deep [name="content"] {
+	bottom: v-bind("popupBottom + 'px'") !important;
 }
 
 .popup-content {

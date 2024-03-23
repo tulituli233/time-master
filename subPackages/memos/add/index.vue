@@ -90,7 +90,7 @@
 
 <script>
 import mpHtml from '@/uni-app/components/mp-html/mp-html'
-import { apiAddMemo } from '@/services/api/memos'
+import { apiAddMemo, apiUpdateMemo } from '@/services/api/memos'
 // import content from './content'
 // 上传图片方法
 function upload(src, type) {
@@ -119,7 +119,7 @@ function remove(src) {
 export default {
     data() {
         return {
-            content: '',
+            content: '<div>Hello World!</div>',
             keyboardHeight: 0,
             modal: null,
             dialog: false,
@@ -145,16 +145,26 @@ export default {
                 '<div style="width: 100%; box-sizing: border-box; border-radius: 5px; background-color: #f6f6f6; padding: 10px; margin: 10px 0"><div>卡片</div><div style="font-size: 12px; color: gray">正文</div></div>',
                 '<div style="border: 1px solid gray; box-shadow: 3px 3px 0px #cfcfce; padding: 10px; margin: 10px 0">段落</div>'
             ],
+            memo: null,
             memoTitle: '',
-            type: 0     // 0代表工作，1代表生活
+            type: 0,        // 0代表工作，1代表生活
+            isEdit: false   // 是否为编辑模式
         }
     },
     components: {
         mpHtml
     },
-    mounted() {
-        this.type = this.$route.query.type == 2 ? 1 : 0
-        console.log('type', this.type);
+    onLoad(e) {
+        this.isEdit = e.isEdit ? true : false
+        if (this.isEdit) {
+            let memo = JSON.parse(e.memo)
+            this.memo = memo
+            this.memoTitle = memo.Title
+            this.content = memo.Content
+            this.type = memo.Type
+        } else {
+            this.type = e.type == 2 ? 1 : 0
+        }
     },
     onReady() {
         // #ifdef APP
@@ -411,7 +421,10 @@ export default {
         },
         // 保存备忘录
         saveMemo(memo) {
-            apiAddMemo(memo).then(res => {
+            console.log('this.isEdit', this.isEdit);
+            if (this.isEdit) memo.MemoID = this.memo.MemoID
+            const api = this.isEdit ? apiUpdateMemo : apiAddMemo
+            api(memo).then(res => {
                 if (res.code === 0 || !res.code) {
                     uni.showToast({
                         icon: 'error',

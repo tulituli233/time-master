@@ -34,3 +34,20 @@ export const apiAddMemo = (memo: Memo): Promise<Memo> => {
         data: memo
     });
 }
+
+// 修改备忘录
+export const apiUpdateMemo = (memo: Memo): Promise<Memo> => {
+    return request({
+        url: `memos/update`,
+        method: 'POST',
+        data: memo
+    });
+}
+
+// 删除备忘录
+export const apiDeleteMemo = (memoID: number): Promise<Memo> => {
+    return request({
+        url: `memos/delete?MemoID=${memoID}`,
+        method: 'GET',
+    });
+}
