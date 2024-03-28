@@ -30,24 +30,24 @@
         </view>
         <!-- 喝水 -->
         <view class="water-btn">
-            <uni-icons custom-prefix="iconfont" type="icon-water" size="50" color="#00b7ff"
-                @click="openWaterPopup" />
+            <uni-icons custom-prefix="iconfont" type="icon-water" size="50" color="#00b7ff" @click="addWaterRecord" />
         </view>
         <!-- 水位 -->
-        <view class="water-level" :style="{ height: percent + '%' }"></view>
+        <view class="water-level" :style="{ height: (15 + percent) + '%' }"></view>
         <!-- 弹出层 -->
         <uni-popup class="popup" ref="popupRef" background-color="#fff">
             <view class="popup-content">
                 <view class="popup-header">
-                    <view class="title">添加饮水</view>
+                    <view class="title">{{ isEdit ? '编辑饮水' : '添加饮水' }}</view>
                 </view>
                 <view class="popup-swiper">
                     <swiper :indicator-dots="true" :autoplay="false">
                         <swiper-item class="swiper-page" v-for="(item, index) in swiperList" :key="index">
                             <view class="water-item" v-for="(item1, index) in item" :key="index"
                                 @click="selectWater(item1.WaterID)">
-                                <view :class="['water-icon', currentWaterType == item1.WaterID ? 'active' : '']">
-                                    <uni-icons custom-prefix="iconfont" :type="item1.WaterIcon" size="50" color="#00b7ff" />
+                                <view :class="['water-icon', waterData.WaterID == item1.WaterID ? 'active' : '']">
+                                    <uni-icons custom-prefix="iconfont" :type="item1.WaterIcon" size="50"
+                                        color="#00b7ff" />
                                 </view>
                                 <view class="water-name">
                                     {{ item1.WaterName }}
@@ -58,10 +58,10 @@
                 </view>
 
                 <view class="numeric-keypad">
-                    <view class="display">{{ inputValue }}</view>
+                    <view class="display">{{ waterData.Amount }}</view>
                     <view class="quick-keypad">
                         <view class="key" v-for="(keyNum, index) in quickKeys" :key="index"
-                            @click="inputValue = keyNum">
+                            @click="waterData.Amount = keyNum">
                             {{ keyNum }}ml
                         </view>
                     </view>
@@ -71,8 +71,8 @@
                                 <view v-if="key != 'date'">{{ key }}</view>
                                 <view v-else>
                                     <!-- 时间选择器 -->
-                                    <picker ref="timePicker" mode="time" :value="waterTime" @change="bindTimeChange">
-                                        <view class="uni-input">{{ waterTime }}</view>
+                                    <picker ref="timePicker" mode="time" :value="waterData.DateTime" @change="bindTimeChange">
+                                        <view class="uni-input">{{ formatDateToTime(waterData.DateTime) }}</view>
                                     </picker>
                                 </view>
                             </td>
@@ -88,20 +88,26 @@
                     <view class="title">饮水记录</view>
                 </view>
                 <view class="record-list" v-if="waterRecords.length > 0">
-                    <view class="record-item" v-for="(item, index) in waterRecords" :key="index">
-                        <view class="record-icon">
-                            <uni-icons custom-prefix="iconfont" :type="getWaterObject(item.WaterID).WaterIcon" size="40"
-                                color="#00b7ff" />
-                        </view>
-                        <view class="record-date">
-                            {{ getTime(item.DateTime) }}
-                        </view>
-                        <view class="record-water">
-                            {{ getWaterObject(item.WaterID).WaterName }}
-                        </view>
-                        <view class="record-amount">
-                            {{ item.Amount }}ml
-                        </view>
+                    <view v-for="(item, index) in waterRecords" :key="index">
+                        <uni-swipe-action>
+                            <uni-swipe-action-item :right-options="swipeOptions" @click="deleteRecord($event, item)">
+                                <view class="record-item" @click="editRecord(item)">
+                                    <view class="record-icon">
+                                        <uni-icons custom-prefix="iconfont"
+                                            :type="getWaterObject(item.WaterID).WaterIcon" size="40" color="#00b7ff" />
+                                    </view>
+                                    <view class="record-date">
+                                        {{ formatDateToTime(item.DateTime) }}
+                                    </view>
+                                    <view class="record-water">
+                                        {{ getWaterObject(item.WaterID).WaterName }}
+                                    </view>
+                                    <view class="record-amount">
+                                        {{ item.Amount }}ml
+                                    </view>
+                                </view>
+                            </uni-swipe-action-item>
+                        </uni-swipe-action>
                     </view>
                 </view>
                 <view class="record-empty" v-else>
@@ -128,9 +134,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { apiAddWaterRecord, apiGetUserWaterRecords, apiGetAllWaterTypes } from '@/services/api/water'
-import { formatDateTime } from '@/utils/utils.js';
+import { ref, reactive, computed } from 'vue'
+import { apiAddWaterRecord, apiGetUserWaterRecords, apiUpdateWaterRecord, apiDeleteWaterRecord, apiGetAllWaterTypes } from '@/services/api/water'
+import { formatDateTime, formatDateToTime } from '@/utils/utils.js';
 import { onShow, onLoad } from '@dcloudio/uni-app'
 
 onLoad(() => {
@@ -158,7 +164,7 @@ const getWaterRecords = () => {
     })
 }
 const percent = computed(() => {
-    return Math.floor((consumedWater.value / targetWater.value) * 100 + 15).toFixed(0)
+    return parseInt(Math.floor((consumedWater.value / targetWater.value) * 100).toFixed(0))
 })
 const tips = ref('每天都要喝水哦')
 const targetWater = ref(2000)
@@ -182,10 +188,8 @@ const swiperList = computed(() => {
     return arr
 })
 
-const currentWaterType = ref(1)
 const selectWater = (WaterID) => {
-    currentWaterType.value = WaterID
-    console.log('currentWaterType', currentWaterType.value);
+    waterData.WaterID = WaterID
 }
 
 // 键盘
@@ -196,7 +200,6 @@ const keypadLayout = [
     ['', 0, '', '完成']
 ];
 const quickKeys = ['100', '200', '250', '500']
-const inputValue = ref('');
 const getTime = () => {
     // 返回当前时间,格式为HH:mm
     const date = new Date();
@@ -206,50 +209,69 @@ const getTime = () => {
 }
 const handleKeyPress = (key) => {
     if (key === 'DEL') {
-        inputValue.value = inputValue.value.slice(0, -1);
+        waterData.Amount = waterData.Amount + '';
+        waterData.Amount = waterData.Amount.slice(0, -1);
     } else if (key === 'AC') {
-        inputValue.value = '';
+        waterData.Amount = '';
     } else if (key === '完成') {
         addWater();
     } else if (key === 'date') {
         console.log('timePicker.value', timePicker.value);
     } else {
-        inputValue.value += key;
+        waterData.Amount += key;
     }
 };
 const timePicker = ref(null);
-const waterTime = ref(getTime());
-const bindTimeChange = (e) => {
-    waterTime.value = e.detail.value
-}
 
-const openWaterPopup = () => {
-    inputValue.value = ''
-    waterTime.value = getTime()
-    currentWaterType.value = 1
+// #region 增
+const bindTimeChange = (e) => {
+    console.log('picker发送选择改变,携带值为', e.detail.value)
+    waterData.DateTime = convertToTodayTime(e.detail.value) + ''
+}
+const addWaterRecord = () => {
+    isEdit.value = false
+    openWaterPopup()
+}
+const openWaterPopup = (waterRecord) => {
+    if (isEdit.value) {
+        waterData.RecordID = waterRecord.RecordID
+        waterData.Amount = waterRecord.Amount
+        waterData.DateTime = waterRecord.DateTime
+        waterData.WaterID = waterRecord.WaterID
+        recordPopupRef.value.close()
+    } else {
+        waterData.Amount = ''
+        waterData.DateTime = new Date().getTime()
+        console.log('waterData.DateTime', waterData.DateTime);
+        waterData.WaterID = 1
+    }
     popupRef.value.open('bottom')
 }
+const waterData = reactive({
+    UserID: getApp().globalData.userInfo.UserID,
+    WaterID: 1,
+    DateTime: getTime(),
+    Amount: ''
+})
+const isEdit = ref(false)
 // 添加饮水记录
 const addWater = () => {
-    let water = {
-        UserID: getApp().globalData.userInfo.UserID,
-        WaterID: currentWaterType.value,
-        DateTime: formatDateTime(convertToTodayTime(waterTime.value)),
-        Amount: inputValue.value
-    }
+    console.log('waterData.DateTime', waterData.DateTime);
+    waterData.DateTime = formatDateTime(waterData.DateTime)
     let errMsg = ''
-	if (!water.Amount) {
-		errMsg = '请输入饮水量'
-	}
-	if (errMsg) {
-		uni.showToast({
-			icon: 'error',
-			title: errMsg
-		})
-		return
-	}
-    console.log('water', water);
-    apiAddWaterRecord(water).then(res => {
+    if (!waterData.Amount) {
+        errMsg = '请输入饮水量'
+    }
+    if (errMsg) {
+        uni.showToast({
+            icon: 'error',
+            title: errMsg
+        })
+        return
+    }
+    console.log('waterData', waterData);
+    let api = isEdit.value ? apiUpdateWaterRecord : apiAddWaterRecord
+    api(waterData).then(res => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',
@@ -264,6 +286,7 @@ const addWater = () => {
         }
     })
 }
+// 时间补全函数
 const convertToTodayTime = (timeString) => {
     const today = new Date();
 
@@ -286,6 +309,38 @@ const setTarget = () => {
     targetWater.value = targetWaterTemp.value
     setTargetRef.value.close()
 }
+// #endregion
+// #region 改
+const editRecord = (item) => {
+    isEdit.value = true
+    openWaterPopup(item)
+}
+// #endregion
+// #region 删除
+const swipeOptions = ref([
+    {
+        text: '删除 ',
+        style: {
+            backgroundColor: '#F56C6C'
+        }
+    }
+])
+const recordPopupRef = ref(null)
+const deleteRecord = (e, item) => {
+    console.log('item', item);
+    apiDeleteWaterRecord(item.RecordID).then(res => {
+        if (res.code === 0 || !res.code) {
+            uni.showToast({
+                icon: 'error',
+                title: res.msg || '网络异常'
+            })
+        } else {
+            waterRecords.value = waterRecords.value.filter(record => record.RecordID !== item.RecordID)
+            recordPopupRef.value.close()
+        }
+    })
+}
+// #endregion
 </script>
 
 <style lang="scss">

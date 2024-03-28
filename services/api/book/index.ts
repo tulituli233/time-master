@@ -70,3 +70,11 @@ export const apiUpdateNovelChapter = (data: { ChapterID: number, ChapterContent:
         data
     })
 }
+
+// 删除小说
+export const apiDeleteNovel = (novelID: number): Promise<Novel> => {
+    return request({
+        url: `book/delete?NovelID=${novelID}`,
+        method: 'GET',
+    })
+}

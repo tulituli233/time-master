@@ -27,12 +27,26 @@
         </view>
         <yt-uploads ref="uploads" :options="options" @selected="selectedHandler" @success="successHandler"
             @fail="failHandler" @process="processHandler"></yt-uploads>
+        <!-- 更多功能 -->
+        <uni-popup ref="popupRef" background-color="#fff">
+            <view class="popup-list">
+                <view class="popup-item" @click="deleteBook">
+                    <view class="popup-icon">
+                        <uni-icons type="trash" size="30" color="#999"></uni-icons>
+                    </view>
+                    <view class="popup-text">
+                        删除
+                    </view>
+                </view>
+                <view class="popup-close" @click="$refs.popupRef.close()">取消</view>
+            </view>
+        </uni-popup>
     </view>
 </template>
 
 <script setup>
 import { ref } from 'vue'; // 导入需要的Vue Composition API
-import { apiGetNovels } from '@/services/api/book';
+import { apiGetNovels, apiDeleteBook } from '@/services/api/book';
 import { onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
 
@@ -93,6 +107,32 @@ const failHandler = (error) => {
 const processHandler = (progress) => {
     console.log('Upload progress:', progress);
 };
+// #region 删
+const popupRef = ref(null)
+const activeBook = ref(null)
+const openPopup = (book) => {
+    activeBook.value = book
+    popupRef.value.open('bottom')
+    // 触发手机抖动
+    uni.vibrateShort();
+}
+const deleteBook = () => {
+    apiDeleteBook(activeBook.value.NovelID).then(res => {
+        if (res.code === 0 || !res.code) {
+            uni.showToast({
+                icon: 'error',
+                title: res.msg || '网络异常'
+            })
+        } else {
+            uni.showToast({
+                title: res.msg
+            })
+            popupRef.value.close()
+            getNovels()
+        }
+    })
+}
+// #endregion
 </script>
 
 <style lang="scss" scoped>

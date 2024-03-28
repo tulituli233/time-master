@@ -33,7 +33,7 @@ export function formatDate(date) {
 export function formatDateTime(date) {
     date = new Date(date);
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-    const formattedTime = date.toLocaleTimeString('en-US', { hour12: false });
+    const formattedTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
     return `${formattedDate} ${formattedTime}`;
 }
 // formatDateToMonth 输出一月，二月...

@@ -59,3 +59,20 @@ export const apiGetAllExpensesCategory = (): Promise<ExpensesCategory[]> => {
         method: 'GET',
     });
 }
+
+// 修改记录
+export const apiUpdateExpense = (expense: Expense): Promise<Expense> => {
+    return request({
+        url: `expenses/update`,
+        method: 'POST',
+        data: expense
+    });
+}
+
+// 删除记录
+export const apiDeleteExpense = (expenseID: number): Promise<Expense> => {
+    return request({
+        url: `expenses/delete?ExpenseID=${expenseID}`,
+        method: 'GET',
+    });
+}

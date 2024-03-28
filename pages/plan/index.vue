@@ -8,17 +8,20 @@
 			<swiper class="swiper" disable-programmatic-animation :current="currentIndex" @change="swiperChange">
 				<swiper-item v-for="item in dayPlan" :key="item.date">
 					<view class="swiper-item" v-if="item.plans && item.plans.length">
-						<view class="content-box" v-for="item1 in item.plans" :key="item1.TaskID">
-							<view class="box-left" @click="updateStatus(item1)">
-								<uni-icons custom-prefix="iconfont" :type="statusIcon(item1.Status)" size="20"
-									color="#4c8bf0"></uni-icons>
-							</view>
-							<view class="box-right" @click="editTask(item1)">
-								<view class="plan-title">
-									<text class="title">{{ item1.Title }}</text>
+						<view v-for="item1 in item.plans" :key="item1.TaskID"
+							@longpress="openMorePopup(item1)">
+							<view class="content-box" v-if="item1.Status !== 2">
+								<view class="box-left" @click="updateStatus(item1)">
+									<uni-icons custom-prefix="iconfont" :type="statusIcon(item1.Status)" size="20"
+										color="#4c8bf0"></uni-icons>
 								</view>
-								<view class="plan-desc">
-									<text class="desc">{{ formatDateTime(item1.DueDate) }}</text>
+								<view class="box-right" @click="editTask(item1)">
+									<view class="plan-title">
+										<text class="title">{{ item1.Title }}</text>
+									</view>
+									<view class="plan-desc">
+										<text class="desc">{{ formatDateTime(item1.DueDate) }}</text>
+									</view>
 								</view>
 							</view>
 						</view>
@@ -73,6 +76,39 @@
 				</view>
 			</view>
 		</uni-popup>
+		<!-- 更多功能 -->
+		<uni-popup ref="popupMore" background-color="#fff">
+			<view class="popup-list">
+				<view class="popup-item">
+					<view class="popup-icon">
+						<uni-icons type="arrow-up" size="30" color="#999"></uni-icons>
+					</view>
+					<view class="popup-text">
+						置顶
+					</view>
+					<view class="popup-switch">
+						<switch @change="changePriority(currentNote)" :checked="currentNote.Priority" />
+					</view>
+				</view>
+				<view class="popup-item" @click="updateTaskStatus({ Status: 3 })">
+					<view class="popup-icon">
+						<uni-icons custom-prefix="iconfont" type="icon-cuo" size="30" color="#999"></uni-icons>
+					</view>
+					<view class="popup-text">
+						失败
+					</view>
+				</view>
+				<view class="popup-item" @click="updateTaskStatus({ Status: 2 })">
+					<view class="popup-icon">
+						<uni-icons type="trash" size="30" color="#999"></uni-icons>
+					</view>
+					<view class="popup-text">
+						删除
+					</view>
+				</view>
+				<view class="popup-close" @click="$refs.popupMore.close()">取消</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -87,7 +123,7 @@ const x = ref('600rpx');
 const y = ref('1000rpx');
 
 const todayX = ref('600rpx');
-const todayY = ref('850rpx');
+const todayY = ref('500rpx');
 
 // 获取任务列表
 let tasks = ref([]);
@@ -189,28 +225,10 @@ const statusIcon = (status) => {
 			return 'icon-quan'
 	}
 }
-const updateTaskStatus = (item, newStatus) => {
-	apiUpdateTask({
-		TaskID: item.TaskID,
-		Status: newStatus
-	}).then(res => {
-		if (res.code === 0 || !res.code) {
-			uni.showToast({
-				icon: 'error',
-				title: res.msg || '网络异常'
-			})
-		} else {
-			uni.showToast({
-				title: res.msg
-			})
-			item.Status = newStatus;
-		}
-	})
-}
 
 const updateStatus = (item) => {
 	const newStatus = item.Status === 0 ? 1 : 0;
-	updateTaskStatus(item, newStatus);
+	updateTaskStatus(item, { Status: newStatus });
 }
 const selectedType = ref(0);
 const popupRef = ref(null);
@@ -303,6 +321,39 @@ const updatePlan = () => {
 		} else {
 			getTasks();
 			popupRef.value.close()
+		}
+	})
+}
+// #endregion
+// #region 改状态
+const popupMore = ref(null)
+const currentNote = ref(null)
+const openMorePopup = (item) => {
+	uni.vibrateShort()
+	currentNote.value = item
+	popupMore.value.open('bottom')
+}
+const changePriority = (task) => {
+	const newPriority = task.Priority === 0 ? 1 : 0
+	updateTaskStatus({ Priority: newPriority })
+}
+const updateTaskStatus = (params = {}) => {
+	const data = {
+		TaskID: currentNote.value.TaskID,
+		...params
+	}
+	apiUpdateTask(data).then(res => {
+		if (res.code === 0 || !res.code) {
+			uni.showToast({
+				icon: 'error',
+				title: res.msg || '网络异常'
+			})
+		} else {
+			uni.showToast({
+				title: res.msg
+			})
+			Object.assign(currentNote.value, params);
+			popupMore.value.close()
 		}
 	})
 }

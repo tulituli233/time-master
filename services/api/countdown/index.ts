@@ -31,3 +31,18 @@ export const apiAddCountdown = (countdown: Countdown): Promise<Countdown> => {
         data: countdown
     });
 }
+
+export const apiUpdateCountdown = (countdown: Countdown): Promise<Countdown> => {
+    return request({
+        url: `countdown/update`,
+        method: 'POST',
+        data: countdown
+    });
+}
+
+export const apiDeleteCountdown = (countdownID: number): Promise<Countdown> => {
+    return request({
+        url: `countdown/delete?CountdownID=${countdownID}`,
+        method: 'GET',
+    });
+}

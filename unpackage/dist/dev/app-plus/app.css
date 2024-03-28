@@ -441,6 +441,9 @@
 .popup-list .popup-item .popup-text {
   font-size: 0.9375rem;
 }
+.popup-list .popup-item .popup-switch {
+  margin-left: auto;
+}
 .popup-list .popup-close {
   padding: 1.25rem;
   margin-top: 0.3125rem;

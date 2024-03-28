@@ -1267,7 +1267,7 @@ if (uni.restoreGlobal) {
   function formatDateTime(date) {
     date = new Date(date);
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-    const formattedTime = date.toLocaleTimeString("en-US", { hour12: false });
+    const formattedTime = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
     return `${formattedDate} ${formattedTime}`;
   }
   function formatDateToMonth(date) {
@@ -6435,16 +6435,16 @@ if (uni.restoreGlobal) {
       };
       const popupRef = vue.ref(null);
       const selectedType = vue.ref(0);
-      const isEdit = vue.ref(false);
+      const isEdit2 = vue.ref(false);
       const addOrEdit = () => {
-        if (isEdit.value) {
+        if (isEdit2.value) {
           updatePlan();
         } else {
           addPlan();
         }
       };
       const openAddPopup = () => {
-        isEdit.value = false;
+        isEdit2.value = false;
         popupRef.value.open("bottom");
         planTitle.value = "";
         planDate.value = formatDateTime(/* @__PURE__ */ new Date());
@@ -6483,7 +6483,7 @@ if (uni.restoreGlobal) {
         });
       };
       const editTask = (item) => {
-        isEdit.value = true;
+        isEdit2.value = true;
         editTaskID.value = item.TaskID;
         planTitle.value = item.Title;
         planDate.value = item.DueDate;
@@ -6803,13 +6803,13 @@ if (uni.restoreGlobal) {
       const x = vue.ref("600rpx");
       const y = vue.ref("1000rpx");
       const todayX = vue.ref("600rpx");
-      const todayY = vue.ref("850rpx");
+      const todayY = vue.ref("500rpx");
       let tasks = vue.ref([]);
       const getTasks = () => {
         return new Promise((resolve, reject) => {
           apiGetUserTasks(getApp().globalData.userInfo.UserID).then((res) => {
             tasks.value = res.data;
-            formatAppLog("log", "at pages/plan/index.vue:98", "tasks", tasks.value);
+            formatAppLog("log", "at pages/plan/index.vue:134", "tasks", tasks.value);
             filterPlans(previewDays, tasks, dayPlan);
             resolve();
           }).catch((error) => {
@@ -6821,7 +6821,7 @@ if (uni.restoreGlobal) {
       onShow(async () => {
         await getTasks();
         uni.onKeyboardHeightChange((res) => {
-          formatAppLog("log", "at pages/plan/index.vue:112", "键盘高度变化----", res.height);
+          formatAppLog("log", "at pages/plan/index.vue:148", "键盘高度变化----", res.height);
           if (res.height === 0) {
             popupBottom.value = 0;
           } else {
@@ -6887,40 +6887,22 @@ if (uni.restoreGlobal) {
             return "icon-quan";
         }
       };
-      const updateTaskStatus = (item, newStatus) => {
-        apiUpdateTask({
-          TaskID: item.TaskID,
-          Status: newStatus
-        }).then((res) => {
-          if (res.code === 0 || !res.code) {
-            uni.showToast({
-              icon: "error",
-              title: res.msg || "网络异常"
-            });
-          } else {
-            uni.showToast({
-              title: res.msg
-            });
-            item.Status = newStatus;
-          }
-        });
-      };
       const updateStatus = (item) => {
-        const newStatus = item.Status === 0 ? 1 : 0;
-        updateTaskStatus(item, newStatus);
+        item.Status === 0 ? 1 : 0;
+        updateTaskStatus(item);
       };
       const selectedType = vue.ref(0);
       const popupRef = vue.ref(null);
-      const isEdit = vue.ref(false);
+      const isEdit2 = vue.ref(false);
       const addOrEdit = () => {
-        if (isEdit.value) {
+        if (isEdit2.value) {
           updatePlan();
         } else {
           addPlan();
         }
       };
       const openAddPopup = () => {
-        isEdit.value = false;
+        isEdit2.value = false;
         popupRef.value.open("bottom");
         planTitle.value = "";
         planDate.value = formatDateTime(/* @__PURE__ */ new Date());
@@ -6945,7 +6927,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at pages/plan/index.vue:251", "plan", plan);
+        formatAppLog("log", "at pages/plan/index.vue:269", "plan", plan);
         apiAddTask(plan).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -6962,7 +6944,7 @@ if (uni.restoreGlobal) {
         });
       };
       const editTask = (item) => {
-        isEdit.value = true;
+        isEdit2.value = true;
         editTaskID.value = item.TaskID;
         planTitle.value = item.Title;
         planDate.value = item.DueDate;
@@ -6999,6 +6981,39 @@ if (uni.restoreGlobal) {
           } else {
             getTasks();
             popupRef.value.close();
+          }
+        });
+      };
+      const popupMore = vue.ref(null);
+      const currentNote = vue.ref(null);
+      const openMorePopup = (item) => {
+        uni.vibrateShort();
+        currentNote.value = item;
+        popupMore.value.open("bottom");
+      };
+      const changePriority = (task) => {
+        const newPriority = task.Priority === 0 ? 1 : 0;
+        updateTaskStatus({ Priority: newPriority });
+      };
+      const updateTaskStatus = (params = {}) => {
+        formatAppLog("log", "at pages/plan/index.vue:341", "params", params);
+        const data2 = {
+          TaskID: currentNote.value.TaskID,
+          ...params
+        };
+        apiUpdateTask(data2).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.showToast({
+              title: res.msg
+            });
+            Object.assign(currentNote.value, params);
+            popupMore.value.close();
+            formatAppLog("log", "at pages/plan/index.vue:358", "currentNote", currentNote.value);
           }
         });
       };
@@ -7046,44 +7061,49 @@ if (uni.restoreGlobal) {
                         null,
                         vue.renderList(item.plans, (item1) => {
                           return vue.openBlock(), vue.createElementBlock("view", {
-                            class: "content-box",
-                            key: item1.TaskID
+                            key: item1.TaskID,
+                            onLongpress: ($event) => openMorePopup(item1)
                           }, [
-                            vue.createElementVNode("view", {
-                              class: "box-left",
-                              onClick: ($event) => updateStatus(item1)
+                            item1.Status !== 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 0,
+                              class: "content-box"
                             }, [
-                              vue.createVNode(_component_uni_icons, {
-                                "custom-prefix": "iconfont",
-                                type: statusIcon(item1.Status),
-                                size: "20",
-                                color: "#4c8bf0"
-                              }, null, 8, ["type"])
-                            ], 8, ["onClick"]),
-                            vue.createElementVNode("view", {
-                              class: "box-right",
-                              onClick: ($event) => editTask(item1)
-                            }, [
-                              vue.createElementVNode("view", { class: "plan-title" }, [
-                                vue.createElementVNode(
-                                  "text",
-                                  { class: "title" },
-                                  vue.toDisplayString(item1.Title),
-                                  1
-                                  /* TEXT */
-                                )
-                              ]),
-                              vue.createElementVNode("view", { class: "plan-desc" }, [
-                                vue.createElementVNode(
-                                  "text",
-                                  { class: "desc" },
-                                  vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
-                                  1
-                                  /* TEXT */
-                                )
-                              ])
-                            ], 8, ["onClick"])
-                          ]);
+                              vue.createElementVNode("view", {
+                                class: "box-left",
+                                onClick: ($event) => updateStatus(item1)
+                              }, [
+                                vue.createVNode(_component_uni_icons, {
+                                  "custom-prefix": "iconfont",
+                                  type: statusIcon(item1.Status),
+                                  size: "20",
+                                  color: "#4c8bf0"
+                                }, null, 8, ["type"])
+                              ], 8, ["onClick"]),
+                              vue.createElementVNode("view", {
+                                class: "box-right",
+                                onClick: ($event) => editTask(item1)
+                              }, [
+                                vue.createElementVNode("view", { class: "plan-title" }, [
+                                  vue.createElementVNode(
+                                    "text",
+                                    { class: "title" },
+                                    vue.toDisplayString(item1.Title),
+                                    1
+                                    /* TEXT */
+                                  )
+                                ]),
+                                vue.createElementVNode("view", { class: "plan-desc" }, [
+                                  vue.createElementVNode(
+                                    "text",
+                                    { class: "desc" },
+                                    vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
+                                    1
+                                    /* TEXT */
+                                  )
+                                ])
+                              ], 8, ["onClick"])
+                            ])) : vue.createCommentVNode("v-if", true)
+                          ], 40, ["onLongpress"]);
                         }),
                         128
                         /* KEYED_FRAGMENT */
@@ -7224,6 +7244,72 @@ if (uni.restoreGlobal) {
                       ))
                     ])
                   ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          ),
+          vue.createCommentVNode(" 更多功能 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "popupMore",
+              ref: popupMore,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-list" }, [
+                  vue.createElementVNode("view", { class: "popup-item" }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "arrow-up",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 置顶 "),
+                    vue.createElementVNode("view", { class: "popup-switch" }, [
+                      vue.createElementVNode("switch", {
+                        onChange: _cache[3] || (_cache[3] = ($event) => changePriority(currentNote.value)),
+                        checked: currentNote.value.Priority
+                      }, null, 40, ["checked"])
+                    ])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: _cache[4] || (_cache[4] = ($event) => updateTaskStatus({ Status: 3 }))
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: "icon-cuo",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 失败 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: _cache[5] || (_cache[5] = ($event) => updateTaskStatus({ Status: 2 }))
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-close",
+                    onClick: _cache[6] || (_cache[6] = ($event) => _ctx.$refs.popupMore.close())
+                  }, "取消")
                 ])
               ]),
               _: 1
@@ -7546,6 +7632,19 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
+  const apiUpdateExpense = (expense) => {
+    return request({
+      url: `expenses/update`,
+      method: "POST",
+      data: expense
+    });
+  };
+  const apiDeleteExpense = (expenseID) => {
+    return request({
+      url: `expenses/delete?ExpenseID=${expenseID}`,
+      method: "GET"
+    });
+  };
   const _sfc_main$j = {
     __name: "index",
     setup(__props2) {
@@ -7557,7 +7656,6 @@ if (uni.restoreGlobal) {
       const y = vue.ref("1000rpx");
       onLoad(() => {
         getExpenseCate2();
-        formatAppLog("log", "at subPackages/expenses/index/index.vue:118", "getApp().globalData.userInfo", getApp().globalData.userInfo);
       });
       onShow(() => {
         getExpenses();
@@ -7566,14 +7664,12 @@ if (uni.restoreGlobal) {
       const getExpenseCate2 = () => {
         apiGetAllExpensesCategory().then((res) => {
           expenseCateList2.value = res.data;
-          formatAppLog("log", "at subPackages/expenses/index/index.vue:127", "expenseCateList------", expenseCateList2.value);
         });
       };
       let accountList = vue.ref([]);
       const getExpenses = () => {
         apiGetUserExpenses(getApp().globalData.userInfo.UserID).then((res) => {
           accountList.value = res.data;
-          formatAppLog("log", "at subPackages/expenses/index/index.vue:135", "accountList-------", accountList.value);
         });
       };
       const incomesNum = (accountList2) => {
@@ -7602,7 +7698,6 @@ if (uni.restoreGlobal) {
           }
           grouped[dateKey].push(expense);
         });
-        formatAppLog("log", "at subPackages/expenses/index/index.vue:170", "grouped", grouped);
         return grouped;
       });
       const getCategoryInfo = (expense) => {
@@ -7611,7 +7706,7 @@ if (uni.restoreGlobal) {
             return cate2;
           }
         });
-        formatAppLog("log", "at subPackages/expenses/index/index.vue:181", "cate", cate);
+        formatAppLog("log", "at subPackages/expenses/index/index.vue:192", "cate", cate);
         return cate;
       };
       const addExpense2 = () => {
@@ -7619,8 +7714,35 @@ if (uni.restoreGlobal) {
           url: "/subPackages/expenses/add/index"
         });
       };
+      const updateExpense = (expense) => {
+        navTo("/subPackages/expenses/add/index?isEdit=true&expense=" + JSON.stringify(expense));
+      };
+      const popupRef = vue.ref(null);
+      const activeExpense = vue.ref(null);
+      const openPopup = (expense) => {
+        activeExpense.value = expense;
+        popupRef.value.open("bottom");
+        uni.vibrateShort();
+      };
+      const deleteExpense = () => {
+        apiDeleteExpense(activeExpense.value.ExpenseID).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.showToast({
+              title: res.msg
+            });
+            popupRef.value.close();
+            getExpenses();
+          }
+        });
+      };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "fixed-box" }, [
             vue.createElementVNode("view", { class: "top" }, [
@@ -7761,7 +7883,9 @@ if (uni.restoreGlobal) {
                         vue.renderList(expenses, (expense) => {
                           return vue.openBlock(), vue.createElementBlock("view", {
                             class: "body-item",
-                            key: expense.ExpenseID
+                            key: expense.ExpenseID,
+                            onClick: ($event) => updateExpense(expense),
+                            onLongpress: ($event) => openPopup(expense)
                           }, [
                             vue.createElementVNode("view", { class: "content-box" }, [
                               vue.createElementVNode(
@@ -7813,7 +7937,7 @@ if (uni.restoreGlobal) {
                                 )
                               ])
                             ])
-                          ]);
+                          ], 40, ["onClick", "onLongpress"]);
                         }),
                         128
                         /* KEYED_FRAGMENT */
@@ -7851,7 +7975,43 @@ if (uni.restoreGlobal) {
                 })
               ])
             ], 8, ["x", "y"])
-          ])
+          ]),
+          vue.createCommentVNode(" 更多功能 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "popupRef",
+              ref: popupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-list" }, [
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: deleteExpense
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-close",
+                    onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.popupRef.close())
+                  }, "取消")
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          )
         ]);
       };
     }
@@ -7860,14 +8020,32 @@ if (uni.restoreGlobal) {
   const _sfc_main$i = {
     __name: "index",
     setup(__props) {
-      onLoad(() => {
+      const isEdit = vue.ref(false);
+      onLoad((e) => {
+        isEdit.value = e.isEdit ? true : false;
+        if (isEdit.value) {
+          let expense = JSON.parse(e.expense);
+          expenseData.ExpenseID = expense.ExpenseID;
+          expenseData.Date = expense.Date;
+          expenseData.Note = expense.Note;
+          expenseData.Amount = Math.abs(expense.Amount);
+          expense.Amount > 0 ? activeTab.value = 1 : activeTab.value = 0;
+          expense.Amount > 0 ? selectedIncomeCateID.value = expense.Category : selectedExpenseCateID.value = expense.Category;
+        }
         getExpenseCate();
+      });
+      const expenseData = vue.reactive({
+        UserID: getApp().globalData.userInfo.UserID,
+        Date: formatDateTime(/* @__PURE__ */ new Date()),
+        Amount: 0,
+        Category: 1,
+        Note: ""
       });
       let expenseCateList = vue.ref([]);
       const getExpenseCate = () => {
         apiGetAllExpensesCategory().then((res) => {
           expenseCateList.value = res.data;
-          formatAppLog("log", "at subPackages/expenses/add/index.vue:72", "expenseCateList", expenseCateList.value);
+          formatAppLog("log", "at subPackages/expenses/add/index.vue:91", "expenseCateList", expenseCateList.value);
         });
       };
       const incomeCate = vue.computed(() => {
@@ -7900,37 +8078,32 @@ if (uni.restoreGlobal) {
         [7, 8, 9, "完成"],
         [".", 0, "DEL", "="]
       ];
-      const noteValue = vue.ref("");
-      const inputValue = vue.ref("");
+      vue.ref("");
+      vue.ref("");
       const handleKeyPress = (key) => {
         if (key === "DEL") {
-          inputValue.value = inputValue.value.slice(0, -1);
+          expenseData.Amount = expenseData.Amount + "";
+          expenseData.Amount = expenseData.Amount.slice(0, -1);
         } else if (key === "=") {
-          inputValue.value = eval(inputValue.value);
+          expenseData.Amount = eval(expenseData.Amount);
         } else if (key === "完成") {
           addExpense();
         } else {
-          inputValue.value += key;
+          expenseData.Amount += key;
         }
       };
-      const dateValue = vue.ref(formatDateTime(/* @__PURE__ */ new Date()));
+      vue.ref(formatDateTime(/* @__PURE__ */ new Date()));
       const selectDate = (e) => {
-        formatAppLog("log", "at subPackages/expenses/add/index.vue:138", "选择日期", e);
+        formatAppLog("log", "at subPackages/expenses/add/index.vue:152", "选择日期", e);
       };
       const addExpense = async () => {
-        let Amount = activeTab.value === 0 ? -inputValue.value : inputValue.value;
-        let Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
-        let expense = {
-          UserID: getApp().globalData.userInfo.UserID,
-          Amount,
-          Category,
-          Date: dateValue.value,
-          Note: noteValue.value
-        };
+        expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
+        expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
+        expenseData.Date = formatDateTime(expenseData.Date);
         let errMsg = "";
-        if (!expense.Amount) {
+        if (!expenseData.Amount) {
           errMsg = "请输入金额";
-        } else if (!expense.Date) {
+        } else if (!expenseData.Date) {
           errMsg = "请选择日期";
         }
         if (errMsg) {
@@ -7940,16 +8113,18 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at subPackages/expenses/add/index.vue:164", "expense", expense);
-        let res = await apiAddExpense(expense);
-        if (res.code === 0) {
+        let api = isEdit.value ? apiUpdateExpense : apiAddExpense;
+        let res = await api(expenseData);
+        if (res.code === 0 || !res.code) {
           uni.showToast({
-            title: res.msg
+            icon: "error",
+            title: res.msg || "网络异常"
           });
         } else {
           uni.showToast({
             title: res.msg
           });
+          uni.navigateBack();
         }
       };
       return (_ctx, _cache) => {
@@ -8091,8 +8266,8 @@ if (uni.restoreGlobal) {
               vue.createVNode(_component_uni_datetime_picker, {
                 class: "no-border",
                 type: "datetime",
-                modelValue: dateValue.value,
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => dateValue.value = $event),
+                modelValue: expenseData.Date,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => expenseData.Date = $event),
                 onChange: selectDate
               }, null, 8, ["modelValue"])
             ]),
@@ -8103,18 +8278,18 @@ if (uni.restoreGlobal) {
                   class: "note",
                   type: "text",
                   placeholder: "添加备注",
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => noteValue.value = $event)
+                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => expenseData.Note = $event)
                 },
                 null,
                 512
                 /* NEED_PATCH */
               ), [
-                [vue.vModelText, noteValue.value]
+                [vue.vModelText, expenseData.Note]
               ]),
               vue.createElementVNode(
                 "view",
                 { class: "input" },
-                vue.toDisplayString(inputValue.value),
+                vue.toDisplayString(expenseData.Amount),
                 1
                 /* TEXT */
               )
@@ -17398,7 +17573,7 @@ if (uni.restoreGlobal) {
         ["", 0, "", "完成"]
       ];
       const quickKeys = ["100", "200", "250", "500"];
-      const inputValue2 = vue.ref("");
+      const inputValue = vue.ref("");
       const getTime2 = () => {
         const date = /* @__PURE__ */ new Date();
         const hours = date.getHours();
@@ -17407,15 +17582,15 @@ if (uni.restoreGlobal) {
       };
       const handleKeyPress2 = (key2) => {
         if (key2 === "DEL") {
-          inputValue2.value = inputValue2.value.slice(0, -1);
+          inputValue.value = inputValue.value.slice(0, -1);
         } else if (key2 === "AC") {
-          inputValue2.value = "";
+          inputValue.value = "";
         } else if (key2 === "完成") {
           addWater();
         } else if (key2 === "date") {
           formatAppLog("log", "at subPackages/water/index/index.vue:215", "timePicker.value", timePicker.value);
         } else {
-          inputValue2.value += key2;
+          inputValue.value += key2;
         }
       };
       const timePicker = vue.ref(null);
@@ -17424,7 +17599,7 @@ if (uni.restoreGlobal) {
         waterTime.value = e.detail.value;
       };
       const openWaterPopup = () => {
-        inputValue2.value = "";
+        inputValue.value = "";
         waterTime.value = getTime2();
         currentWaterType.value = 1;
         popupRef.value.open("bottom");
@@ -17434,7 +17609,7 @@ if (uni.restoreGlobal) {
           UserID: getApp().globalData.userInfo.UserID,
           WaterID: currentWaterType.value,
           DateTime: formatDateTime(convertToTodayTime(waterTime.value)),
-          Amount: inputValue2.value
+          Amount: inputValue.value
         };
         let errMsg = "";
         if (!water.Amount) {
@@ -17641,7 +17816,7 @@ if (uni.restoreGlobal) {
                     vue.createElementVNode(
                       "view",
                       { class: "display" },
-                      vue.toDisplayString(inputValue2.value),
+                      vue.toDisplayString(inputValue.value),
                       1
                       /* TEXT */
                     ),
@@ -17653,7 +17828,7 @@ if (uni.restoreGlobal) {
                           return vue.createElementVNode("view", {
                             class: "key",
                             key: index2,
-                            onClick: ($event) => inputValue2.value = keyNum
+                            onClick: ($event) => inputValue.value = keyNum
                           }, vue.toDisplayString(keyNum) + "ml ", 9, ["onClick"]);
                         }),
                         64
@@ -18653,6 +18828,19 @@ if (uni.restoreGlobal) {
       data: countdown
     });
   };
+  const apiUpdateCountdown = (countdown) => {
+    return request({
+      url: `countdown/update`,
+      method: "POST",
+      data: countdown
+    });
+  };
+  const apiDeleteCountdown = (countdownID) => {
+    return request({
+      url: `countdown/delete?CountdownID=${countdownID}`,
+      method: "GET"
+    });
+  };
   const _sfc_main$7 = {
     __name: "index",
     setup(__props2) {
@@ -18661,6 +18849,7 @@ if (uni.restoreGlobal) {
       onShow(() => {
         getCountdowns();
       });
+      let countdownList = vue.ref([]);
       const getCountdowns = () => {
         apiGetUserCountdowns(getApp().globalData.userInfo.UserID).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -18670,11 +18859,10 @@ if (uni.restoreGlobal) {
             });
           } else {
             countdownList.value = res.data;
-            formatAppLog("log", "at subPackages/countdowns/index/index.vue:79", "countdownList", countdownList.value);
+            formatAppLog("log", "at subPackages/countdowns/index/index.vue:95", "countdownList", countdownList.value);
           }
         });
       };
-      let countdownList = vue.ref([]);
       const getRemainingDays = (targetDate) => {
         const now = /* @__PURE__ */ new Date();
         const target = new Date(targetDate);
@@ -18682,13 +18870,23 @@ if (uni.restoreGlobal) {
         return Math.ceil(diff / (1e3 * 60 * 60 * 24));
       };
       const addCountdownRef = vue.ref(null);
+      const isEdit2 = vue.ref(false);
+      const openAddOrEditCountdown = (countdown, openEdit = false) => {
+        isEdit2.value = openEdit;
+        if (openEdit) {
+          activeCountdownID.value = countdown.CountdownID;
+          countdownName.value = countdown.Name;
+          countdownDate.value = countdown.TargetDate;
+        }
+        addCountdownRef.value.open("bottom");
+      };
       const countdownName = vue.ref("");
       const countdownDate = vue.ref("");
       const addCountdown = () => {
         let countdown = {
           UserId: getApp().globalData.userInfo.UserID,
           Name: countdownName.value,
-          TargetDate: countdownDate.value
+          TargetDate: formatDate(countdownDate.value)
         };
         let errMsg = "";
         if (!countdown.Name) {
@@ -18703,8 +18901,11 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at subPackages/countdowns/index/index.vue:115", "countdown", countdown);
-        apiAddCountdown(countdown).then((res) => {
+        if (isEdit2.value)
+          countdown.CountdownID = activeCountdownID.value;
+        formatAppLog("log", "at subPackages/countdowns/index/index.vue:142", "countdown", countdown);
+        let api = isEdit2.value ? apiUpdateCountdown : apiAddCountdown;
+        api(countdown).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
@@ -18716,6 +18917,29 @@ if (uni.restoreGlobal) {
             });
             getCountdowns();
             addCountdownRef.value.close();
+          }
+        });
+      };
+      const popupRef = vue.ref(null);
+      const activeCountdownID = vue.ref(null);
+      const openPopup = (countdown) => {
+        activeCountdownID.value = countdown.CountdownID;
+        popupRef.value.open("bottom");
+        uni.vibrateShort();
+      };
+      const deleteCountdown = () => {
+        apiDeleteCountdown(activeCountdownID.value).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.showToast({
+              title: res.msg
+            });
+            popupRef.value.close();
+            getCountdowns();
           }
         });
       };
@@ -18731,7 +18955,9 @@ if (uni.restoreGlobal) {
               vue.renderList(vue.unref(countdownList), (item) => {
                 return vue.openBlock(), vue.createElementBlock("view", {
                   class: "countdown-item",
-                  key: item.CountdownID
+                  key: item.CountdownID,
+                  onClick: ($event) => openAddOrEditCountdown(item, true),
+                  onLongpress: ($event) => openPopup(item)
                 }, [
                   vue.createElementVNode("view", { class: "countdown-left" }, [
                     vue.createElementVNode(
@@ -18783,7 +19009,7 @@ if (uni.restoreGlobal) {
                       vue.createElementVNode("text", { class: "today" }, "今天")
                     ]))
                   ])
-                ]);
+                ], 40, ["onClick", "onLongpress"]);
               }),
               128
               /* KEYED_FRAGMENT */
@@ -18800,7 +19026,7 @@ if (uni.restoreGlobal) {
             }, [
               vue.createElementVNode("button", {
                 class: "win-service",
-                onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.addCountdownRef.open("bottom"))
+                onClick: openAddOrEditCountdown
               }, [
                 vue.createVNode(_component_uni_icons, {
                   type: "plusempty",
@@ -18823,7 +19049,13 @@ if (uni.restoreGlobal) {
               default: vue.withCtx(() => [
                 vue.createElementVNode("view", { class: "add-countdown-content" }, [
                   vue.createElementVNode("view", { class: "add-countdown-header" }, [
-                    vue.createElementVNode("view", { class: "title" }, "添加倒计时")
+                    vue.createElementVNode(
+                      "view",
+                      { class: "title" },
+                      vue.toDisplayString(isEdit2.value ? "编辑倒计时" : "添加倒计时"),
+                      1
+                      /* TEXT */
+                    )
                   ]),
                   vue.createElementVNode("view", { class: "countdown-name" }, [
                     vue.withDirectives(vue.createElementVNode(
@@ -18831,7 +19063,7 @@ if (uni.restoreGlobal) {
                       {
                         type: "text",
                         class: "name-input",
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => countdownName.value = $event),
+                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => countdownName.value = $event),
                         placeholder: "倒计时名称"
                       },
                       null,
@@ -18846,19 +19078,55 @@ if (uni.restoreGlobal) {
                     vue.createVNode(_component_uni_datetime_picker, {
                       type: "date",
                       modelValue: countdownDate.value,
-                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => countdownDate.value = $event)
+                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => countdownDate.value = $event)
                     }, null, 8, ["modelValue"])
                   ]),
                   vue.createElementVNode("view", { class: "add-countdown-input" }, [
                     vue.createElementVNode("view", {
                       class: "btn",
-                      onClick: _cache[3] || (_cache[3] = ($event) => _ctx.$refs.setTargetRef.close())
+                      onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
                     }, "取消"),
                     vue.createElementVNode("view", {
                       class: "btn btn-primary",
-                      onClick: _cache[4] || (_cache[4] = ($event) => addCountdown())
+                      onClick: _cache[3] || (_cache[3] = ($event) => addCountdown())
                     }, "确定")
                   ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          ),
+          vue.createCommentVNode(" 更多功能 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "popupRef",
+              ref: popupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-list" }, [
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: deleteCountdown
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-close",
+                    onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$refs.popupRef.close())
+                  }, "取消")
                 ])
               ]),
               _: 1

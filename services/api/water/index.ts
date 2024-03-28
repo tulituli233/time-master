@@ -51,6 +51,23 @@ export const apiGetUserWaterRecords = (userID: number): Promise<WaterRecord[]> =
     })
 }
 
+// 修改喝水记录
+export const apiUpdateWaterRecord = (record: WaterRecord): Promise<WaterRecord> => {
+    return request({
+        url: `water/update`,
+        method: 'POST',
+        data: record
+    })
+}
+
+// 删除喝水记录
+export const apiDeleteWaterRecord = (recordID: number): Promise<WaterRecord> => {
+    return request({
+        url: `water/delete?RecordID=${recordID}`,
+        method: 'GET',
+    })
+}
+
 // 获取所有喝水类型
 export const apiGetAllWaterTypes = (): Promise<WaterType[]> => {
     return request({

@@ -38,11 +38,12 @@
         <!-- 记账输入器固定在页面底部，互动包括备注添加、金额输入（数字键盘）、分类选择 -->
         <view class="numeric-keypad">
             <view class="date">
-                <uni-datetime-picker class="no-border" type="datetime" v-model="dateValue" @change="selectDate" />
+                <uni-datetime-picker class="no-border" type="datetime" v-model="expenseData.Date"
+                    @change="selectDate" />
             </view>
             <view class="display">
-                <input class="note" type="text" placeholder="添加备注" v-model="noteValue" />
-                <view class="input">{{ inputValue }}</view>
+                <input class="note" type="text" placeholder="添加备注" v-model="expenseData.Note" />
+                <view class="input">{{ expenseData.Amount }}</view>
             </view>
             <table>
                 <tr v-for="(row, rowIndex) in keypadLayout" :key="rowIndex">
@@ -56,15 +57,33 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { apiGetAllExpensesCategory, apiAddExpense } from '@/services/api/expenses';
+import { ref, reactive, computed } from 'vue';
+import { apiGetAllExpensesCategory, apiAddExpense, apiUpdateExpense } from '@/services/api/expenses';
 import { onLoad } from '@dcloudio/uni-app';
 import { formatDateTime } from '@/utils/utils.js';
 
 // 获取分类数据
-onLoad(() => {
+const isEdit = ref(false);
+onLoad((e) => {
+    isEdit.value = e.isEdit ? true : false
+    if (isEdit.value) {
+        let expense = JSON.parse(e.expense)
+        expenseData.ExpenseID = expense.ExpenseID
+        expenseData.Date = expense.Date
+        expenseData.Note = expense.Note
+        expenseData.Amount = Math.abs(expense.Amount)
+        expense.Amount > 0 ? activeTab.value = 1 : activeTab.value = 0
+        expense.Amount > 0 ? selectedIncomeCateID.value = expense.Category : selectedExpenseCateID.value = expense.Category
+    }
     getExpenseCate();
 })
+const expenseData = reactive({
+    UserID: getApp().globalData.userInfo.UserID,
+    Date: formatDateTime(new Date()),
+    Amount: 0,
+    Category: 1,
+    Note: '',
+});
 let expenseCateList = ref([]);
 const getExpenseCate = () => {
     apiGetAllExpensesCategory().then((res) => {
@@ -116,19 +135,14 @@ const noteValue = ref('');
 const inputValue = ref('');
 const handleKeyPress = (key) => {
     if (key === 'DEL') {
-        // Handle delete key press
-        inputValue.value = inputValue.value.slice(0, -1);
+        expenseData.Amount = expenseData.Amount + ''
+        expenseData.Amount = expenseData.Amount.slice(0, -1);
     } else if (key === '=') {
-        // Handle equal key press
-        // Example: Evaluate the expression
-        inputValue.value = eval(inputValue.value);
+        expenseData.Amount = eval(expenseData.Amount);
     } else if (key === '完成') {
-        // Handle done key press
-        // Example: Submit the form or close the keypad
         addExpense();
     } else {
-        // Append the pressed key to the input value
-        inputValue.value += key;
+        expenseData.Amount += key;
     }
 };
 const dateValue = ref(formatDateTime(new Date()));
@@ -139,38 +153,34 @@ const selectDate = (e) => {
 }
 // ##region 新增记账
 const addExpense = async () => {
-    let Amount = activeTab.value === 0 ? -inputValue.value : inputValue.value;
-    let Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
-    let expense = {
-        UserID: getApp().globalData.userInfo.UserID,
-        Amount,
-        Category,
-        Date: dateValue.value,
-        Note: noteValue.value
-    }
+    expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
+    expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
+    expenseData.Date = formatDateTime(expenseData.Date);
     let errMsg = ''
-	if (!expense.Amount) {
-		errMsg = '请输入金额'
-	} else if (!expense.Date) {
-		errMsg = '请选择日期'
-	}
-	if (errMsg) {
-		uni.showToast({
-			icon: 'error',
-			title: errMsg
-		})
-		return
-	}
-    console.log('expense', expense);
-    let res = await apiAddExpense(expense);
-    if (res.code === 0) {
+    if (!expenseData.Amount) {
+        errMsg = '请输入金额'
+    } else if (!expenseData.Date) {
+        errMsg = '请选择日期'
+    }
+    if (errMsg) {
         uni.showToast({
-            title: res.msg,
+            icon: 'error',
+            title: errMsg
+        })
+        return
+    }
+    let api = isEdit.value ? apiUpdateExpense : apiAddExpense
+    let res = await api(expenseData);
+    if (res.code === 0 || !res.code) {
+        uni.showToast({
+            icon: 'error',
+            title: res.msg || '网络异常'
         })
     } else {
         uni.showToast({
-            title: res.msg,
+            title: res.msg
         })
+        uni.navigateBack()
     }
 };
 // ##endregion

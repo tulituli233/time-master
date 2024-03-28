@@ -1,7 +1,8 @@
 <template>
     <view class="content">
         <view class="countdown-list">
-            <view class="countdown-item" v-for="item in countdownList" :key="item.CountdownID">
+            <view class="countdown-item" v-for="item in countdownList" :key="item.CountdownID"
+               @click="openAddOrEditCountdown(item, true)" @longpress="openPopup(item)">
                 <view class="countdown-left">
                     <view class="title">
                         {{ item.Name }}
@@ -27,7 +28,7 @@
         <!-- 小浮窗 -->
         <movable-area class="movableArea">
             <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-                <button class="win-service" @click="$refs.addCountdownRef.open('bottom')">
+                <button class="win-service" @click="openAddOrEditCountdown">
                     <uni-icons type="plusempty" size="30" color="#fff"></uni-icons>
                 </button>
             </movable-view>
@@ -36,7 +37,7 @@
         <uni-popup class="add-countdown" ref="addCountdownRef" background-color="#fff">
             <view class="add-countdown-content">
                 <view class="add-countdown-header">
-                    <view class="title">添加倒计时</view>
+                    <view class="title">{{ isEdit ? '编辑倒计时' : '添加倒计时' }}</view>
                 </view>
                 <view class="countdown-name">
                     <input type="text" class="name-input" v-model="countdownName" placeholder="倒计时名称" />
@@ -51,12 +52,26 @@
                 </view>
             </view>
         </uni-popup>
+        <!-- 更多功能 -->
+        <uni-popup ref="popupRef" background-color="#fff">
+            <view class="popup-list">
+                <view class="popup-item" @click="deleteCountdown">
+                    <view class="popup-icon">
+                        <uni-icons type="trash" size="30" color="#999"></uni-icons>
+                    </view>
+                    <view class="popup-text">
+                        删除
+                    </view>
+                </view>
+                <view class="popup-close" @click="$refs.popupRef.close()">取消</view>
+            </view>
+        </uni-popup>
     </view>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { apiAddCountdown, apiGetUserCountdowns } from '@/services/api/countdown'
+import { apiAddCountdown, apiGetUserCountdowns, apiUpdateCountdown, apiDeleteCountdown } from '@/services/api/countdown'
 import { formatDate, formatDateLunar } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app'
 
@@ -66,7 +81,8 @@ const y = ref('1000rpx');
 onShow(() => {
     getCountdowns()
 })
-
+// #region 查
+let countdownList = ref([])
 const getCountdowns = () => {
     apiGetUserCountdowns(getApp().globalData.userInfo.UserID).then(res => {
         if (res.code === 0 || !res.code) {
@@ -80,7 +96,7 @@ const getCountdowns = () => {
         }
     })
 }
-let countdownList = ref([])
+// #endregion
 // 计算剩余天数
 const getRemainingDays = (targetDate) => {
     const now = new Date();
@@ -88,8 +104,18 @@ const getRemainingDays = (targetDate) => {
     const diff = target - now;
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
 }
-
+// #region 增/改
 const addCountdownRef = ref(null)
+const isEdit = ref(false)
+const openAddOrEditCountdown = (countdown, openEdit = false) => {
+    isEdit.value = openEdit
+    if (openEdit) {
+        activeCountdownID.value = countdown.CountdownID
+        countdownName.value = countdown.Name
+        countdownDate.value = countdown.TargetDate
+    }
+    addCountdownRef.value.open('bottom')
+}
 const countdownName = ref('')
 const countdownDate = ref('')
 
@@ -97,23 +123,25 @@ const addCountdown = () => {
     let countdown = {
         UserId: getApp().globalData.userInfo.UserID,
         Name: countdownName.value,
-        TargetDate: countdownDate.value
+        TargetDate: formatDate(countdownDate.value),
     }
     let errMsg = ''
-	if (!countdown.Name) {
-		errMsg = '请输入倒计时名称'
-	} else if (!countdown.TargetDate) {
-		errMsg = '请选择目标日期'
-	}
-	if (errMsg) {
-		uni.showToast({
-			icon: 'error',
-			title: errMsg
-		})
-		return
-	}
+    if (!countdown.Name) {
+        errMsg = '请输入倒计时名称'
+    } else if (!countdown.TargetDate) {
+        errMsg = '请选择目标日期'
+    }
+    if (errMsg) {
+        uni.showToast({
+            icon: 'error',
+            title: errMsg
+        })
+        return
+    }
+    if (isEdit.value) countdown.CountdownID = activeCountdownID.value
     console.log('countdown', countdown);
-    apiAddCountdown(countdown).then(res => {
+    let api = isEdit.value ? apiUpdateCountdown : apiAddCountdown
+    api(countdown).then(res => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',
@@ -128,6 +156,35 @@ const addCountdown = () => {
         }
     })
 }
+// #endregion
+
+// #region 删
+const popupRef = ref(null)
+const activeCountdownID = ref(null)
+const openPopup = (countdown) => {
+    activeCountdownID.value = countdown.CountdownID
+    popupRef.value.open('bottom')
+    // 触发手机抖动
+    uni.vibrateShort();
+}
+const deleteCountdown = () => {
+    // 删除
+    apiDeleteCountdown(activeCountdownID.value).then(res => {
+        if (res.code === 0 || !res.code) {
+            uni.showToast({
+                icon: 'error',
+                title: res.msg || '网络异常'
+            })
+        } else {
+            uni.showToast({
+                title: res.msg
+            })
+            popupRef.value.close()
+            getCountdowns()
+        }
+    })
+}
+// #endregion
 </script>
 
 <style lang="scss" scoped>
@@ -151,7 +208,7 @@ const addCountdown = () => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10rpx 10rpx 20rpx; 
+        padding: 10rpx 10rpx 20rpx;
 
         .countdown-left {
             display: flex;
@@ -177,6 +234,7 @@ const addCountdown = () => {
                     padding: 0 10rpx;
                     font-size: 75rpx;
                 }
+
                 .today {
                     font-size: 50rpx;
                 }
