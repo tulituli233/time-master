@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$y = {
+  const _sfc_main$z = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -742,7 +742,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$i], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
   const ON_UNLOAD = "onUnload";
@@ -1313,7 +1313,7 @@ if (uni.restoreGlobal) {
     navTo,
     timestampToTime
   }, Symbol.toStringTag, { value: "Module" }));
-  const _sfc_main$x = {
+  const _sfc_main$y = {
     __name: "index",
     setup(__props2) {
       const list = vue.ref([
@@ -1448,9 +1448,9 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
   const _imports_0 = "/static/head.png";
-  const _sfc_main$w = {
+  const _sfc_main$x = {
     __name: "index",
     setup(__props2) {
       const userInfo = vue.ref(null);
@@ -1597,8 +1597,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
-  const _sfc_main$v = {
+  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
+  const _sfc_main$w = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -1647,7 +1647,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1692,7 +1692,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$g], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$h], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -1764,7 +1764,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$u = {
+  const _sfc_main$v = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -1834,7 +1834,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -1931,11 +1931,11 @@ if (uni.restoreGlobal) {
     );
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$u);
+    block0$1(_sfc_main$v);
   if (typeof block1 === "function")
-    block1(_sfc_main$u);
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$f], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$t = {
+    block1(_sfc_main$v);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$g], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$u = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -1961,12 +1961,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$e], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$f], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -2322,7 +2322,7 @@ if (uni.restoreGlobal) {
     }
     return value;
   }
-  const _sfc_main$s = {
+  const _sfc_main$t = {
     props: {
       weeks: {
         type: Object,
@@ -2356,7 +2356,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2412,7 +2412,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$d], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$e], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -2769,7 +2769,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t: t$3 } = initVueI18n(i18nMessages);
-  const _sfc_main$r = {
+  const _sfc_main$s = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -3370,7 +3370,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -3647,9 +3647,9 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$c], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$d], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$2 } = initVueI18n(i18nMessages);
-  const _sfc_main$q = {
+  const _sfc_main$r = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -4125,7 +4125,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -4418,8 +4418,8 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$b], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$p = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$c], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$q = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -5070,7 +5070,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -5413,7 +5413,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$a], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$b], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
     constructor(options2, _this) {
       this.options = options2;
@@ -5526,7 +5526,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$o = {
+  const _sfc_main$p = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -5777,7 +5777,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -5790,8 +5790,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$9], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$n = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$a], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$o = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -6118,7 +6118,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -6178,7 +6178,7 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   const BASE_URL = "http://192.168.0.104:3838/";
   uni.setStorageSync("BASE_URL", BASE_URL);
   const DEFAULT_HEADERS = {
@@ -6225,7 +6225,7 @@ if (uni.restoreGlobal) {
       data: task
     });
   };
-  const _sfc_main$m = {
+  const _sfc_main$n = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -6526,10 +6526,10 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_2$2);
+        const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_2$1);
         const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_3);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "select" }, [
             vue.createElementVNode("view", { class: "select-header" }, [
@@ -6792,8 +6792,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
-  const _sfc_main$l = {
+  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
+  const _sfc_main$m = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -6996,7 +6996,6 @@ if (uni.restoreGlobal) {
         updateTaskStatus({ Priority: newPriority });
       };
       const updateTaskStatus = (params = {}) => {
-        formatAppLog("log", "at pages/plan/index.vue:341", "params", params);
         const data2 = {
           TaskID: currentNote.value.TaskID,
           ...params
@@ -7013,14 +7012,13 @@ if (uni.restoreGlobal) {
             });
             Object.assign(currentNote.value, params);
             popupMore.value.close();
-            formatAppLog("log", "at pages/plan/index.vue:358", "currentNote", currentNote.value);
           }
         });
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "time" }, [
             vue.createElementVNode(
@@ -7322,7 +7320,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
+  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
   const apiLogin = (credentials) => {
     return request({
       url: `users/login`,
@@ -7337,7 +7335,7 @@ if (uni.restoreGlobal) {
       data: userData
     });
   };
-  const _sfc_main$k = {
+  const _sfc_main$l = {
     __name: "index",
     setup(__props2) {
       const isRegister = vue.ref(false);
@@ -7612,7 +7610,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
+  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
   const apiAddExpense = (expense) => {
     return request({
       url: `expenses/add`,
@@ -7645,7 +7643,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$j = {
+  const _sfc_main$k = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -7742,7 +7740,7 @@ if (uni.restoreGlobal) {
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "fixed-box" }, [
             vue.createElementVNode("view", { class: "top" }, [
@@ -8016,8 +8014,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
-  const _sfc_main$i = {
+  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
+  const _sfc_main$j = {
     __name: "index",
     setup(__props) {
       const isEdit = vue.ref(false);
@@ -8323,8 +8321,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
-  const _sfc_main$h = {
+  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
+  const _sfc_main$i = {
     __name: "index",
     setup(__props2) {
       const handleLogout = () => {
@@ -8344,7 +8342,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
+  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
   const apiGetUserMemos = (userID) => {
     return request({
       url: `memos/list?userID=${userID}`,
@@ -8371,7 +8369,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -8441,7 +8439,7 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "select" }, [
             vue.createElementVNode("view", { class: "select-header" }, [
@@ -8556,7 +8554,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-65dcb35f"], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
+  const SubPackagesMemosIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-65dcb35f"], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/index/index.vue"]]);
   const config$1 = {
     // 信任的标签（保持标签名不变）
     trustTags: makeMap("card,a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,ruby,rt,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video"),
@@ -9559,7 +9557,7 @@ if (uni.restoreGlobal) {
       this.i++;
     }
   };
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     props: {
       mode: {
         type: Boolean,
@@ -9594,7 +9592,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "card",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args)),
@@ -9640,7 +9638,7 @@ if (uni.restoreGlobal) {
       })
     ], 12, ["data-i"]);
   }
-  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$7], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
+  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$8], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
   const block0 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("handler");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["handler"] = "3052a0dc";
@@ -9656,7 +9654,7 @@ if (uni.restoreGlobal) {
     }
     return top - 30;
   }
-  const _sfc_main$e = {
+  const _sfc_main$f = {
     name: "node",
     options: {},
     data() {
@@ -10257,7 +10255,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node", true);
     const _component_my_card = vue.resolveComponent("my-card");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -10596,8 +10594,8 @@ if (uni.restoreGlobal) {
     ], 14, ["id"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$e);
-  const node = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$6], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
+    block0(_sfc_main$f);
+  const node = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$7], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
   /*!
    * marked - a markdown parser
    * Copyright (c) 2011-2020, Christopher Jeffrey. (MIT Licensed)
@@ -16293,7 +16291,7 @@ if (uni.restoreGlobal) {
     }
   };
   const plugins = [Markdown, Emoji, Highlight, Latex, Search, Style, ImgCache, Card, Editable];
-  const _sfc_main$d = {
+  const _sfc_main$e = {
     name: "mp-html",
     data() {
       return {
@@ -16578,7 +16576,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node");
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -16684,7 +16682,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$5], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
+  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$6], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
   function upload$1(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/memos/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -17031,8 +17029,8 @@ if (uni.restoreGlobal) {
     __injectCSSVars__$1();
     return __setup__$1(props, ctx);
   } : __injectCSSVars__$1;
-  const _sfc_main$c = __default__$1;
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$d = __default__$1;
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -17308,8 +17306,8 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$4], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
-  const _sfc_main$b = {
+  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$5], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
+  const _sfc_main$c = {
     name: "UniNumberBox",
     emits: ["change", "input", "update:modelValue", "blur", "focus"],
     props: {
@@ -17438,7 +17436,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-numbox" }, [
       vue.createElementVNode(
         "view",
@@ -17497,7 +17495,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$3], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$4], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
   const apiAddWaterRecord = (record) => {
     return request({
       url: `water/add`,
@@ -17511,13 +17509,26 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
+  const apiUpdateWaterRecord = (record) => {
+    return request({
+      url: `water/update`,
+      method: "POST",
+      data: record
+    });
+  };
+  const apiDeleteWaterRecord = (recordID) => {
+    return request({
+      url: `water/delete?RecordID=${recordID}`,
+      method: "GET"
+    });
+  };
   const apiGetAllWaterTypes = () => {
     return request({
       url: `water/allTypes`,
       method: "GET"
     });
   };
-  const _sfc_main$a = {
+  const _sfc_main$b = {
     __name: "index",
     setup(__props2) {
       onLoad(() => {
@@ -17527,7 +17538,7 @@ if (uni.restoreGlobal) {
       const getAllWaterTypes = () => {
         apiGetAllWaterTypes().then((res) => {
           waterTypes.value = res.data;
-          formatAppLog("log", "at subPackages/water/index/index.vue:145", "waterTypes", waterTypes.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:151", "waterTypes", waterTypes.value);
         });
       };
       let waterRecords = vue.ref([]);
@@ -17537,11 +17548,11 @@ if (uni.restoreGlobal) {
       const getWaterRecords = () => {
         apiGetUserWaterRecords(getApp().globalData.userInfo.UserID).then((res) => {
           waterRecords.value = res.data;
-          formatAppLog("log", "at subPackages/water/index/index.vue:157", "waterRecords", waterRecords.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:163", "waterRecords", waterRecords.value);
         });
       };
       const percent = vue.computed(() => {
-        return Math.floor(consumedWater.value / targetWater.value * 100 + 15).toFixed(0);
+        return parseInt(Math.floor(consumedWater.value / targetWater.value * 100).toFixed(0));
       });
       const tips = vue.ref("每天都要喝水哦");
       const targetWater = vue.ref(2e3);
@@ -17558,13 +17569,11 @@ if (uni.restoreGlobal) {
         for (let i = 0; i < waterTypes.value.length; i += 10) {
           arr.push(waterTypes.value.slice(i, i + 10));
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:181", "arr", arr);
+        formatAppLog("log", "at subPackages/water/index/index.vue:187", "arr", arr);
         return arr;
       });
-      const currentWaterType = vue.ref(1);
       const selectWater = (WaterID) => {
-        currentWaterType.value = WaterID;
-        formatAppLog("log", "at subPackages/water/index/index.vue:188", "currentWaterType", currentWaterType.value);
+        waterData.WaterID = WaterID;
       };
       const keypadLayout2 = [
         [1, 2, 3, "date"],
@@ -17573,7 +17582,6 @@ if (uni.restoreGlobal) {
         ["", 0, "", "完成"]
       ];
       const quickKeys = ["100", "200", "250", "500"];
-      const inputValue = vue.ref("");
       const getTime2 = () => {
         const date = /* @__PURE__ */ new Date();
         const hours = date.getHours();
@@ -17582,37 +17590,54 @@ if (uni.restoreGlobal) {
       };
       const handleKeyPress2 = (key2) => {
         if (key2 === "DEL") {
-          inputValue.value = inputValue.value.slice(0, -1);
+          waterData.Amount = waterData.Amount + "";
+          waterData.Amount = waterData.Amount.slice(0, -1);
         } else if (key2 === "AC") {
-          inputValue.value = "";
+          waterData.Amount = "";
         } else if (key2 === "完成") {
           addWater();
         } else if (key2 === "date") {
-          formatAppLog("log", "at subPackages/water/index/index.vue:215", "timePicker.value", timePicker.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:219", "timePicker.value", timePicker.value);
         } else {
-          inputValue.value += key2;
+          waterData.Amount += key2;
         }
       };
       const timePicker = vue.ref(null);
-      const waterTime = vue.ref(getTime2());
       const bindTimeChange = (e) => {
-        waterTime.value = e.detail.value;
+        formatAppLog("log", "at subPackages/water/index/index.vue:228", "picker发送选择改变,携带值为", e.detail.value);
+        waterData.DateTime = convertToTodayTime(e.detail.value) + "";
       };
-      const openWaterPopup = () => {
-        inputValue.value = "";
-        waterTime.value = getTime2();
-        currentWaterType.value = 1;
+      const addWaterRecord = () => {
+        isEdit2.value = false;
+        openWaterPopup();
+      };
+      const openWaterPopup = (waterRecord) => {
+        if (isEdit2.value) {
+          waterData.RecordID = waterRecord.RecordID;
+          waterData.Amount = waterRecord.Amount;
+          waterData.DateTime = waterRecord.DateTime;
+          waterData.WaterID = waterRecord.WaterID;
+          recordPopupRef.value.close();
+        } else {
+          waterData.Amount = "";
+          waterData.DateTime = (/* @__PURE__ */ new Date()).getTime();
+          formatAppLog("log", "at subPackages/water/index/index.vue:245", "waterData.DateTime", waterData.DateTime);
+          waterData.WaterID = 1;
+        }
         popupRef.value.open("bottom");
       };
+      const waterData = vue.reactive({
+        UserID: getApp().globalData.userInfo.UserID,
+        WaterID: 1,
+        DateTime: getTime2(),
+        Amount: ""
+      });
+      const isEdit2 = vue.ref(false);
       const addWater = () => {
-        let water = {
-          UserID: getApp().globalData.userInfo.UserID,
-          WaterID: currentWaterType.value,
-          DateTime: formatDateTime(convertToTodayTime(waterTime.value)),
-          Amount: inputValue.value
-        };
+        formatAppLog("log", "at subPackages/water/index/index.vue:259", "waterData.DateTime", waterData.DateTime);
+        waterData.DateTime = formatDateTime(waterData.DateTime);
         let errMsg = "";
-        if (!water.Amount) {
+        if (!waterData.Amount) {
           errMsg = "请输入饮水量";
         }
         if (errMsg) {
@@ -17622,8 +17647,9 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:251", "water", water);
-        apiAddWaterRecord(water).then((res) => {
+        formatAppLog("log", "at subPackages/water/index/index.vue:272", "waterData", waterData);
+        let api = isEdit2.value ? apiUpdateWaterRecord : apiAddWaterRecord;
+        api(waterData).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
@@ -17656,10 +17682,39 @@ if (uni.restoreGlobal) {
         targetWater.value = targetWaterTemp.value;
         setTargetRef.value.close();
       };
+      const editRecord = (item) => {
+        isEdit2.value = true;
+        openWaterPopup(item);
+      };
+      const swipeOptions = vue.ref([
+        {
+          text: "删除 ",
+          style: {
+            backgroundColor: "#F56C6C"
+          }
+        }
+      ]);
+      const recordPopupRef = vue.ref(null);
+      const deleteRecord = (e, item) => {
+        formatAppLog("log", "at subPackages/water/index/index.vue:330", "item", item);
+        apiDeleteWaterRecord(item.RecordID).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            waterRecords.value = waterRecords.value.filter((record) => record.RecordID !== item.RecordID);
+            recordPopupRef.value.close();
+          }
+        });
+      };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
-        const _component_uni_number_box = resolveEasycom(vue.resolveDynamicComponent("uni-number-box"), __easycom_2);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
+        const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_2$1);
+        const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_3);
+        const _component_uni_number_box = resolveEasycom(vue.resolveDynamicComponent("uni-number-box"), __easycom_4);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createCommentVNode(" 已喝水量的百分比 "),
           vue.createElementVNode("view", { class: "water" }, [
@@ -17726,7 +17781,7 @@ if (uni.restoreGlobal) {
               type: "icon-water",
               size: "50",
               color: "#00b7ff",
-              onClick: openWaterPopup
+              onClick: addWaterRecord
             })
           ]),
           vue.createCommentVNode(" 水位 "),
@@ -17734,7 +17789,7 @@ if (uni.restoreGlobal) {
             "view",
             {
               class: "water-level",
-              style: vue.normalizeStyle({ height: vue.unref(percent) + "%" })
+              style: vue.normalizeStyle({ height: 15 + vue.unref(percent) + "%" })
             },
             null,
             4
@@ -17753,7 +17808,13 @@ if (uni.restoreGlobal) {
               default: vue.withCtx(() => [
                 vue.createElementVNode("view", { class: "popup-content" }, [
                   vue.createElementVNode("view", { class: "popup-header" }, [
-                    vue.createElementVNode("view", { class: "title" }, "添加饮水")
+                    vue.createElementVNode(
+                      "view",
+                      { class: "title" },
+                      vue.toDisplayString(isEdit2.value ? "编辑饮水" : "添加饮水"),
+                      1
+                      /* TEXT */
+                    )
                   ]),
                   vue.createElementVNode("view", { class: "popup-swiper" }, [
                     vue.createElementVNode("swiper", {
@@ -17780,7 +17841,7 @@ if (uni.restoreGlobal) {
                                   vue.createElementVNode(
                                     "view",
                                     {
-                                      class: vue.normalizeClass(["water-icon", currentWaterType.value == item1.WaterID ? "active" : ""])
+                                      class: vue.normalizeClass(["water-icon", waterData.WaterID == item1.WaterID ? "active" : ""])
                                     },
                                     [
                                       vue.createVNode(_component_uni_icons, {
@@ -17816,7 +17877,7 @@ if (uni.restoreGlobal) {
                     vue.createElementVNode(
                       "view",
                       { class: "display" },
-                      vue.toDisplayString(inputValue.value),
+                      vue.toDisplayString(waterData.Amount),
                       1
                       /* TEXT */
                     ),
@@ -17828,7 +17889,7 @@ if (uni.restoreGlobal) {
                           return vue.createElementVNode("view", {
                             class: "key",
                             key: index2,
-                            onClick: ($event) => inputValue.value = keyNum
+                            onClick: ($event) => waterData.Amount = keyNum
                           }, vue.toDisplayString(keyNum) + "ml ", 9, ["onClick"]);
                         }),
                         64
@@ -17862,13 +17923,13 @@ if (uni.restoreGlobal) {
                                       ref_key: "timePicker",
                                       ref: timePicker,
                                       mode: "time",
-                                      value: waterTime.value,
+                                      value: waterData.DateTime,
                                       onChange: bindTimeChange
                                     }, [
                                       vue.createElementVNode(
                                         "view",
                                         { class: "uni-input" },
-                                        vue.toDisplayString(waterTime.value),
+                                        vue.toDisplayString(vue.unref(formatDateToTime)(waterData.DateTime)),
                                         1
                                         /* TEXT */
                                       )
@@ -17899,7 +17960,8 @@ if (uni.restoreGlobal) {
             _component_uni_popup,
             {
               class: "record-popup",
-              ref: "recordPopupRef",
+              ref_key: "recordPopupRef",
+              ref: recordPopupRef,
               "background-color": "#fff"
             },
             {
@@ -17916,38 +17978,61 @@ if (uni.restoreGlobal) {
                       vue.Fragment,
                       null,
                       vue.renderList(vue.unref(waterRecords), (item, index2) => {
-                        return vue.openBlock(), vue.createElementBlock("view", {
-                          class: "record-item",
-                          key: index2
-                        }, [
-                          vue.createElementVNode("view", { class: "record-icon" }, [
-                            vue.createVNode(_component_uni_icons, {
-                              "custom-prefix": "iconfont",
-                              type: getWaterObject(item.WaterID).WaterIcon,
-                              size: "40",
-                              color: "#00b7ff"
-                            }, null, 8, ["type"])
-                          ]),
-                          vue.createElementVNode(
-                            "view",
-                            { class: "record-date" },
-                            vue.toDisplayString(getTime2(item.DateTime)),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "view",
-                            { class: "record-water" },
-                            vue.toDisplayString(getWaterObject(item.WaterID).WaterName),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "view",
-                            { class: "record-amount" },
-                            vue.toDisplayString(item.Amount) + "ml ",
-                            1
-                            /* TEXT */
+                        return vue.openBlock(), vue.createElementBlock("view", { key: index2 }, [
+                          vue.createVNode(
+                            _component_uni_swipe_action,
+                            null,
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_uni_swipe_action_item, {
+                                  "right-options": swipeOptions.value,
+                                  onClick: ($event) => deleteRecord($event, item)
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createElementVNode("view", {
+                                      class: "record-item",
+                                      onClick: ($event) => editRecord(item)
+                                    }, [
+                                      vue.createElementVNode("view", { class: "record-icon" }, [
+                                        vue.createVNode(_component_uni_icons, {
+                                          "custom-prefix": "iconfont",
+                                          type: getWaterObject(item.WaterID).WaterIcon,
+                                          size: "40",
+                                          color: "#00b7ff"
+                                        }, null, 8, ["type"])
+                                      ]),
+                                      vue.createElementVNode(
+                                        "view",
+                                        { class: "record-date" },
+                                        vue.toDisplayString(vue.unref(formatDateToTime)(item.DateTime)),
+                                        1
+                                        /* TEXT */
+                                      ),
+                                      vue.createElementVNode(
+                                        "view",
+                                        { class: "record-water" },
+                                        vue.toDisplayString(getWaterObject(item.WaterID).WaterName),
+                                        1
+                                        /* TEXT */
+                                      ),
+                                      vue.createElementVNode(
+                                        "view",
+                                        { class: "record-amount" },
+                                        vue.toDisplayString(item.Amount) + "ml ",
+                                        1
+                                        /* TEXT */
+                                      )
+                                    ], 8, ["onClick"])
+                                  ]),
+                                  _: 2
+                                  /* DYNAMIC */
+                                }, 1032, ["right-options", "onClick"])
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
                           )
                         ]);
                       }),
@@ -18010,7 +18095,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
+  const SubPackagesWaterIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "E:/HBuilderProjects/time-master/subPackages/water/index/index.vue"]]);
   const apiGetUserDiaries = (userID) => {
     return request({
       url: `diary/list?userID=${userID}`,
@@ -18037,7 +18122,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$9 = {
+  const _sfc_main$a = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -18080,7 +18165,7 @@ if (uni.restoreGlobal) {
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "diary-list" }, [
             (vue.openBlock(true), vue.createElementBlock(
@@ -18196,7 +18281,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
+  const SubPackagesDiaryIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "E:/HBuilderProjects/time-master/subPackages/diary/index/index.vue"]]);
   function upload(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/diary/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -18537,8 +18622,8 @@ if (uni.restoreGlobal) {
     __injectCSSVars__();
     return __setup__(props, ctx);
   } : __injectCSSVars__;
-  const _sfc_main$8 = __default__;
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$9 = __default__;
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -18814,7 +18899,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
+  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$3], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
   const apiGetUserCountdowns = (userID) => {
     return request({
       url: `countdown/list?userID=${userID}`,
@@ -18841,7 +18926,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$7 = {
+  const _sfc_main$8 = {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
@@ -18946,7 +19031,7 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$1);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "countdown-list" }, [
             (vue.openBlock(true), vue.createElementBlock(
@@ -19139,7 +19224,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
+  const SubPackagesCountdownsIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-ef2a374b"], ["__file", "E:/HBuilderProjects/time-master/subPackages/countdowns/index/index.vue"]]);
   const getRootDir = () => {
     if (uni.getSystemInfoSync().platform !== "android") {
       plus.nativeUI.alert("这个组件只能在安卓下使用");
@@ -19211,7 +19296,7 @@ if (uni.restoreGlobal) {
     getRootDir,
     getSubDir
   };
-  const _sfc_main$6 = {
+  const _sfc_main$7 = {
     props: {
       autoclose: {
         type: Boolean,
@@ -19306,7 +19391,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "yt-content" }, [
       $data.isChoose === true ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -19395,7 +19480,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
+  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$2], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
   let options = {
     // 选则图片或者视频 图片:0 视频:1
     type: 0,
@@ -19419,7 +19504,7 @@ if (uni.restoreGlobal) {
     // 是否自动上传
     autoUpload: true
   };
-  const _sfc_main$5 = {
+  const _sfc_main$6 = {
     components: {
       ytFileSelector
     },
@@ -19597,7 +19682,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_yt_file_selector = vue.resolveComponent("yt-file-selector");
     return vue.openBlock(), vue.createElementBlock("view", { class: "yt-uploads" }, [
       vue.createVNode(_component_yt_file_selector, {
@@ -19607,7 +19692,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["onSelected"])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
   const apiGetNovels = () => {
     return request({
       url: "book/list",
@@ -19633,11 +19718,55 @@ if (uni.restoreGlobal) {
       data: data2
     });
   };
-  const _sfc_main$4 = {
+  const apiDeleteNovel = (novelID) => {
+    return request({
+      url: `book/delete?NovelID=${novelID}`,
+      method: "GET"
+    });
+  };
+  const apiCreateNovel = (data2) => {
+    return request({
+      url: "book/create",
+      method: "POST",
+      data: data2
+    });
+  };
+  const apiUpdateNovel = (data2) => {
+    return request({
+      url: "book/update",
+      method: "POST",
+      data: data2
+    });
+  };
+  const apiAddNovelChapter = (data2) => {
+    return request({
+      url: "book/addChapter",
+      method: "POST",
+      data: data2
+    });
+  };
+  const apiDownloadNovel = (novelID) => {
+    return request({
+      url: `book/download?NovelID=${novelID}`,
+      method: "GET"
+    });
+  };
+  const _sfc_main$5 = {
     __name: "index",
     setup(__props2) {
+      vue.useCssVars((_ctx) => ({
+        "7b29b7df-popupBottom + 'px'": popupBottom.value + "px"
+      }));
+      const popupBottom = vue.ref(0);
       onShow(() => {
         getNovels();
+        uni.onKeyboardHeightChange((res) => {
+          if (res.height === 0) {
+            popupBottom.value = 0;
+          } else {
+            popupBottom.value = 100;
+          }
+        });
       });
       const novels = vue.ref([]);
       const getNovels = () => {
@@ -19649,7 +19778,7 @@ if (uni.restoreGlobal) {
             });
           } else {
             novels.value = res.data;
-            formatAppLog("log", "at subPackages/book/index/index.vue:53", "novels", novels.value);
+            formatAppLog("log", "at subPackages/book/index/index.vue:142", "novels", novels.value);
           }
           novels.value.push({});
         });
@@ -19659,12 +19788,12 @@ if (uni.restoreGlobal) {
         type: 2,
         host: `${baseUrl}book/upload`
       });
-      formatAppLog("log", "at subPackages/book/index/index.vue:64", "options", options2);
+      formatAppLog("log", "at subPackages/book/index/index.vue:153", "options", options2);
       const selectedHandler = (selectedData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:66", "Selected data:", selectedData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:155", "Selected data:", selectedData);
       };
       const successHandler = (successData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:70", "Success data:", successData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:159", "Success data:", successData);
         let res = successData[0];
         if (res.code === 0 || !res.code) {
           uni.showToast({
@@ -19679,18 +19808,158 @@ if (uni.restoreGlobal) {
         }
       };
       const failHandler = (error) => {
-        formatAppLog("error", "at subPackages/book/index/index.vue:86", "Error:", error);
+        formatAppLog("error", "at subPackages/book/index/index.vue:175", "Error:", error);
         uni.showToast({
           icon: "error",
           title: "fail上传失败"
         });
       };
       const processHandler = (progress) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:94", "Upload progress:", progress);
+        formatAppLog("log", "at subPackages/book/index/index.vue:183", "Upload progress:", progress);
+      };
+      const popupRef = vue.ref(null);
+      const activeBook = vue.ref(null);
+      const openPopup = (book) => {
+        activeBook.value = book;
+        popupRef.value.open("bottom");
+        uni.vibrateShort();
+      };
+      const addPopupRef = vue.ref(null);
+      const openAddPopup = () => {
+        addPopupRef.value.open("bottom");
+        uni.vibrateShort();
+      };
+      const openCreatePopup = () => {
+        isEdit2.value = false;
+        bookInfo.Title = "";
+        bookInfo.Author = "";
+        addPopupRef.value.close();
+        createOreditPopupRef.value.open("bottom");
+      };
+      const openEditPopup = () => {
+        isEdit2.value = true;
+        bookInfo.Title = activeBook.value.Title;
+        bookInfo.Author = activeBook.value.Author;
+        bookInfo.NovelID = activeBook.value.NovelID;
+        popupRef.value.close();
+        createOreditPopupRef.value.open("bottom");
+      };
+      const isEdit2 = vue.ref(false);
+      const createOreditPopupRef = vue.ref(null);
+      const bookInfo = vue.reactive({
+        Title: "",
+        Author: ""
+      });
+      const createOrEdit = () => {
+        let api = isEdit2.value ? apiUpdateNovel : apiCreateNovel;
+        api(bookInfo).then((res) => {
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.showToast({
+              title: res.msg
+            });
+            createOreditPopupRef.value.close();
+            getNovels();
+          }
+        });
+      };
+      const toAddPage = () => {
+        popupRef.value.close();
+        navTo(`/subPackages/book/add/index?novelID=${activeBook.value.NovelID}`);
+      };
+      const serverCreateTempFile = () => {
+        return new Promise((resolve, reject) => {
+          apiDownloadNovel(activeBook.value.NovelID).then((res) => {
+            formatAppLog("log", "at subPackages/book/index/index.vue:293", "res", res);
+            if (res.code === 0 || !res.code) {
+              uni.showToast({
+                icon: "error",
+                title: res.msg || "网络异常"
+              });
+              reject();
+            }
+            resolve(res.data.fileName);
+          });
+        });
+      };
+      const downloadBook = async () => {
+        let tempFilePath = await serverCreateTempFile();
+        formatAppLog("log", "at subPackages/book/index/index.vue:309", "tempFilePath", tempFilePath);
+        uni.downloadFile({
+          url: `${baseUrl}downloads/${tempFilePath}`,
+          //  存储文件到手机本地文件夹
+          success: (res) => {
+            if (res.statusCode === 200) {
+              uni.saveFile({
+                tempFilePath: res.tempFilePath,
+                //临时路径
+                success: function(data2) {
+                  var savedFilePath = data2.savedFilePath;
+                  formatAppLog("log", "at subPackages/book/index/index.vue:321", "savedFilePath", savedFilePath);
+                  let osname = plus.os.name;
+                  if (osname == "Android") {
+                    uni.showToast({
+                      mask: true,
+                      title: "下载成功",
+                      duration: 1e3
+                    });
+                  }
+                  uni.setClipboardData({
+                    data: activeBook.value.Title,
+                    showToast: false,
+                    success: function() {
+                      formatAppLog("log", "at subPackages/book/index/index.vue:338", "setClipboardData success");
+                    }
+                  });
+                  setTimeout(() => {
+                    uni.openDocument({
+                      filePath: data2.savedFilePath,
+                      success: function(ress) {
+                        formatAppLog("log", "at subPackages/book/index/index.vue:348", "成功打开文件");
+                      },
+                      fail() {
+                        formatAppLog("log", "at subPackages/book/index/index.vue:351", "打开文件失败");
+                      }
+                    });
+                  }, 1e3);
+                }
+              });
+            }
+          }
+        });
+      };
+      const deleteBook = () => {
+        uni.showModal({
+          title: "删除提示",
+          content: `确定要删除《${activeBook.value.Title}》吗？`,
+          success: (res) => {
+            if (res.confirm) {
+              apiDeleteNovel(activeBook.value.NovelID).then((res2) => {
+                if (res2.code === 0 || !res2.code) {
+                  uni.showToast({
+                    icon: "error",
+                    title: res2.msg || "网络异常"
+                  });
+                } else {
+                  uni.showToast({
+                    title: res2.msg
+                  });
+                  popupRef.value.close();
+                  getNovels();
+                }
+              });
+            }
+          }
+        });
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_yt_uploads = resolveEasycom(vue.resolveDynamicComponent("yt-uploads"), __easycom_1);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "book-list" }, [
             (vue.openBlock(true), vue.createElementBlock(
@@ -19706,8 +19975,10 @@ if (uni.restoreGlobal) {
                   [
                     index2 != novels.value.length - 1 ? (vue.openBlock(), vue.createElementBlock("view", {
                       key: 0,
+                      onLongpress: ($event) => openPopup(item),
                       onClick: ($event) => vue.unref(navTo)(`/subPackages/book/read/index?id=${item.NovelID}&name=${item.Title}`)
                     }, [
+                      vue.createCommentVNode(' @click="openPopup(item)"> '),
                       vue.createElementVNode("view", { class: "book-img" }, [
                         vue.createElementVNode("view", { class: "book-pad" }, [
                           vue.createElementVNode(
@@ -19729,20 +20000,27 @@ if (uni.restoreGlobal) {
                         ),
                         vue.createCommentVNode(' <view class="book-plan">读到第1章</view> ')
                       ])
-                    ], 8, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 1,
-                      class: "book-add",
-                      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.uploads.select())
-                    }, [
-                      vue.createElementVNode("view", { class: "add-icon" }, [
-                        vue.createVNode(_component_uni_icons, {
-                          type: "plusempty",
-                          size: "50",
-                          color: "#ccc"
-                        })
-                      ]),
-                      vue.createElementVNode("view", { class: "add-text" }, "上传本地书")
-                    ]))
+                    ], 40, ["onLongpress", "onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                      "view",
+                      {
+                        key: 1,
+                        class: "book-add",
+                        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.uploads.select()),
+                        onLongpress: _cache[1] || (_cache[1] = ($event) => openAddPopup())
+                      },
+                      [
+                        vue.createElementVNode("view", { class: "add-icon" }, [
+                          vue.createVNode(_component_uni_icons, {
+                            type: "plusempty",
+                            size: "50",
+                            color: "#ccc"
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "add-text" }, "上传本地书")
+                      ],
+                      32
+                      /* HYDRATE_EVENTS */
+                    ))
                   ],
                   2
                   /* CLASS */
@@ -19759,13 +20037,200 @@ if (uni.restoreGlobal) {
             onSuccess: successHandler,
             onFail: failHandler,
             onProcess: processHandler
-          }, null, 8, ["options"])
+          }, null, 8, ["options"]),
+          vue.createCommentVNode(" 更多功能 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "popupRef",
+              ref: popupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-list" }, [
+                  vue.createCommentVNode(" 编辑书籍信息 "),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: openEditPopup
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "compose",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 编辑书籍 ")
+                  ]),
+                  vue.createCommentVNode(" 新增章节 "),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: toAddPage
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "plus",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 新增章节 ")
+                  ]),
+                  vue.createCommentVNode(" 下载书籍 "),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: downloadBook
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "download",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 下载书籍 ")
+                  ]),
+                  vue.createCommentVNode(" 删除书籍 "),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: deleteBook
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 删除书籍 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-close",
+                    onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.popupRef.close())
+                  }, "取消")
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          ),
+          vue.createCommentVNode(" 长按添加 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "addPopupRef",
+              ref: addPopupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-list" }, [
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: openCreatePopup
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "plus",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 创建书籍 ")
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "popup-close",
+                    onClick: _cache[3] || (_cache[3] = ($event) => _ctx.$refs.addPopupRef.close())
+                  }, "取消")
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          ),
+          vue.createCommentVNode(" 添加或编辑书籍名称和作者 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "createOreditPopupRef",
+              ref: createOreditPopupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-content" }, [
+                  vue.createElementVNode("view", { class: "popup-header" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "title" },
+                      vue.toDisplayString(isEdit2.value ? "编辑书籍" : "添加书籍"),
+                      1
+                      /* TEXT */
+                    )
+                  ]),
+                  vue.createElementVNode("view", { class: "popup-body" }, [
+                    vue.createElementVNode("view", { class: "input-item" }, [
+                      vue.createElementVNode("view", { class: "input-label" }, "书名："),
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          class: "input",
+                          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => bookInfo.Title = $event),
+                          placeholder: "请输入书名"
+                        },
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, bookInfo.Title]
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "input-item" }, [
+                      vue.createElementVNode("view", { class: "input-label" }, "作者："),
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          class: "input",
+                          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => bookInfo.Author = $event),
+                          placeholder: "请输入作者"
+                        },
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, bookInfo.Author]
+                      ])
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "popup-footer" }, [
+                    vue.createElementVNode("view", {
+                      class: "btn",
+                      onClick: _cache[6] || (_cache[6] = ($event) => _ctx.$refs.createOreditPopupRef.close())
+                    }, "取消"),
+                    vue.createElementVNode("view", {
+                      class: "btn btn-primary",
+                      onClick: _cache[7] || (_cache[7] = ($event) => createOrEdit())
+                    }, "确定")
+                  ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          )
         ]);
       };
     }
   };
-  const SubPackagesBookIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-7b29b7df"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/index/index.vue"]]);
-  const _sfc_main$3 = {
+  const SubPackagesBookIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-7b29b7df"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/index/index.vue"]]);
+  const _sfc_main$4 = {
     __name: "index",
     setup(__props2) {
       const novelID = vue.ref(0);
@@ -20317,12 +20782,15 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-24f694c0"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
-  const _sfc_main$2 = {
+  const SubPackagesBookReadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-24f694c0"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/read/index.vue"]]);
+  const _sfc_main$3 = {
     __name: "index",
     setup(__props2) {
+      vue.useCssVars((_ctx) => ({
+        "d2bf280f-keyboardHeight + 'px'": keyboardHeight.value + "px"
+      }));
       const x = vue.ref("600rpx");
-      const y = vue.ref("500rpx");
+      const y = vue.ref("350rpx");
       const windowHeight = vue.ref(0);
       const chapter = vue.ref({});
       const themeColor = vue.ref("day-mode");
@@ -20331,10 +20799,13 @@ if (uni.restoreGlobal) {
         themeColor.value = query.themeColor;
         chapter.value = uni.getStorageSync("editChapter") || "";
         windowHeight.value = await getScreenHeight();
-        formatAppLog("log", "at subPackages/book/edit/index.vue:33", "windowHeight", windowHeight.value);
+        inputHistory.value.push(chapter.value.oldContent);
+        uni.onKeyboardHeightChange((res) => {
+          keyboardHeight.value = res.height;
+        });
         setTimeout(async () => {
           let eleHeight = await getElementHeightById("edit-textarea");
-          formatAppLog("log", "at subPackages/book/edit/index.vue:36", "eleHeight", eleHeight);
+          formatAppLog("log", "at subPackages/book/edit/index.vue:56", "eleHeight", eleHeight);
           scrollTop.value = (eleHeight - windowHeight.value / 2) * progress - windowHeight.value / 3;
         }, 1e3);
       });
@@ -20361,8 +20832,26 @@ if (uni.restoreGlobal) {
           }).exec();
         });
       };
+      const keyboardHeight = vue.ref(0);
+      const inputHistory = vue.ref([]);
+      const currentHistoryIndex = vue.ref(0);
+      const handleInput = () => {
+        inputHistory.value.push(chapter.value.oldContent);
+        currentHistoryIndex.value = inputHistory.value.length - 1;
+        formatAppLog("log", "at subPackages/book/edit/index.vue:94", "inputHistory", inputHistory.value);
+      };
+      const recallPreviousInput = () => {
+        if (currentHistoryIndex.value > 0) {
+          chapter.value.oldContent = inputHistory.value[--currentHistoryIndex.value];
+        }
+      };
+      const recallNextInput = () => {
+        if (currentHistoryIndex.value < inputHistory.value.length - 1) {
+          chapter.value.oldContent = inputHistory.value[++currentHistoryIndex.value];
+        }
+      };
       const saveChapter = () => {
-        formatAppLog("log", "at subPackages/book/edit/index.vue:69", "chapter", chapter.value);
+        formatAppLog("log", "at subPackages/book/edit/index.vue:109", "chapter", chapter.value);
         apiUpdateNovelChapter({
           ChapterID: chapter.value.ChapterID,
           ChapterContent: chapter.value.oldContent
@@ -20404,11 +20893,12 @@ if (uni.restoreGlobal) {
                   "auto-height": "",
                   "adjust-position": false,
                   maxlength: "-1",
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => chapter.value.oldContent = $event)
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => chapter.value.oldContent = $event),
+                  onInput: handleInput
                 },
                 null,
-                4
-                /* STYLE */
+                36
+                /* STYLE, HYDRATE_EVENTS */
               ), [
                 [vue.vModelText, chapter.value.oldContent]
               ])
@@ -20433,6 +20923,39 @@ if (uni.restoreGlobal) {
                   })
                 ])
               ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 编辑功能框 "),
+            vue.createElementVNode("view", { class: "edit-function" }, [
+              vue.createCommentVNode(" 内容字符数 "),
+              vue.createElementVNode(
+                "view",
+                { class: "char-num" },
+                "已输入" + vue.toDisplayString(chapter.value.oldContent.length) + "个字符",
+                1
+                /* TEXT */
+              ),
+              vue.createCommentVNode(" 撤销 ctrl + z "),
+              vue.createElementVNode("view", {
+                class: "fun-btn",
+                onClick: recallPreviousInput
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "left",
+                  size: "20",
+                  color: "#333"
+                })
+              ]),
+              vue.createCommentVNode(" 重做 ctrl + y "),
+              vue.createElementVNode("view", {
+                class: "fun-btn",
+                onClick: recallNextInput
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "right",
+                  size: "20",
+                  color: "#333"
+                })
+              ])
             ])
           ],
           2
@@ -20441,52 +20964,164 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesBookEditIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d2bf280f"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/edit/index.vue"]]);
-  const _sfc_main$1 = {
+  const SubPackagesBookEditIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-d2bf280f"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/edit/index.vue"]]);
+  const _sfc_main$2 = {
     __name: "index",
     setup(__props2) {
-      const scrollTop = vue.ref(0);
-      const handleScroll = (event) => {
-        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:14", event.detail.scrollTop);
-        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:15", "scrollTop", scrollTop.value);
-        scrollTop.value = 1e3;
-      };
-      const setScrollTop = (value) => {
-        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:20", "setScrollTop", value);
-        scrollTop.value = value;
+      onLoad((query) => {
+        chapter.NovelID = query.novelID;
+      });
+      const x = vue.ref("600rpx");
+      const y = vue.ref("300rpx");
+      const chapter = vue.reactive({
+        NovelID: 0,
+        ChapterTitle: "",
+        ChapterContent: ""
+      });
+      const saveChapter = () => {
+        apiAddNovelChapter(chapter).then((res) => {
+          formatAppLog("log", "at subPackages/book/add/index.vue:53", "saveChapter res", res);
+          if (res.code === 0 || !res.code) {
+            uni.showToast({
+              icon: "error",
+              title: res.msg || "网络异常"
+            });
+          } else {
+            uni.navigateBack();
+          }
+        });
       };
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", null, [
-          vue.createElementVNode("scroll-view", {
-            class: "sv",
-            "scroll-y": "",
-            "scroll-top": scrollTop.value,
-            onScroll: handleScroll
-          }, [
-            (vue.openBlock(), vue.createElementBlock(
-              vue.Fragment,
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
+          vue.createCommentVNode(" 章节标题 "),
+          vue.createElementVNode("view", { class: "chapter-title" }, [
+            vue.createElementVNode("view", { class: "text" }, "章节标题："),
+            vue.withDirectives(vue.createElementVNode(
+              "input",
+              {
+                class: "title-input",
+                type: "text",
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => chapter.ChapterTitle = $event),
+                placeholder: "请输入章节标题"
+              },
               null,
-              vue.renderList(100, (item) => {
-                return vue.createElementVNode(
-                  "view",
-                  { key: item },
-                  vue.toDisplayString(item),
-                  1
-                  /* TEXT */
-                );
-              }),
-              64
-              /* STABLE_FRAGMENT */
-            ))
-          ], 40, ["scroll-top"]),
-          vue.createElementVNode("view", {
-            onClick: _cache[0] || (_cache[0] = ($event) => setScrollTop(0))
-          }, "回到顶部")
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, chapter.ChapterTitle]
+            ])
+          ]),
+          vue.createCommentVNode(" 章节内容 "),
+          vue.createElementVNode("view", { class: "chapter-content" }, [
+            vue.createElementVNode("view", { class: "text" }, "章节内容："),
+            vue.withDirectives(vue.createElementVNode(
+              "textarea",
+              {
+                class: "content-textarea",
+                "adjust-position": false,
+                placeholder: "请输入章节内容",
+                maxlength: "-1",
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => chapter.ChapterContent = $event)
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, chapter.ChapterContent]
+            ])
+          ]),
+          vue.createCommentVNode(" 内容编辑功能面板 "),
+          vue.createElementVNode("view", { class: "edit-function" }, [
+            vue.createCommentVNode(" 内容字符数 "),
+            vue.createElementVNode(
+              "view",
+              { class: "char-num" },
+              "已输入" + vue.toDisplayString(chapter.ChapterContent.length) + "个字符",
+              1
+              /* TEXT */
+            )
+          ]),
+          vue.createCommentVNode(" 小浮窗 "),
+          vue.createElementVNode("movable-area", { class: "movableArea" }, [
+            vue.createElementVNode("movable-view", {
+              class: "movableView",
+              direction: "all",
+              x: x.value,
+              y: y.value,
+              "out-of-bounds": false
+            }, [
+              vue.createElementVNode("button", {
+                class: "win-service theme-bgc",
+                onClick: saveChapter
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "folder-add",
+                  size: "30",
+                  color: "#fff"
+                })
+              ])
+            ], 8, ["x", "y"])
+          ])
         ]);
       };
     }
   };
-  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-fe972938"], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
+  const SubPackagesBookAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-eb6b0b00"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/add/index.vue"]]);
+  const _sfc_main$1 = {
+    data() {
+      return {
+        inputValue: "1",
+        inputHistory: [],
+        currentHistoryIndex: -1
+      };
+    },
+    created() {
+      this.inputHistory.push(this.inputValue);
+    },
+    methods: {
+      handleInput() {
+        this.inputHistory.push(this.inputValue);
+        this.currentHistoryIndex = this.inputHistory.length - 1;
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:27", "inputHistory", this.inputHistory);
+      },
+      recallPreviousInput() {
+        if (this.currentHistoryIndex > 0) {
+          this.inputValue = this.inputHistory[--this.currentHistoryIndex];
+        }
+      },
+      restorePreviousInput() {
+        if (this.currentHistoryIndex < this.inputHistory.length - 1) {
+          this.inputValue = this.inputHistory[++this.currentHistoryIndex];
+        }
+      }
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("div", null, [
+      vue.withDirectives(vue.createElementVNode(
+        "textarea",
+        {
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.inputValue = $event),
+          onInput: _cache[1] || (_cache[1] = (...args) => $options.handleInput && $options.handleInput(...args))
+        },
+        null,
+        544
+        /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [
+        [vue.vModelText, $data.inputValue]
+      ]),
+      vue.createCommentVNode(" 撤销 ctrl + z "),
+      vue.createElementVNode("button", {
+        onClick: _cache[2] || (_cache[2] = (...args) => $options.recallPreviousInput && $options.recallPreviousInput(...args))
+      }, "Recall"),
+      vue.createCommentVNode(" 恢复 ctrl + y "),
+      vue.createElementVNode("button", {
+        onClick: _cache[3] || (_cache[3] = (...args) => $options.restorePreviousInput && $options.restorePreviousInput(...args))
+      }, "Restore")
+    ]);
+  }
+  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/mine/index", PagesMineIndex);
   __definePage("pages/note/index", PagesNoteIndex);
@@ -20504,6 +21139,7 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/book/index/index", SubPackagesBookIndexIndex);
   __definePage("subPackages/book/read/index", SubPackagesBookReadIndex);
   __definePage("subPackages/book/edit/index", SubPackagesBookEditIndex);
+  __definePage("subPackages/book/add/index", SubPackagesBookAddIndex);
   __definePage("subPackages/test/NumericKeypad/index", SubPackagesTestNumericKeypadIndex);
   const _sfc_main = {
     onLaunch: function() {

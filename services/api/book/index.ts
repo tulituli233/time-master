@@ -78,3 +78,38 @@ export const apiDeleteNovel = (novelID: number): Promise<Novel> => {
         method: 'GET',
     })
 }
+
+// 创建小说
+export const apiCreateNovel = (data: { Title: string, Author: string }): Promise<Novel> => {
+    return request({
+        url: 'book/create',
+        method: 'POST',
+        data
+    })
+}
+
+// 修改小说
+export const apiUpdateNovel = (data: { NovelID: number, Title: string, Author: string }): Promise<Novel> => {
+    return request({
+        url: 'book/update',
+        method: 'POST',
+        data
+    })
+}
+
+// 新增章节
+export const apiAddNovelChapter = (data: { NovelID: number, ChapterTitle: string, ChapterContent: string }): Promise<NovelChapter> => {
+    return request({
+        url: 'book/addChapter',
+        method: 'POST',
+        data
+    })
+}
+
+// 下载小说
+export const apiDownloadNovel = (novelID: number): Promise<Novel> => {
+    return request({
+        url: `book/download?NovelID=${novelID}`,
+        method: 'GET',
+    })
+}

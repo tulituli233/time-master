@@ -1,29 +1,41 @@
 <template>
-    <view>
-        <scroll-view class="sv" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
-            <view v-for="item in 100" :key="item">{{ item }}</view>
-        </scroll-view>
-        <view @click="setScrollTop(0)">回到顶部</view>
-    </view>
+    <div>
+        <textarea v-model="inputValue" @input="handleInput"></textarea>
+        <!-- 撤销 ctrl + z -->
+        <button @click="recallPreviousInput">Recall</button>
+        <!-- 恢复 ctrl + y -->
+        <button @click="restorePreviousInput">Restore</button>
+    </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-const scrollTop = ref(0);
-const handleScroll = (event) => {
-    console.log(event.detail.scrollTop);
-    console.log('scrollTop', scrollTop.value);
-    scrollTop.value = 1000;
-}
-
-const setScrollTop = (value) => {
-    console.log('setScrollTop', value);
-    scrollTop.value = value;
-}
+<script>
+export default {
+    data() {
+        return {
+            inputValue: '1',
+            inputHistory: [],
+            currentHistoryIndex: -1,
+        };
+    },
+    created() {
+        this.inputHistory.push(this.inputValue);
+    },
+    methods: {
+        handleInput() {
+            this.inputHistory.push(this.inputValue);
+            this.currentHistoryIndex = this.inputHistory.length - 1;
+            console.log('inputHistory', this.inputHistory);
+        },
+        recallPreviousInput() {
+            if (this.currentHistoryIndex > 0) {
+                this.inputValue = this.inputHistory[--this.currentHistoryIndex];
+            }
+        },
+        restorePreviousInput() {
+            if (this.currentHistoryIndex < this.inputHistory.length - 1) {
+                this.inputValue = this.inputHistory[++this.currentHistoryIndex];
+            }
+        },
+    },
+};
 </script>
-
-<style lang="scss" scoped>
-.sv {
-    height: 50vh;
-}
-</style>

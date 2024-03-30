@@ -1,8 +1,9 @@
 <template>
     <view :class="themeColor">
         <scroll-view scroll-y class="edit-scroll" :scroll-top="scrollTop">
-            <textarea id="edit-textarea" class="content-textarea" :style="{ 'padding-bottom': windowHeight / 2 + 'px' }" :cursor="20" auto-height :adjust-position="false"
-                maxlength="-1" v-model="chapter.oldContent"></textarea>
+            <textarea id="edit-textarea" class="content-textarea" :style="{ 'padding-bottom': windowHeight / 2 + 'px' }"
+                :cursor="20" auto-height :adjust-position="false" maxlength="-1" v-model="chapter.oldContent"
+                @input="handleInput"></textarea>
         </scroll-view>
         <!-- 小浮窗 -->
         <movable-area class="movableArea">
@@ -12,16 +13,29 @@
                 </button>
             </movable-view>
         </movable-area>
+        <!-- 编辑功能框 -->
+        <view class="edit-function">
+            <!-- 内容字符数 -->
+            <view class="char-num">已输入{{ chapter.oldContent.length }}个字符</view>
+            <!-- 撤销 ctrl + z -->
+            <view class="fun-btn" @click="recallPreviousInput">
+                <uni-icons type="left" size="20" color="#333"></uni-icons>
+            </view>
+            <!-- 重做 ctrl + y -->
+            <view class="fun-btn" @click="recallNextInput">
+                <uni-icons type="right" size="20" color="#333"></uni-icons>
+            </view>
+        </view>
     </view>
 </template>
 
 <script setup>
-import { ref, onUpdated } from 'vue';
+import { ref, onUpdated, computed } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { apiUpdateNovelChapter } from '@/services/api/book';
 
 const x = ref('600rpx');
-const y = ref('500rpx');
+const y = ref('350rpx');
 const windowHeight = ref(0);
 const chapter = ref({});
 const themeColor = ref('day-mode');
@@ -30,7 +44,13 @@ onLoad(async (query) => {
     themeColor.value = query.themeColor
     chapter.value = uni.getStorageSync('editChapter') || ''
     windowHeight.value = await getScreenHeight();
-    console.log('windowHeight', windowHeight.value);
+    // 初始化inputHistory
+    inputHistory.value.push(chapter.value.oldContent);
+    // #ifdef APP
+    uni.onKeyboardHeightChange(res => {
+        keyboardHeight.value = res.height
+    })
+    // #endif
     setTimeout(async () => {
         let eleHeight = await getElementHeightById('edit-textarea');
         console.log('eleHeight', eleHeight);
@@ -64,7 +84,27 @@ const getElementHeightById = (elementId) => {
         }).exec();
     });
 }
-
+// #region 更多功能
+const keyboardHeight = ref(0);
+const inputHistory = ref([]);
+const currentHistoryIndex = ref(0);
+const handleInput = () => {
+    inputHistory.value.push(chapter.value.oldContent);
+    currentHistoryIndex.value = inputHistory.value.length - 1
+    console.log('inputHistory', inputHistory.value);
+}
+const recallPreviousInput = () => {
+    if (currentHistoryIndex.value > 0) {
+        chapter.value.oldContent = inputHistory.value[--currentHistoryIndex.value]
+    }
+}
+const recallNextInput = () => {
+    if (currentHistoryIndex.value < inputHistory.value.length - 1) {
+        chapter.value.oldContent = inputHistory.value[++currentHistoryIndex.value]
+    }
+}
+// #endregion
+// #region 编辑功能
 const saveChapter = () => {
     console.log('chapter', chapter.value);
     apiUpdateNovelChapter({
@@ -86,6 +126,7 @@ const saveChapter = () => {
         }
     })
 }
+// #endregio
 </script>
 
 <style lang="scss" scoped>
@@ -102,5 +143,26 @@ const saveChapter = () => {
 .content-textarea {
     width: 100vw;
     font-size: 42rpx;
+}
+
+.edit-function {
+    position: fixed;
+    bottom: v-bind("keyboardHeight + 'px'");
+    left: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background-color: #f2f2f2;
+
+    .fun-btn {
+        padding: 0 20rpx;
+        margin: 0 40rpx;
+    }
+
+    .char-num {
+        color: #999;
+        margin-right: 80rpx;
+    }
 }
 </style>
