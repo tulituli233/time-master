@@ -108,6 +108,8 @@ onLoad((query) => {
         brightnessPercent: 70,
         themeType: 1
     }
+    // 屏幕高度
+    getScreenHeight();
     init()
     getNovelChapters()
 })
@@ -169,6 +171,7 @@ const getTotalHeight = () => {
 
 // 预加载下一章节
 const preloadNextChapter = async () => {
+    console.log('preloadNextChapter');
     let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
     novelChapterArr.value.push(chapter);
 }
@@ -185,6 +188,9 @@ const addStartEnd = () => {
 
 const novelChapters = ref([])
 const novelChapterArr = ref([])
+// 没有该小说章节
+const noChapter = ref(false)
+// 获取章节
 const getNovelChapters = () => {
     apiGetNovelChapters(novelID.value).then(res => {
         if (res.code === 0 || !res.code) {
@@ -192,6 +198,9 @@ const getNovelChapters = () => {
                 icon: 'error',
                 title: res.msg || '网络异常'
             })
+        } else if (res.code === 2) {
+            noChapter.value = true
+            console.log('res', res);
         } else {
             novelChapters.value = res.data
         }
@@ -308,7 +317,8 @@ const handleScroll = (e) => {
     } else {
         ccIndex.value = currentChapter(e.detail.scrollTop);
         ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
-        if (!isLoading.value && ccProgress.value > 0.5 && novelChapterArr.value.length === ccIndex.value + 1) {
+        let ccremainProgress = currentChapterRemainProgress(e.detail.scrollTop, ccIndex.value);
+        if (!isLoading.value && !noChapter.value && ccremainProgress < 0.4 && novelChapterArr.value.length === ccIndex.value + 1) {
             isLoading.value = true;
             preloadNextChapter();
         }
@@ -328,6 +338,27 @@ const currentChapter = (scrollTop) => {
 const currentChapterProgress = (scrollTop, currentChapterIndex) => {
     let progress = (scrollTop - novelChapterArr.value[currentChapterIndex].start) / (novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start);
     return progress
+}
+const screenHeight = ref(0);
+// 计算当前章节剩余进度
+const currentChapterRemainProgress = (scrollTop, currentChapterIndex) => {
+    // 当前章节高度
+    let eleHeight = (novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start);
+    // 当前章节剩余高度
+    let remainHeight = eleHeight - scrollTop - screenHeight.value;
+    let progress = remainHeight / eleHeight
+    return progress
+}
+// 获取屏幕高度
+const getScreenHeight = () => {
+    return new Promise((resolve, reject) => {
+        uni.getSystemInfo({
+            success: function (res) {
+                screenHeight.value = res.windowHeight
+                resolve(res.windowHeight);
+            }
+        });
+    });
 }
 // 获取元素高度
 const getElementHeightById = (elementId) => {
@@ -510,6 +541,7 @@ const saveReadRecord = () => {
 
         .chapter-list {
             height: 100vh;
+            font-size: 20rpx;
 
             .chapter-item {
                 height: 35rpx;

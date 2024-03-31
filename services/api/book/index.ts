@@ -107,9 +107,9 @@ export const apiAddNovelChapter = (data: { NovelID: number, ChapterTitle: string
 }
 
 // 下载小说
-export const apiDownloadNovel = (novelID: number): Promise<Novel> => {
+export const apiDownloadNovel = (novelID: number, IncludeChapterTitle = 1): Promise<Novel> => {
     return request({
-        url: `book/download?NovelID=${novelID}`,
+        url: `book/download?NovelID=${novelID}&IncludeChapterTitle=${IncludeChapterTitle}`,
         method: 'GET',
     })
 }

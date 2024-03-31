@@ -19745,9 +19745,9 @@ if (uni.restoreGlobal) {
       data: data2
     });
   };
-  const apiDownloadNovel = (novelID) => {
+  const apiDownloadNovel = (novelID, IncludeChapterTitle = 1) => {
     return request({
-      url: `book/download?NovelID=${novelID}`,
+      url: `book/download?NovelID=${novelID}&IncludeChapterTitle=${IncludeChapterTitle}`,
       method: "GET"
     });
   };
@@ -20248,6 +20248,7 @@ if (uni.restoreGlobal) {
           brightnessPercent: 70,
           themeType: 1
         };
+        getScreenHeight();
         init();
         getNovelChapters();
       });
@@ -20301,6 +20302,7 @@ if (uni.restoreGlobal) {
         return Promise.all(promiseList).then(() => totalHeight);
       };
       const preloadNextChapter = async () => {
+        formatAppLog("log", "at subPackages/book/read/index.vue:174", "preloadNextChapter");
         let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
         novelChapterArr.value.push(chapter);
       };
@@ -20315,6 +20317,7 @@ if (uni.restoreGlobal) {
       };
       const novelChapters = vue.ref([]);
       const novelChapterArr = vue.ref([]);
+      const noChapter = vue.ref(false);
       const getNovelChapters = () => {
         apiGetNovelChapters(novelID.value).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -20322,6 +20325,9 @@ if (uni.restoreGlobal) {
               icon: "error",
               title: res.msg || "网络异常"
             });
+          } else if (res.code === 2) {
+            noChapter.value = true;
+            formatAppLog("log", "at subPackages/book/read/index.vue:203", "res", res);
           } else {
             novelChapters.value = res.data;
           }
@@ -20403,7 +20409,7 @@ if (uni.restoreGlobal) {
           }
         }
         readSetting.value.themeType = type;
-        formatAppLog("log", "at subPackages/book/read/index.vue:283", "readSetting", readSetting.value);
+        formatAppLog("log", "at subPackages/book/read/index.vue:292", "readSetting", readSetting.value);
       };
       const scrollTop = vue.ref(1);
       const goTop = vue.ref(false);
@@ -20430,7 +20436,8 @@ if (uni.restoreGlobal) {
         } else {
           ccIndex.value = currentChapter(e.detail.scrollTop);
           ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
-          if (!isLoading.value && ccProgress.value > 0.5 && novelChapterArr.value.length === ccIndex.value + 1) {
+          let ccremainProgress = currentChapterRemainProgress(e.detail.scrollTop, ccIndex.value);
+          if (!isLoading.value && !noChapter.value && ccremainProgress < 0.4 && novelChapterArr.value.length === ccIndex.value + 1) {
             isLoading.value = true;
             preloadNextChapter();
           }
@@ -20448,6 +20455,23 @@ if (uni.restoreGlobal) {
       const currentChapterProgress = (scrollTop2, currentChapterIndex) => {
         let progress = (scrollTop2 - novelChapterArr.value[currentChapterIndex].start) / (novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start);
         return progress;
+      };
+      const screenHeight = vue.ref(0);
+      const currentChapterRemainProgress = (scrollTop2, currentChapterIndex) => {
+        let eleHeight = novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start;
+        let remainHeight = eleHeight - scrollTop2 - screenHeight.value;
+        let progress = remainHeight / eleHeight;
+        return progress;
+      };
+      const getScreenHeight = () => {
+        return new Promise((resolve, reject) => {
+          uni.getSystemInfo({
+            success: function(res) {
+              screenHeight.value = res.windowHeight;
+              resolve(res.windowHeight);
+            }
+          });
+        });
       };
       const getElementHeightById = (elementId) => {
         return new Promise((resolve, reject) => {

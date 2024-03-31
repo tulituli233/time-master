@@ -1,3 +1,4 @@
+node_modules
 unpackage/dist/dev/.nvue/assets/iconfont.a0b6c6c5.ttf
 unpackage/dist/dev/app-plus/__uniappview.html
 unpackage/dist/dev/app-plus/app-config-service.js
@@ -264,7 +265,6 @@ node_modules/mp-html/tools/demo/uni-app/pages.json
 node_modules/mp-html/tools/demo/uni-app/README.md
 node_modules/mp-html/tools/demo/uni-app/pages/index/index.vue
 node_modules/mp-html/tools/demo/uni-app/pages/jump/jump.vue
-node_modules
 unpackage/dist/dev/.nvue/assets/iconfont.210c14f6.ttf
 unpackage/dist/dev/app-plus/app-config-service.js
 unpackage/dist/dev/app-plus/app-service.js
