@@ -1,41 +1,28 @@
 <template>
-    <div>
-        <textarea v-model="inputValue" @input="handleInput"></textarea>
-        <!-- 撤销 ctrl + z -->
-        <button @click="recallPreviousInput">Recall</button>
-        <!-- 恢复 ctrl + y -->
-        <button @click="restorePreviousInput">Restore</button>
-    </div>
-</template>
-
-<script>
-export default {
+    <view>
+      <picker mode="multiSelector" :range="[years, months]" @change="onDateChange">
+        <view>{{ selectedYear }} - {{ selectedMonth }}</view>
+      </picker>
+    </view>
+  </template>
+  
+  <script>
+  export default {
     data() {
-        return {
-            inputValue: '1',
-            inputHistory: [],
-            currentHistoryIndex: -1,
-        };
-    },
-    created() {
-        this.inputHistory.push(this.inputValue);
+      return {
+        years: ['2022', '2023', '2024'],
+        months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        selectedYear: '2022',
+        selectedMonth: '1'
+      };
     },
     methods: {
-        handleInput() {
-            this.inputHistory.push(this.inputValue);
-            this.currentHistoryIndex = this.inputHistory.length - 1;
-            console.log('inputHistory', this.inputHistory);
-        },
-        recallPreviousInput() {
-            if (this.currentHistoryIndex > 0) {
-                this.inputValue = this.inputHistory[--this.currentHistoryIndex];
-            }
-        },
-        restorePreviousInput() {
-            if (this.currentHistoryIndex < this.inputHistory.length - 1) {
-                this.inputValue = this.inputHistory[++this.currentHistoryIndex];
-            }
-        },
-    },
-};
-</script>
+      onDateChange(event) {
+        const [yearIndex, monthIndex] = event.detail.value;
+        this.selectedYear = this.years[yearIndex];
+        this.selectedMonth = this.months[monthIndex];
+        console.log(this.selectedYear, this.selectedMonth);
+      }
+    }
+  };
+  </script>

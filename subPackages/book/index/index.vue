@@ -50,13 +50,17 @@
                     </view>
                 </view>
                 <!-- 下载书籍 -->
-                <view class="popup-item" @click="downloadBook">
+                <view class="popup-item">
                     <view class="popup-icon">
                         <uni-icons type="download" size="30" color="#999"></uni-icons>
                     </view>
-                    <view class="popup-text">
+                    <view class="popup-text" @click="downloadBook">
                         下载书籍
                     </view>
+                    <view class="popup-switch">
+                        是否加标题
+						<switch @change="changeIncludeChapterTitle" :checked="IncludeChapterTitle" />
+					</view>
                 </view>
                 <!-- 删除书籍 -->
                 <view class="popup-item" @click="deleteBook">
@@ -79,6 +83,14 @@
                     </view>
                     <view class="popup-text">
                         创建书籍
+                    </view>
+                </view>
+                <view class="popup-item" @click="navTo('/subPackages/book/search/index')">
+                    <view class="popup-icon">
+                        <uni-icons type="search" size="30" color="#999"></uni-icons>
+                    </view>
+                    <view class="popup-text">
+                        搜索书籍
                     </view>
                 </view>
                 <view class="popup-close" @click="$refs.addPopupRef.close()">取消</view>
@@ -139,7 +151,6 @@ const getNovels = () => {
             })
         } else {
             novels.value = res.data
-            console.log('novels', novels.value)
         }
         novels.value.push({})
     })
@@ -150,7 +161,6 @@ const options = ref({
     type: 2,
     host: `${baseUrl}book/upload`,
 });
-console.log('options', options);
 const selectedHandler = (selectedData) => {
     console.log('Selected data:', selectedData);
 };
@@ -289,7 +299,7 @@ function saveTextFileToStorage1(txtContent) {
 // 服务器生成txt文件
 const serverCreateTempFile = () => {
     return new Promise((resolve, reject) => {
-        apiDownloadNovel(activeBook.value.NovelID).then(res => {
+        apiDownloadNovel(activeBook.value.NovelID, includeChapterTitle.value).then(res => {
             console.log('res', res);
             if (res.code === 0 || !res.code) {
                 uni.showToast({
@@ -302,7 +312,11 @@ const serverCreateTempFile = () => {
         })
     })
 }
-
+// 是否包含章节标题
+const includeChapterTitle = ref(false)
+const changeIncludeChapterTitle = () => {
+    includeChapterTitle.value = !includeChapterTitle.value
+}
 // 本地保存txt文件
 const downloadBook = async () => {
     let tempFilePath = await serverCreateTempFile()

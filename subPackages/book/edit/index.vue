@@ -1,29 +1,40 @@
 <template>
     <view :class="themeColor">
-        <scroll-view scroll-y class="edit-scroll" :scroll-top="scrollTop">
-            <textarea id="edit-textarea" class="content-textarea" :style="{ 'padding-bottom': windowHeight / 2 + 'px' }"
-                :cursor="20" auto-height :adjust-position="false" maxlength="-1" v-model="chapter.oldContent"
-                @input="handleInput"></textarea>
-        </scroll-view>
-        <!-- 小浮窗 -->
-        <movable-area class="movableArea">
-            <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
-                <button class="win-service theme-bgc" @click="saveChapter">
-                    <uni-icons type="cloud-upload" size="30" color="#fff"></uni-icons>
-                </button>
-            </movable-view>
-        </movable-area>
-        <!-- 编辑功能框 -->
-        <view class="edit-function">
-            <!-- 内容字符数 -->
-            <view class="char-num">已输入{{ chapter.oldContent.length }}个字符</view>
-            <!-- 撤销 ctrl + z -->
-            <view class="fun-btn" @click="recallPreviousInput">
-                <uni-icons type="left" size="20" color="#333"></uni-icons>
-            </view>
-            <!-- 重做 ctrl + y -->
-            <view class="fun-btn" @click="recallNextInput">
-                <uni-icons type="right" size="20" color="#333"></uni-icons>
+        <view :style="{ 'opacity': brightnessPercent / 100 }">
+            <scroll-view scroll-y class="edit-scroll" :scroll-top="scrollTop">
+                <textarea id="edit-textarea" class="content-textarea"
+                    :style="{ 'padding-bottom': windowHeight / 2 + 'px' }" :cursor="20" auto-height
+                    :adjust-position="false" maxlength="-1" v-model="chapter.oldContent"
+                    @input="handleInput"></textarea>
+            </scroll-view>
+            <!-- 小浮窗 -->
+            <movable-area class="movableArea">
+                <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
+                    <button class="win-service theme-bgc" @click="saveChapter">
+                        <uni-icons type="cloud-upload" size="30" color="#fff"></uni-icons>
+                    </button>
+                </movable-view>
+            </movable-area>
+            <!-- 撤销 ctrl+z -->
+            <movable-area class="movableArea">
+                <movable-view class="movableView" direction="all" :x="prevX" :y="prevY" :out-of-bounds="false">
+                    <button class="win-service theme-bgc" @click="recallPreviousInput">
+                        <uni-icons type="left" size="30" color="#fff"></uni-icons>
+                    </button>
+                </movable-view>
+            </movable-area>
+            <!-- 重做 ctrl+y -->
+            <movable-area class="movableArea">
+                <movable-view class="movableView" direction="all" :x="nextX" :y="nextY" :out-of-bounds="false">
+                    <button class="win-service theme-bgc" @click="recallNextInput">
+                        <uni-icons type="right" size="30" color="#fff"></uni-icons>
+                    </button>
+                </movable-view>
+            </movable-area>
+            <!-- 编辑功能框 -->
+            <view class="edit-function theme-bgc">
+                <!-- 内容字符数 -->
+                <view class="char-num">已输入{{ chapter.oldContent.length }}个字符</view>
             </view>
         </view>
     </view>
@@ -35,13 +46,24 @@ import { onLoad } from '@dcloudio/uni-app';
 import { apiUpdateNovelChapter } from '@/services/api/book';
 
 const x = ref('600rpx');
-const y = ref('350rpx');
+const y = ref('150rpx');
+const prevX = ref('600rpx');
+const prevY = ref('300rpx');
+const nextX = ref('600rpx');
+const nextY = ref('450rpx');
 const windowHeight = ref(0);
 const chapter = ref({});
 const themeColor = ref('day-mode');
+const brightnessPercent = ref(70);
+const fontSizePercent = ref(30);
+const fontSize = computed(() => {
+    return fontSizePercent.value / 100 * 24 + 12;
+})
 onLoad(async (query) => {
     let progress = query.progress
     themeColor.value = query.themeColor
+    brightnessPercent.value = query.brightnessPercent
+    fontSizePercent.value = query.fontSizePercent
     chapter.value = uni.getStorageSync('editChapter') || ''
     windowHeight.value = await getScreenHeight();
     // 初始化inputHistory
@@ -53,7 +75,6 @@ onLoad(async (query) => {
     // #endif
     setTimeout(async () => {
         let eleHeight = await getElementHeightById('edit-textarea');
-        console.log('eleHeight', eleHeight);
         scrollTop.value = (eleHeight - windowHeight.value / 2) * progress - windowHeight.value / 3
     }, 1000)
 })
@@ -142,7 +163,7 @@ const saveChapter = () => {
 
 .content-textarea {
     width: 100vw;
-    font-size: 42rpx;
+    font-size: v-bind("fontSize + 'px'");
 }
 
 .edit-function {

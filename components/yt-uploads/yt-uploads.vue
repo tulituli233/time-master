@@ -41,7 +41,6 @@
 		},
 		created() {
 			this._uploadsinit()
-			console.log('yt-uploads created');
 		},
 		data() {
 			return {

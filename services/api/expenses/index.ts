@@ -45,9 +45,9 @@ export const apiAddExpense = (expense: Expense): Promise<Expense> => {
 }
 
 // 获取指定用户支出
-export const apiGetUserExpenses = (userID: number): Promise<Expense[]> => {
+export const apiGetUserExpenses = (userID: number, year: number, month: number): Promise<Expense[]> => {
     return request({
-        url: `expenses/list?userID=${userID}`,
+        url: `expenses/list?userID=${userID}&year=${year}&month=${month}`,
         method: 'GET',
     });
 }

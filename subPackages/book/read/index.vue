@@ -17,6 +17,7 @@
                         :key="index" v-html="item.ChapterContent"></view>
                 </scroll-view>
             </view>
+            <!-- 导航栏 -->
             <view class="navbar theme-bgc" v-show="showTab">
                 <view @click="openMenu" class="navbar-item">
                     <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-catalog" size="30"></uni-icons>
@@ -28,14 +29,27 @@
                     <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-shuimian" size="30"></uni-icons>
                 </view>
             </view>
+            <!-- 底部状态栏 -->
+            <view class="statusbar theme-bgc">
+                <view class="statusbar-item">
+                    <!-- 时间 -->
+                    <view class="time">{{ nowTime }}</view>
+                </view>
+                <view class="statusbar-item">
+                    <!-- 总阅读进度 -->
+                    <view class="progress">{{ totalReadProgress }}%</view>
+                </view>
+            </view>
             <view v-show="showMenu" class="sidebar-menu" @click="showMenu = false">
                 <view class="menu-left">
                     <view class="menu-header theme-bgc-4">
                         <view class="novel-title ellipsis">{{ novelName }}</view>
                         <view class="chapter-num">共{{ novelChapters.length }}章</view>
                     </view>
-                    <scroll-view class="chapter-list theme-bgc" scroll-y>
-                        <view class="chapter-item ellipsis" v-for="chapter in novelChapters" :key="chapter.ChapterID">
+                    <scroll-view class="chapter-list theme-bgc" scroll-y :scroll-top="menuScrollTop">
+                        <view
+                            :class="{ 'chapter-item': true, 'theme-bgc-4': true, 'active': chapter.ChapterNumber === novelChapterArr[ccIndex].ChapterNumber }"
+                            v-for="chapter in novelChapters" :key="chapter.ChapterID">
                             <view @click.stop="goToChapter(chapter.ChapterNumber)">
                                 第{{ chapter.ChapterNumber }}章&nbsp;
                                 {{ chapter.ChapterTitle }}
@@ -46,25 +60,25 @@
             </view>
             <view v-show="showSetting" class="sidebar-setting theme-bgc">
                 <view class="setting-item">
-                    <view class="setting-icon">
+                    <view class="setting-icon" @click="setBrightness(-1)">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liangdu-4"
                             size="30"></uni-icons>
                     </view>
                     <input class="range-input" type="range" :value="readSetting.brightnessPercent"
                         @input="updateBrightness" />
-                    <view class="setting-icon">
+                    <view class="setting-icon" @click="setBrightness(1)">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liang-8"
                             size="30"></uni-icons>
                     </view>
                 </view>
                 <view class="setting-item">
-                    <view class="setting-icon">
+                    <view class="setting-icon" @click="setFontSize(-1)">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jian"
                             size="30"></uni-icons>
                     </view>
                     <input class="range-input" type="range" :value="readSetting.fontSizePercent"
                         @input="updateFontSize" />
-                    <view class="setting-icon">
+                    <view class="setting-icon" @click="setFontSize(1)">
                         <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jia"
                             size="30"></uni-icons>
                     </view>
@@ -90,7 +104,7 @@
 import { ref, computed, onUpdated, onBeforeUnmount } from 'vue';
 import { apiGetNovelChapter, apiGetNovelChapters } from '@/services/api/book';
 import { onShow, onLoad, onUnload } from '@dcloudio/uni-app';
-import { navTo } from '@/utils/utils'
+import { navTo, formatDateToTime } from '@/utils/utils'
 
 const novelID = ref(0);
 const novelName = ref('');
@@ -108,6 +122,8 @@ onLoad((query) => {
         brightnessPercent: 70,
         themeType: 1
     }
+    // 更新时间
+    updateNowTime()
     // 屏幕高度
     getScreenHeight();
     init()
@@ -150,6 +166,16 @@ const init = async () => {
     let chapter1 = await getNovelChapter(initChapterNumber + 1);
     novelChapterArr.value.push(chapter1);
 }
+// #region 目录
+const showMenu = ref(false);
+const openMenu = () => {
+    showMenu.value = true;
+    setTimeout(() => {
+        menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
+        console.log('menuScrollTop', menuScrollTop.value);
+    }, 100);
+};
+const menuScrollTop = ref(1);
 // 滚动条回到上次阅读位置
 const scrollToLastRead = (validHeight) => {
     setTimeout(() => {
@@ -158,6 +184,7 @@ const scrollToLastRead = (validHeight) => {
         isInitialized.value = false
     }, 100)
 }
+// #endregion
 const getTotalHeight = () => {
     let totalHeight = 0;
     const promiseList = novelChapterArr.value.map((item, index) => {
@@ -230,7 +257,7 @@ const getNovelChapter = (chapterNumber = 1, callback) => {
         });
     });
 }
-
+// #region 设置
 const updateBrightness = (e) => {
     readSetting.value.brightnessPercent = e.detail.value
 }
@@ -240,7 +267,15 @@ const fontSize = computed(() => {
 const updateFontSize = (e) => {
     readSetting.value.fontSizePercent = e.detail.value
 }
-
+const setBrightness = (num) => {
+    readSetting.value.brightnessPercent = parseInt(readSetting.value.brightnessPercent)
+    readSetting.value.brightnessPercent += num
+}
+const setFontSize = (num) => {
+    readSetting.value.fontSizePercent = parseInt(readSetting.value.fontSizePercent)
+    readSetting.value.fontSizePercent += num
+}
+// #endregion
 const colorList = [
     { color: '#f8f8f8', type: 1 },
     { color: '#f7f0e6', type: 2 },
@@ -256,11 +291,6 @@ const clickContent = () => {
     showTab.value = !showTab.value;
     showMenu.value = false;
     showSetting.value = false;
-};
-
-const showMenu = ref(false);
-const openMenu = () => {
-    showMenu.value = true;
 };
 
 const showSetting = ref(false);
@@ -296,14 +326,17 @@ const goTop = ref(false);
 const goToChapter = async (ChapterNumber) => {
     let chapter = await getNovelChapter(ChapterNumber, () => {
         showMenu.value = false;
-        // 清空novelChapterArr
-        novelChapterArr.value = [];
+        // 清空novelChapterArr，使用pop，直到数组长度为0
+        // 不能使用novelChapterArr.value = []，这会触发页面重新渲染，出现页面闪动的问题，影响体验
+        while (novelChapterArr.value.length > 1) {
+            novelChapterArr.value.pop();
+        }
         ccIndex.value = 0;
         ccProgress.value = 0;
         goTop.value = true;
         scrollTop.value = 0;
     });
-    novelChapterArr.value.push(chapter);
+    novelChapterArr.value[0] = chapter;
 }
 const ccIndex = ref(0);
 const ccProgress = ref(0);
@@ -392,7 +425,7 @@ function getElementDistanceToTop(elementId) {
 // 编辑章节内容
 const editChapter = () => {
     uni.setStorageSync('editChapter', novelChapterArr.value[ccIndex.value]);
-    navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value}`);
+    navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value}&brightnessPercent=${readSetting.value.brightnessPercent}&fontSizePercent=${readSetting.value.fontSizePercent}`);
 }
 
 const isInitialized = ref(true);
@@ -438,6 +471,22 @@ const saveReadRecord = () => {
     }
     uni.setStorageSync('readHistory', readHistory);
 }
+// #region 底部状态栏
+// 当前时间，每1分钟更新一次，格式：00:00
+const nowTime = ref('00:00');
+const updateNowTime = () => {
+    nowTime.value = formatDateToTime(new Date());
+    setInterval(() => {
+        nowTime.value = formatDateToTime(new Date());
+    }, 60000);
+}
+const totalReadProgress = computed(() => {
+    if (novelChapters.value.length == 0) {
+        return 0;
+    }
+    return ((novelChapterArr.value[ccIndex.value].ChapterNumber / novelChapters.value.length) * 100).toFixed(0);
+})
+// #endregion
 </script>
 
 <style lang="scss" scoped>
@@ -470,7 +519,7 @@ const saveReadRecord = () => {
         width: 65vw;
         height: 60rpx;
         line-height: 60rpx;
-        font-size: 18px;
+        font-size: 24rpx;
         font-weight: bold;
         overflow: hidden;
     }
@@ -498,12 +547,29 @@ const saveReadRecord = () => {
     align-items: center;
     height: 50px;
     background-color: #f0f0f0;
+    z-index: 1;
 
     .navbar-item {
         flex: 1;
         text-align: center;
         padding: 10px;
         cursor: pointer;
+    }
+}
+
+.statusbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60rpx;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .statusbar-item {
+        padding: 20rpx;
     }
 }
 
@@ -540,7 +606,7 @@ const saveReadRecord = () => {
         }
 
         .chapter-list {
-            height: 100vh;
+            height: 90vh;
             font-size: 20rpx;
 
             .chapter-item {
@@ -552,6 +618,10 @@ const saveReadRecord = () => {
                 &:hover {
                     background-color: #ddd;
                 }
+            }
+
+            .active {
+                background-color: #ddd !important;
             }
         }
     }
@@ -568,15 +638,18 @@ const saveReadRecord = () => {
     padding: 20rpx;
 
     .setting-item {
+        width: 90vw;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20rpx;
 
         .setting-icon {
             padding: 10rpx;
         }
 
         .range-input {
-            width: 500rpx;
+            width: 450rpx;
             padding: 10rpx;
         }
     }

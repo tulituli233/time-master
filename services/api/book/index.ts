@@ -107,9 +107,25 @@ export const apiAddNovelChapter = (data: { NovelID: number, ChapterTitle: string
 }
 
 // 下载小说
-export const apiDownloadNovel = (novelID: number, IncludeChapterTitle = 1): Promise<Novel> => {
+export const apiDownloadNovel = (novelID: number, IncludeChapterTitle = false): Promise<Novel> => {
     return request({
         url: `book/download?NovelID=${novelID}&IncludeChapterTitle=${IncludeChapterTitle}`,
+        method: 'GET',
+    })
+}
+
+// 根据作者名称获取网页链接
+export const apiGetNovelUrlByAuthor = (author: string): Promise<string> => {
+    return request({
+        url: `book/getNovelUrlByAuthor?author=${author}`,
+        method: 'GET',
+    })
+}
+
+// 根据网页链接获取小说的内容
+export const apiGetNovelByUrl = (url: string): Promise<string> => {
+    return request({
+        url: `book/getNovelByUrl?url=${url}`,
         method: 'GET',
     })
 }
