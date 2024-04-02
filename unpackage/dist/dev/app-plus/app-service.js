@@ -6178,7 +6178,7 @@ if (uni.restoreGlobal) {
     )) : vue.createCommentVNode("v-if", true);
   }
   const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const BASE_URL = "http://192.168.0.104:3838/";
+  const BASE_URL = "http://192.168.0.101:3838/";
   uni.setStorageSync("BASE_URL", BASE_URL);
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
@@ -19789,6 +19789,7 @@ if (uni.restoreGlobal) {
       vue.useCssVars((_ctx) => ({
         "7b29b7df-popupBottom + 'px'": popupBottom.value + "px"
       }));
+      const includeChapterTitle = vue.ref(false);
       const popupBottom = vue.ref(0);
       onShow(() => {
         getNovels();
@@ -19820,10 +19821,10 @@ if (uni.restoreGlobal) {
         host: `${baseUrl}book/upload`
       });
       const selectedHandler = (selectedData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:165", "Selected data:", selectedData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:166", "Selected data:", selectedData);
       };
       const successHandler = (successData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:169", "Success data:", successData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:170", "Success data:", successData);
         let res = successData[0];
         if (res.code === 0 || !res.code) {
           uni.showToast({
@@ -19838,14 +19839,14 @@ if (uni.restoreGlobal) {
         }
       };
       const failHandler = (error) => {
-        formatAppLog("error", "at subPackages/book/index/index.vue:185", "Error:", error);
+        formatAppLog("error", "at subPackages/book/index/index.vue:186", "Error:", error);
         uni.showToast({
           icon: "error",
           title: "fail上传失败"
         });
       };
       const processHandler = (progress) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:193", "Upload progress:", progress);
+        formatAppLog("log", "at subPackages/book/index/index.vue:194", "Upload progress:", progress);
       };
       const popupRef = vue.ref(null);
       const activeBook = vue.ref(null);
@@ -19904,7 +19905,7 @@ if (uni.restoreGlobal) {
       const serverCreateTempFile = () => {
         return new Promise((resolve, reject) => {
           apiDownloadNovel(activeBook.value.NovelID, includeChapterTitle.value).then((res) => {
-            formatAppLog("log", "at subPackages/book/index/index.vue:303", "res", res);
+            formatAppLog("log", "at subPackages/book/index/index.vue:304", "res", res);
             if (res.code === 0 || !res.code) {
               uni.showToast({
                 icon: "error",
@@ -19916,7 +19917,6 @@ if (uni.restoreGlobal) {
           });
         });
       };
-      const includeChapterTitle = vue.ref(false);
       const changeIncludeChapterTitle = () => {
         includeChapterTitle.value = !includeChapterTitle.value;
       };
@@ -20128,7 +20128,7 @@ if (uni.restoreGlobal) {
                       vue.createTextVNode(" 是否加标题 "),
                       vue.createElementVNode("switch", {
                         onChange: changeIncludeChapterTitle,
-                        checked: _ctx.IncludeChapterTitle
+                        checked: includeChapterTitle.value
                       }, null, 40, ["checked"])
                     ])
                   ]),
@@ -20287,12 +20287,19 @@ if (uni.restoreGlobal) {
   const _sfc_main$5 = {
     __name: "index",
     setup(__props2) {
+      vue.useCssVars((_ctx) => ({
+        "24f694c0-readSetting.brightnessPercent / 100": readSetting.value.brightnessPercent / 100
+      }));
       const novelID = vue.ref(0);
       const novelName = vue.ref("");
       const novelHistory = vue.ref({});
       const readSetting = vue.ref({});
       const x = vue.ref("600rpx");
-      const y = vue.ref("500rpx");
+      const y = vue.ref("300rpx");
+      const prevX = vue.ref("50rpx");
+      const prevY = vue.ref("500rpx");
+      const nextX = vue.ref("600rpx");
+      const nextY = vue.ref("500rpx");
       onLoad((query) => {
         novelID.value = query.id;
         novelName.value = query.name;
@@ -20334,17 +20341,18 @@ if (uni.restoreGlobal) {
       };
       const init = async () => {
         let initChapterNumber = novelHistory.value.ChapterNumber;
-        let chapter = await getNovelChapter(initChapterNumber);
-        novelChapterArr.value.push(chapter);
-        let chapter1 = await getNovelChapter(initChapterNumber + 1);
-        novelChapterArr.value.push(chapter1);
+        let preLoadChapterCount = 3;
+        for (let i = 0; i < preLoadChapterCount; i++) {
+          let chapter = await getNovelChapter(initChapterNumber + i);
+          novelChapterArr.value.push(chapter);
+        }
       };
       const showMenu = vue.ref(false);
       const openMenu = () => {
         showMenu.value = true;
         setTimeout(() => {
           menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
-          formatAppLog("log", "at subPackages/book/read/index.vue:175", "menuScrollTop", menuScrollTop.value);
+          formatAppLog("log", "at subPackages/book/read/index.vue:198", "menuScrollTop", menuScrollTop.value);
         }, 100);
       };
       const menuScrollTop = vue.ref(1);
@@ -20366,7 +20374,6 @@ if (uni.restoreGlobal) {
         return Promise.all(promiseList).then(() => totalHeight);
       };
       const preloadNextChapter = async () => {
-        formatAppLog("log", "at subPackages/book/read/index.vue:201", "preloadNextChapter");
         let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
         novelChapterArr.value.push(chapter);
       };
@@ -20391,7 +20398,7 @@ if (uni.restoreGlobal) {
             });
           } else if (res.code === 2) {
             noChapter.value = true;
-            formatAppLog("log", "at subPackages/book/read/index.vue:230", "res", res);
+            formatAppLog("log", "at subPackages/book/read/index.vue:252", "res", res);
           } else {
             novelChapters.value = res.data;
           }
@@ -20477,11 +20484,13 @@ if (uni.restoreGlobal) {
           }
         }
         readSetting.value.themeType = type;
-        formatAppLog("log", "at subPackages/book/read/index.vue:322", "readSetting", readSetting.value);
+        formatAppLog("log", "at subPackages/book/read/index.vue:344", "readSetting", readSetting.value);
       };
       const scrollTop = vue.ref(1);
       const goTop = vue.ref(false);
       const goToChapter = async (ChapterNumber) => {
+        if (ChapterNumber < 1 || ChapterNumber > novelChapters.value.length)
+          return;
         let chapter = await getNovelChapter(ChapterNumber, () => {
           showMenu.value = false;
           while (novelChapterArr.value.length > 1) {
@@ -20904,9 +20913,9 @@ if (uni.restoreGlobal) {
               4
               /* STYLE */
             ),
-            vue.createCommentVNode(" 小浮窗 "),
+            vue.createCommentVNode(" 编辑浮窗 "),
             vue.createElementVNode("movable-area", { class: "movableArea" }, [
-              vue.createElementVNode("movable-view", {
+              vue.withDirectives(vue.createElementVNode("movable-view", {
                 class: "movableView",
                 direction: "all",
                 x: x.value,
@@ -20923,7 +20932,55 @@ if (uni.restoreGlobal) {
                     color: "#fff"
                   })
                 ])
-              ], 8, ["x", "y"])
+              ], 8, ["x", "y"]), [
+                [vue.vShow, showTab.value]
+              ])
+            ]),
+            vue.createCommentVNode(" 下一章按钮 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.withDirectives(vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: nextX.value,
+                y: nextY.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service theme-bgc",
+                  onClick: _cache[6] || (_cache[6] = ($event) => goToChapter(novelChapterArr.value[ccIndex.value].ChapterNumber + 1))
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "right",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"]), [
+                [vue.vShow, showTab.value]
+              ])
+            ]),
+            vue.createCommentVNode(" 上一章按钮 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.withDirectives(vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: prevX.value,
+                y: prevY.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service theme-bgc",
+                  onClick: _cache[7] || (_cache[7] = ($event) => goToChapter(novelChapterArr.value[ccIndex.value].ChapterNumber - 1))
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "left",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"]), [
+                [vue.vShow, showTab.value]
+              ])
             ])
           ],
           2
@@ -21105,7 +21162,7 @@ if (uni.restoreGlobal) {
                       onClick: recallPreviousInput
                     }, [
                       vue.createVNode(_component_uni_icons, {
-                        type: "left",
+                        type: "arrow-left",
                         size: "30",
                         color: "#fff"
                       })
@@ -21126,7 +21183,7 @@ if (uni.restoreGlobal) {
                       onClick: recallNextInput
                     }, [
                       vue.createVNode(_component_uni_icons, {
-                        type: "right",
+                        type: "arrow-right",
                         size: "30",
                         color: "#fff"
                       })

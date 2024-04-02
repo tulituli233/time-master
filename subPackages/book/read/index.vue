@@ -89,11 +89,29 @@
                 </view>
             </view>
         </view>
-        <!-- 小浮窗 -->
+        <!-- 编辑浮窗 -->
         <movable-area class="movableArea">
-            <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
+            <movable-view class="movableView" v-show="showTab" direction="all" :x="x" :y="y" :out-of-bounds="false">
                 <button class="win-service theme-bgc" @click="editChapter">
                     <uni-icons type="gear" size="30" color="#fff"></uni-icons>
+                </button>
+            </movable-view>
+        </movable-area>
+        <!-- 下一章按钮 -->
+        <movable-area class="movableArea">
+            <movable-view class="movableView" v-show="showTab" direction="all" :x="nextX" :y="nextY"
+                :out-of-bounds="false">
+                <button class="win-service theme-bgc" @click="goToChapter(novelChapterArr[ccIndex].ChapterNumber + 1)">
+                    <uni-icons type="right" size="30" color="#fff"></uni-icons>
+                </button>
+            </movable-view>
+        </movable-area>
+        <!-- 上一章按钮 -->
+        <movable-area class="movableArea">
+            <movable-view class="movableView" v-show="showTab" direction="all" :x="prevX" :y="prevY"
+                :out-of-bounds="false">
+                <button class="win-service theme-bgc" @click="goToChapter(novelChapterArr[ccIndex].ChapterNumber - 1)">
+                    <uni-icons type="left" size="30" color="#fff"></uni-icons>
                 </button>
             </movable-view>
         </movable-area>
@@ -111,7 +129,11 @@ const novelName = ref('');
 const novelHistory = ref({});
 const readSetting = ref({});
 const x = ref('600rpx');
-const y = ref('500rpx');
+const y = ref('300rpx');
+const prevX = ref('50rpx');
+const prevY = ref('500rpx');
+const nextX = ref('600rpx');
+const nextY = ref('500rpx');
 onLoad((query) => {
     // 获取路由参数
     novelID.value = query.id
@@ -161,10 +183,11 @@ const getNovelHistory = () => {
 const init = async () => {
     // 历史阅读记录
     let initChapterNumber = novelHistory.value.ChapterNumber;
-    let chapter = await getNovelChapter(initChapterNumber);
-    novelChapterArr.value.push(chapter);
-    let chapter1 = await getNovelChapter(initChapterNumber + 1);
-    novelChapterArr.value.push(chapter1);
+    let preLoadChapterCount = 3; // 可控制预加载章节数
+    for (let i = 0; i < preLoadChapterCount; i++) {
+        let chapter = await getNovelChapter(initChapterNumber + i);
+        novelChapterArr.value.push(chapter);
+    }
 }
 // #region 目录
 const showMenu = ref(false);
@@ -198,7 +221,6 @@ const getTotalHeight = () => {
 
 // 预加载下一章节
 const preloadNextChapter = async () => {
-    console.log('preloadNextChapter');
     let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
     novelChapterArr.value.push(chapter);
 }
@@ -323,7 +345,9 @@ const switchTheme = (type) => {
 };
 const scrollTop = ref(1);
 const goTop = ref(false);
+// 跳转到指定章节
 const goToChapter = async (ChapterNumber) => {
+    if (ChapterNumber < 1 || ChapterNumber > novelChapters.value.length) return
     let chapter = await getNovelChapter(ChapterNumber, () => {
         showMenu.value = false;
         // 清空novelChapterArr，使用pop，直到数组长度为0
@@ -492,7 +516,7 @@ const totalReadProgress = computed(() => {
 <style lang="scss" scoped>
 .win-service {
     background-color: #aaa;
-    opacity: 0.7;
+    opacity: v-bind("readSetting.brightnessPercent / 100");
 }
 
 .novel-reader {
@@ -622,6 +646,7 @@ const totalReadProgress = computed(() => {
 
             .active {
                 background-color: #ddd !important;
+                color: #000;
             }
         }
     }

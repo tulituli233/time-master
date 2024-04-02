@@ -19,7 +19,7 @@
             <movable-area class="movableArea">
                 <movable-view class="movableView" direction="all" :x="prevX" :y="prevY" :out-of-bounds="false">
                     <button class="win-service theme-bgc" @click="recallPreviousInput">
-                        <uni-icons type="left" size="30" color="#fff"></uni-icons>
+                        <uni-icons type="arrow-left" size="30" color="#fff"></uni-icons>
                     </button>
                 </movable-view>
             </movable-area>
@@ -27,7 +27,7 @@
             <movable-area class="movableArea">
                 <movable-view class="movableView" direction="all" :x="nextX" :y="nextY" :out-of-bounds="false">
                     <button class="win-service theme-bgc" @click="recallNextInput">
-                        <uni-icons type="right" size="30" color="#fff"></uni-icons>
+                        <uni-icons type="arrow-right" size="30" color="#fff"></uni-icons>
                     </button>
                 </movable-view>
             </movable-area>

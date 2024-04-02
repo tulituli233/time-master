@@ -59,7 +59,7 @@
                     </view>
                     <view class="popup-switch">
                         是否加标题
-						<switch @change="changeIncludeChapterTitle" :checked="IncludeChapterTitle" />
+						<switch @change="changeIncludeChapterTitle" :checked="includeChapterTitle" />
 					</view>
                 </view>
                 <!-- 删除书籍 -->
@@ -127,6 +127,7 @@ import { apiGetNovels, apiDeleteNovel, apiCreateNovel, apiUpdateNovel, apiDownlo
 import { onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
 
+const includeChapterTitle = ref(false)
 const popupBottom = ref(0);
 onShow(() => {
     getNovels()
@@ -313,7 +314,6 @@ const serverCreateTempFile = () => {
     })
 }
 // 是否包含章节标题
-const includeChapterTitle = ref(false)
 const changeIncludeChapterTitle = () => {
     includeChapterTitle.value = !includeChapterTitle.value
 }
