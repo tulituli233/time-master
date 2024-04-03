@@ -182,10 +182,14 @@ const getNovelHistory = () => {
 // 初始化页面
 const init = async () => {
     // 历史阅读记录
-    let initChapterNumber = novelHistory.value.ChapterNumber;
+    let initChapterNumber = novelHistory.value.ChapterNumber - 1;
     let preLoadChapterCount = 3; // 可控制预加载章节数
-    for (let i = 0; i < preLoadChapterCount; i++) {
-        let chapter = await getNovelChapter(initChapterNumber + i);
+    preLoadChapters(initChapterNumber, preLoadChapterCount);
+}
+// 预加载X个章节
+const preLoadChapters = async (currentChapterNumber, count) => {
+    for (let i = 1; i <= count; i++) {
+        let chapter = await getNovelChapter(currentChapterNumber + i);
         novelChapterArr.value.push(chapter);
     }
 }
@@ -361,6 +365,7 @@ const goToChapter = async (ChapterNumber) => {
         scrollTop.value = 0;
     });
     novelChapterArr.value[0] = chapter;
+    preLoadChapters(chapter.ChapterNumber, 2);
 }
 const ccIndex = ref(0);
 const ccProgress = ref(0);
@@ -374,8 +379,7 @@ const handleScroll = (e) => {
     } else {
         ccIndex.value = currentChapter(e.detail.scrollTop);
         ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
-        let ccremainProgress = currentChapterRemainProgress(e.detail.scrollTop, ccIndex.value);
-        if (!isLoading.value && !noChapter.value && ccremainProgress < 0.4 && novelChapterArr.value.length === ccIndex.value + 1) {
+        if (!isLoading.value && !noChapter.value && (e.detail.scrollTop + screenHeight.value * 1.5 > novelChapterArr.value[ccIndex.value].end) && novelChapterArr.value.length === ccIndex.value + 1) {
             isLoading.value = true;
             preloadNextChapter();
         }

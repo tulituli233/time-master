@@ -129,3 +129,11 @@ export const apiGetNovelByUrl = (url: string): Promise<string> => {
         method: 'GET',
     })
 }
+
+// 批量删除章节
+export const apiBatchDeleteNovelChapters = (novelId: number, startChapterNumber: number, endChapterNumber: number): Promise<NovelChapter[]> => {
+    return request({
+        url: `book/batchDelete?startChapterNumber=${startChapterNumber}&endChapterNumber=${endChapterNumber}&novelId=${novelId}`,
+        method: 'GET',
+    })
+}

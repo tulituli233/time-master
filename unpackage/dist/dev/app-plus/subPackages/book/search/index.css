@@ -70,3 +70,6 @@
   text-align: center;
   line-height: 1.875rem;
 }
+#book-list .book-item .done[data-v-d945bf32] {
+  background-color: #ccc;
+}

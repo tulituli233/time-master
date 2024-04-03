@@ -1,9 +1,15 @@
 // request.ts
 import { UniAppRequestOptions, UniAppRequestSuccessCallback, UniAppRequestFailCallback } from 'uni';
 
-// const BASE_URL = 'http://127.0.0.1:3838/';
-const BASE_URL = 'http://192.168.0.101:3838/';
-uni.setStorageSync('BASE_URL', BASE_URL);
+let BASE_URL = 'http://192.168.0.101:3838/';
+
+const init = () => {
+    if (uni.getStorageSync('BASE_URL')) {
+        BASE_URL = uni.getStorageSync('BASE_URL');
+    }
+}
+// 初始化
+init();
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json'
@@ -31,3 +37,8 @@ export const request = (options: UniAppRequestOptions): Promise<any> => {
         });
     });
 };
+
+export const setBaseUrl = (url: string) => {
+    BASE_URL = url;
+    uni.setStorageSync('BASE_URL', BASE_URL);
+}

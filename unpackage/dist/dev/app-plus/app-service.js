@@ -6178,8 +6178,13 @@ if (uni.restoreGlobal) {
     )) : vue.createCommentVNode("v-if", true);
   }
   const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const BASE_URL = "http://192.168.0.101:3838/";
-  uni.setStorageSync("BASE_URL", BASE_URL);
+  let BASE_URL = "http://192.168.0.101:3838/";
+  const init = () => {
+    if (uni.getStorageSync("BASE_URL")) {
+      BASE_URL = uni.getStorageSync("BASE_URL");
+    }
+  };
+  init();
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
   };
@@ -6203,6 +6208,10 @@ if (uni.restoreGlobal) {
         }
       });
     });
+  };
+  const setBaseUrl = (url) => {
+    BASE_URL = url;
+    uni.setStorageSync("BASE_URL", BASE_URL);
   };
   const apiGetUserTasks = (userID) => {
     return request({
@@ -8346,6 +8355,22 @@ if (uni.restoreGlobal) {
   const _sfc_main$j = {
     __name: "index",
     setup(__props2) {
+      const baseUrl = vue.ref("");
+      const setBaseUrlPopupRef = vue.ref(null);
+      const openSetBaseUrl = () => {
+        baseUrl.value = uni.getStorageSync("BASE_URL");
+        setBaseUrlPopupRef.value.open("bottom");
+      };
+      const setUrl = () => {
+        if (baseUrl.value) {
+          setBaseUrl(baseUrl.value);
+          setBaseUrlPopupRef.value.close();
+          uni.showToast({
+            title: "设置成功",
+            icon: "success"
+          });
+        }
+      };
       const handleLogout = () => {
         uni.removeStorageSync("token");
         uni.removeStorageSync("userInfo");
@@ -8354,11 +8379,66 @@ if (uni.restoreGlobal) {
         });
       };
       return (_ctx, _cache) => {
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", {
             class: "setting-item",
+            onClick: openSetBaseUrl
+          }, "设置服务请求地址"),
+          vue.createElementVNode("view", {
+            class: "setting-item",
             onClick: handleLogout
-          }, "退出登录")
+          }, "退出登录"),
+          vue.createCommentVNode(" 设置服务请求地址 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "setBaseUrlPopupRef",
+              ref: setBaseUrlPopupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-content" }, [
+                  vue.createElementVNode("view", { class: "popup-header" }, [
+                    vue.createElementVNode("view", { class: "title" }, "设置服务请求地址")
+                  ]),
+                  vue.createElementVNode("view", { class: "popup-body" }, [
+                    vue.createElementVNode("view", { class: "input-item" }, [
+                      vue.createElementVNode("view", { class: "input-label" }, "地址:"),
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          class: "input",
+                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => baseUrl.value = $event),
+                          placeholder: "请输入服务请求地址"
+                        },
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, baseUrl.value]
+                      ])
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "popup-footer" }, [
+                    vue.createElementVNode("view", {
+                      class: "btn",
+                      onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.setBaseUrlPopupRef.close())
+                    }, "取消"),
+                    vue.createElementVNode("view", {
+                      class: "btn btn-primary",
+                      onClick: _cache[2] || (_cache[2] = ($event) => setUrl())
+                    }, "确定")
+                  ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          )
         ]);
       };
     }
@@ -19783,6 +19863,12 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
+  const apiBatchDeleteNovelChapters = (novelId, startChapterNumber, endChapterNumber) => {
+    return request({
+      url: `book/batchDelete?startChapterNumber=${startChapterNumber}&endChapterNumber=${endChapterNumber}&novelId=${novelId}`,
+      method: "GET"
+    });
+  };
   const _sfc_main$6 = {
     __name: "index",
     setup(__props2) {
@@ -19793,6 +19879,7 @@ if (uni.restoreGlobal) {
       const popupBottom = vue.ref(0);
       onShow(() => {
         getNovels();
+        addPopupRef.value.close();
         uni.onKeyboardHeightChange((res) => {
           if (res.height === 0) {
             popupBottom.value = 0;
@@ -19821,10 +19908,10 @@ if (uni.restoreGlobal) {
         host: `${baseUrl}book/upload`
       });
       const selectedHandler = (selectedData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:166", "Selected data:", selectedData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:193", "Selected data:", selectedData);
       };
       const successHandler = (successData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:170", "Success data:", successData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:197", "Success data:", successData);
         let res = successData[0];
         if (res.code === 0 || !res.code) {
           uni.showToast({
@@ -19839,14 +19926,14 @@ if (uni.restoreGlobal) {
         }
       };
       const failHandler = (error) => {
-        formatAppLog("error", "at subPackages/book/index/index.vue:186", "Error:", error);
+        formatAppLog("error", "at subPackages/book/index/index.vue:213", "Error:", error);
         uni.showToast({
           icon: "error",
           title: "fail上传失败"
         });
       };
       const processHandler = (progress) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:194", "Upload progress:", progress);
+        formatAppLog("log", "at subPackages/book/index/index.vue:221", "Upload progress:", progress);
       };
       const popupRef = vue.ref(null);
       const activeBook = vue.ref(null);
@@ -19902,10 +19989,40 @@ if (uni.restoreGlobal) {
         popupRef.value.close();
         navTo(`/subPackages/book/add/index?novelID=${activeBook.value.NovelID}`);
       };
+      const batchDeletePopupRef = vue.ref(null);
+      const startChapterNumber = vue.ref("");
+      const endChapterNumber = vue.ref("");
+      const openBatchDeletePopup = () => {
+        startChapterNumber.value = "";
+        endChapterNumber.value = "";
+        batchDeletePopupRef.value.open("bottom");
+      };
+      const batchDelete = () => {
+        if (!startChapterNumber.value) {
+          uni.showToast({
+            icon: "error",
+            title: "起始章节序号不能为空"
+          });
+        } else {
+          apiBatchDeleteNovelChapters(activeBook.value.NovelID, startChapterNumber.value, endChapterNumber.value).then((res) => {
+            if (res.code === 0 || !res.code) {
+              uni.showToast({
+                icon: "error",
+                title: res.msg || "网络异常"
+              });
+            } else {
+              uni.showToast({
+                title: res.msg
+              });
+              batchDeletePopupRef.value.close();
+            }
+          });
+        }
+      };
       const serverCreateTempFile = () => {
         return new Promise((resolve, reject) => {
           apiDownloadNovel(activeBook.value.NovelID, includeChapterTitle.value).then((res) => {
-            formatAppLog("log", "at subPackages/book/index/index.vue:304", "res", res);
+            formatAppLog("log", "at subPackages/book/index/index.vue:366", "res", res);
             if (res.code === 0 || !res.code) {
               uni.showToast({
                 icon: "error",
@@ -19922,7 +20039,7 @@ if (uni.restoreGlobal) {
       };
       const downloadBook = async () => {
         let tempFilePath = await serverCreateTempFile();
-        formatAppLog("log", "at subPackages/book/index/index.vue:323", "tempFilePath", tempFilePath);
+        formatAppLog("log", "at subPackages/book/index/index.vue:385", "tempFilePath", tempFilePath);
         uni.downloadFile({
           url: `${baseUrl}downloads/${tempFilePath}`,
           //  存储文件到手机本地文件夹
@@ -19933,7 +20050,7 @@ if (uni.restoreGlobal) {
                 //临时路径
                 success: function(data2) {
                   var savedFilePath = data2.savedFilePath;
-                  formatAppLog("log", "at subPackages/book/index/index.vue:335", "savedFilePath", savedFilePath);
+                  formatAppLog("log", "at subPackages/book/index/index.vue:397", "savedFilePath", savedFilePath);
                   let osname = plus.os.name;
                   if (osname == "Android") {
                     uni.showToast({
@@ -19946,17 +20063,17 @@ if (uni.restoreGlobal) {
                     data: activeBook.value.Title,
                     showToast: false,
                     success: function() {
-                      formatAppLog("log", "at subPackages/book/index/index.vue:352", "setClipboardData success");
+                      formatAppLog("log", "at subPackages/book/index/index.vue:414", "setClipboardData success");
                     }
                   });
                   setTimeout(() => {
                     uni.openDocument({
                       filePath: data2.savedFilePath,
                       success: function(ress) {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:362", "成功打开文件");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:424", "成功打开文件");
                       },
                       fail() {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:365", "打开文件失败");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:427", "打开文件失败");
                       }
                     });
                   }, 1e3);
@@ -20110,6 +20227,20 @@ if (uni.restoreGlobal) {
                       })
                     ]),
                     vue.createElementVNode("view", { class: "popup-text" }, " 新增章节 ")
+                  ]),
+                  vue.createCommentVNode(" 批量删除章节 "),
+                  vue.createElementVNode("view", {
+                    class: "popup-item",
+                    onClick: openBatchDeletePopup
+                  }, [
+                    vue.createElementVNode("view", { class: "popup-icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "30",
+                        color: "#999"
+                      })
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-text" }, " 批量删除章节 ")
                   ]),
                   vue.createCommentVNode(" 下载书籍 "),
                   vue.createElementVNode("view", { class: "popup-item" }, [
@@ -20278,6 +20409,69 @@ if (uni.restoreGlobal) {
             },
             512
             /* NEED_PATCH */
+          ),
+          vue.createCommentVNode(" 批量删除章节 "),
+          vue.createVNode(
+            _component_uni_popup,
+            {
+              ref_key: "batchDeletePopupRef",
+              ref: batchDeletePopupRef,
+              "background-color": "#fff"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "popup-content" }, [
+                  vue.createElementVNode("view", { class: "popup-header" }, [
+                    vue.createElementVNode("view", { class: "title" }, "批量删除章节")
+                  ]),
+                  vue.createElementVNode("view", { class: "batch-body" }, [
+                    vue.withDirectives(vue.createElementVNode(
+                      "input",
+                      {
+                        class: "batch-input",
+                        type: "number",
+                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => startChapterNumber.value = $event),
+                        placeholder: "起始章节序号"
+                      },
+                      null,
+                      512
+                      /* NEED_PATCH */
+                    ), [
+                      [vue.vModelText, startChapterNumber.value]
+                    ]),
+                    vue.createTextVNode(" - "),
+                    vue.withDirectives(vue.createElementVNode(
+                      "input",
+                      {
+                        class: "batch-input",
+                        type: "number",
+                        "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => endChapterNumber.value = $event),
+                        placeholder: "结束章节序号"
+                      },
+                      null,
+                      512
+                      /* NEED_PATCH */
+                    ), [
+                      [vue.vModelText, endChapterNumber.value]
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "popup-footer" }, [
+                    vue.createElementVNode("view", {
+                      class: "btn",
+                      onClick: _cache[11] || (_cache[11] = ($event) => _ctx.$refs.batchDeletePopupRef.close())
+                    }, "取消"),
+                    vue.createElementVNode("view", {
+                      class: "btn btn-primary",
+                      onClick: _cache[12] || (_cache[12] = ($event) => batchDelete())
+                    }, "确定")
+                  ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
           )
         ]);
       };
@@ -20311,7 +20505,7 @@ if (uni.restoreGlobal) {
         };
         updateNowTime();
         getScreenHeight();
-        init();
+        init2();
         getNovelChapters();
       });
       onShow(() => {
@@ -20339,11 +20533,14 @@ if (uni.restoreGlobal) {
           return novelHistory2;
         }
       };
-      const init = async () => {
-        let initChapterNumber = novelHistory.value.ChapterNumber;
+      const init2 = async () => {
+        let initChapterNumber = novelHistory.value.ChapterNumber - 1;
         let preLoadChapterCount = 3;
-        for (let i = 0; i < preLoadChapterCount; i++) {
-          let chapter = await getNovelChapter(initChapterNumber + i);
+        preLoadChapters(initChapterNumber, preLoadChapterCount);
+      };
+      const preLoadChapters = async (currentChapterNumber, count) => {
+        for (let i = 1; i <= count; i++) {
+          let chapter = await getNovelChapter(currentChapterNumber + i);
           novelChapterArr.value.push(chapter);
         }
       };
@@ -20352,7 +20549,7 @@ if (uni.restoreGlobal) {
         showMenu.value = true;
         setTimeout(() => {
           menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
-          formatAppLog("log", "at subPackages/book/read/index.vue:198", "menuScrollTop", menuScrollTop.value);
+          formatAppLog("log", "at subPackages/book/read/index.vue:202", "menuScrollTop", menuScrollTop.value);
         }, 100);
       };
       const menuScrollTop = vue.ref(1);
@@ -20398,7 +20595,7 @@ if (uni.restoreGlobal) {
             });
           } else if (res.code === 2) {
             noChapter.value = true;
-            formatAppLog("log", "at subPackages/book/read/index.vue:252", "res", res);
+            formatAppLog("log", "at subPackages/book/read/index.vue:256", "res", res);
           } else {
             novelChapters.value = res.data;
           }
@@ -20484,7 +20681,7 @@ if (uni.restoreGlobal) {
           }
         }
         readSetting.value.themeType = type;
-        formatAppLog("log", "at subPackages/book/read/index.vue:344", "readSetting", readSetting.value);
+        formatAppLog("log", "at subPackages/book/read/index.vue:348", "readSetting", readSetting.value);
       };
       const scrollTop = vue.ref(1);
       const goTop = vue.ref(false);
@@ -20502,6 +20699,7 @@ if (uni.restoreGlobal) {
           scrollTop.value = 0;
         });
         novelChapterArr.value[0] = chapter;
+        preLoadChapters(chapter.ChapterNumber, 2);
       };
       const ccIndex = vue.ref(0);
       const ccProgress = vue.ref(0);
@@ -20515,8 +20713,7 @@ if (uni.restoreGlobal) {
         } else {
           ccIndex.value = currentChapter(e.detail.scrollTop);
           ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
-          let ccremainProgress = currentChapterRemainProgress(e.detail.scrollTop, ccIndex.value);
-          if (!isLoading.value && !noChapter.value && ccremainProgress < 0.4 && novelChapterArr.value.length === ccIndex.value + 1) {
+          if (!isLoading.value && !noChapter.value && e.detail.scrollTop + screenHeight.value * 1.5 > novelChapterArr.value[ccIndex.value].end && novelChapterArr.value.length === ccIndex.value + 1) {
             isLoading.value = true;
             preloadNextChapter();
           }
@@ -20536,12 +20733,6 @@ if (uni.restoreGlobal) {
         return progress;
       };
       const screenHeight = vue.ref(0);
-      const currentChapterRemainProgress = (scrollTop2, currentChapterIndex) => {
-        let eleHeight = novelChapterArr.value[currentChapterIndex].end - novelChapterArr.value[currentChapterIndex].start;
-        let remainHeight = eleHeight - scrollTop2 - screenHeight.value;
-        let progress = remainHeight / eleHeight;
-        return progress;
-      };
       const getScreenHeight = () => {
         return new Promise((resolve, reject) => {
           uni.getSystemInfo({
@@ -21336,13 +21527,18 @@ if (uni.restoreGlobal) {
           }
         });
       };
-      const getNovelByUrl = (url) => {
+      const getNovelByUrl = (url, index2) => {
+        if (!url) {
+          return;
+        }
         apiGetNovelByUrl(url).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
               title: res.msg || "网络异常"
             });
+          } else {
+            searchResults.value[index2].url = "";
           }
         });
       };
@@ -21372,10 +21568,10 @@ if (uni.restoreGlobal) {
             (vue.openBlock(true), vue.createElementBlock(
               vue.Fragment,
               null,
-              vue.renderList(searchResults.value, (result) => {
+              vue.renderList(searchResults.value, (result, index2) => {
                 return vue.openBlock(), vue.createElementBlock("view", {
                   class: "book-item",
-                  key: result.id
+                  key: index2
                 }, [
                   vue.createElementVNode(
                     "view",
@@ -21385,9 +21581,9 @@ if (uni.restoreGlobal) {
                     /* TEXT */
                   ),
                   vue.createElementVNode("view", {
-                    class: "get-btn",
-                    onClick: ($event) => getNovelByUrl(result.url)
-                  }, "获取", 8, ["onClick"])
+                    class: vue.normalizeClass(["get-btn", result.url ? "" : "done"]),
+                    onClick: ($event) => getNovelByUrl(result.url, index2)
+                  }, vue.toDisplayString(result.url ? "获取" : "已获取"), 11, ["onClick"])
                 ]);
               }),
               128

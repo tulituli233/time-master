@@ -49,6 +49,15 @@
                         新增章节
                     </view>
                 </view>
+                <!-- 批量删除章节 -->
+                <view class="popup-item" @click="openBatchDeletePopup">
+                    <view class="popup-icon">
+                        <uni-icons type="trash" size="30" color="#999"></uni-icons>
+                    </view>
+                    <view class="popup-text">
+                        批量删除章节
+                    </view>
+                </view>
                 <!-- 下载书籍 -->
                 <view class="popup-item">
                     <view class="popup-icon">
@@ -59,8 +68,8 @@
                     </view>
                     <view class="popup-switch">
                         是否加标题
-						<switch @change="changeIncludeChapterTitle" :checked="includeChapterTitle" />
-					</view>
+                        <switch @change="changeIncludeChapterTitle" :checked="includeChapterTitle" />
+                    </view>
                 </view>
                 <!-- 删除书籍 -->
                 <view class="popup-item" @click="deleteBook">
@@ -118,12 +127,29 @@
                 </view>
             </view>
         </uni-popup>
+        <!-- 批量删除章节 -->
+        <uni-popup ref="batchDeletePopupRef" background-color="#fff">
+            <view class="popup-content">
+                <view class="popup-header">
+                    <view class="title">批量删除章节</view>
+                </view>
+                <view class="batch-body">
+                    <input class="batch-input" type="number" v-model="startChapterNumber" placeholder="起始章节序号" />
+                    -
+                    <input class="batch-input" type="number" v-model="endChapterNumber" placeholder="结束章节序号" />
+                </view>
+                <view class="popup-footer">
+                    <view class="btn" @click="$refs.batchDeletePopupRef.close()">取消</view>
+                    <view class="btn btn-primary" @click="batchDelete()">确定</view>
+                </view>
+            </view>
+        </uni-popup>
     </view>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'; // 导入需要的Vue Composition API
-import { apiGetNovels, apiDeleteNovel, apiCreateNovel, apiUpdateNovel, apiDownloadNovel } from '@/services/api/book';
+import { apiGetNovels, apiDeleteNovel, apiCreateNovel, apiUpdateNovel, apiDownloadNovel, apiBatchDeleteNovelChapters } from '@/services/api/book';
 import { onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
 
@@ -131,6 +157,7 @@ const includeChapterTitle = ref(false)
 const popupBottom = ref(0);
 onShow(() => {
     getNovels()
+    addPopupRef.value.close()
     // #ifdef APP-PLUS
     uni.onKeyboardHeightChange(res => {
         if (res.height === 0) {
@@ -254,6 +281,41 @@ const toAddPage = () => {
     popupRef.value.close()
     navTo(`/subPackages/book/add/index?novelID=${activeBook.value.NovelID}`)
 }
+// #endregion
+// #region 批量删除章节
+const batchDeletePopupRef = ref(null)
+const startChapterNumber = ref('')
+const endChapterNumber = ref('')
+const openBatchDeletePopup = () => {
+    startChapterNumber.value = ''
+    endChapterNumber.value = ''
+    batchDeletePopupRef.value.open('bottom')
+}
+const batchDelete = () => {
+    if (!startChapterNumber.value) {
+        uni.showToast({
+            icon: 'error',
+            title: '起始章节序号不能为空'
+        })
+    }
+    else {
+        apiBatchDeleteNovelChapters(activeBook.value.NovelID, startChapterNumber.value, endChapterNumber.value).then(res => {
+            if (res.code === 0 || !res.code) {
+                uni.showToast({
+                    icon: 'error',
+                    title: res.msg || '网络异常'
+                })
+            }
+            else {
+                uni.showToast({
+                    title: res.msg
+                })
+                batchDeletePopupRef.value.close()
+            }
+        })
+    }
+}
+// #endregion
 // #region 下载书籍
 const downloadBook1 = async (novel) => {
     let res = await saveTextFileToStorage1('myexample')
@@ -483,60 +545,16 @@ const deleteBook = () => {
     -webkit-line-clamp: 2;
 }
 
-.popup-content {
-    padding: 40rpx;
+// 批量删除
+.batch-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
 
-    .popup-header {
-        text-align: center;
-        margin-bottom: 40rpx;
-    }
-
-    .popup-body {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .input-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20rpx;
-
-            .input-label {
-                width: 200rpx;
-                color: #888;
-                text-align: right;
-                margin-right: 20rpx;
-            }
-
-            .input {
-                flex: 1;
-            }
-        }
-    }
-
-    .popup-footer {
-        padding: 20rpx;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-
-        .btn {
-            width: 150rpx;
-            height: 80rpx;
-            line-height: 80rpx;
-            text-align: center;
-            border-radius: 50rpx;
-            border: 1px solid #aaa;
-        }
-
-        .btn-primary {
-            margin-left: 80rpx;
-            background-color: #0084ff;
-            color: #fff;
-        }
+    .batch-input {
+        width: 200rpx;
+        padding: 20rpx 30rpx;
     }
 }
 </style>

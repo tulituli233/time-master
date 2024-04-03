@@ -5,9 +5,9 @@
             <view class="search-btn" @click="search">搜索</view>
         </view>
         <view id="book-list">
-            <view class="book-item" v-for="result in searchResults" :key="result.id">
+            <view class="book-item" v-for="(result, index) in searchResults" :key="index">
                 <view class="book-title ellipsis">{{ result.name }}</view>
-                <view class="get-btn" @click="getNovelByUrl(result.url)">获取</view>
+                <view :class="['get-btn', result.url ? '' : 'done']" @click="getNovelByUrl(result.url, index)">{{ result.url ? '获取' : '已获取' }}</view>
             </view>
         </view>
     </div>
@@ -16,7 +16,6 @@
 <script setup>
 import { ref } from 'vue';
 import { apiGetNovelUrlByAuthor, apiGetNovelByUrl } from '@/services/api/book';
-
 
 const searchString = ref('');
 const searchResults = ref([]);
@@ -37,7 +36,10 @@ const getNovelUrlByAuthor = (author) => {
     })
 }
 
-const getNovelByUrl = (url) => {
+const getNovelByUrl = (url, index) => {
+    if (!url) {
+        return
+    }
     apiGetNovelByUrl(url).then((res) => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -45,6 +47,7 @@ const getNovelByUrl = (url) => {
                 title: res.msg || '网络异常'
             })
         } else {
+            searchResults.value[index].url = ''
             // navTo(`/subPackages/book/read/index?id=${res.data.id}&name=${res.data.name}`)
         }
     })
@@ -103,6 +106,10 @@ const getNovelByUrl = (url) => {
             border-radius: 10rpx;
             text-align: center;
             line-height: 60rpx;
+        }
+
+        .done {
+            background-color: #ccc;
         }
     }
 }

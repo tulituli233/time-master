@@ -156,6 +156,10 @@ const saveChapter = () => {
     opacity: 0.7;
 }
 
+#edit-textarea {
+    width: 95vw;
+}
+
 .edit-scroll {
     height: 100vh;
     padding: 20rpx;
