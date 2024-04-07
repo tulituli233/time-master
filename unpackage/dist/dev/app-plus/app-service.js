@@ -20429,6 +20429,7 @@ if (uni.restoreGlobal) {
                       "input",
                       {
                         class: "batch-input",
+                        style: { "text-align": "right" },
                         type: "number",
                         "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => startChapterNumber.value = $event),
                         placeholder: "起始章节序号"
@@ -20714,6 +20715,10 @@ if (uni.restoreGlobal) {
           ccIndex.value = currentChapter(e.detail.scrollTop);
           ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
           if (!isLoading.value && !noChapter.value && e.detail.scrollTop + screenHeight.value * 1.5 > novelChapterArr.value[ccIndex.value].end && novelChapterArr.value.length === ccIndex.value + 1) {
+            isLoading.value = true;
+            preloadNextChapter();
+          }
+          if (!isLoading.value && !noChapter.value && e.detail.scrollTop + screenHeight.value * 1.2 > novelChapterArr.value[novelChapterArr.value.length - 1].end && ccIndex.value > 0) {
             isLoading.value = true;
             preloadNextChapter();
           }

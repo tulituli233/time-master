@@ -1,6 +1,6 @@
 <template>
     <view :class="themeColor">
-        <view :style="{ 'opacity': brightnessPercent / 100 }">
+        <view :style="{ 'opacity': brightnessPercent / 100 }" @click="clickContent">
             <scroll-view scroll-y class="edit-scroll" :scroll-top="scrollTop">
                 <textarea id="edit-textarea" class="content-textarea"
                     :style="{ 'padding-bottom': windowHeight / 2 + 'px' }" :cursor="20" auto-height
@@ -9,7 +9,7 @@
             </scroll-view>
             <!-- 小浮窗 -->
             <movable-area class="movableArea">
-                <movable-view class="movableView" direction="all" :x="x" :y="y" :out-of-bounds="false">
+                <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="x" :y="y" :out-of-bounds="false">
                     <button class="win-service theme-bgc" @click="saveChapter">
                         <uni-icons type="cloud-upload" size="30" color="#fff"></uni-icons>
                     </button>
@@ -17,7 +17,7 @@
             </movable-area>
             <!-- 撤销 ctrl+z -->
             <movable-area class="movableArea">
-                <movable-view class="movableView" direction="all" :x="prevX" :y="prevY" :out-of-bounds="false">
+                <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="prevX" :y="prevY" :out-of-bounds="false">
                     <button class="win-service theme-bgc" @click="recallPreviousInput">
                         <uni-icons type="arrow-left" size="30" color="#fff"></uni-icons>
                     </button>
@@ -25,7 +25,7 @@
             </movable-area>
             <!-- 重做 ctrl+y -->
             <movable-area class="movableArea">
-                <movable-view class="movableView" direction="all" :x="nextX" :y="nextY" :out-of-bounds="false">
+                <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="nextX" :y="nextY" :out-of-bounds="false">
                     <button class="win-service theme-bgc" @click="recallNextInput">
                         <uni-icons type="arrow-right" size="30" color="#fff"></uni-icons>
                     </button>
@@ -46,11 +46,11 @@ import { onLoad } from '@dcloudio/uni-app';
 import { apiUpdateNovelChapter } from '@/services/api/book';
 
 const x = ref('600rpx');
-const y = ref('150rpx');
+const y = ref('300rpx');
 const prevX = ref('600rpx');
-const prevY = ref('300rpx');
+const prevY = ref('450rpx');
 const nextX = ref('600rpx');
-const nextY = ref('450rpx');
+const nextY = ref('600rpx');
 const windowHeight = ref(0);
 const chapter = ref({});
 const themeColor = ref('day-mode');
@@ -75,7 +75,7 @@ onLoad(async (query) => {
     // #endif
     setTimeout(async () => {
         let eleHeight = await getElementHeightById('edit-textarea');
-        scrollTop.value = (eleHeight - windowHeight.value / 2) * progress - windowHeight.value / 3
+        scrollTop.value = (eleHeight - windowHeight.value / 2) * progress
     }, 1000)
 })
 const scrollTop = ref(1)
@@ -105,6 +105,12 @@ const getElementHeightById = (elementId) => {
         }).exec();
     });
 }
+// #regin 点击页面
+const showFunBtn = ref(false);
+const clickContent = () => {
+    showFunBtn.value = !showFunBtn.value;
+}
+// #endregin
 // #region 更多功能
 const keyboardHeight = ref(0);
 const inputHistory = ref([]);

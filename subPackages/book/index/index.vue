@@ -134,7 +134,7 @@
                     <view class="title">批量删除章节</view>
                 </view>
                 <view class="batch-body">
-                    <input class="batch-input" type="number" v-model="startChapterNumber" placeholder="起始章节序号" />
+                    <input class="batch-input" style="text-align: right;" type="number" v-model="startChapterNumber" placeholder="起始章节序号" />
                     -
                     <input class="batch-input" type="number" v-model="endChapterNumber" placeholder="结束章节序号" />
                 </view>

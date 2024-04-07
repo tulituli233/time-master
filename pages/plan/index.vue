@@ -120,7 +120,7 @@ import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks
 
 const previewDays = 31;//预览天数
 const x = ref('600rpx');
-const y = ref('1000rpx');
+const y = ref('1200rpx');
 
 const todayX = ref('600rpx');
 const todayY = ref('500rpx');

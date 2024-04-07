@@ -428,6 +428,7 @@ const deleteRecord = (e, item) => {
 
     .popup-swiper {
         height: 450rpx;
+        width: 100vw;
     }
 
     .swiper-page {

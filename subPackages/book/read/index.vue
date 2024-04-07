@@ -129,11 +129,11 @@ const novelName = ref('');
 const novelHistory = ref({});
 const readSetting = ref({});
 const x = ref('600rpx');
-const y = ref('300rpx');
+const y = ref('600rpx');
 const prevX = ref('50rpx');
-const prevY = ref('500rpx');
+const prevY = ref('750rpx');
 const nextX = ref('600rpx');
-const nextY = ref('500rpx');
+const nextY = ref('750rpx');
 onLoad((query) => {
     // 获取路由参数
     novelID.value = query.id
@@ -379,7 +379,13 @@ const handleScroll = (e) => {
     } else {
         ccIndex.value = currentChapter(e.detail.scrollTop);
         ccProgress.value = currentChapterProgress(e.detail.scrollTop, ccIndex.value);
+        // 当前章节仅剩0.5屏幕高度时，预加载下一章
         if (!isLoading.value && !noChapter.value && (e.detail.scrollTop + screenHeight.value * 1.5 > novelChapterArr.value[ccIndex.value].end) && novelChapterArr.value.length === ccIndex.value + 1) {
+            isLoading.value = true;
+            preloadNextChapter();
+        }
+        // 最新章节仅剩0.2屏幕高度时，预加载下一章
+        if (!isLoading.value && !noChapter.value && (e.detail.scrollTop + screenHeight.value * 1.2 > novelChapterArr.value[novelChapterArr.value.length - 1].end) && ccIndex.value > 0) {
             isLoading.value = true;
             preloadNextChapter();
         }

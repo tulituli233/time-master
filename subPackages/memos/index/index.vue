@@ -58,7 +58,7 @@ import { navTo, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
 
 const x = ref('600rpx');
-const y = ref('1000rpx');
+const y = ref('1200rpx');
 // 获取备忘录
 let memos = ref([]);
 onShow(() => {

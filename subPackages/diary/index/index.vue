@@ -54,7 +54,7 @@ import { navTo, formatDateToMonth, formatDateToDay, formatDateToTime } from '@/u
 import { onShow } from '@dcloudio/uni-app';
 
 const x = ref('600rpx');
-const y = ref('1000rpx');
+const y = ref('1200rpx');
 // 获取日记
 let diaries = ref([]);
 onShow(() => {

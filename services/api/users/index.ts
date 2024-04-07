@@ -37,4 +37,3 @@ export const apiRegister = (userData: { Phone: string, Password: string }): Prom
         data: userData
     });
 };
-
