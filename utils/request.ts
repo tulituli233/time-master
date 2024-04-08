@@ -30,34 +30,64 @@ export const request = (options: UniAppRequestOptions, assignedBaseUrl?: string)
         });
     });
 };
-
-// 通过遍历指定区间的IPV4地址，测试服务器连接
-const pingRange = async (oldUrl: string, start: number, end: number) => {
-    const oldRes = await request({
-        url: `users/ping`,
-        method: 'GET'
-    }, oldUrl).catch(() => { });
-    if (oldRes) {
-        return;
-    }
-    let i = start;
-    const timer = setInterval(async () => {
-        if (i > end) {
-            clearTimeout(timer);
-            return;
+interface PingResult {
+    code: number;
+    msg: string;
+}
+export const pingRange = (oldUrl: string, start: number = 101, end: number = 120): Promise<PingResult> => {
+    return new Promise<PingResult>(async (resolve, reject) => {
+        let timeOut = setTimeout(() => {
+            // 查找新地址
+            console.log(`开始ping 192.168.0.${start}到192.168.0.${end}`);
+            let i = start;
+            const timer = setInterval(async () => {
+                if (i > end) {
+                    clearInterval(timer);
+                    resolve({
+                        code: 0,
+                        msg: `从192.168.0.${start}到192.168.0.${end} 未能ping通`
+                    });
+                }
+                const currentI = ++i;
+                try {
+                    const res = await request({
+                        url: `users/ping`,
+                        method: 'GET'
+                    }, `http://192.168.0.${currentI}:3838/`);
+                    if (res) {
+                        BASE_URL = `http://192.168.0.${currentI}:3838/`;
+                        uni.setStorageSync('BASE_URL', BASE_URL);
+                        clearInterval(timer);
+                        resolve({
+                            code: 1,
+                            msg: BASE_URL
+                        });
+                    }
+                } catch (error) {
+                    console.log(`192.168.0.${currentI} ping 失败`);
+                }
+            }, 1000);
+        }, 3000);
+        // 尝试旧地址
+        try {
+            console.log(`开始ping ${oldUrl}`);
+            const oldRes = await request({
+                url: `users/ping`,
+                method: 'GET'
+            }, oldUrl);
+            if (oldRes) {
+                console.log(`旧地址${oldUrl} ping成功`);
+                resolve({
+                    code: 2,
+                    msg: oldUrl
+                });
+                clearTimeout(timeOut);
+                return;
+            }
+        } catch (error) {
+            console.log(`旧地址${oldUrl} ping失败`);
         }
-        const res = await request({
-            url: `users/ping`,
-            method: 'GET'
-        }, `http://192.168.0.${i}:3838/`).catch(() => { });
-        if (res) {
-            BASE_URL = `http://192.168.0.${i}:3838/`;
-            uni.setStorageSync('BASE_URL', BASE_URL);
-            clearTimeout(timer);
-            return;
-        }
-        i++;
-    }, 1000);
+    });
 }
 
 const init = () => {

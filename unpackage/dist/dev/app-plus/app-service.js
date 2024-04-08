@@ -6179,19 +6179,14 @@ if (uni.restoreGlobal) {
   }
   const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   let BASE_URL = "http://192.168.0.101:3838/";
-  const init = () => {
-    if (uni.getStorageSync("BASE_URL")) {
-      BASE_URL = uni.getStorageSync("BASE_URL");
-    }
-  };
-  init();
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
   };
-  const request = (options2) => {
+  const request = (options2, assignedBaseUrl) => {
+    const baseUrl = assignedBaseUrl || BASE_URL;
     const requestOptions = {
       ...options2,
-      url: `${BASE_URL}${options2.url}`,
+      url: `${baseUrl}${options2.url}`,
       header: {
         ...DEFAULT_HEADERS,
         ...options2.header
@@ -6209,6 +6204,66 @@ if (uni.restoreGlobal) {
       });
     });
   };
+  const pingRange = (oldUrl, start = 101, end = 120) => {
+    return new Promise(async (resolve, reject) => {
+      let timeOut = setTimeout(() => {
+        formatAppLog("log", "at utils/request.ts:41", `开始ping 192.168.0.${start}到192.168.0.${end}`);
+        let i = start;
+        const timer = setInterval(async () => {
+          if (i > end) {
+            clearInterval(timer);
+            resolve({
+              code: 0,
+              msg: `从192.168.0.${start}到192.168.0.${end} 未能ping通`
+            });
+          }
+          const currentI = ++i;
+          try {
+            const res = await request({
+              url: `users/ping`,
+              method: "GET"
+            }, `http://192.168.0.${currentI}:3838/`);
+            if (res) {
+              BASE_URL = `http://192.168.0.${currentI}:3838/`;
+              uni.setStorageSync("BASE_URL", BASE_URL);
+              clearInterval(timer);
+              resolve({
+                code: 1,
+                msg: BASE_URL
+              });
+            }
+          } catch (error) {
+            formatAppLog("log", "at utils/request.ts:67", `192.168.0.${currentI} ping 失败`);
+          }
+        }, 1e3);
+      }, 3e3);
+      try {
+        formatAppLog("log", "at utils/request.ts:73", `开始ping ${oldUrl}`);
+        const oldRes = await request({
+          url: `users/ping`,
+          method: "GET"
+        }, oldUrl);
+        if (oldRes) {
+          formatAppLog("log", "at utils/request.ts:79", `旧地址${oldUrl} ping成功`);
+          resolve({
+            code: 2,
+            msg: oldUrl
+          });
+          clearTimeout(timeOut);
+          return;
+        }
+      } catch (error) {
+        formatAppLog("log", "at utils/request.ts:88", `旧地址${oldUrl} ping失败`);
+      }
+    });
+  };
+  const init = () => {
+    if (uni.getStorageSync("BASE_URL")) {
+      BASE_URL = uni.getStorageSync("BASE_URL");
+    }
+    pingRange(BASE_URL, 101, 120);
+  };
+  init();
   const setBaseUrl = (url) => {
     BASE_URL = url;
     uni.setStorageSync("BASE_URL", BASE_URL);
@@ -6240,7 +6295,7 @@ if (uni.restoreGlobal) {
         "fbfe11c7-popupBottom + 'px'": popupBottom.value + "px"
       }));
       const x = vue.ref("600rpx");
-      const y = vue.ref("1000rpx");
+      const y = vue.ref("1200rpx");
       const popupBottom = vue.ref(0);
       let tasks = vue.ref([]);
       onShow(() => {
@@ -6809,7 +6864,7 @@ if (uni.restoreGlobal) {
       }));
       const previewDays = 31;
       const x = vue.ref("600rpx");
-      const y = vue.ref("1000rpx");
+      const y = vue.ref("1200rpx");
       const todayX = vue.ref("600rpx");
       const todayY = vue.ref("500rpx");
       let tasks = vue.ref([]);
@@ -8371,6 +8426,24 @@ if (uni.restoreGlobal) {
           });
         }
       };
+      const refreshBaseUrl = async () => {
+        let res = await pingRange(uni.getStorageSync("BASE_URL"));
+        formatAppLog("log", "at subPackages/mine/setting/index.vue:56", "res", res);
+        if (res.code === 0) {
+          uni.showToast({
+            title: "服务器地址更新失败",
+            icon: "error"
+          });
+        } else {
+          if (res.code === 2)
+            msg = "服务器地址未改变";
+          msg = `当前服务器地址为${res.msg}`;
+          uni.showToast({
+            title: msg,
+            icon: "success"
+          });
+        }
+      };
       const handleLogout = () => {
         uni.removeStorageSync("token");
         uni.removeStorageSync("userInfo");
@@ -8379,16 +8452,31 @@ if (uni.restoreGlobal) {
         });
       };
       return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", {
             class: "setting-item",
             onClick: openSetBaseUrl
-          }, "设置服务请求地址"),
+          }, [
+            vue.createElementVNode("view", { class: "title" }, "设置服务请求地址"),
+            vue.createElementVNode("view", {
+              class: "icon",
+              onClick: vue.withModifiers(refreshBaseUrl, ["stop"])
+            }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "refreshempty",
+                size: "20",
+                color: "#999"
+              })
+            ], 8, ["onClick"])
+          ]),
           vue.createElementVNode("view", {
             class: "setting-item",
             onClick: handleLogout
-          }, "退出登录"),
+          }, [
+            vue.createElementVNode("view", { class: "title" }, "退出登录")
+          ]),
           vue.createCommentVNode(" 设置服务请求地址 "),
           vue.createVNode(
             _component_uni_popup,
@@ -8474,7 +8562,7 @@ if (uni.restoreGlobal) {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
-      const y = vue.ref("1000rpx");
+      const y = vue.ref("1200rpx");
       let memos = vue.ref([]);
       onShow(() => {
         getMemos();
@@ -18227,7 +18315,7 @@ if (uni.restoreGlobal) {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
-      const y = vue.ref("1000rpx");
+      const y = vue.ref("1200rpx");
       let diaries = vue.ref([]);
       onShow(() => {
         getDiaries();
@@ -19031,7 +19119,7 @@ if (uni.restoreGlobal) {
     __name: "index",
     setup(__props2) {
       const x = vue.ref("600rpx");
-      const y = vue.ref("1000rpx");
+      const y = vue.ref("1200rpx");
       onShow(() => {
         getCountdowns();
       });
@@ -20490,11 +20578,11 @@ if (uni.restoreGlobal) {
       const novelHistory = vue.ref({});
       const readSetting = vue.ref({});
       const x = vue.ref("600rpx");
-      const y = vue.ref("300rpx");
+      const y = vue.ref("600rpx");
       const prevX = vue.ref("50rpx");
-      const prevY = vue.ref("500rpx");
+      const prevY = vue.ref("850rpx");
       const nextX = vue.ref("600rpx");
-      const nextY = vue.ref("500rpx");
+      const nextY = vue.ref("850rpx");
       onLoad((query) => {
         novelID.value = query.id;
         novelName.value = query.name;
@@ -20529,7 +20617,8 @@ if (uni.restoreGlobal) {
             ChapterNumber: 1,
             Title: novelName.value,
             NovelID: novelID.value,
-            ChapterProgress: 0
+            ChapterProgress: 0,
+            BookMarkList: []
           };
           return novelHistory2;
         }
@@ -20548,28 +20637,22 @@ if (uni.restoreGlobal) {
       const showMenu = vue.ref(false);
       const openMenu = () => {
         showMenu.value = true;
+        showTab.value = false;
         setTimeout(() => {
           menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
-          formatAppLog("log", "at subPackages/book/read/index.vue:202", "menuScrollTop", menuScrollTop.value);
+          formatAppLog("log", "at subPackages/book/read/index.vue:231", "menuScrollTop", menuScrollTop.value);
         }, 100);
       };
       const menuScrollTop = vue.ref(1);
-      const scrollToLastRead = (validHeight) => {
+      const scrollToLastRead = (validHeight, chaProgress = 0) => {
+        chaProgress = chaProgress == 0 ? novelHistory.value.ChapterProgress : chaProgress;
         setTimeout(() => {
-          let st = validHeight * novelHistory.value.ChapterProgress;
+          let st = validHeight * chaProgress;
           scrollTop.value = st;
+          if (chaProgress)
+            ccProgress.value = chaProgress;
           isInitialized.value = false;
         }, 100);
-      };
-      const getTotalHeight = () => {
-        let totalHeight = 0;
-        const promiseList = novelChapterArr.value.map((item, index2) => {
-          return getElementHeightById(`novel-chapter-${index2}`).then((height) => {
-            totalHeight += height;
-            return totalHeight;
-          });
-        });
-        return Promise.all(promiseList).then(() => totalHeight);
       };
       const preloadNextChapter = async () => {
         let chapter = await getNovelChapter(novelChapterArr.value[novelChapterArr.value.length - 1].ChapterNumber + 1);
@@ -20596,7 +20679,7 @@ if (uni.restoreGlobal) {
             });
           } else if (res.code === 2) {
             noChapter.value = true;
-            formatAppLog("log", "at subPackages/book/read/index.vue:256", "res", res);
+            formatAppLog("log", "at subPackages/book/read/index.vue:287", "res", res);
           } else {
             novelChapters.value = res.data;
           }
@@ -20650,6 +20733,48 @@ if (uni.restoreGlobal) {
       const goBack = () => {
         uni.navigateBack();
       };
+      const createStar = () => {
+        const bookMark = {
+          ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
+          BookMarkTitle: novelChapterArr.value[ccIndex.value].ChapterTitle,
+          ChapterProgress: ccProgress.value
+        };
+        let nHistory = {
+          NovelID: novelID.value,
+          NovelName: novelName.value,
+          ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
+          ChapterProgress: ccProgress.value,
+          BookMarkList: [bookMark]
+        };
+        let readHistory = uni.getStorageSync("readHistory") || [];
+        let index2 = readHistory.findIndex((item) => item.NovelID === nHistory.NovelID);
+        if (index2 > -1) {
+          if (!readHistory[index2].BookMarkList) {
+            readHistory[index2].BookMarkList = [bookMark];
+          }
+          readHistory[index2].BookMarkList.push(bookMark);
+        } else {
+          readHistory.push(nHistory);
+        }
+        uni.setStorageSync("readHistory", readHistory);
+        uni.showToast({
+          icon: "success",
+          title: "成功添加书签"
+        });
+      };
+      const showStar = vue.ref(false);
+      const openStar = () => {
+        novelHistory.value = getNovelHistory();
+        showStar.value = !showStar.value;
+      };
+      const goToBookmark = async (chapterNumber, chaProgress) => {
+        await goToChapter(chapterNumber);
+        let eleHeight = await getElementHeightById(`novel-chapter-0`);
+        formatAppLog("log", "at subPackages/book/read/index.vue:385", "eleHeight", eleHeight);
+        scrollToLastRead(eleHeight, chaProgress);
+        showMenu.value = false;
+        showStar.value = false;
+      };
       const showTab = vue.ref(false);
       const clickContent = () => {
         showTab.value = !showTab.value;
@@ -20682,7 +20807,7 @@ if (uni.restoreGlobal) {
           }
         }
         readSetting.value.themeType = type;
-        formatAppLog("log", "at subPackages/book/read/index.vue:348", "readSetting", readSetting.value);
+        formatAppLog("log", "at subPackages/book/read/index.vue:424", "readSetting", readSetting.value);
       };
       const scrollTop = vue.ref(1);
       const goTop = vue.ref(false);
@@ -20769,9 +20894,8 @@ if (uni.restoreGlobal) {
       vue.onUpdated(async () => {
         if (isInitialized.value) {
           ccProgress.value = novelHistory.value ? novelHistory.value.ChapterProgress : 0;
-          let totalHeight = await getTotalHeight();
-          let eleHeight = await getElementHeightById(`novel-chapter-1`);
-          scrollToLastRead(totalHeight - eleHeight);
+          let eleHeight = await getElementHeightById(`novel-chapter-0`);
+          scrollToLastRead(eleHeight);
         }
       });
       vue.onBeforeUnmount(() => {
@@ -20789,15 +20913,17 @@ if (uni.restoreGlobal) {
           NovelID: novelID.value,
           NovelName: novelName.value,
           ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
-          ChapterProgress: ccProgress.value
+          ChapterProgress: ccProgress.value,
+          BookMarkList: []
         };
         let readHistory = uni.getStorageSync("readHistory") || [];
         let index2 = readHistory.findIndex((item) => {
           return item.NovelID === nHistory.NovelID;
         });
         if (index2 > -1) {
-          readHistory.splice(index2, 1);
-          readHistory.push(nHistory);
+          readHistory[index2].ChapterProgress = nHistory.ChapterProgress;
+          readHistory[index2].ChapterNumber = nHistory.ChapterNumber;
+          readHistory[index2].NovelName = nHistory.NovelName;
         } else {
           readHistory.push(nHistory);
         }
@@ -20832,16 +20958,6 @@ if (uni.restoreGlobal) {
               },
               [
                 vue.createElementVNode("view", { class: "novel-header theme-bgc" }, [
-                  vue.createElementVNode("view", {
-                    class: "back",
-                    onClick: goBack
-                  }, [
-                    vue.createVNode(_component_uni_icons, {
-                      class: "theme-font",
-                      type: "arrow-left",
-                      size: "30"
-                    })
-                  ]),
                   novelChapterArr.value[ccIndex.value] ? (vue.openBlock(), vue.createElementBlock(
                     "view",
                     {
@@ -20860,6 +20976,38 @@ if (uni.restoreGlobal) {
                     /* TEXT */
                   )
                 ]),
+                vue.createCommentVNode(" 顶部功能栏 "),
+                vue.withDirectives(vue.createElementVNode(
+                  "view",
+                  { class: "header-fun theme-bgc" },
+                  [
+                    vue.createElementVNode("view", {
+                      class: "back",
+                      onClick: goBack
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        type: "arrow-left",
+                        size: "30"
+                      })
+                    ]),
+                    vue.createElementVNode("view", {
+                      class: "star",
+                      onClick: createStar
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        type: "star",
+                        size: "30"
+                      })
+                    ])
+                  ],
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vShow, showTab.value]
+                ]),
+                vue.createCommentVNode(" 小说内容 "),
                 vue.createElementVNode(
                   "view",
                   {
@@ -20960,6 +21108,7 @@ if (uni.restoreGlobal) {
                     )
                   ])
                 ]),
+                vue.createCommentVNode(" 目录 "),
                 vue.withDirectives(vue.createElementVNode(
                   "view",
                   {
@@ -20969,49 +21118,102 @@ if (uni.restoreGlobal) {
                   [
                     vue.createElementVNode("view", { class: "menu-left" }, [
                       vue.createElementVNode("view", { class: "menu-header theme-bgc-4" }, [
-                        vue.createElementVNode(
-                          "view",
-                          { class: "novel-title ellipsis" },
-                          vue.toDisplayString(novelName.value),
-                          1
-                          /* TEXT */
-                        ),
-                        vue.createElementVNode(
-                          "view",
-                          { class: "chapter-num" },
-                          "共" + vue.toDisplayString(novelChapters.value.length) + "章",
-                          1
-                          /* TEXT */
-                        )
+                        vue.createElementVNode("view", { class: "left-menu" }, [
+                          vue.createElementVNode(
+                            "view",
+                            { class: "novel-title ellipsis" },
+                            vue.toDisplayString(novelName.value),
+                            1
+                            /* TEXT */
+                          ),
+                          vue.createElementVNode(
+                            "view",
+                            { class: "chapter-num" },
+                            "共" + vue.toDisplayString(novelChapters.value.length) + "章",
+                            1
+                            /* TEXT */
+                          )
+                        ]),
+                        vue.createElementVNode("view", {
+                          class: "right-menu",
+                          onClick: vue.withModifiers(openStar, ["stop"])
+                        }, [
+                          vue.createVNode(_component_uni_icons, {
+                            class: "theme-font",
+                            type: "star",
+                            size: "30"
+                          })
+                        ], 8, ["onClick"])
                       ]),
-                      vue.createElementVNode("scroll-view", {
-                        class: "chapter-list theme-bgc",
-                        "scroll-y": "",
-                        "scroll-top": menuScrollTop.value
-                      }, [
-                        (vue.openBlock(true), vue.createElementBlock(
-                          vue.Fragment,
-                          null,
-                          vue.renderList(novelChapters.value, (chapter) => {
-                            return vue.openBlock(), vue.createElementBlock(
-                              "view",
-                              {
-                                class: vue.normalizeClass({ "chapter-item": true, "theme-bgc-4": true, "active": chapter.ChapterNumber === novelChapterArr.value[ccIndex.value].ChapterNumber }),
-                                key: chapter.ChapterID
-                              },
-                              [
-                                vue.createElementVNode("view", {
-                                  onClick: vue.withModifiers(($event) => goToChapter(chapter.ChapterNumber), ["stop"])
-                                }, " 第" + vue.toDisplayString(chapter.ChapterNumber) + "章  " + vue.toDisplayString(chapter.ChapterTitle), 9, ["onClick"])
-                              ],
-                              2
-                              /* CLASS */
-                            );
-                          }),
-                          128
-                          /* KEYED_FRAGMENT */
-                        ))
-                      ], 8, ["scroll-top"])
+                      vue.withDirectives(vue.createElementVNode(
+                        "view",
+                        null,
+                        [
+                          vue.createElementVNode("scroll-view", {
+                            class: "chapter-list theme-bgc",
+                            "scroll-y": "",
+                            "scroll-top": menuScrollTop.value
+                          }, [
+                            (vue.openBlock(true), vue.createElementBlock(
+                              vue.Fragment,
+                              null,
+                              vue.renderList(novelChapters.value, (chapter) => {
+                                return vue.openBlock(), vue.createElementBlock(
+                                  "view",
+                                  {
+                                    class: vue.normalizeClass({ "chapter-item": true, "theme-bgc-4": true, "active": chapter.ChapterNumber === novelChapterArr.value[ccIndex.value].ChapterNumber }),
+                                    key: chapter.ChapterID
+                                  },
+                                  [
+                                    vue.createElementVNode("view", {
+                                      onClick: vue.withModifiers(($event) => goToChapter(chapter.ChapterNumber), ["stop"])
+                                    }, " 第" + vue.toDisplayString(chapter.ChapterNumber) + "章  " + vue.toDisplayString(chapter.ChapterTitle), 9, ["onClick"])
+                                  ],
+                                  2
+                                  /* CLASS */
+                                );
+                              }),
+                              128
+                              /* KEYED_FRAGMENT */
+                            ))
+                          ], 8, ["scroll-top"])
+                        ],
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vShow, !showStar.value]
+                      ]),
+                      vue.withDirectives(vue.createElementVNode(
+                        "view",
+                        null,
+                        [
+                          vue.createElementVNode("scroll-view", {
+                            class: "chapter-list theme-bgc",
+                            "scroll-y": ""
+                          }, [
+                            (vue.openBlock(true), vue.createElementBlock(
+                              vue.Fragment,
+                              null,
+                              vue.renderList(novelHistory.value.BookMarkList, (bookmark, index2) => {
+                                return vue.openBlock(), vue.createElementBlock("view", {
+                                  class: "chapter-item theme-bgc-4",
+                                  key: index2
+                                }, [
+                                  vue.createElementVNode("view", {
+                                    onClick: vue.withModifiers(($event) => goToBookmark(bookmark.ChapterNumber, bookmark.ChapterProgress), ["stop"])
+                                  }, " 第" + vue.toDisplayString(bookmark.ChapterNumber) + "章  " + vue.toDisplayString(bookmark.BookMarkTitle), 9, ["onClick"])
+                                ]);
+                              }),
+                              128
+                              /* KEYED_FRAGMENT */
+                            ))
+                          ])
+                        ],
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vShow, showStar.value]
+                      ])
                     ])
                   ],
                   512
@@ -21019,6 +21221,7 @@ if (uni.restoreGlobal) {
                 ), [
                   [vue.vShow, showMenu.value]
                 ]),
+                vue.createCommentVNode(" 设置 "),
                 vue.withDirectives(vue.createElementVNode(
                   "view",
                   { class: "sidebar-setting theme-bgc" },
@@ -21194,11 +21397,11 @@ if (uni.restoreGlobal) {
         "d2bf280f-keyboardHeight + 'px'": keyboardHeight.value + "px"
       }));
       const x = vue.ref("600rpx");
-      const y = vue.ref("150rpx");
+      const y = vue.ref("300rpx");
       const prevX = vue.ref("600rpx");
-      const prevY = vue.ref("300rpx");
+      const prevY = vue.ref("450rpx");
       const nextX = vue.ref("600rpx");
-      const nextY = vue.ref("450rpx");
+      const nextY = vue.ref("600rpx");
       const windowHeight = vue.ref(0);
       const chapter = vue.ref({});
       const themeColor = vue.ref("day-mode");
@@ -21220,7 +21423,7 @@ if (uni.restoreGlobal) {
         });
         setTimeout(async () => {
           let eleHeight = await getElementHeightById("edit-textarea");
-          scrollTop.value = (eleHeight - windowHeight.value / 2) * progress - windowHeight.value / 3;
+          scrollTop.value = (eleHeight - windowHeight.value / 2) * progress;
         }, 1e3);
       });
       const scrollTop = vue.ref(1);
@@ -21246,13 +21449,17 @@ if (uni.restoreGlobal) {
           }).exec();
         });
       };
+      const showFunBtn = vue.ref(false);
+      const clickContent = () => {
+        showFunBtn.value = !showFunBtn.value;
+      };
       const keyboardHeight = vue.ref(0);
       const inputHistory = vue.ref([]);
       const currentHistoryIndex = vue.ref(0);
       const handleInput = () => {
         inputHistory.value.push(chapter.value.oldContent);
         currentHistoryIndex.value = inputHistory.value.length - 1;
-        formatAppLog("log", "at subPackages/book/edit/index.vue:115", "inputHistory", inputHistory.value);
+        formatAppLog("log", "at subPackages/book/edit/index.vue:121", "inputHistory", inputHistory.value);
       };
       const recallPreviousInput = () => {
         if (currentHistoryIndex.value > 0) {
@@ -21265,7 +21472,7 @@ if (uni.restoreGlobal) {
         }
       };
       const saveChapter = () => {
-        formatAppLog("log", "at subPackages/book/edit/index.vue:130", "chapter", chapter.value);
+        formatAppLog("log", "at subPackages/book/edit/index.vue:136", "chapter", chapter.value);
         apiUpdateNovelChapter({
           ChapterID: chapter.value.ChapterID,
           ChapterContent: chapter.value.oldContent
@@ -21295,7 +21502,8 @@ if (uni.restoreGlobal) {
             vue.createElementVNode(
               "view",
               {
-                style: vue.normalizeStyle({ "opacity": brightnessPercent.value / 100 })
+                style: vue.normalizeStyle({ "opacity": brightnessPercent.value / 100 }),
+                onClick: clickContent
               },
               [
                 vue.createElementVNode("scroll-view", {
@@ -21325,7 +21533,7 @@ if (uni.restoreGlobal) {
                 ], 8, ["scroll-top"]),
                 vue.createCommentVNode(" 小浮窗 "),
                 vue.createElementVNode("movable-area", { class: "movableArea" }, [
-                  vue.createElementVNode("movable-view", {
+                  vue.withDirectives(vue.createElementVNode("movable-view", {
                     class: "movableView",
                     direction: "all",
                     x: x.value,
@@ -21342,11 +21550,13 @@ if (uni.restoreGlobal) {
                         color: "#fff"
                       })
                     ])
-                  ], 8, ["x", "y"])
+                  ], 8, ["x", "y"]), [
+                    [vue.vShow, showFunBtn.value]
+                  ])
                 ]),
                 vue.createCommentVNode(" 撤销 ctrl+z "),
                 vue.createElementVNode("movable-area", { class: "movableArea" }, [
-                  vue.createElementVNode("movable-view", {
+                  vue.withDirectives(vue.createElementVNode("movable-view", {
                     class: "movableView",
                     direction: "all",
                     x: prevX.value,
@@ -21363,11 +21573,13 @@ if (uni.restoreGlobal) {
                         color: "#fff"
                       })
                     ])
-                  ], 8, ["x", "y"])
+                  ], 8, ["x", "y"]), [
+                    [vue.vShow, showFunBtn.value]
+                  ])
                 ]),
                 vue.createCommentVNode(" 重做 ctrl+y "),
                 vue.createElementVNode("movable-area", { class: "movableArea" }, [
-                  vue.createElementVNode("movable-view", {
+                  vue.withDirectives(vue.createElementVNode("movable-view", {
                     class: "movableView",
                     direction: "all",
                     x: nextX.value,
@@ -21384,7 +21596,9 @@ if (uni.restoreGlobal) {
                         color: "#fff"
                       })
                     ])
-                  ], 8, ["x", "y"])
+                  ], 8, ["x", "y"]), [
+                    [vue.vShow, showFunBtn.value]
+                  ])
                 ]),
                 vue.createCommentVNode(" 编辑功能框 "),
                 vue.createElementVNode("view", { class: "edit-function theme-bgc" }, [

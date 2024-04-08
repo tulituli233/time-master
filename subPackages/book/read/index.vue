@@ -2,15 +2,22 @@
     <view :class="theme">
         <view class="novel-reader" :style="{ 'opacity': readSetting.brightnessPercent / 100 }">
             <view class="novel-header theme-bgc">
-                <view class="back" @click="goBack">
-                    <uni-icons class="theme-font" type="arrow-left" size="30"></uni-icons>
-                </view>
                 <view class="chapter-title ellipsis" v-if="novelChapterArr[ccIndex]">
                     第{{ novelChapterArr[ccIndex].ChapterNumber }}章&nbsp;
                     {{ novelChapterArr[ccIndex].ChapterTitle }}
                 </view>
                 <view class="chapter-progress">{{ (ccProgress * 100).toFixed(0) }}%</view>
             </view>
+            <!-- 顶部功能栏 -->
+            <view class="header-fun theme-bgc" v-show="showTab">
+                <view class="back" @click="goBack">
+                    <uni-icons class="theme-font" type="arrow-left" size="30"></uni-icons>
+                </view>
+                <view class="star" @click="createStar">
+                    <uni-icons class="theme-font" type="star" size="30"></uni-icons>
+                </view>
+            </view>
+            <!-- 小说内容 -->
             <view class="novel-content" :style="{ 'font-size': fontSize + 'px!important' }" @click="clickContent">
                 <scroll-view style="height: 100vh;" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
                     <view class="novel-chapter" :id="`novel-chapter-${index}`" v-for="(item, index) in novelChapterArr"
@@ -40,24 +47,44 @@
                     <view class="progress">{{ totalReadProgress }}%</view>
                 </view>
             </view>
+            <!-- 目录 -->
             <view v-show="showMenu" class="sidebar-menu" @click="showMenu = false">
                 <view class="menu-left">
                     <view class="menu-header theme-bgc-4">
-                        <view class="novel-title ellipsis">{{ novelName }}</view>
-                        <view class="chapter-num">共{{ novelChapters.length }}章</view>
-                    </view>
-                    <scroll-view class="chapter-list theme-bgc" scroll-y :scroll-top="menuScrollTop">
-                        <view
-                            :class="{ 'chapter-item': true, 'theme-bgc-4': true, 'active': chapter.ChapterNumber === novelChapterArr[ccIndex].ChapterNumber }"
-                            v-for="chapter in novelChapters" :key="chapter.ChapterID">
-                            <view @click.stop="goToChapter(chapter.ChapterNumber)">
-                                第{{ chapter.ChapterNumber }}章&nbsp;
-                                {{ chapter.ChapterTitle }}
-                            </view>
+                        <view class="left-menu">
+                            <view class="novel-title ellipsis">{{ novelName }}</view>
+                            <view class="chapter-num">共{{ novelChapters.length }}章</view>
                         </view>
-                    </scroll-view>
+                        <view class="right-menu" @click.stop="openStar">
+                            <uni-icons class="theme-font" type="star" size="30"></uni-icons>
+                        </view>
+                    </view>
+                    <view v-show="!showStar">
+                        <scroll-view class="chapter-list theme-bgc" scroll-y :scroll-top="menuScrollTop">
+                            <view
+                                :class="{ 'chapter-item': true, 'theme-bgc-4': true, 'active': chapter.ChapterNumber === novelChapterArr[ccIndex].ChapterNumber }"
+                                v-for="chapter in novelChapters" :key="chapter.ChapterID">
+                                <view @click.stop="goToChapter(chapter.ChapterNumber)">
+                                    第{{ chapter.ChapterNumber }}章&nbsp;
+                                    {{ chapter.ChapterTitle }}
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                    <view v-show="showStar">
+                        <scroll-view class="chapter-list theme-bgc" scroll-y>
+                            <view class="chapter-item theme-bgc-4"
+                                v-for="(bookmark, index) in novelHistory.BookMarkList" :key="index">
+                                <view @click.stop="goToBookmark(bookmark.ChapterNumber, bookmark.ChapterProgress)">
+                                    第{{ bookmark.ChapterNumber }}章&nbsp;
+                                    {{ bookmark.BookMarkTitle }}
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
                 </view>
             </view>
+            <!-- 设置 -->
             <view v-show="showSetting" class="sidebar-setting theme-bgc">
                 <view class="setting-item">
                     <view class="setting-icon" @click="setBrightness(-1)">
@@ -131,9 +158,9 @@ const readSetting = ref({});
 const x = ref('600rpx');
 const y = ref('600rpx');
 const prevX = ref('50rpx');
-const prevY = ref('750rpx');
+const prevY = ref('850rpx');
 const nextX = ref('600rpx');
-const nextY = ref('750rpx');
+const nextY = ref('850rpx');
 onLoad((query) => {
     // 获取路由参数
     novelID.value = query.id
@@ -173,7 +200,8 @@ const getNovelHistory = () => {
             ChapterNumber: 1,
             Title: novelName.value,
             NovelID: novelID.value,
-            ChapterProgress: 0
+            ChapterProgress: 0,
+            BookMarkList: []
         }
         return novelHistory
     }
@@ -197,6 +225,7 @@ const preLoadChapters = async (currentChapterNumber, count) => {
 const showMenu = ref(false);
 const openMenu = () => {
     showMenu.value = true;
+    showTab.value = false;
     setTimeout(() => {
         menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
         console.log('menuScrollTop', menuScrollTop.value);
@@ -204,10 +233,12 @@ const openMenu = () => {
 };
 const menuScrollTop = ref(1);
 // 滚动条回到上次阅读位置
-const scrollToLastRead = (validHeight) => {
+const scrollToLastRead = (validHeight, chaProgress = 0) => {
+    chaProgress = chaProgress == 0 ? novelHistory.value.ChapterProgress : chaProgress
     setTimeout(() => {
-        let st = validHeight * novelHistory.value.ChapterProgress
+        let st = validHeight * chaProgress
         scrollTop.value = st
+        if (chaProgress) ccProgress.value = chaProgress
         isInitialized.value = false
     }, 100)
 }
@@ -307,11 +338,66 @@ const colorList = [
     { color: '#f7f0e6', type: 2 },
     { color: '#dff2dc', type: 3 },
 ];
-
+// #region 顶部功能栏
 const goBack = () => {
     uni.navigateBack();
 };
-
+const createStar = () => {
+    const bookMark = {
+        ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
+        BookMarkTitle: novelChapterArr.value[ccIndex.value].ChapterTitle,
+        ChapterProgress: ccProgress.value
+    }
+    let nHistory = {
+        NovelID: novelID.value,
+        NovelName: novelName.value,
+        ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
+        ChapterProgress: ccProgress.value,
+        BookMarkList: [bookMark]
+    }
+    let readHistory = uni.getStorageSync('readHistory') || []
+    let index = readHistory.findIndex((item) => item.NovelID === nHistory.NovelID)
+    if (index > -1) {
+        // 兼容旧数据
+        if (!readHistory[index].BookMarkList) {
+            readHistory[index].BookMarkList = [bookMark]
+        }
+        readHistory[index].BookMarkList.push(bookMark)
+    } else {
+        readHistory.push(nHistory)
+    }
+    uni.setStorageSync('readHistory', readHistory)
+    uni.showToast({
+        icon: 'success',
+        title: '成功添加书签'
+    })
+}
+const showStar = ref(false)
+const openStar = () => {
+    novelHistory.value = getNovelHistory()
+    showStar.value = !showStar.value
+}
+// 跳转到指定书签
+const goToBookmark = async (chapterNumber, chaProgress) => {
+    await goToChapter(chapterNumber);
+    // 可能未渲染
+    let eleHeight = await getElementHeightById(`novel-chapter-0`);
+    console.log('eleHeight', eleHeight);
+    scrollToLastRead(eleHeight, chaProgress);
+    showMenu.value = false;
+    showStar.value = false
+}
+// 删除指定书签
+const deleteBookmark = (index) => {
+    let readHistory = uni.getStorageSync('readHistory') || []
+    let bookIndex = readHistory.findIndex((item) => {
+        return item.NovelID === nHistory.NovelID
+    })
+    if (bookIndex > -1) {
+        readHistory[bookIndex].BookMarkList.splice(index, 1)
+    }
+}
+// #endregion
 const showTab = ref(false);
 const clickContent = () => {
     showTab.value = !showTab.value;
@@ -466,9 +552,8 @@ const isInitialized = ref(true);
 onUpdated(async () => {
     if (isInitialized.value) {
         ccProgress.value = novelHistory.value ? novelHistory.value.ChapterProgress : 0;
-        let totalHeight = await getTotalHeight();
-        let eleHeight = await getElementHeightById(`novel-chapter-1`);
-        scrollToLastRead(totalHeight - eleHeight);
+        let eleHeight = await getElementHeightById(`novel-chapter-0`);
+        scrollToLastRead(eleHeight);
     }
 })
 onBeforeUnmount(() => {
@@ -491,15 +576,18 @@ const saveReadRecord = () => {
         NovelID: novelID.value,
         NovelName: novelName.value,
         ChapterNumber: novelChapterArr.value[ccIndex.value].ChapterNumber,
-        ChapterProgress: ccProgress.value
+        ChapterProgress: ccProgress.value,
+        BookMarkList: []
     }
     let readHistory = uni.getStorageSync('readHistory') || [];
     let index = readHistory.findIndex((item) => {
         return item.NovelID === nHistory.NovelID
     })
     if (index > -1) {
-        readHistory.splice(index, 1);
-        readHistory.push(nHistory);
+        // 更新
+        readHistory[index].ChapterProgress = nHistory.ChapterProgress;
+        readHistory[index].ChapterNumber = nHistory.ChapterNumber;
+        readHistory[index].NovelName = nHistory.NovelName;
     } else {
         readHistory.push(nHistory);
     }
@@ -534,25 +622,35 @@ const totalReadProgress = computed(() => {
     flex-direction: column;
 }
 
+.header-fun {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 95vw;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    z-index: 2;
+}
+
 .novel-header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 95vw;
     background: #f0f0f0;
     display: flex;
     align-items: center;
-    padding: 10px;
+    justify-content: space-between;
+    padding: 10rpx 20rpx;
     z-index: 1;
-
-    .back {
-        margin: 0 30px 0 0;
-    }
 
     .chapter-title {
         width: 65vw;
-        height: 60rpx;
-        line-height: 60rpx;
+        height: 40rpx;
+        line-height: 40rpx;
         font-size: 24rpx;
         font-weight: bold;
         overflow: hidden;
@@ -566,7 +664,7 @@ const totalReadProgress = computed(() => {
 
 .novel-content {
     height: 50vh;
-    margin-top: 80rpx;
+    margin-top: 40rpx;
     flex: 1;
     padding: 10px;
 }
@@ -628,14 +726,22 @@ const totalReadProgress = computed(() => {
         .menu-header {
             padding: 20rpx;
             background-color: #ddd;
+            display: flex;
+            align-items: center;
 
-            .novel-title {
-                margin-bottom: 10rpx;
-                font-weight: bold;
+            .left-menu {
+                .novel-title {
+                    margin-bottom: 10rpx;
+                    font-weight: bold;
+                }
+
+                .chapter-num {
+                    font-size: 24rpx;
+                }
             }
 
-            .chapter-num {
-                font-size: 24rpx;
+            .right-menu {
+                margin-left: auto;
             }
         }
 

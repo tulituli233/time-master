@@ -354,10 +354,8 @@
 
 .movableView {
   position: absolute;
-  top: 5.125rem;
   width: 3.125rem;
   height: 3.125rem;
-  margin-top: 5.125rem;
   pointer-events: auto;
 }
 
