@@ -1,5 +1,5 @@
 <template>
-    <view :class="theme">
+    <view :class="theme.mode">
         <view class="novel-reader" :style="{ 'opacity': readSetting.brightnessPercent / 100 }">
             <view class="novel-header theme-bgc">
                 <view class="chapter-title ellipsis" v-if="novelChapterArr[ccIndex]">
@@ -48,7 +48,7 @@
                 </view>
             </view>
             <!-- 目录 -->
-            <view v-show="showMenu" class="sidebar-menu" @click="showMenu = false">
+            <view v-show="showMenu" class="sidebar-menu" @click="closeMenu">
                 <view class="menu-left">
                     <view class="menu-header theme-bgc-4">
                         <view class="left-menu">
@@ -73,11 +73,20 @@
                     </view>
                     <view v-show="showStar">
                         <scroll-view class="chapter-list theme-bgc" scroll-y>
-                            <view class="chapter-item theme-bgc-4"
+                            <view class="chapter-item book-mark-item theme-bgc-4"
                                 v-for="(bookmark, index) in novelHistory.BookMarkList" :key="index">
-                                <view @click.stop="goToBookmark(bookmark.ChapterNumber, bookmark.ChapterProgress)">
+                                <view class="book-mark-title"
+                                    @click.stop="goToBookmark(bookmark.ChapterNumber, bookmark.ChapterProgress)">
                                     第{{ bookmark.ChapterNumber }}章&nbsp;
                                     {{ bookmark.BookMarkTitle }}
+                                </view>
+                                <!-- 删除 -->
+                                <view class="delete-btn" @click.stop="deleteBookmark(bookmark)">
+                                    <uni-icons class="theme-font" type="closeempty" size="25"></uni-icons>
+                                </view>
+                                <!-- 编辑 -->
+                                <view class="edit-btn" @click.stop="showEditBookmark(index, bookmark)">
+                                    <uni-icons class="theme-font" type="compose" size="25"></uni-icons>
                                 </view>
                             </view>
                         </scroll-view>
@@ -142,13 +151,31 @@
                 </button>
             </movable-view>
         </movable-area>
+        <!-- 书签编辑弹窗 -->
+        <uni-popup ref="editBookmarkRef" id="edit-bookmark" :background-color="theme.bgc">
+            <view class="popup-content">
+                <view class="popup-header">
+                    <view class="title">书签编辑</view>
+                </view>
+                <view class="popup-body">
+                    <view class="input-item">
+                        <view class="input-label">书签名：</view>
+                        <input class="input" v-model="activeBookmark.BookMarkTitle" placeholder="请输入书名" />
+                    </view>
+                </view>
+                <view class="popup-footer">
+                    <view class="btn" @click="$refs.editBookmarkRef.close()">取消</view>
+                    <view class="btn btn-primary" @click="editBookmark(activeIndex, activeBookmark)">确定</view>
+                </view>
+            </view>
+        </uni-popup>
     </view>
 </template>
 
 <script setup>
 import { ref, computed, onUpdated, onBeforeUnmount } from 'vue';
 import { apiGetNovelChapter, apiGetNovelChapters } from '@/services/api/book';
-import { onShow, onLoad, onUnload } from '@dcloudio/uni-app';
+import { onReady, onShow, onLoad, onUnload } from '@dcloudio/uni-app';
 import { navTo, formatDateToTime } from '@/utils/utils'
 
 const novelID = ref(0);
@@ -177,6 +204,15 @@ onLoad((query) => {
     getScreenHeight();
     init()
     getNovelChapters()
+})
+const keyboardHeight = ref(0);
+onReady(() => {
+    // #ifdef APP-PLUS
+    uni.onKeyboardHeightChange(res => {
+        console.log('键盘高度变化----', res.height)
+        keyboardHeight.value = res.height
+    })
+    // #endif
 })
 onShow(() => {
     // #ifdef APP-PLUS
@@ -231,6 +267,10 @@ const openMenu = () => {
         console.log('menuScrollTop', menuScrollTop.value);
     }, 100);
 };
+const closeMenu = () => {
+    showMenu.value = false;
+    showStar.value = false;
+}
 const menuScrollTop = ref(1);
 // 滚动条回到上次阅读位置
 const scrollToLastRead = (validHeight, chaProgress = 0) => {
@@ -360,7 +400,7 @@ const createStar = () => {
     if (index > -1) {
         // 兼容旧数据
         if (!readHistory[index].BookMarkList) {
-            readHistory[index].BookMarkList = [bookMark]
+            readHistory[index].BookMarkList = []
         }
         readHistory[index].BookMarkList.push(bookMark)
     } else {
@@ -391,18 +431,56 @@ const goToBookmark = async (chapterNumber, chaProgress) => {
 const deleteBookmark = (index) => {
     let readHistory = uni.getStorageSync('readHistory') || []
     let bookIndex = readHistory.findIndex((item) => {
-        return item.NovelID === nHistory.NovelID
+        return item.NovelID === novelID.value
     })
     if (bookIndex > -1) {
         readHistory[bookIndex].BookMarkList.splice(index, 1)
+        novelHistory.value.BookMarkList.splice(index, 1)
+        uni.setStorageSync('readHistory', readHistory)
     }
+}
+const editBookmarkRef = ref(null)
+const activeBookmark = ref(null)
+const activeIndex = ref(0)
+const showEditBookmark = (index, bookmark) => {
+    activeBookmark.value = bookmark
+    activeIndex.value = index
+    editBookmarkRef.value.open('bottom')
+}
+// 编辑指定书签
+const editBookmark = (index, newBookmark) => {
+    let readHistory = uni.getStorageSync('readHistory') || []
+    let bookIndex = readHistory.findIndex((item) => {
+        return item.NovelID === novelID.value
+    })
+    if (bookIndex > -1) {
+        readHistory[bookIndex].BookMarkList[index].BookMarkTitle = newBookmark.BookMarkTitle
+        novelHistory.value.BookMarkList[index].BookMarkTitle = newBookmark.BookMarkTitle
+        uni.setStorageSync('readHistory', readHistory)
+    }
+    editBookmarkRef.value.close()
 }
 // #endregion
 const showTab = ref(false);
-const clickContent = () => {
-    showTab.value = !showTab.value;
-    showMenu.value = false;
-    showSetting.value = false;
+const currScrollTop = ref(0);
+const clickContent = (e) => {
+    // 0.03即(3vh)为顶部标题栏高度
+    const viewHeight = screenHeight.value * (1 - 0.07);
+    // 结合screenHeight和x、y判断用户点击了屏幕的上方、下方还是在中间
+    if (e.detail.y < screenHeight.value / 3) {
+        if (currScrollTop.value < screenHeight.value) {
+            scrollTop.value = scrollTop.value ? 0 : 1;
+        } else {
+            scrollTop.value = currScrollTop.value - viewHeight;
+        }
+    } else if (e.detail.y > screenHeight.value / 3 && e.detail.y < screenHeight.value * 2 / 3) {
+        showTab.value = !showTab.value;
+        showMenu.value = false;
+        showSetting.value = false;
+    } else if (e.detail.y > screenHeight.value * 2 / 3) {
+        scrollTop.value = currScrollTop.value + viewHeight;
+    }
+    console.log('scrollTop', scrollTop.value);
 };
 
 const showSetting = ref(false);
@@ -412,15 +490,15 @@ const openSetting = () => {
 const theme = computed(() => {
     switch (readSetting.value.themeType) {
         case 1:
-            return 'day-mode';
+            return { mode: 'day-mode', bgc: '#fff' };
         case 2:
-            return 'brown-mode';
+            return { mode: 'brown-mode', bgc: '#f7f0e6' };
         case 3:
-            return 'green-mode';
+            return { mode: 'green-mode', bgc: '#dff2dc' };
         case 4:
-            return 'night-mode';
+            return { mode: 'night-mode', bgc: '#000' };
         default:
-            return 'day-mode';
+            return { mode: 'day-mode', bgc: '#fff' };
     }
 });
 const switchTheme = (type) => {
@@ -456,6 +534,7 @@ const goToChapter = async (ChapterNumber) => {
 const ccIndex = ref(0);
 const ccProgress = ref(0);
 const handleScroll = (e) => {
+    currScrollTop.value = e.detail.scrollTop;
     if (goTop.value) {
         goTop.value = false;
         scrollTop.value = 1;
@@ -545,7 +624,7 @@ function getElementDistanceToTop(elementId) {
 // 编辑章节内容
 const editChapter = () => {
     uni.setStorageSync('editChapter', novelChapterArr.value[ccIndex.value]);
-    navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value}&brightnessPercent=${readSetting.value.brightnessPercent}&fontSizePercent=${readSetting.value.fontSizePercent}`);
+    navTo(`/subPackages/book/edit/index?progress=${ccProgress.value}&themeColor=${theme.value.mode}&brightnessPercent=${readSetting.value.brightnessPercent}&fontSizePercent=${readSetting.value.fontSizePercent}`);
 }
 
 const isInitialized = ref(true);
@@ -649,8 +728,8 @@ const totalReadProgress = computed(() => {
 
     .chapter-title {
         width: 65vw;
-        height: 40rpx;
-        line-height: 40rpx;
+        height: 3vh;
+        line-height: 3vh;
         font-size: 24rpx;
         font-weight: bold;
         overflow: hidden;
@@ -664,7 +743,7 @@ const totalReadProgress = computed(() => {
 
 .novel-content {
     height: 50vh;
-    margin-top: 40rpx;
+    margin-top: 3vh;
     flex: 1;
     padding: 10px;
 }
@@ -694,7 +773,7 @@ const totalReadProgress = computed(() => {
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 60rpx;
+    height: 4vh;
     background-color: #f0f0f0;
     display: flex;
     justify-content: space-between;
@@ -764,6 +843,19 @@ const totalReadProgress = computed(() => {
                 background-color: #ddd !important;
                 color: #000;
             }
+
+            .book-mark-item {
+                display: flex;
+                align-items: center;
+
+                .book-mark-title {
+                    width: 350rpx;
+                }
+
+                .delete-btn {
+                    margin-right: 20rpx;
+                }
+            }
         }
     }
 }
@@ -807,5 +899,14 @@ const totalReadProgress = computed(() => {
             cursor: pointer;
         }
     }
+}
+
+// 书签编辑
+#edit-bookmark {
+    position: fixed;
+    bottom: v-bind("keyboardHeight + 'px'");
+    left: 0;
+    width: 100vw;
+    z-index: 2;
 }
 </style>

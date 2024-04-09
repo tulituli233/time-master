@@ -10,7 +10,7 @@
             <!-- 小浮窗 -->
             <movable-area class="movableArea">
                 <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="x" :y="y" :out-of-bounds="false">
-                    <button class="win-service theme-bgc" @click="saveChapter">
+                    <button class="win-service theme-bgc" @click.stop="saveChapter">
                         <uni-icons type="cloud-upload" size="30" color="#fff"></uni-icons>
                     </button>
                 </movable-view>
@@ -18,7 +18,7 @@
             <!-- 撤销 ctrl+z -->
             <movable-area class="movableArea">
                 <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="prevX" :y="prevY" :out-of-bounds="false">
-                    <button class="win-service theme-bgc" @click="recallPreviousInput">
+                    <button class="win-service theme-bgc" @click.stop="recallPreviousInput">
                         <uni-icons type="arrow-left" size="30" color="#fff"></uni-icons>
                     </button>
                 </movable-view>
@@ -26,7 +26,7 @@
             <!-- 重做 ctrl+y -->
             <movable-area class="movableArea">
                 <movable-view class="movableView" v-show="showFunBtn" direction="all" :x="nextX" :y="nextY" :out-of-bounds="false">
-                    <button class="win-service theme-bgc" @click="recallNextInput">
+                    <button class="win-service theme-bgc" @click.stop="recallNextInput">
                         <uni-icons type="arrow-right" size="30" color="#fff"></uni-icons>
                     </button>
                 </movable-view>
