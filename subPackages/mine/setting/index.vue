@@ -1,16 +1,21 @@
 <template>
-    <view class="content">
-        <view class="setting-item" @click="openSetBaseUrl">
+    <view :class="['content', theme.mode]">
+        <!-- 设置服务请求地址 -->
+        <view class="setting-item theme-bgc" @click="openSetBaseUrl">
             <view class="title">设置服务请求地址</view>
             <view class="icon" @click.stop="refreshBaseUrl">
                 <uni-icons type="refreshempty" size="20" color="#999"></uni-icons>
             </view>
         </view>
-        <view class="setting-item" @click="handleLogout">
+        <!-- 切换应用主题 -->
+        <view class="setting-item theme-bgc" @click="changeTheme">
+            <view class="title">切换应用主题</view>
+        </view>
+        <view class="setting-item theme-bgc" @click="handleLogout">
             <view class="title">退出登录</view>
         </view>
         <!-- 设置服务请求地址 -->
-        <uni-popup ref="setBaseUrlPopupRef" background-color="#fff">
+        <uni-popup ref="setBaseUrlPopupRef" :background-color="theme.bgc">
             <view class="popup-content">
                 <view class="popup-header">
                     <view class="title">设置服务请求地址</view>
@@ -31,9 +36,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { setBaseUrl, pingRange } from '@/utils/request'
+import { useStore } from 'vuex';
 
+const store = useStore();
+const theme = computed(() => store.state.theme)
+// #region 设置服务请求地址
 const baseUrl = ref('')
 const setBaseUrlPopupRef = ref(null)
 const openSetBaseUrl = () => {
@@ -69,6 +78,26 @@ const refreshBaseUrl = async () => {
         })
     }
 }
+// #endregion
+// #region 切换应用主题
+const changeTheme = () => {
+    let newTheme = {}
+    if (theme.value.mode == 'night-mode') {
+        newTheme = {
+            mode: 'day-mode',
+            bgc: '#fff',
+            iconColor: '#000'
+        }
+    } else {
+        newTheme = {
+            mode: 'night-mode',
+            bgc: '#000',
+            iconColor: '#fff'
+        }
+    }
+    store.dispatch('updateTheme', newTheme)
+}
+// #endregion
 // 退出登录
 const handleLogout = () => {
     uni.removeStorageSync('token')

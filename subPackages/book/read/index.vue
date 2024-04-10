@@ -515,6 +515,9 @@ const scrollTop = ref(1);
 const goTop = ref(false);
 // 跳转到指定章节
 const goToChapter = async (ChapterNumber) => {
+    // 如果章节相等，直接返回
+    if (ChapterNumber === novelChapterArr.value[ccIndex.value].ChapterNumber) return
+    // 如果章节不存在，直接返回
     if (ChapterNumber < 1 || ChapterNumber > novelChapters.value.length) return
     let chapter = await getNovelChapter(ChapterNumber, () => {
         showMenu.value = false;

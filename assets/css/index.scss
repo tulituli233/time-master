@@ -85,8 +85,8 @@
 }
 
 .night-mode {
-	background-color: #000000;
-	color: #ffffff;
+	background-color: #000000 !important;
+	color: #ffffff !important;
 
 	.theme-font {
 		color: #ffffff !important;
@@ -96,19 +96,40 @@
 		background-color: #333 !important;
 	}
 
+	.theme-bgc-0 {
+		background-color: #000 !important;
+	}
+
+	.theme-bgc-2 {
+		background-color: #222 !important;
+	}
+
 	.theme-bgc-4 {
 		background-color: #444 !important;
 	}
+
+	.theme-border {
+		border-color: #000 !important;
+	}
+
+	.theme-book-img {
+		background-color: #333 !important;
+		border-color: #222 !important;
+		box-shadow: 0 10rpx 10rpx #222 !important;
+		.theme-book-pad {
+			background-color: #444 !important;
+			border-color: #555 !important;
+		}
+	}
 }
+
 // 公用弹窗
 .popup-list {
-	background-color: #f8f8f8;
 
 	.popup-item {
 		display: flex;
 		align-items: center;
 		padding: 40rpx 20rpx;
-		background-color: #fff;
 
 		.popup-icon {
 			margin-right: 20rpx;
@@ -124,67 +145,66 @@
 	}
 
 	.popup-close {
+		border-top: 10rpx solid #f8f8f8;
 		padding: 40rpx;
-		margin-top: 10rpx;
 		text-align: center;
-		background-color: #fff;
 	}
 }
 
 // 公用确认弹窗
 .popup-content {
-    padding: 40rpx;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	padding: 40rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-    .popup-header {
-        text-align: center;
-        margin-bottom: 40rpx;
-    }
+	.popup-header {
+		text-align: center;
+		margin-bottom: 40rpx;
+	}
 
-    .popup-body {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+	.popup-body {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 
-        .input-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20rpx;
+		.input-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20rpx;
 
-            .input-label {
-                width: 200rpx;
-                color: #888;
-                text-align: right;
-                margin-right: 20rpx;
-            }
+			.input-label {
+				width: 200rpx;
+				color: #888;
+				text-align: right;
+				margin-right: 20rpx;
+			}
 
-            .input {
-                flex: 1;
-            }
-        }
-    }
+			.input {
+				flex: 1;
+			}
+		}
+	}
 
-    .popup-footer {
-        padding: 20rpx;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
+	.popup-footer {
+		padding: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
 
-        .btn {
-            width: 150rpx;
-            height: 80rpx;
-            line-height: 80rpx;
-            text-align: center;
-            border-radius: 50rpx;
-            border: 1px solid #aaa;
-        }
+		.btn {
+			width: 150rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			text-align: center;
+			border-radius: 50rpx;
+			border: 1px solid #aaa;
+		}
 
-        .btn-primary {
-            margin-left: 80rpx;
-            background-color: #0084ff;
-            color: #fff;
-        }
-    }
+		.btn-primary {
+			margin-left: 80rpx;
+			background-color: #0084ff;
+			color: #fff;
+		}
+	}
 }

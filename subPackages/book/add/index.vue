@@ -1,5 +1,5 @@
 <template>
-    <view class="content">
+    <view :class="['content', theme.mode]">
         <!-- 章节标题 -->
         <view class="chapter-title">
             <view class="text">章节标题：</view>
@@ -8,7 +8,7 @@
         <!-- 章节内容 -->
         <view class="chapter-content">
             <view class="text">章节内容：</view>
-            <textarea class="content-textarea" :adjust-position="false" placeholder="请输入章节内容" maxlength="-1"
+            <textarea class="content-textarea theme-bgc-2" :adjust-position="false" placeholder="请输入章节内容" maxlength="-1"
                 v-model="chapter.ChapterContent"></textarea>
         </view>
         <!-- 内容编辑功能面板 -->
@@ -28,10 +28,13 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { apiAddNovelChapter } from '@/services/api/book';
 import { onLoad } from '@dcloudio/uni-app';
+import { useStore } from 'vuex';
 
+const store = useStore();
+const theme = computed(() => store.state.theme)
 onLoad((query) => {
     chapter.NovelID = query.novelID
 })

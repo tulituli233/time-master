@@ -1,28 +1,24 @@
+<!-- MyComponent.vue -->
+
 <template>
-    <view>
-      <picker mode="multiSelector" :range="[years, months]" @change="onDateChange">
-        <view>{{ selectedYear }} - {{ selectedMonth }}</view>
-      </picker>
-    </view>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        years: ['2022', '2023', '2024'],
-        months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        selectedYear: '2022',
-        selectedMonth: '1'
-      };
-    },
-    methods: {
-      onDateChange(event) {
-        const [yearIndex, monthIndex] = event.detail.value;
-        this.selectedYear = this.years[yearIndex];
-        this.selectedMonth = this.months[monthIndex];
-        console.log(this.selectedYear, this.selectedMonth);
-      }
-    }
-  };
-  </script>
+  <div>
+    <p>{{ data }}</p>
+    <input v-model="newData" type="text" />
+    <button @click="updateData">更新数据</button>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, inject } from 'vue';
+import { useStore } from 'vuex';
+
+const newData = ref('');
+const store = useStore(); // 获取 Vuex store
+
+const data = computed(() => store.state.data);
+
+const updateData = () => {
+  store.dispatch('updateData', newData.value);
+  newData.value = ''; // 清空输入框
+};
+</script>

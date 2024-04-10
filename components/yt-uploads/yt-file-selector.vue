@@ -150,7 +150,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .yt-content {
 	display: flex;
 	flex-direction: column;

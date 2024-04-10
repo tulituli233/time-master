@@ -1,13 +1,13 @@
 <template>
-    <view class="content">
-        <view class="book-list">
+    <view :class="['content', theme.mode]">
+        <view class="book-list theme-bgc-0">
             <view :class="['book-item', index % 3 == 1 ? 'book-middle' : '']" v-for="(item, index) in novels"
                 :key="index">
                 <view v-if="index != novels.length - 1" @longpress="openPopup(item)"
                     @click="navTo(`/subPackages/book/read/index?id=${item.NovelID}&name=${item.Title}`)">
                     <!-- @click="openPopup(item)"> -->
-                    <view class="book-img">
-                        <view class="book-pad">
+                    <view class="book-img theme-book-img">
+                        <view class="book-pad theme-book-pad">
                             <view class="book-text ellipsis">
                                 {{ item.Title }}
                             </view>
@@ -18,7 +18,7 @@
                         <!-- <view class="book-plan">读到第1章</view> -->
                     </view>
                 </view>
-                <view v-else class="book-add" @click="$refs.uploads.select()" @longpress="openAddPopup()">
+                <view v-else class="book-add theme-bgc" @click="$refs.uploads.select()" @longpress="openAddPopup()">
                     <view class="add-icon">
                         <uni-icons type="plusempty" size="50" color="#ccc"></uni-icons>
                     </view>
@@ -29,7 +29,7 @@
         <yt-uploads ref="uploads" :options="options" @selected="selectedHandler" @success="successHandler"
             @fail="failHandler" @process="processHandler"></yt-uploads>
         <!-- 更多功能 -->
-        <uni-popup ref="popupRef" background-color="#fff">
+        <uni-popup ref="popupRef" :background-color="theme.bgc">
             <view class="popup-list">
                 <!-- 编辑书籍信息 -->
                 <view class="popup-item" @click="openEditPopup">
@@ -80,11 +80,11 @@
                         删除书籍
                     </view>
                 </view>
-                <view class="popup-close" @click="$refs.popupRef.close()">取消</view>
+                <view class="popup-close theme-border" @click="$refs.popupRef.close()">取消</view>
             </view>
         </uni-popup>
         <!-- 长按添加 -->
-        <uni-popup ref="addPopupRef" background-color="#fff">
+        <uni-popup ref="addPopupRef" :background-color="theme.bgc">
             <view class="popup-list">
                 <view class="popup-item" @click="openCreatePopup">
                     <view class="popup-icon">
@@ -102,11 +102,11 @@
                         搜索书籍
                     </view>
                 </view>
-                <view class="popup-close" @click="$refs.addPopupRef.close()">取消</view>
+                <view class="popup-close theme-border" @click="$refs.addPopupRef.close()">取消</view>
             </view>
         </uni-popup>
         <!-- 添加或编辑书籍名称和作者 -->
-        <uni-popup ref="createOreditPopupRef" background-color="#fff">
+        <uni-popup ref="createOreditPopupRef" :background-color="theme.bgc">
             <view class="popup-content">
                 <view class="popup-header">
                     <view class="title">{{ isEdit ? '编辑书籍' : '添加书籍' }}</view>
@@ -128,7 +128,7 @@
             </view>
         </uni-popup>
         <!-- 批量删除章节 -->
-        <uni-popup ref="batchDeletePopupRef" background-color="#fff">
+        <uni-popup ref="batchDeletePopupRef" :background-color="theme.bgc">
             <view class="popup-content">
                 <view class="popup-header">
                     <view class="title">批量删除章节</view>
@@ -148,16 +148,22 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'; // 导入需要的Vue Composition API
+import { ref, reactive, computed } from 'vue'; // 导入需要的Vue Composition API
 import { apiGetNovels, apiDeleteNovel, apiCreateNovel, apiUpdateNovel, apiDownloadNovel, apiBatchDeleteNovelChapters } from '@/services/api/book';
 import { onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
+import { useStore } from 'vuex';
 
+const store = useStore();
+const theme = computed(() => store.state.theme)
 const includeChapterTitle = ref(false)
 const popupBottom = ref(0);
 onShow(() => {
     getNovels()
-    addPopupRef.value.close()
+    setTimeout(() => {
+        deleteBook()
+    }, 1000)
+    // addPopupRef.value.close()
     // #ifdef APP-PLUS
     uni.onKeyboardHeightChange(res => {
         if (res.height === 0) {

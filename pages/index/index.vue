@@ -17,8 +17,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { navTo } from '@/utils/utils'
+
 const list = ref([
 	{
 		title: '备忘录',

@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view :class="['content', theme.mode]">
 		<view class="top">
 			<view class="left">
 				<view class="head">
@@ -11,7 +11,7 @@
 				<text class="desc">用一句话让人记住你！</text>
 			</view>
 		</view>
-		<view class="middle">
+		<view class="middle theme-bgc">
 			<div class="item" v-for="item in middleList" :key="item.unicode">
 				<div class="mtop">
 					<uni-icons custom-prefix="iconfont" :type="item.unicode" :color="item.color" size="30"></uni-icons>
@@ -19,15 +19,15 @@
 				<div class="mbottom">{{ item.title }}</div>
 			</div>
 		</view>
-		<view class="bottom">
+		<view class="bottom theme-bgc">
 			<view class="list-item" v-for="item in list" :key="item.unicode" @click="navTo(item.url)">
 				<view class="left">
-					<uni-icons custom-prefix="iconfont" :type="item.unicode" size="30"></uni-icons>
+					<uni-icons custom-prefix="iconfont" :type="item.unicode" size="30" :color="theme.iconColor"></uni-icons>
 				</view>
 				<view class="right">
 					<view class="title">{{ item.title }}</view>
 					<view class="arrow">
-						<uni-icons type="right" size="30"></uni-icons>
+						<uni-icons type="right" size="30" :color="theme.iconColor"></uni-icons>
 					</view>
 				</view>
 			</view>
@@ -36,10 +36,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { onLoad } from '@dcloudio/uni-app';
+import { ref, computed, onMounted } from 'vue'
+import { onLoad, onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
+import { useStore } from 'vuex';
 
+const store = useStore();
+const theme = computed(() => store.state.theme)
 const userInfo = ref(null)
 onMounted(() => {
 	userInfo.value = uni.getStorageSync('userInfo')

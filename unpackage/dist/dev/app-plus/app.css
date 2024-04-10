@@ -411,8 +411,8 @@
 }
 
 .night-mode {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 .night-mode .theme-font {
   color: #ffffff !important;
@@ -420,18 +420,32 @@
 .night-mode .theme-bgc {
   background-color: #333 !important;
 }
+.night-mode .theme-bgc-0 {
+  background-color: #000 !important;
+}
+.night-mode .theme-bgc-2 {
+  background-color: #222 !important;
+}
 .night-mode .theme-bgc-4 {
   background-color: #444 !important;
 }
-
-.popup-list {
-  background-color: #f8f8f8;
+.night-mode .theme-border {
+  border-color: #000 !important;
 }
+.night-mode .theme-book-img {
+  background-color: #333 !important;
+  border-color: #222 !important;
+  box-shadow: 0 0.3125rem 0.3125rem #222 !important;
+}
+.night-mode .theme-book-img .theme-book-pad {
+  background-color: #444 !important;
+  border-color: #555 !important;
+}
+
 .popup-list .popup-item {
   display: flex;
   align-items: center;
   padding: 1.25rem 0.625rem;
-  background-color: #fff;
 }
 .popup-list .popup-item .popup-icon {
   margin-right: 0.625rem;
@@ -443,10 +457,9 @@
   margin-left: auto;
 }
 .popup-list .popup-close {
+  border-top: 0.3125rem solid #f8f8f8;
   padding: 1.25rem;
-  margin-top: 0.3125rem;
   text-align: center;
-  background-color: #fff;
 }
 
 .popup-content {
