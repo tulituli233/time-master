@@ -1,7 +1,7 @@
 <template>
-	<view class="content">
+	<AppPage navTitle="时间管家" :showTab="true" :activeIndex="0">
 		<view class="list">
-			<view class="item" @click="linkTo(item.url)" v-for="item in list" :key="item.title">
+			<view class="item theme-bgc" @click="linkTo(item.url)" v-for="item in list" :key="item.title">
 				<view class="left">
 					<view class="icon" :style="{ backgroundColor: item.color }">
 						<uni-icons custom-prefix="iconfont" :type="item.unicode" color="#fff" size="30"></uni-icons>
@@ -13,12 +13,13 @@
 				</view>
 			</view>
 		</view>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { navTo } from '@/utils/utils'
+import AppPage from '@/components/AppPage'
 
 const list = ref([
 	{

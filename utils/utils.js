@@ -6,6 +6,12 @@ export const navTo = (url) => {
         url
     })
 }
+// tabbar跳转
+export const switchTab = (url) => {
+    uni.switchTab({
+        url
+    })
+}
 
 // 将时间戳转换为2021-06-01
 export const timestampToTime = (timestamp) => {

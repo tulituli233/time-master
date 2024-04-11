@@ -1,5 +1,5 @@
 <template>
-    <view :class="['content', theme.mode]">
+    <AppPage navTitle="书架">
         <!-- 设置服务请求地址 -->
         <view class="setting-item theme-bgc" @click="openSetBaseUrl">
             <view class="title">设置服务请求地址</view>
@@ -32,11 +32,12 @@
                 </view>
             </view>
         </uni-popup>
-    </view>
+    </AppPage>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import AppPage from '@/components/AppPage'
 import { setBaseUrl, pingRange } from '@/utils/request'
 import { useStore } from 'vuex';
 
@@ -91,7 +92,7 @@ const changeTheme = () => {
     } else {
         newTheme = {
             mode: 'night-mode',
-            bgc: '#000',
+            bgc: '#222',
             iconColor: '#fff'
         }
     }

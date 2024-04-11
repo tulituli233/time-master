@@ -1,16 +1,16 @@
 <template>
-	<view class="content">
-		<view class="select">
-			<view class="select-header">
+	<AppPage navTitle="事项" :showTab="true" :activeIndex="1">
+		<view id="select">
+			<view class="select-header theme-bgc">
 				<view class="uni-padding-wrap">
 					<uni-segmented-control :current="current" :values="items" :style-type="styleType"
 						:active-color="activeColor" @clickItem="onClickItem" />
 				</view>
 			</view>
-			<view class="content">
+			<view class="plan-content">
 				<view>
 					<view class="plan-list">
-						<view :class="['plan-item', index === 0 ? 'first' : '']" v-for="(item, index) in newPlanList"
+						<view :class="['plan-item theme-bgc', index === 0 ? 'first' : '', index === newPlanList.length - 1 ? 'last' : '']" v-for="(item, index) in newPlanList"
 							:key="index">
 							<view v-if="item.plans && item.plans.length">
 								<view class="plan-header" @click="item.isShow = !item.isShow">
@@ -89,11 +89,12 @@
 				</view>
 			</view>
 		</uni-popup>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import AppPage from '@/components/AppPage'
 import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks';
 import { formatDateTime, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
@@ -429,9 +430,11 @@ const updatePlan = () => {
 	padding: 0px 40rpx
 }
 
-.select {
+#select {
 	.select-header {
 		position: fixed;
+		top: 150rpx;
+		left: 0;
 		width: 100%;
 		z-index: 1;
 		background-color: #f2f2f2;
@@ -448,6 +451,10 @@ const updatePlan = () => {
 
 	.first {
 		margin-top: 100rpx;
+	}
+
+	.last {
+		margin-bottom: 120rpx!important;
 	}
 
 	.plan-item {

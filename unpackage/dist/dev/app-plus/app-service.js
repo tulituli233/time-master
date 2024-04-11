@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$A = {
+  const _sfc_main$B = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
@@ -1249,6 +1249,11 @@ if (uni.restoreGlobal) {
       url
     });
   };
+  const switchTab = (url) => {
+    uni.switchTab({
+      url
+    });
+  };
   const timestampToTime = (timestamp) => {
     let date = new Date(timestamp);
     let Y = date.getFullYear() + "-";
@@ -1312,145 +1317,9 @@ if (uni.restoreGlobal) {
     formatDateToTime,
     getWeek,
     navTo,
+    switchTab,
     timestampToTime
   }, Symbol.toStringTag, { value: "Module" }));
-  const _sfc_main$z = {
-    __name: "index",
-    setup(__props2) {
-      const list = vue.ref([
-        {
-          title: "备忘录",
-          unicode: "icon-biaoqian",
-          url: "/subPackages/memos/index/index",
-          color: "#1baf59",
-          desc: "记事本"
-        },
-        {
-          title: "记账",
-          unicode: "icon-jizhang",
-          url: "/subPackages/expenses/index/index",
-          color: "#7e7cea",
-          desc: "本月：收入5000，支出3000，结余2000"
-        },
-        {
-          title: "日记",
-          unicode: "icon-rijix",
-          url: "/subPackages/diary/index/index",
-          color: "#4c8bf0",
-          desc: "今天是个好日子，明天也是个好日子"
-        },
-        {
-          title: "纪念日倒数",
-          unicode: "icon-jinianriyingxiao",
-          url: "/subPackages/countdowns/index/index",
-          color: "#f75e3c",
-          desc: "2024年2月24日，距离2024年3月1日还有5天"
-        },
-        {
-          title: "事项",
-          unicode: "icon-note",
-          url: "/pages/note/index",
-          color: "#ffa851",
-          desc: "总数：2个，未完成：1个"
-        },
-        {
-          title: "喝水",
-          unicode: "icon-shui",
-          url: "/subPackages/water/index/index",
-          color: "#00b5ff",
-          desc: "今日：0/1700ml"
-        },
-        {
-          title: "小说",
-          unicode: "icon-xuexi",
-          url: "/subPackages/book/index/index",
-          color: "#ce9178",
-          desc: "已读：1章，未读：5章"
-        },
-        {
-          title: "课程表",
-          unicode: "icon-kechengbiao",
-          url: "/pages/note/index",
-          color: "#ff4962",
-          desc: "小初高大学课程表"
-        },
-        {
-          title: "习惯打卡",
-          unicode: "icon-a-rilidaka",
-          url: "/subPackages/test/NumericKeypad/index",
-          color: "#7e7de8",
-          desc: "习惯成自然"
-        }
-      ]);
-      const linkTo = (url) => {
-        if (url !== "/pages/note/index") {
-          navTo(url);
-        } else {
-          uni.switchTab({
-            url: "/pages/note/index"
-          });
-        }
-      };
-      return (_ctx, _cache) => {
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "list" }, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList(list.value, (item) => {
-                return vue.openBlock(), vue.createElementBlock("view", {
-                  class: "item",
-                  onClick: ($event) => linkTo(item.url),
-                  key: item.title
-                }, [
-                  vue.createElementVNode("view", { class: "left" }, [
-                    vue.createElementVNode(
-                      "view",
-                      {
-                        class: "icon",
-                        style: vue.normalizeStyle({ backgroundColor: item.color })
-                      },
-                      [
-                        vue.createVNode(_component_uni_icons, {
-                          "custom-prefix": "iconfont",
-                          type: item.unicode,
-                          color: "#fff",
-                          size: "30"
-                        }, null, 8, ["type"])
-                      ],
-                      4
-                      /* STYLE */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "right" }, [
-                    vue.createElementVNode(
-                      "text",
-                      { class: "title" },
-                      vue.toDisplayString(item.title),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "text",
-                      { class: "desc" },
-                      vue.toDisplayString(item.desc),
-                      1
-                      /* TEXT */
-                    )
-                  ])
-                ], 8, ["onClick"]);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ])
-        ]);
-      };
-    }
-  };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
-  const _imports_0 = "/static/head.png";
   function getDevtoolsGlobalHook() {
     return getTarget().__VUE_DEVTOOLS_GLOBAL_HOOK__;
   }
@@ -2508,6 +2377,300 @@ if (uni.restoreGlobal) {
     this._committing = committing;
   };
   Object.defineProperties(Store.prototype, prototypeAccessors);
+  const _sfc_main$A = {
+    __name: "index",
+    props: {
+      navTitle: {
+        type: String,
+        default: "时间管家"
+      },
+      showNav: {
+        type: Boolean,
+        default: true
+      },
+      navBgColor: {
+        type: String,
+        default: ""
+      },
+      havePadTab: {
+        type: Boolean,
+        default: true
+      },
+      showTab: {
+        type: Boolean,
+        default: false
+      },
+      activeIndex: {
+        type: Number,
+        default: 0
+      },
+      backgroundImage: {
+        type: String,
+        default: ""
+      }
+    },
+    setup(__props2) {
+      const props = __props2;
+      vue.useCssVars((_ctx) => ({
+        'd4a57c02-backgroundImage ? `url(${backgroundImage})` : "none"': __props2.backgroundImage ? `url(${__props2.backgroundImage})` : "none",
+        'd4a57c02-commonCss.pageNavHeight + "rpx"': vue.unref(commonCss).pageNavHeight + "rpx",
+        'd4a57c02-havePadTab ? commonCss.pageNavHeight + "rpx" : "0"': __props2.havePadTab ? vue.unref(commonCss).pageNavHeight + "rpx" : "0"
+      }));
+      onLoad(() => {
+        uni.hideTabBar();
+        formatAppLog("log", "at components/AppPage/index.vue:41", "hideTabBar");
+      });
+      const store2 = useStore();
+      const theme = vue.computed(() => store2.state.theme);
+      const commonCss = vue.computed(() => store2.state.commonCss);
+      const navBack = () => {
+        uni.navigateBack();
+      };
+      const tabbarList = vue.computed(() => store2.state.tabbarList);
+      const iconColor = (index2, mode) => {
+        if (mode === "night-mode") {
+          return index2 === props.activeIndex ? "#4c8bf0" : "#fff";
+        } else {
+          return index2 === props.activeIndex ? "#4c8bf0" : "#000";
+        }
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            class: vue.normalizeClass(["content", vue.unref(theme).mode]),
+            style: vue.normalizeStyle({ "background-image": vue.unref(theme).mode !== "night-mode" ? `url(${__props2.backgroundImage})` : "none" })
+          },
+          [
+            vue.createCommentVNode(" 顶部导航栏 "),
+            __props2.showNav ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 0,
+                class: "top-nav theme-bgc",
+                style: vue.normalizeStyle({ backgroundColor: __props2.navBgColor == "" ? "#fff" : `${__props2.navBgColor} !important` })
+              },
+              [
+                !__props2.showTab ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "back"
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "left",
+                    size: "30",
+                    onClick: navBack,
+                    color: vue.unref(theme).iconColor
+                  }, null, 8, ["color"])
+                ])) : vue.createCommentVNode("v-if", true),
+                vue.createElementVNode(
+                  "view",
+                  { class: "title theme-font" },
+                  vue.toDisplayString(__props2.navTitle),
+                  1
+                  /* TEXT */
+                )
+              ],
+              4
+              /* STYLE */
+            )) : vue.createCommentVNode("v-if", true),
+            vue.createCommentVNode(" 自定义顶部导航插槽 "),
+            vue.renderSlot(_ctx.$slots, "custom-nav", {}, void 0, true),
+            vue.createElementVNode("view", { class: "page-content" }, [
+              vue.createCommentVNode(" 内容插槽 "),
+              vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+            ]),
+            vue.createCommentVNode(" tabbar "),
+            __props2.showTab ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 1,
+              class: "tabbar theme-bgc"
+            }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(vue.unref(tabbarList), (item, index2) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "tabbar-item",
+                    key: item.icon,
+                    onClick: ($event) => vue.unref(switchTab)(item.pagePath)
+                  }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: item.icon,
+                        size: "25",
+                        color: iconColor(index2, vue.unref(theme).mode)
+                      }, null, 8, ["type", "color"])
+                    ]),
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: "text",
+                        style: vue.normalizeStyle({ color: iconColor(index2, vue.unref(theme).mode) })
+                      },
+                      vue.toDisplayString(item.text),
+                      5
+                      /* TEXT, STYLE */
+                    )
+                  ], 8, ["onClick"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])) : vue.createCommentVNode("v-if", true)
+          ],
+          6
+          /* CLASS, STYLE */
+        );
+      };
+    }
+  };
+  const AppPage = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-d4a57c02"], ["__file", "E:/HBuilderProjects/time-master/components/AppPage/index.vue"]]);
+  const _sfc_main$z = {
+    __name: "index",
+    setup(__props2) {
+      const list = vue.ref([
+        {
+          title: "备忘录",
+          unicode: "icon-biaoqian",
+          url: "/subPackages/memos/index/index",
+          color: "#1baf59",
+          desc: "记事本"
+        },
+        {
+          title: "记账",
+          unicode: "icon-jizhang",
+          url: "/subPackages/expenses/index/index",
+          color: "#7e7cea",
+          desc: "本月：收入5000，支出3000，结余2000"
+        },
+        {
+          title: "日记",
+          unicode: "icon-rijix",
+          url: "/subPackages/diary/index/index",
+          color: "#4c8bf0",
+          desc: "今天是个好日子，明天也是个好日子"
+        },
+        {
+          title: "纪念日倒数",
+          unicode: "icon-jinianriyingxiao",
+          url: "/subPackages/countdowns/index/index",
+          color: "#f75e3c",
+          desc: "2024年2月24日，距离2024年3月1日还有5天"
+        },
+        {
+          title: "事项",
+          unicode: "icon-note",
+          url: "/pages/note/index",
+          color: "#ffa851",
+          desc: "总数：2个，未完成：1个"
+        },
+        {
+          title: "喝水",
+          unicode: "icon-shui",
+          url: "/subPackages/water/index/index",
+          color: "#00b5ff",
+          desc: "今日：0/1700ml"
+        },
+        {
+          title: "小说",
+          unicode: "icon-xuexi",
+          url: "/subPackages/book/index/index",
+          color: "#ce9178",
+          desc: "已读：1章，未读：5章"
+        },
+        {
+          title: "课程表",
+          unicode: "icon-kechengbiao",
+          url: "/pages/note/index",
+          color: "#ff4962",
+          desc: "小初高大学课程表"
+        },
+        {
+          title: "习惯打卡",
+          unicode: "icon-a-rilidaka",
+          url: "/subPackages/test/NumericKeypad/index",
+          color: "#7e7de8",
+          desc: "习惯成自然"
+        }
+      ]);
+      const linkTo = (url) => {
+        if (url !== "/pages/note/index") {
+          navTo(url);
+        } else {
+          uni.switchTab({
+            url: "/pages/note/index"
+          });
+        }
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "时间管家",
+          showTab: true,
+          activeIndex: 0
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "list" }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(list.value, (item) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "item theme-bgc",
+                    onClick: ($event) => linkTo(item.url),
+                    key: item.title
+                  }, [
+                    vue.createElementVNode("view", { class: "left" }, [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: "icon",
+                          style: vue.normalizeStyle({ backgroundColor: item.color })
+                        },
+                        [
+                          vue.createVNode(_component_uni_icons, {
+                            "custom-prefix": "iconfont",
+                            type: item.unicode,
+                            color: "#fff",
+                            size: "30"
+                          }, null, 8, ["type"])
+                        ],
+                        4
+                        /* STYLE */
+                      )
+                    ]),
+                    vue.createElementVNode("view", { class: "right" }, [
+                      vue.createElementVNode(
+                        "text",
+                        { class: "title" },
+                        vue.toDisplayString(item.title),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "text",
+                        { class: "desc" },
+                        vue.toDisplayString(item.desc),
+                        1
+                        /* TEXT */
+                      )
+                    ])
+                  ], 8, ["onClick"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        });
+      };
+    }
+  };
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const _imports_0 = "/static/head.png";
   const _sfc_main$y = {
     __name: "index",
     setup(__props2) {
@@ -2516,8 +2679,8 @@ if (uni.restoreGlobal) {
       const userInfo = vue.ref(null);
       vue.onMounted(() => {
         userInfo.value = uni.getStorageSync("userInfo");
-        formatAppLog("log", "at pages/mine/index.vue:49", "userInfo", userInfo.value);
-        formatAppLog("log", "at pages/mine/index.vue:50", "userInfo", userInfo.value.Username);
+        formatAppLog("log", "at pages/mine/index.vue:51", "userInfo", userInfo.value);
+        formatAppLog("log", "at pages/mine/index.vue:52", "userInfo", userInfo.value.Username);
       });
       const middleList = vue.ref([
         {
@@ -2564,12 +2727,13 @@ if (uni.restoreGlobal) {
       ]);
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        return vue.openBlock(), vue.createElementBlock(
-          "view",
-          {
-            class: vue.normalizeClass(["content", vue.unref(theme).mode])
-          },
-          [
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          showNav: false,
+          havePadTab: false,
+          showTab: true,
+          activeIndex: 3
+        }, {
+          default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "top" }, [
               vue.createElementVNode("view", { class: "left" }, [
                 vue.createElementVNode("view", { class: "head" }, [
@@ -2660,10 +2824,10 @@ if (uni.restoreGlobal) {
                 /* KEYED_FRAGMENT */
               ))
             ])
-          ],
-          2
-          /* CLASS */
-        );
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -6984,7 +7148,8 @@ if (uni.restoreGlobal) {
         if (this.backgroundColor === "" || this.backgroundColor === "none") {
           return "transparent";
         }
-        return this.backgroundColor;
+        const vuex = JSON.parse(uni.getStorageSync("vuex"));
+        return vuex.theme.bgc;
       }
     },
     mounted() {
@@ -7055,7 +7220,7 @@ if (uni.restoreGlobal) {
           direction = this.type;
         }
         if (!this.config[direction]) {
-          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:279", "缺少类型：", direction);
+          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:282", "缺少类型：", direction);
           return;
         }
         this[this.config[direction]]();
@@ -7372,7 +7537,7 @@ if (uni.restoreGlobal) {
       onShow(() => {
         getTasks();
         uni.onKeyboardHeightChange((res) => {
-          formatAppLog("log", "at pages/note/index.vue:110", "键盘高度变化----", res.height);
+          formatAppLog("log", "at pages/note/index.vue:111", "键盘高度变化----", res.height);
           if (res.height === 0) {
             popupBottom.value = 0;
           } else {
@@ -7383,7 +7548,7 @@ if (uni.restoreGlobal) {
       const getTasks = () => {
         apiGetUserTasks(getApp().globalData.userInfo.UserID).then((res) => {
           tasks.value = res.data;
-          formatAppLog("log", "at pages/note/index.vue:122", "tasks", tasks);
+          formatAppLog("log", "at pages/note/index.vue:123", "tasks", tasks);
         });
       };
       const current = vue.ref(0);
@@ -7509,7 +7674,7 @@ if (uni.restoreGlobal) {
             cateList.value[7].plans.push(item);
           }
         });
-        formatAppLog("log", "at pages/note/index.vue:269", "cateList", cateList);
+        formatAppLog("log", "at pages/note/index.vue:270", "cateList", cateList);
         return cateList.value;
       };
       const clearPlans = () => {
@@ -7519,7 +7684,7 @@ if (uni.restoreGlobal) {
       };
       const planTitle = vue.ref("");
       const planDate = vue.ref(formatDateTime(/* @__PURE__ */ new Date()));
-      formatAppLog("log", "at pages/note/index.vue:280", "planDate", planDate.value);
+      formatAppLog("log", "at pages/note/index.vue:281", "planDate", planDate.value);
       let typeList = [
         {
           name: "工作",
@@ -7603,7 +7768,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at pages/note/index.vue:370", "plan", plan);
+        formatAppLog("log", "at pages/note/index.vue:371", "plan", plan);
         apiAddTask(plan).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -7664,265 +7829,273 @@ if (uni.restoreGlobal) {
         const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_3);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "select" }, [
-            vue.createElementVNode("view", { class: "select-header" }, [
-              vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
-                vue.createVNode(_component_uni_segmented_control, {
-                  current: current.value,
-                  values: items,
-                  "style-type": styleType,
-                  "active-color": activeColor,
-                  onClickItem
-                }, null, 8, ["current"])
-              ])
-            ]),
-            vue.createElementVNode("view", { class: "content" }, [
-              vue.createElementVNode("view", null, [
-                vue.createElementVNode("view", { class: "plan-list" }, [
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList(vue.unref(newPlanList), (item, index2) => {
-                      return vue.openBlock(), vue.createElementBlock(
-                        "view",
-                        {
-                          class: vue.normalizeClass(["plan-item", index2 === 0 ? "first" : ""]),
-                          key: index2
-                        },
-                        [
-                          item.plans && item.plans.length ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
-                            vue.createElementVNode("view", {
-                              class: "plan-header",
-                              onClick: ($event) => item.isShow = !item.isShow
-                            }, [
-                              vue.createElementVNode("view", { class: "header-title" }, [
-                                vue.createElementVNode(
-                                  "text",
-                                  { class: "title" },
-                                  vue.toDisplayString(item.title),
-                                  1
-                                  /* TEXT */
-                                )
-                              ]),
-                              vue.createElementVNode("view", { class: "header-desc" }, [
-                                vue.createElementVNode(
-                                  "text",
-                                  { class: "plan-num" },
-                                  vue.toDisplayString(item.plans.length),
-                                  1
-                                  /* TEXT */
-                                ),
-                                vue.createVNode(_component_uni_icons, {
-                                  type: item.isShow ? "top" : "bottom",
-                                  size: "20"
-                                }, null, 8, ["type"])
-                              ])
-                            ], 8, ["onClick"]),
-                            vue.withDirectives(vue.createElementVNode(
-                              "view",
-                              { class: "plan-body" },
-                              [
-                                (vue.openBlock(true), vue.createElementBlock(
-                                  vue.Fragment,
-                                  null,
-                                  vue.renderList(item.plans, (item1) => {
-                                    return vue.openBlock(), vue.createElementBlock("view", {
-                                      class: "body-item",
-                                      key: item1.TaskID
-                                    }, [
-                                      vue.createVNode(
-                                        _component_uni_swipe_action,
-                                        null,
-                                        {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(_component_uni_swipe_action_item, {
-                                              "right-options": options2.value,
-                                              onClick: ($event) => bindClick($event, item1)
-                                            }, {
-                                              default: vue.withCtx(() => [
-                                                vue.createElementVNode("view", { class: "content-box" }, [
-                                                  vue.createElementVNode("view", {
-                                                    class: "box-left",
-                                                    onClick: ($event) => updateStatus(item1)
-                                                  }, [
-                                                    vue.createVNode(_component_uni_icons, {
-                                                      "custom-prefix": "iconfont",
-                                                      type: statusIcon(item1.Status),
-                                                      size: "20",
-                                                      color: "#4c8bf0"
-                                                    }, null, 8, ["type"])
-                                                  ], 8, ["onClick"]),
-                                                  vue.createElementVNode("view", {
-                                                    class: "box-right",
-                                                    onClick: ($event) => editTask(item1)
-                                                  }, [
-                                                    vue.createElementVNode("view", { class: "plan-title" }, [
-                                                      vue.createElementVNode(
-                                                        "text",
-                                                        { class: "title" },
-                                                        vue.toDisplayString(item1.Title),
-                                                        1
-                                                        /* TEXT */
-                                                      )
-                                                    ]),
-                                                    vue.createElementVNode("view", { class: "plan-desc" }, [
-                                                      vue.createElementVNode(
-                                                        "text",
-                                                        { class: "desc" },
-                                                        vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
-                                                        1
-                                                        /* TEXT */
-                                                      )
-                                                    ])
-                                                  ], 8, ["onClick"])
-                                                ])
-                                              ]),
-                                              _: 2
-                                              /* DYNAMIC */
-                                            }, 1032, ["right-options", "onClick"])
-                                          ]),
-                                          _: 2
-                                          /* DYNAMIC */
-                                        },
-                                        1024
-                                        /* DYNAMIC_SLOTS */
-                                      )
-                                    ]);
-                                  }),
-                                  128
-                                  /* KEYED_FRAGMENT */
-                                ))
-                              ],
-                              512
-                              /* NEED_PATCH */
-                            ), [
-                              [vue.vShow, item.isShow]
-                            ])
-                          ])) : vue.createCommentVNode("v-if", true)
-                        ],
-                        2
-                        /* CLASS */
-                      );
-                    }),
-                    128
-                    /* KEYED_FRAGMENT */
-                  ))
-                ])
-              ])
-            ])
-          ]),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: openAddPopup
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 添加弹窗 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-content" }, [
-                  vue.createElementVNode("view", { class: "input-box" }, [
-                    vue.withDirectives(vue.createElementVNode(
-                      "input",
-                      {
-                        class: "input",
-                        type: "text",
-                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => planTitle.value = $event),
-                        placeholder: "把事情记录下来吧~"
-                      },
-                      null,
-                      512
-                      /* NEED_PATCH */
-                    ), [
-                      [vue.vModelText, planTitle.value]
-                    ]),
-                    vue.createElementVNode("view", { class: "btn" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        "custom-prefix": "iconfont",
-                        type: "icon-send",
-                        size: "30",
-                        color: "#4c8bf0",
-                        onClick: addOrEdit
-                      })
-                    ])
-                  ]),
-                  vue.createCommentVNode(" 属性 "),
-                  vue.createElementVNode("view", { class: "attr" }, [
-                    vue.createElementVNode("view", { class: "date" }, [
-                      vue.createVNode(_component_uni_datetime_picker, {
-                        class: "no-border",
-                        type: "datetime",
-                        modelValue: planDate.value,
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => planDate.value = $event)
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    vue.createElementVNode("view", { class: "type-list" }, [
-                      (vue.openBlock(true), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList(vue.unref(typeList), (item, index2) => {
-                          return vue.openBlock(), vue.createElementBlock("view", {
-                            class: "type-box",
-                            style: vue.normalizeStyle({ border: selectedType.value === index2 ? "5rpx solid " + item.color : "none" }),
-                            key: index2,
-                            onClick: ($event) => selectedType.value = index2
-                          }, [
-                            vue.createElementVNode(
-                              "view",
-                              {
-                                class: "type",
-                                style: vue.normalizeStyle({ backgroundColor: item.color })
-                              },
-                              [
-                                vue.createVNode(_component_uni_icons, {
-                                  "custom-prefix": "iconfont",
-                                  type: item.icon,
-                                  size: "20",
-                                  color: "#fff"
-                                }, null, 8, ["type"])
-                              ],
-                              4
-                              /* STYLE */
-                            )
-                          ], 12, ["onClick"]);
-                        }),
-                        128
-                        /* KEYED_FRAGMENT */
-                      ))
-                    ])
-                  ])
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "事项",
+          showTab: true,
+          activeIndex: 1
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { id: "select" }, [
+              vue.createElementVNode("view", { class: "select-header theme-bgc" }, [
+                vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
+                  vue.createVNode(_component_uni_segmented_control, {
+                    current: current.value,
+                    values: items,
+                    "style-type": styleType,
+                    "active-color": activeColor,
+                    onClickItem
+                  }, null, 8, ["current"])
                 ])
               ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+              vue.createElementVNode("view", { class: "plan-content" }, [
+                vue.createElementVNode("view", null, [
+                  vue.createElementVNode("view", { class: "plan-list" }, [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList(vue.unref(newPlanList), (item, index2) => {
+                        return vue.openBlock(), vue.createElementBlock(
+                          "view",
+                          {
+                            class: vue.normalizeClass(["plan-item theme-bgc", index2 === 0 ? "first" : "", index2 === vue.unref(newPlanList).length - 1 ? "last" : ""]),
+                            key: index2
+                          },
+                          [
+                            item.plans && item.plans.length ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
+                              vue.createElementVNode("view", {
+                                class: "plan-header",
+                                onClick: ($event) => item.isShow = !item.isShow
+                              }, [
+                                vue.createElementVNode("view", { class: "header-title" }, [
+                                  vue.createElementVNode(
+                                    "text",
+                                    { class: "title" },
+                                    vue.toDisplayString(item.title),
+                                    1
+                                    /* TEXT */
+                                  )
+                                ]),
+                                vue.createElementVNode("view", { class: "header-desc" }, [
+                                  vue.createElementVNode(
+                                    "text",
+                                    { class: "plan-num" },
+                                    vue.toDisplayString(item.plans.length),
+                                    1
+                                    /* TEXT */
+                                  ),
+                                  vue.createVNode(_component_uni_icons, {
+                                    type: item.isShow ? "top" : "bottom",
+                                    size: "20"
+                                  }, null, 8, ["type"])
+                                ])
+                              ], 8, ["onClick"]),
+                              vue.withDirectives(vue.createElementVNode(
+                                "view",
+                                { class: "plan-body" },
+                                [
+                                  (vue.openBlock(true), vue.createElementBlock(
+                                    vue.Fragment,
+                                    null,
+                                    vue.renderList(item.plans, (item1) => {
+                                      return vue.openBlock(), vue.createElementBlock("view", {
+                                        class: "body-item",
+                                        key: item1.TaskID
+                                      }, [
+                                        vue.createVNode(
+                                          _component_uni_swipe_action,
+                                          null,
+                                          {
+                                            default: vue.withCtx(() => [
+                                              vue.createVNode(_component_uni_swipe_action_item, {
+                                                "right-options": options2.value,
+                                                onClick: ($event) => bindClick($event, item1)
+                                              }, {
+                                                default: vue.withCtx(() => [
+                                                  vue.createElementVNode("view", { class: "content-box" }, [
+                                                    vue.createElementVNode("view", {
+                                                      class: "box-left",
+                                                      onClick: ($event) => updateStatus(item1)
+                                                    }, [
+                                                      vue.createVNode(_component_uni_icons, {
+                                                        "custom-prefix": "iconfont",
+                                                        type: statusIcon(item1.Status),
+                                                        size: "20",
+                                                        color: "#4c8bf0"
+                                                      }, null, 8, ["type"])
+                                                    ], 8, ["onClick"]),
+                                                    vue.createElementVNode("view", {
+                                                      class: "box-right",
+                                                      onClick: ($event) => editTask(item1)
+                                                    }, [
+                                                      vue.createElementVNode("view", { class: "plan-title" }, [
+                                                        vue.createElementVNode(
+                                                          "text",
+                                                          { class: "title" },
+                                                          vue.toDisplayString(item1.Title),
+                                                          1
+                                                          /* TEXT */
+                                                        )
+                                                      ]),
+                                                      vue.createElementVNode("view", { class: "plan-desc" }, [
+                                                        vue.createElementVNode(
+                                                          "text",
+                                                          { class: "desc" },
+                                                          vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
+                                                          1
+                                                          /* TEXT */
+                                                        )
+                                                      ])
+                                                    ], 8, ["onClick"])
+                                                  ])
+                                                ]),
+                                                _: 2
+                                                /* DYNAMIC */
+                                              }, 1032, ["right-options", "onClick"])
+                                            ]),
+                                            _: 2
+                                            /* DYNAMIC */
+                                          },
+                                          1024
+                                          /* DYNAMIC_SLOTS */
+                                        )
+                                      ]);
+                                    }),
+                                    128
+                                    /* KEYED_FRAGMENT */
+                                  ))
+                                ],
+                                512
+                                /* NEED_PATCH */
+                              ), [
+                                [vue.vShow, item.isShow]
+                              ])
+                            ])) : vue.createCommentVNode("v-if", true)
+                          ],
+                          2
+                          /* CLASS */
+                        );
+                      }),
+                      128
+                      /* KEYED_FRAGMENT */
+                    ))
+                  ])
+                ])
+              ])
+            ]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: openAddPopup
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 添加弹窗 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-content" }, [
+                    vue.createElementVNode("view", { class: "input-box" }, [
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          class: "input",
+                          type: "text",
+                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => planTitle.value = $event),
+                          placeholder: "把事情记录下来吧~"
+                        },
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, planTitle.value]
+                      ]),
+                      vue.createElementVNode("view", { class: "btn" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          "custom-prefix": "iconfont",
+                          type: "icon-send",
+                          size: "30",
+                          color: "#4c8bf0",
+                          onClick: addOrEdit
+                        })
+                      ])
+                    ]),
+                    vue.createCommentVNode(" 属性 "),
+                    vue.createElementVNode("view", { class: "attr" }, [
+                      vue.createElementVNode("view", { class: "date" }, [
+                        vue.createVNode(_component_uni_datetime_picker, {
+                          class: "no-border",
+                          type: "datetime",
+                          modelValue: planDate.value,
+                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => planDate.value = $event)
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      vue.createElementVNode("view", { class: "type-list" }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(vue.unref(typeList), (item, index2) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "type-box",
+                              style: vue.normalizeStyle({ border: selectedType.value === index2 ? "5rpx solid " + item.color : "none" }),
+                              key: index2,
+                              onClick: ($event) => selectedType.value = index2
+                            }, [
+                              vue.createElementVNode(
+                                "view",
+                                {
+                                  class: "type",
+                                  style: vue.normalizeStyle({ backgroundColor: item.color })
+                                },
+                                [
+                                  vue.createVNode(_component_uni_icons, {
+                                    "custom-prefix": "iconfont",
+                                    type: item.icon,
+                                    size: "20",
+                                    color: "#fff"
+                                  }, null, 8, ["type"])
+                                ],
+                                4
+                                /* STYLE */
+                              )
+                            ], 12, ["onClick"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
+                    ])
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -7937,13 +8110,13 @@ if (uni.restoreGlobal) {
       const x = vue.ref("600rpx");
       const y = vue.ref("1200rpx");
       const todayX = vue.ref("600rpx");
-      const todayY = vue.ref("500rpx");
+      const todayY = vue.ref("800rpx");
       let tasks = vue.ref([]);
       const getTasks = () => {
         return new Promise((resolve, reject) => {
           apiGetUserTasks(getApp().globalData.userInfo.UserID).then((res) => {
             tasks.value = res.data;
-            formatAppLog("log", "at pages/plan/index.vue:134", "tasks", tasks.value);
+            formatAppLog("log", "at pages/plan/index.vue:135", "tasks", tasks.value);
             filterPlans(previewDays, tasks, dayPlan);
             resolve();
           }).catch((error) => {
@@ -7955,7 +8128,7 @@ if (uni.restoreGlobal) {
       onShow(async () => {
         await getTasks();
         uni.onKeyboardHeightChange((res) => {
-          formatAppLog("log", "at pages/plan/index.vue:148", "键盘高度变化----", res.height);
+          formatAppLog("log", "at pages/plan/index.vue:149", "键盘高度变化----", res.height);
           if (res.height === 0) {
             popupBottom.value = 0;
           } else {
@@ -8061,7 +8234,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at pages/plan/index.vue:269", "plan", plan);
+        formatAppLog("log", "at pages/plan/index.vue:270", "plan", plan);
         apiAddTask(plan).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -8153,304 +8326,312 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "time" }, [
-            vue.createElementVNode(
-              "view",
-              { class: "date" },
-              vue.toDisplayString(currDate.value),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode(
-              "view",
-              { class: "week" },
-              vue.toDisplayString(currWeek.value),
-              1
-              /* TEXT */
-            )
-          ]),
-          vue.createElementVNode("view", { class: "swiper-box" }, [
-            vue.createElementVNode("swiper", {
-              class: "swiper",
-              "disable-programmatic-animation": "",
-              current: vue.unref(currentIndex),
-              onChange: swiperChange
-            }, [
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList(dayPlan.value, (item) => {
-                  return vue.openBlock(), vue.createElementBlock("swiper-item", {
-                    key: item.date
-                  }, [
-                    item.plans && item.plans.length ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 0,
-                      class: "swiper-item"
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "规划",
+          showTab: true,
+          activeIndex: 2
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "time theme-bgc" }, [
+              vue.createElementVNode(
+                "view",
+                { class: "date" },
+                vue.toDisplayString(currDate.value),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode(
+                "view",
+                { class: "week" },
+                vue.toDisplayString(currWeek.value),
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "swiper-box" }, [
+              vue.createElementVNode("swiper", {
+                class: "swiper",
+                "disable-programmatic-animation": "",
+                current: vue.unref(currentIndex),
+                onChange: swiperChange
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList(dayPlan.value, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("swiper-item", {
+                      key: item.date
                     }, [
-                      (vue.openBlock(true), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList(item.plans, (item1) => {
-                          return vue.openBlock(), vue.createElementBlock("view", {
-                            key: item1.TaskID,
-                            onLongpress: ($event) => openMorePopup(item1)
-                          }, [
-                            item1.Status !== 2 ? (vue.openBlock(), vue.createElementBlock("view", {
-                              key: 0,
-                              class: "content-box"
+                      item.plans && item.plans.length ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 0,
+                        class: "swiper-item"
+                      }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(item.plans, (item1) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              key: item1.TaskID,
+                              onLongpress: ($event) => openMorePopup(item1)
                             }, [
-                              vue.createElementVNode("view", {
-                                class: "box-left",
-                                onClick: ($event) => updateStatus(item1)
+                              item1.Status !== 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 0,
+                                class: "content-box theme-bgc"
                               }, [
-                                vue.createVNode(_component_uni_icons, {
-                                  "custom-prefix": "iconfont",
-                                  type: statusIcon(item1.Status),
-                                  size: "20",
-                                  color: "#4c8bf0"
-                                }, null, 8, ["type"])
-                              ], 8, ["onClick"]),
-                              vue.createElementVNode("view", {
-                                class: "box-right",
-                                onClick: ($event) => editTask(item1)
-                              }, [
-                                vue.createElementVNode("view", { class: "plan-title" }, [
-                                  vue.createElementVNode(
-                                    "text",
-                                    { class: "title" },
-                                    vue.toDisplayString(item1.Title),
-                                    1
-                                    /* TEXT */
-                                  )
-                                ]),
-                                vue.createElementVNode("view", { class: "plan-desc" }, [
-                                  vue.createElementVNode(
-                                    "text",
-                                    { class: "desc" },
-                                    vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
-                                    1
-                                    /* TEXT */
-                                  )
-                                ])
-                              ], 8, ["onClick"])
-                            ])) : vue.createCommentVNode("v-if", true)
-                          ], 40, ["onLongpress"]);
-                        }),
-                        128
-                        /* KEYED_FRAGMENT */
-                      ))
-                    ])) : (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 1,
-                      class: "swiper-item no-data"
-                    }, "暂无数据"))
-                  ]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ], 40, ["current"])
-          ]),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: openAddPopup
+                                vue.createElementVNode("view", {
+                                  class: "box-left",
+                                  onClick: ($event) => updateStatus(item1)
+                                }, [
+                                  vue.createVNode(_component_uni_icons, {
+                                    "custom-prefix": "iconfont",
+                                    type: statusIcon(item1.Status),
+                                    size: "20",
+                                    color: "#4c8bf0"
+                                  }, null, 8, ["type"])
+                                ], 8, ["onClick"]),
+                                vue.createElementVNode("view", {
+                                  class: "box-right",
+                                  onClick: ($event) => editTask(item1)
+                                }, [
+                                  vue.createElementVNode("view", { class: "plan-title" }, [
+                                    vue.createElementVNode(
+                                      "text",
+                                      { class: "title" },
+                                      vue.toDisplayString(item1.Title),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ]),
+                                  vue.createElementVNode("view", { class: "plan-desc" }, [
+                                    vue.createElementVNode(
+                                      "text",
+                                      { class: "desc" },
+                                      vue.toDisplayString(vue.unref(formatDateTime)(item1.DueDate)),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ])
+                                ], 8, ["onClick"])
+                              ])) : vue.createCommentVNode("v-if", true)
+                            ], 40, ["onLongpress"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 1,
+                        class: "swiper-item no-data"
+                      }, "暂无数据"))
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ], 40, ["current"])
+            ]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
               }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 今天小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: todayX.value,
-              y: todayY.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: _cache[0] || (_cache[0] = ($event) => vue.isRef(currentIndex) ? currentIndex.value = vue.unref(todayIndex) : currentIndex = vue.unref(todayIndex))
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: openAddPopup
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 今天小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: todayX.value,
+                y: todayY.value,
+                "out-of-bounds": false
               }, [
-                vue.createVNode(_component_uni_icons, {
-                  class: "today-icon",
-                  "custom-prefix": "iconfont",
-                  type: "icon-jinri",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 添加弹窗 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-content" }, [
-                  vue.createElementVNode("view", { class: "input-box" }, [
-                    vue.withDirectives(vue.createElementVNode(
-                      "input",
-                      {
-                        class: "input",
-                        type: "text",
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => planTitle.value = $event),
-                        placeholder: "把事情记录下来吧~"
-                      },
-                      null,
-                      512
-                      /* NEED_PATCH */
-                    ), [
-                      [vue.vModelText, planTitle.value]
-                    ]),
-                    vue.createElementVNode("view", { class: "btn" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        "custom-prefix": "iconfont",
-                        type: "icon-send",
-                        size: "30",
-                        color: "#4c8bf0",
-                        onClick: addOrEdit
-                      })
-                    ])
-                  ]),
-                  vue.createCommentVNode(" 属性 "),
-                  vue.createElementVNode("view", { class: "attr" }, [
-                    vue.createElementVNode("view", { class: "date" }, [
-                      vue.createVNode(_component_uni_datetime_picker, {
-                        class: "no-border",
-                        type: "datetime",
-                        modelValue: planDate.value,
-                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => planDate.value = $event)
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    vue.createElementVNode("view", { class: "type-list" }, [
-                      (vue.openBlock(true), vue.createElementBlock(
-                        vue.Fragment,
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: _cache[0] || (_cache[0] = ($event) => vue.isRef(currentIndex) ? currentIndex.value = vue.unref(todayIndex) : currentIndex = vue.unref(todayIndex))
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    class: "today-icon",
+                    "custom-prefix": "iconfont",
+                    type: "icon-jinri",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 添加弹窗 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-content" }, [
+                    vue.createElementVNode("view", { class: "input-box" }, [
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          class: "input",
+                          type: "text",
+                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => planTitle.value = $event),
+                          placeholder: "把事情记录下来吧~"
+                        },
                         null,
-                        vue.renderList(vue.unref(typeList), (item, index2) => {
-                          return vue.openBlock(), vue.createElementBlock("view", {
-                            class: "type-box",
-                            style: vue.normalizeStyle({ border: selectedType.value === index2 ? "5rpx solid " + item.color : "none" }),
-                            key: index2,
-                            onClick: ($event) => selectedType.value = index2
-                          }, [
-                            vue.createElementVNode(
-                              "view",
-                              {
-                                class: "type",
-                                style: vue.normalizeStyle({ backgroundColor: item.color })
-                              },
-                              [
-                                vue.createVNode(_component_uni_icons, {
-                                  "custom-prefix": "iconfont",
-                                  type: item.icon,
-                                  size: "20",
-                                  color: "#fff"
-                                }, null, 8, ["type"])
-                              ],
-                              4
-                              /* STYLE */
-                            )
-                          ], 12, ["onClick"]);
-                        }),
-                        128
-                        /* KEYED_FRAGMENT */
-                      ))
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, planTitle.value]
+                      ]),
+                      vue.createElementVNode("view", { class: "btn" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          "custom-prefix": "iconfont",
+                          type: "icon-send",
+                          size: "30",
+                          color: "#4c8bf0",
+                          onClick: addOrEdit
+                        })
+                      ])
+                    ]),
+                    vue.createCommentVNode(" 属性 "),
+                    vue.createElementVNode("view", { class: "attr" }, [
+                      vue.createElementVNode("view", { class: "date" }, [
+                        vue.createVNode(_component_uni_datetime_picker, {
+                          class: "no-border",
+                          type: "datetime",
+                          modelValue: planDate.value,
+                          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => planDate.value = $event)
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      vue.createElementVNode("view", { class: "type-list" }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(vue.unref(typeList), (item, index2) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "type-box",
+                              style: vue.normalizeStyle({ border: selectedType.value === index2 ? "5rpx solid " + item.color : "none" }),
+                              key: index2,
+                              onClick: ($event) => selectedType.value = index2
+                            }, [
+                              vue.createElementVNode(
+                                "view",
+                                {
+                                  class: "type",
+                                  style: vue.normalizeStyle({ backgroundColor: item.color })
+                                },
+                                [
+                                  vue.createVNode(_component_uni_icons, {
+                                    "custom-prefix": "iconfont",
+                                    type: item.icon,
+                                    size: "20",
+                                    color: "#fff"
+                                  }, null, 8, ["type"])
+                                ],
+                                4
+                                /* STYLE */
+                              )
+                            ], 12, ["onClick"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
                     ])
                   ])
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          ),
-          vue.createCommentVNode(" 更多功能 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupMore",
-              ref: popupMore,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-list" }, [
-                  vue.createElementVNode("view", { class: "popup-item" }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "arrow-up",
-                        size: "30",
-                        color: "#999"
-                      })
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            ),
+            vue.createCommentVNode(" 更多功能 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupMore",
+                ref: popupMore,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-list" }, [
+                    vue.createElementVNode("view", { class: "popup-item" }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "arrow-up",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 置顶 "),
+                      vue.createElementVNode("view", { class: "popup-switch" }, [
+                        vue.createElementVNode("switch", {
+                          onChange: _cache[3] || (_cache[3] = ($event) => changePriority(currentNote.value)),
+                          checked: currentNote.value.Priority
+                        }, null, 40, ["checked"])
+                      ])
                     ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 置顶 "),
-                    vue.createElementVNode("view", { class: "popup-switch" }, [
-                      vue.createElementVNode("switch", {
-                        onChange: _cache[3] || (_cache[3] = ($event) => changePriority(currentNote.value)),
-                        checked: currentNote.value.Priority
-                      }, null, 40, ["checked"])
-                    ])
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: _cache[4] || (_cache[4] = ($event) => updateTaskStatus({ Status: 3 }))
-                  }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        "custom-prefix": "iconfont",
-                        type: "icon-cuo",
-                        size: "30",
-                        color: "#999"
-                      })
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: _cache[4] || (_cache[4] = ($event) => updateTaskStatus({ Status: 3 }))
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          "custom-prefix": "iconfont",
+                          type: "icon-cuo",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 失败 ")
                     ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 失败 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: _cache[5] || (_cache[5] = ($event) => updateTaskStatus({ Status: 2 }))
-                  }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "trash",
-                        size: "30",
-                        color: "#999"
-                      })
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: _cache[5] || (_cache[5] = ($event) => updateTaskStatus({ Status: 2 }))
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "trash",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
                     ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-close",
-                    onClick: _cache[6] || (_cache[6] = ($event) => _ctx.$refs.popupMore.close())
-                  }, "取消")
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+                    vue.createElementVNode("view", {
+                      class: "popup-close",
+                      onClick: _cache[6] || (_cache[6] = ($event) => _ctx.$refs.popupMore.close())
+                    }, "取消")
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -8878,295 +9059,302 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "fixed-box" }, [
-            vue.createElementVNode("view", { class: "top" }, [
-              vue.createElementVNode("view", { class: "date" }, [
-                vue.createElementVNode("picker", {
-                  mode: "multiSelector",
-                  range: [years.value, months.value],
-                  value: [yearIndex.value, monthIndex.value],
-                  onChange: onDateChange
-                }, [
-                  vue.createElementVNode(
-                    "view",
-                    { class: "top-title" },
-                    vue.toDisplayString(selectedYear.value) + "年",
-                    1
-                    /* TEXT */
-                  ),
-                  vue.createElementVNode(
-                    "view",
-                    { class: "month" },
-                    vue.toDisplayString(selectedMonth.value) + "月",
-                    1
-                    /* TEXT */
-                  )
-                ], 40, ["range", "value"])
-              ]),
-              vue.createElementVNode("view", { class: "money" }, [
-                vue.createElementVNode("view", { class: "item" }, [
-                  vue.createElementVNode("view", { class: "top-title" }, "收入"),
-                  vue.createElementVNode(
-                    "view",
-                    { class: "num" },
-                    vue.toDisplayString(incomesNum(vue.unref(accountList))),
-                    1
-                    /* TEXT */
-                  )
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "记账管家",
+          navBgColor: "#1baf59"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "fixed-box" }, [
+              vue.createElementVNode("view", { class: "top" }, [
+                vue.createElementVNode("view", { class: "date" }, [
+                  vue.createElementVNode("picker", {
+                    mode: "multiSelector",
+                    range: [years.value, months.value],
+                    value: [yearIndex.value, monthIndex.value],
+                    onChange: onDateChange
+                  }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "top-title" },
+                      vue.toDisplayString(selectedYear.value) + "年",
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "month" },
+                      vue.toDisplayString(selectedMonth.value) + "月",
+                      1
+                      /* TEXT */
+                    )
+                  ], 40, ["range", "value"])
                 ]),
-                vue.createElementVNode("view", { class: "item" }, [
-                  vue.createElementVNode("view", { class: "top-title" }, "支出"),
-                  vue.createElementVNode(
-                    "view",
-                    { class: "num" },
-                    vue.toDisplayString(expensesNum(vue.unref(accountList))),
-                    1
-                    /* TEXT */
-                  )
+                vue.createElementVNode("view", { class: "money" }, [
+                  vue.createElementVNode("view", { class: "item" }, [
+                    vue.createElementVNode("view", { class: "top-title" }, "收入"),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "num" },
+                      vue.toDisplayString(incomesNum(vue.unref(accountList))),
+                      1
+                      /* TEXT */
+                    )
+                  ]),
+                  vue.createElementVNode("view", { class: "item" }, [
+                    vue.createElementVNode("view", { class: "top-title" }, "支出"),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "num" },
+                      vue.toDisplayString(expensesNum(vue.unref(accountList))),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ])
+              ]),
+              vue.createCommentVNode(" 功能列表 "),
+              vue.createElementVNode("view", { class: "function-box theme-bgc-0" }, [
+                vue.createElementVNode("view", { class: "function-list theme-bgc" }, [
+                  vue.createElementVNode("view", { class: "function-item" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: "icon-zichan",
+                        size: "30",
+                        color: themeColor.value
+                      }, null, 8, ["color"])
+                    ]),
+                    vue.createElementVNode("view", { class: "title" }, "资产")
+                  ]),
+                  vue.createElementVNode("view", { class: "function-item" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: "icon-tongji",
+                        size: "30",
+                        color: themeColor.value
+                      }, null, 8, ["color"])
+                    ]),
+                    vue.createElementVNode("view", { class: "title" }, "统计")
+                  ]),
+                  vue.createElementVNode("view", { class: "function-item" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: "icon-yusuan",
+                        size: "30",
+                        color: themeColor.value
+                      }, null, 8, ["color"])
+                    ]),
+                    vue.createElementVNode("view", { class: "title" }, "预算")
+                  ]),
+                  vue.createElementVNode("view", { class: "function-item" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: "icon-tongyongdaoru",
+                        size: "30",
+                        color: themeColor.value
+                      }, null, 8, ["color"])
+                    ]),
+                    vue.createElementVNode("view", { class: "title" }, "导入")
+                  ])
                 ])
               ])
             ]),
-            vue.createCommentVNode(" 功能列表 "),
-            vue.createElementVNode("view", { class: "function-box" }, [
-              vue.createElementVNode("view", { class: "function-list" }, [
-                vue.createElementVNode("view", { class: "function-item" }, [
-                  vue.createElementVNode("view", { class: "icon" }, [
-                    vue.createVNode(_component_uni_icons, {
-                      "custom-prefix": "iconfont",
-                      type: "icon-zichan",
-                      size: "30",
-                      color: themeColor.value
-                    }, null, 8, ["color"])
-                  ]),
-                  vue.createElementVNode("view", { class: "title" }, "资产")
-                ]),
-                vue.createElementVNode("view", { class: "function-item" }, [
-                  vue.createElementVNode("view", { class: "icon" }, [
-                    vue.createVNode(_component_uni_icons, {
-                      "custom-prefix": "iconfont",
-                      type: "icon-tongji",
-                      size: "30",
-                      color: themeColor.value
-                    }, null, 8, ["color"])
-                  ]),
-                  vue.createElementVNode("view", { class: "title" }, "统计")
-                ]),
-                vue.createElementVNode("view", { class: "function-item" }, [
-                  vue.createElementVNode("view", { class: "icon" }, [
-                    vue.createVNode(_component_uni_icons, {
-                      "custom-prefix": "iconfont",
-                      type: "icon-yusuan",
-                      size: "30",
-                      color: themeColor.value
-                    }, null, 8, ["color"])
-                  ]),
-                  vue.createElementVNode("view", { class: "title" }, "预算")
-                ]),
-                vue.createElementVNode("view", { class: "function-item" }, [
-                  vue.createElementVNode("view", { class: "icon" }, [
-                    vue.createVNode(_component_uni_icons, {
-                      "custom-prefix": "iconfont",
-                      type: "icon-tongyongdaoru",
-                      size: "30",
-                      color: themeColor.value
-                    }, null, 8, ["color"])
-                  ]),
-                  vue.createElementVNode("view", { class: "title" }, "导入")
-                ])
-              ])
-            ])
-          ]),
-          vue.createCommentVNode(" 账目列表 "),
-          vue.unref(groupedExpenses) && Object.keys(vue.unref(groupedExpenses)).length ? (vue.openBlock(), vue.createElementBlock("view", {
-            key: 0,
-            class: "account-list"
-          }, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList(vue.unref(groupedExpenses), (expenses, date, index2) => {
-                return vue.openBlock(), vue.createElementBlock(
-                  "view",
-                  {
-                    class: vue.normalizeClass(["account-item", index2 === 0 ? "first" : ""]),
-                    key: date
-                  },
-                  [
-                    vue.createElementVNode("view", { class: "plan-header" }, [
-                      vue.createElementVNode("view", { class: "header-title" }, [
-                        vue.createElementVNode("text", { class: "title" }, [
-                          vue.createTextVNode(
-                            vue.toDisplayString(vue.unref(formatDate)(date)),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "text",
-                            { class: "week" },
-                            vue.toDisplayString(vue.unref(getWeek)(date)),
-                            1
-                            /* TEXT */
-                          )
+            vue.createCommentVNode(" 账目列表 "),
+            vue.unref(groupedExpenses) && Object.keys(vue.unref(groupedExpenses)).length ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "account-list"
+            }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(vue.unref(groupedExpenses), (expenses, date, index2) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      class: vue.normalizeClass(["account-item theme-bgc", index2 === 0 ? "first" : ""]),
+                      key: date
+                    },
+                    [
+                      vue.createElementVNode("view", { class: "plan-header theme-bgc-2" }, [
+                        vue.createElementVNode("view", { class: "header-title" }, [
+                          vue.createElementVNode("text", { class: "title" }, [
+                            vue.createTextVNode(
+                              vue.toDisplayString(vue.unref(formatDate)(date)),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "text",
+                              { class: "week" },
+                              vue.toDisplayString(vue.unref(getWeek)(date)),
+                              1
+                              /* TEXT */
+                            )
+                          ])
+                        ]),
+                        vue.createElementVNode("view", { class: "header-desc" }, [
+                          vue.createElementVNode("text", { class: "plan-num" }, [
+                            vue.createCommentVNode(" 正数相加 "),
+                            vue.createElementVNode(
+                              "text",
+                              { class: "income" },
+                              "收 " + vue.toDisplayString(incomesNum(expenses)),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "text",
+                              null,
+                              "支 " + vue.toDisplayString(expensesNum(expenses)),
+                              1
+                              /* TEXT */
+                            )
+                          ])
                         ])
                       ]),
-                      vue.createElementVNode("view", { class: "header-desc" }, [
-                        vue.createElementVNode("text", { class: "plan-num" }, [
-                          vue.createCommentVNode(" 正数相加 "),
-                          vue.createElementVNode(
-                            "text",
-                            { class: "income" },
-                            "收 " + vue.toDisplayString(incomesNum(expenses)),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "text",
-                            null,
-                            "支 " + vue.toDisplayString(expensesNum(expenses)),
-                            1
-                            /* TEXT */
-                          )
-                        ])
-                      ])
-                    ]),
-                    vue.createElementVNode("view", { class: "plan-body" }, [
-                      (vue.openBlock(true), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList(expenses, (expense) => {
-                          return vue.openBlock(), vue.createElementBlock("view", {
-                            class: "body-item",
-                            key: expense.ExpenseID,
-                            onClick: ($event) => updateExpense(expense),
-                            onLongpress: ($event) => openPopup(expense)
-                          }, [
-                            vue.createElementVNode("view", { class: "content-box" }, [
-                              vue.createElementVNode(
-                                "view",
-                                {
-                                  class: "box-left",
-                                  style: vue.normalizeStyle({ backgroundColor: getCategoryInfo(expense).CategoryColor })
-                                },
-                                [
-                                  vue.createVNode(_component_uni_icons, {
-                                    "custom-prefix": "iconfont",
-                                    type: getCategoryInfo(expense).CategoryIcon,
-                                    color: "#fff",
-                                    size: "24"
-                                  }, null, 8, ["type"])
-                                ],
-                                4
-                                /* STYLE */
-                              ),
-                              vue.createElementVNode("view", { class: "box-right" }, [
-                                vue.createElementVNode("view", { class: "plan-title" }, [
-                                  vue.createElementVNode(
-                                    "text",
-                                    { class: "title" },
-                                    vue.toDisplayString(getCategoryInfo(expense).CategoryName),
-                                    1
-                                    /* TEXT */
-                                  )
+                      vue.createElementVNode("view", { class: "plan-body" }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(expenses, (expense) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "body-item",
+                              key: expense.ExpenseID,
+                              onClick: ($event) => updateExpense(expense),
+                              onLongpress: ($event) => openPopup(expense)
+                            }, [
+                              vue.createElementVNode("view", { class: "content-box" }, [
+                                vue.createElementVNode(
+                                  "view",
+                                  {
+                                    class: "box-left",
+                                    style: vue.normalizeStyle({ backgroundColor: getCategoryInfo(expense).CategoryColor })
+                                  },
+                                  [
+                                    vue.createVNode(_component_uni_icons, {
+                                      "custom-prefix": "iconfont",
+                                      type: getCategoryInfo(expense).CategoryIcon,
+                                      color: "#fff",
+                                      size: "24"
+                                    }, null, 8, ["type"])
+                                  ],
+                                  4
+                                  /* STYLE */
+                                ),
+                                vue.createElementVNode("view", { class: "box-right" }, [
+                                  vue.createElementVNode("view", { class: "plan-title" }, [
+                                    vue.createElementVNode(
+                                      "text",
+                                      { class: "title" },
+                                      vue.toDisplayString(getCategoryInfo(expense).CategoryName),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ]),
+                                  vue.createElementVNode("view", { class: "plan-desc" }, [
+                                    vue.createElementVNode(
+                                      "text",
+                                      { class: "desc" },
+                                      vue.toDisplayString(expense.Note),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ])
                                 ]),
-                                vue.createElementVNode("view", { class: "plan-desc" }, [
+                                vue.createElementVNode("view", { class: "box-last" }, [
                                   vue.createElementVNode(
                                     "text",
-                                    { class: "desc" },
-                                    vue.toDisplayString(expense.Note),
-                                    1
-                                    /* TEXT */
+                                    {
+                                      class: vue.normalizeClass(["money", expense.Amount < 0 ? "red" : "green"])
+                                    },
+                                    vue.toDisplayString(expense.Amount),
+                                    3
+                                    /* TEXT, CLASS */
                                   )
                                 ])
-                              ]),
-                              vue.createElementVNode("view", { class: "box-last" }, [
-                                vue.createElementVNode(
-                                  "text",
-                                  {
-                                    class: vue.normalizeClass(["money", expense.Amount < 0 ? "red" : "green"])
-                                  },
-                                  vue.toDisplayString(expense.Amount),
-                                  3
-                                  /* TEXT, CLASS */
-                                )
                               ])
-                            ])
-                          ], 40, ["onClick", "onLongpress"]);
-                        }),
-                        128
-                        /* KEYED_FRAGMENT */
-                      ))
-                    ])
-                  ],
-                  2
-                  /* CLASS */
-                );
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ])) : (vue.openBlock(), vue.createElementBlock("view", {
-            key: 1,
-            class: "no-data"
-          }, "暂无数据")),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: addExpense2
+                            ], 40, ["onClick", "onLongpress"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])) : (vue.openBlock(), vue.createElementBlock("view", {
+              key: 1,
+              class: "no-data"
+            }, "暂无数据")),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
               }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 更多功能 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-list" }, [
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: deleteExpense
-                  }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "trash",
-                        size: "30",
-                        color: "#999"
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-close",
-                    onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.popupRef.close())
-                  }, "取消")
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: addExpense2
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
                 ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 更多功能 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-list" }, [
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: deleteExpense
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "trash",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                    ]),
+                    vue.createElementVNode("view", {
+                      class: "popup-close",
+                      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.popupRef.close())
+                    }, "取消")
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -9501,7 +9689,7 @@ if (uni.restoreGlobal) {
       };
       const refreshBaseUrl = async () => {
         let res = await pingRange(uni.getStorageSync("BASE_URL"));
-        formatAppLog("log", "at subPackages/mine/setting/index.vue:65", "res", res);
+        formatAppLog("log", "at subPackages/mine/setting/index.vue:66", "res", res);
         if (res.code === 0) {
           uni.showToast({
             title: "服务器地址更新失败",
@@ -9528,7 +9716,7 @@ if (uni.restoreGlobal) {
         } else {
           newTheme = {
             mode: "night-mode",
-            bgc: "#000",
+            bgc: "#222",
             iconColor: "#fff"
           };
         }
@@ -9544,12 +9732,8 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock(
-          "view",
-          {
-            class: vue.normalizeClass(["content", vue.unref(theme).mode])
-          },
-          [
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "书架" }, {
+          default: vue.withCtx(() => [
             vue.createCommentVNode(" 设置服务请求地址 "),
             vue.createElementVNode("view", {
               class: "setting-item theme-bgc",
@@ -9624,10 +9808,10 @@ if (uni.restoreGlobal) {
               _: 1
               /* STABLE */
             }, 8, ["background-color"])
-          ],
-          2
-          /* CLASS */
-        );
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -9670,7 +9854,7 @@ if (uni.restoreGlobal) {
       const getMemos = () => {
         apiGetUserMemos(getApp().globalData.userInfo.UserID).then((res) => {
           memos.value = res.data;
-          formatAppLog("log", "at subPackages/memos/index/index.vue:70", "memos", memos);
+          formatAppLog("log", "at subPackages/memos/index/index.vue:71", "memos", memos);
         });
       };
       const current = vue.ref(0);
@@ -9729,117 +9913,121 @@ if (uni.restoreGlobal) {
         const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "select" }, [
-            vue.createElementVNode("view", { class: "select-header" }, [
-              vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
-                vue.createVNode(_component_uni_segmented_control, {
-                  current: current.value,
-                  values: items,
-                  "style-type": styleType,
-                  "active-color": activeColor,
-                  onClickItem
-                }, null, 8, ["current"])
-              ])
-            ]),
-            vue.createElementVNode("view", { class: "content" }, [
-              vue.createElementVNode("view", null, [
-                vue.createElementVNode("view", { class: "note-list" }, [
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList(vue.unref(newPlanList), (item, index2) => {
-                      return vue.openBlock(), vue.createElementBlock("view", {
-                        class: vue.normalizeClass({ "note-item": true, "top": index2 < 3, "middle": index2 % 3 == 1 }),
-                        key: item.MemoID,
-                        onClick: ($event) => editMemo(item),
-                        onLongpress: ($event) => openPopup(item)
-                      }, [
-                        vue.createElementVNode(
-                          "view",
-                          { class: "note-title" },
-                          vue.toDisplayString(item.Title),
-                          1
-                          /* TEXT */
-                        ),
-                        vue.createElementVNode("view", {
-                          class: "note-content",
-                          innerHTML: item.Content
-                        }, null, 8, ["innerHTML"]),
-                        vue.createElementVNode(
-                          "view",
-                          { class: "note-time" },
-                          vue.toDisplayString(vue.unref(formatDate)(item.CreatedDate)),
-                          1
-                          /* TEXT */
-                        )
-                      ], 42, ["onClick", "onLongpress"]);
-                    }),
-                    128
-                    /* KEYED_FRAGMENT */
-                  ))
-                ])
-              ])
-            ])
-          ]),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: _cache[0] || (_cache[0] = ($event) => vue.unref(navTo)(`/subPackages/memos/add/index?type=${current.value}`))
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 更多功能 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-list" }, [
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: deleteMemo
-                  }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "trash",
-                        size: "30",
-                        color: "#999"
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-close",
-                    onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.popupRef.close())
-                  }, "取消")
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "备忘录" }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "select" }, [
+              vue.createElementVNode("view", { class: "select-header theme-bgc" }, [
+                vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
+                  vue.createVNode(_component_uni_segmented_control, {
+                    current: current.value,
+                    values: items,
+                    "style-type": styleType,
+                    "active-color": activeColor,
+                    onClickItem
+                  }, null, 8, ["current"])
                 ])
               ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+              vue.createElementVNode("view", { class: "note-body" }, [
+                vue.createElementVNode("view", null, [
+                  vue.createElementVNode("view", { class: "note-list" }, [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList(vue.unref(newPlanList), (item, index2) => {
+                        return vue.openBlock(), vue.createElementBlock("view", {
+                          class: vue.normalizeClass({ "note-item theme-bgc": true, "top": index2 < 3, "middle": index2 % 3 == 1 }),
+                          key: item.MemoID,
+                          onClick: ($event) => editMemo(item),
+                          onLongpress: ($event) => openPopup(item)
+                        }, [
+                          vue.createElementVNode(
+                            "view",
+                            { class: "note-title" },
+                            vue.toDisplayString(item.Title),
+                            1
+                            /* TEXT */
+                          ),
+                          vue.createElementVNode("view", {
+                            class: "note-content",
+                            innerHTML: item.Content
+                          }, null, 8, ["innerHTML"]),
+                          vue.createElementVNode(
+                            "view",
+                            { class: "note-time" },
+                            vue.toDisplayString(vue.unref(formatDate)(item.CreatedDate)),
+                            1
+                            /* TEXT */
+                          )
+                        ], 42, ["onClick", "onLongpress"]);
+                      }),
+                      128
+                      /* KEYED_FRAGMENT */
+                    ))
+                  ])
+                ])
+              ])
+            ]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: _cache[0] || (_cache[0] = ($event) => vue.unref(navTo)(`/subPackages/memos/add/index?type=${current.value}`))
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
+                ])
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 更多功能 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-list" }, [
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: deleteMemo
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "trash",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                    ]),
+                    vue.createElementVNode("view", {
+                      class: "popup-close",
+                      onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.popupRef.close())
+                    }, "取消")
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -18827,7 +19015,7 @@ if (uni.restoreGlobal) {
       const getAllWaterTypes = () => {
         apiGetAllWaterTypes().then((res) => {
           waterTypes.value = res.data;
-          formatAppLog("log", "at subPackages/water/index/index.vue:151", "waterTypes", waterTypes.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:156", "waterTypes", waterTypes.value);
         });
       };
       let waterRecords = vue.ref([]);
@@ -18837,7 +19025,7 @@ if (uni.restoreGlobal) {
       const getWaterRecords = () => {
         apiGetUserWaterRecords(getApp().globalData.userInfo.UserID).then((res) => {
           waterRecords.value = res.data;
-          formatAppLog("log", "at subPackages/water/index/index.vue:163", "waterRecords", waterRecords.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:168", "waterRecords", waterRecords.value);
         });
       };
       const percent = vue.computed(() => {
@@ -18858,7 +19046,7 @@ if (uni.restoreGlobal) {
         for (let i2 = 0; i2 < waterTypes.value.length; i2 += 10) {
           arr.push(waterTypes.value.slice(i2, i2 + 10));
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:187", "arr", arr);
+        formatAppLog("log", "at subPackages/water/index/index.vue:192", "arr", arr);
         return arr;
       });
       const selectWater = (WaterID) => {
@@ -18886,14 +19074,14 @@ if (uni.restoreGlobal) {
         } else if (key2 === "完成") {
           addWater();
         } else if (key2 === "date") {
-          formatAppLog("log", "at subPackages/water/index/index.vue:219", "timePicker.value", timePicker.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:224", "timePicker.value", timePicker.value);
         } else {
           waterData.Amount += key2;
         }
       };
       const timePicker = vue.ref(null);
       const bindTimeChange = (e2) => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:228", "picker发送选择改变,携带值为", e2.detail.value);
+        formatAppLog("log", "at subPackages/water/index/index.vue:233", "picker发送选择改变,携带值为", e2.detail.value);
         waterData.DateTime = convertToTodayTime(e2.detail.value) + "";
       };
       const addWaterRecord = () => {
@@ -18910,7 +19098,7 @@ if (uni.restoreGlobal) {
         } else {
           waterData.Amount = "";
           waterData.DateTime = (/* @__PURE__ */ new Date()).getTime();
-          formatAppLog("log", "at subPackages/water/index/index.vue:245", "waterData.DateTime", waterData.DateTime);
+          formatAppLog("log", "at subPackages/water/index/index.vue:250", "waterData.DateTime", waterData.DateTime);
           waterData.WaterID = 1;
         }
         popupRef.value.open("bottom");
@@ -18923,7 +19111,7 @@ if (uni.restoreGlobal) {
       });
       const isEdit2 = vue.ref(false);
       const addWater = () => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:259", "waterData.DateTime", waterData.DateTime);
+        formatAppLog("log", "at subPackages/water/index/index.vue:264", "waterData.DateTime", waterData.DateTime);
         waterData.DateTime = formatDateTime(waterData.DateTime);
         let errMsg = "";
         if (!waterData.Amount) {
@@ -18936,7 +19124,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:272", "waterData", waterData);
+        formatAppLog("log", "at subPackages/water/index/index.vue:277", "waterData", waterData);
         let api = isEdit2.value ? apiUpdateWaterRecord : apiAddWaterRecord;
         api(waterData).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -18985,7 +19173,7 @@ if (uni.restoreGlobal) {
       ]);
       const recordPopupRef = vue.ref(null);
       const deleteRecord = (e2, item) => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:330", "item", item);
+        formatAppLog("log", "at subPackages/water/index/index.vue:335", "item", item);
         apiDeleteWaterRecord(item.RecordID).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -19004,383 +19192,393 @@ if (uni.restoreGlobal) {
         const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_2);
         const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_3);
         const _component_uni_number_box = resolveEasycom(vue.resolveDynamicComponent("uni-number-box"), __easycom_4);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createCommentVNode(" 已喝水量的百分比 "),
-          vue.createElementVNode("view", { class: "water" }, [
-            vue.createElementVNode(
-              "view",
-              { class: "water-percent" },
-              vue.toDisplayString(vue.unref(percent)),
-              1
-              /* TEXT */
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "饮水" }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", {
+              id: "water-card",
+              class: "theme-bgc"
+            }, [
+              vue.createCommentVNode(" 已喝水量的百分比 "),
+              vue.createElementVNode("view", { class: "water" }, [
+                vue.createElementVNode(
+                  "view",
+                  { class: "water-percent" },
+                  vue.toDisplayString(vue.unref(percent)),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode("view", { class: "percent" }, " % ")
+              ]),
+              vue.createCommentVNode(" 温馨提示 "),
+              vue.createElementVNode(
+                "view",
+                { class: "tips" },
+                vue.toDisplayString(tips.value),
+                1
+                /* TEXT */
+              ),
+              vue.createCommentVNode(" 已喝(ml)、目标(ml)、剩余(ml) "),
+              vue.createElementVNode("view", { class: "info" }, [
+                vue.createElementVNode("view", {
+                  class: "info-item",
+                  onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.recordPopupRef.open("bottom"))
+                }, [
+                  vue.createElementVNode("view", { class: "label" }, "已喝(ml)"),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "value" },
+                    vue.toDisplayString(vue.unref(consumedWater)),
+                    1
+                    /* TEXT */
+                  )
+                ]),
+                vue.createElementVNode("view", {
+                  class: "info-item",
+                  onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.setTargetRef.open("bottom"))
+                }, [
+                  vue.createElementVNode("view", { class: "label" }, "目标(ml)"),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "value" },
+                    vue.toDisplayString(targetWater.value),
+                    1
+                    /* TEXT */
+                  )
+                ]),
+                vue.createElementVNode("view", { class: "info-item" }, [
+                  vue.createElementVNode("view", { class: "label" }, "剩余(ml)"),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "value" },
+                    vue.toDisplayString(targetWater.value - vue.unref(consumedWater)),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ]),
+              vue.createCommentVNode(" 喝水 "),
+              vue.createElementVNode("view", { class: "water-btn" }, [
+                vue.createVNode(_component_uni_icons, {
+                  "custom-prefix": "iconfont",
+                  type: "icon-water",
+                  size: "50",
+                  color: "#00b7ff",
+                  onClick: addWaterRecord
+                })
+              ]),
+              vue.createCommentVNode(" 水位 "),
+              vue.createElementVNode(
+                "view",
+                {
+                  class: "water-level",
+                  style: vue.normalizeStyle({ height: 15 + vue.unref(percent) + "%" })
+                },
+                null,
+                4
+                /* STYLE */
+              )
+            ]),
+            vue.createCommentVNode(" 弹出层 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                class: "popup",
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-content theme-font" }, [
+                    vue.createElementVNode("view", { class: "popup-header" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(isEdit2.value ? "编辑饮水" : "添加饮水"),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
+                    vue.createElementVNode("view", { class: "popup-swiper" }, [
+                      vue.createElementVNode("swiper", {
+                        "indicator-dots": true,
+                        autoplay: false
+                      }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(vue.unref(swiperList), (item, index2) => {
+                            return vue.openBlock(), vue.createElementBlock("swiper-item", {
+                              class: "swiper-page",
+                              key: index2
+                            }, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList(item, (item1, index3) => {
+                                  return vue.openBlock(), vue.createElementBlock("view", {
+                                    class: "water-item",
+                                    key: index3,
+                                    onClick: ($event) => selectWater(item1.WaterID)
+                                  }, [
+                                    vue.createElementVNode(
+                                      "view",
+                                      {
+                                        class: vue.normalizeClass(["water-icon", waterData.WaterID == item1.WaterID ? "active" : ""])
+                                      },
+                                      [
+                                        vue.createVNode(_component_uni_icons, {
+                                          "custom-prefix": "iconfont",
+                                          type: item1.WaterIcon,
+                                          size: "50",
+                                          color: "#00b7ff"
+                                        }, null, 8, ["type"])
+                                      ],
+                                      2
+                                      /* CLASS */
+                                    ),
+                                    vue.createElementVNode(
+                                      "view",
+                                      { class: "water-name" },
+                                      vue.toDisplayString(item1.WaterName),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ], 8, ["onClick"]);
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "numeric-keypad" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "display" },
+                        vue.toDisplayString(waterData.Amount),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "quick-keypad" }, [
+                        (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(quickKeys, (keyNum, index2) => {
+                            return vue.createElementVNode("view", {
+                              class: "key theme-bgc",
+                              key: index2,
+                              onClick: ($event) => waterData.Amount = keyNum
+                            }, vue.toDisplayString(keyNum) + "ml ", 9, ["onClick"]);
+                          }),
+                          64
+                          /* STABLE_FRAGMENT */
+                        ))
+                      ]),
+                      vue.createElementVNode("table", null, [
+                        (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(keypadLayout2, (row, rowIndex) => {
+                            return vue.createElementVNode("tr", { key: rowIndex }, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList(row, (key2, keyIndex) => {
+                                  return vue.openBlock(), vue.createElementBlock("td", {
+                                    class: "theme-bgc",
+                                    key: keyIndex,
+                                    onClick: ($event) => handleKeyPress2(key2)
+                                  }, [
+                                    key2 != "date" ? (vue.openBlock(), vue.createElementBlock(
+                                      "view",
+                                      { key: 0 },
+                                      vue.toDisplayString(key2),
+                                      1
+                                      /* TEXT */
+                                    )) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
+                                      vue.createCommentVNode(" 时间选择器 "),
+                                      vue.createElementVNode("picker", {
+                                        ref_for: true,
+                                        ref_key: "timePicker",
+                                        ref: timePicker,
+                                        mode: "time",
+                                        value: waterData.DateTime,
+                                        onChange: bindTimeChange
+                                      }, [
+                                        vue.createElementVNode(
+                                          "view",
+                                          { class: "uni-input" },
+                                          vue.toDisplayString(vue.unref(formatDateToTime)(waterData.DateTime)),
+                                          1
+                                          /* TEXT */
+                                        )
+                                      ], 40, ["value"])
+                                    ]))
+                                  ], 8, ["onClick"]);
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]);
+                          }),
+                          64
+                          /* STABLE_FRAGMENT */
+                        ))
+                      ])
+                    ])
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
             ),
-            vue.createElementVNode("view", { class: "percent" }, " % ")
-          ]),
-          vue.createCommentVNode(" 温馨提示 "),
-          vue.createElementVNode(
-            "view",
-            { class: "tips" },
-            vue.toDisplayString(tips.value),
-            1
-            /* TEXT */
-          ),
-          vue.createCommentVNode(" 已喝(ml)、目标(ml)、剩余(ml) "),
-          vue.createElementVNode("view", { class: "info" }, [
-            vue.createElementVNode("view", {
-              class: "info-item",
-              onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$refs.recordPopupRef.open("bottom"))
-            }, [
-              vue.createElementVNode("view", { class: "label" }, "已喝(ml)"),
-              vue.createElementVNode(
-                "view",
-                { class: "value" },
-                vue.toDisplayString(vue.unref(consumedWater)),
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", {
-              class: "info-item",
-              onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.setTargetRef.open("bottom"))
-            }, [
-              vue.createElementVNode("view", { class: "label" }, "目标(ml)"),
-              vue.createElementVNode(
-                "view",
-                { class: "value" },
-                vue.toDisplayString(targetWater.value),
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "info-item" }, [
-              vue.createElementVNode("view", { class: "label" }, "剩余(ml)"),
-              vue.createElementVNode(
-                "view",
-                { class: "value" },
-                vue.toDisplayString(targetWater.value - vue.unref(consumedWater)),
-                1
-                /* TEXT */
-              )
-            ])
-          ]),
-          vue.createCommentVNode(" 喝水 "),
-          vue.createElementVNode("view", { class: "water-btn" }, [
-            vue.createVNode(_component_uni_icons, {
-              "custom-prefix": "iconfont",
-              type: "icon-water",
-              size: "50",
-              color: "#00b7ff",
-              onClick: addWaterRecord
-            })
-          ]),
-          vue.createCommentVNode(" 水位 "),
-          vue.createElementVNode(
-            "view",
-            {
-              class: "water-level",
-              style: vue.normalizeStyle({ height: 15 + vue.unref(percent) + "%" })
-            },
-            null,
-            4
-            /* STYLE */
-          ),
-          vue.createCommentVNode(" 弹出层 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              class: "popup",
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-content" }, [
-                  vue.createElementVNode("view", { class: "popup-header" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "title" },
-                      vue.toDisplayString(isEdit2.value ? "编辑饮水" : "添加饮水"),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "popup-swiper" }, [
-                    vue.createElementVNode("swiper", {
-                      "indicator-dots": true,
-                      autoplay: false
+            vue.createCommentVNode(" 饮水记录弹出层 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                class: "record-popup",
+                ref_key: "recordPopupRef",
+                ref: recordPopupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "record-popup-content theme-font" }, [
+                    vue.createElementVNode("view", { class: "record-header" }, [
+                      vue.createElementVNode("view", { class: "title" }, "饮水记录")
+                    ]),
+                    vue.unref(waterRecords).length > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "record-list"
                     }, [
                       (vue.openBlock(true), vue.createElementBlock(
                         vue.Fragment,
                         null,
-                        vue.renderList(vue.unref(swiperList), (item, index2) => {
-                          return vue.openBlock(), vue.createElementBlock("swiper-item", {
-                            class: "swiper-page",
-                            key: index2
-                          }, [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
+                        vue.renderList(vue.unref(waterRecords), (item, index2) => {
+                          return vue.openBlock(), vue.createElementBlock("view", { key: index2 }, [
+                            vue.createVNode(
+                              _component_uni_swipe_action,
                               null,
-                              vue.renderList(item, (item1, index3) => {
-                                return vue.openBlock(), vue.createElementBlock("view", {
-                                  class: "water-item",
-                                  key: index3,
-                                  onClick: ($event) => selectWater(item1.WaterID)
-                                }, [
-                                  vue.createElementVNode(
-                                    "view",
-                                    {
-                                      class: vue.normalizeClass(["water-icon", waterData.WaterID == item1.WaterID ? "active" : ""])
-                                    },
-                                    [
-                                      vue.createVNode(_component_uni_icons, {
-                                        "custom-prefix": "iconfont",
-                                        type: item1.WaterIcon,
-                                        size: "50",
-                                        color: "#00b7ff"
-                                      }, null, 8, ["type"])
-                                    ],
-                                    2
-                                    /* CLASS */
-                                  ),
-                                  vue.createElementVNode(
-                                    "view",
-                                    { class: "water-name" },
-                                    vue.toDisplayString(item1.WaterName),
-                                    1
-                                    /* TEXT */
-                                  )
-                                ], 8, ["onClick"]);
-                              }),
-                              128
-                              /* KEYED_FRAGMENT */
-                            ))
+                              {
+                                default: vue.withCtx(() => [
+                                  vue.createVNode(_component_uni_swipe_action_item, {
+                                    "right-options": swipeOptions.value,
+                                    onClick: ($event) => deleteRecord($event, item)
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createElementVNode("view", {
+                                        class: "record-item",
+                                        onClick: ($event) => editRecord(item)
+                                      }, [
+                                        vue.createElementVNode("view", { class: "record-icon" }, [
+                                          vue.createVNode(_component_uni_icons, {
+                                            "custom-prefix": "iconfont",
+                                            type: getWaterObject(item.WaterID).WaterIcon,
+                                            size: "40",
+                                            color: "#00b7ff"
+                                          }, null, 8, ["type"])
+                                        ]),
+                                        vue.createElementVNode(
+                                          "view",
+                                          { class: "record-date" },
+                                          vue.toDisplayString(vue.unref(formatDateToTime)(item.DateTime)),
+                                          1
+                                          /* TEXT */
+                                        ),
+                                        vue.createElementVNode(
+                                          "view",
+                                          { class: "record-water" },
+                                          vue.toDisplayString(getWaterObject(item.WaterID).WaterName),
+                                          1
+                                          /* TEXT */
+                                        ),
+                                        vue.createElementVNode(
+                                          "view",
+                                          { class: "record-amount" },
+                                          vue.toDisplayString(item.Amount) + "ml ",
+                                          1
+                                          /* TEXT */
+                                        )
+                                      ], 8, ["onClick"])
+                                    ]),
+                                    _: 2
+                                    /* DYNAMIC */
+                                  }, 1032, ["right-options", "onClick"])
+                                ]),
+                                _: 2
+                                /* DYNAMIC */
+                              },
+                              1024
+                              /* DYNAMIC_SLOTS */
+                            )
                           ]);
                         }),
                         128
                         /* KEYED_FRAGMENT */
                       ))
-                    ])
-                  ]),
-                  vue.createElementVNode("view", { class: "numeric-keypad" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "display" },
-                      vue.toDisplayString(waterData.Amount),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "quick-keypad" }, [
-                      (vue.openBlock(), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList(quickKeys, (keyNum, index2) => {
-                          return vue.createElementVNode("view", {
-                            class: "key",
-                            key: index2,
-                            onClick: ($event) => waterData.Amount = keyNum
-                          }, vue.toDisplayString(keyNum) + "ml ", 9, ["onClick"]);
-                        }),
-                        64
-                        /* STABLE_FRAGMENT */
-                      ))
+                    ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 1,
+                      class: "record-empty"
+                    }, " 今天还没有喝水哦 "))
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            ),
+            vue.createCommentVNode(" 设置饮水目标 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                class: "set-target",
+                ref_key: "setTargetRef",
+                ref: setTargetRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "set-target-content theme-font" }, [
+                    vue.createElementVNode("view", { class: "set-target-header" }, [
+                      vue.createElementVNode("view", { class: "title" }, "设置饮水目标")
                     ]),
-                    vue.createElementVNode("table", null, [
-                      (vue.openBlock(), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList(keypadLayout2, (row, rowIndex) => {
-                          return vue.createElementVNode("tr", { key: rowIndex }, [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
-                              null,
-                              vue.renderList(row, (key2, keyIndex) => {
-                                return vue.openBlock(), vue.createElementBlock("td", {
-                                  key: keyIndex,
-                                  onClick: ($event) => handleKeyPress2(key2)
-                                }, [
-                                  key2 != "date" ? (vue.openBlock(), vue.createElementBlock(
-                                    "view",
-                                    { key: 0 },
-                                    vue.toDisplayString(key2),
-                                    1
-                                    /* TEXT */
-                                  )) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
-                                    vue.createCommentVNode(" 时间选择器 "),
-                                    vue.createElementVNode("picker", {
-                                      ref_for: true,
-                                      ref_key: "timePicker",
-                                      ref: timePicker,
-                                      mode: "time",
-                                      value: waterData.DateTime,
-                                      onChange: bindTimeChange
-                                    }, [
-                                      vue.createElementVNode(
-                                        "view",
-                                        { class: "uni-input" },
-                                        vue.toDisplayString(vue.unref(formatDateToTime)(waterData.DateTime)),
-                                        1
-                                        /* TEXT */
-                                      )
-                                    ], 40, ["value"])
-                                  ]))
-                                ], 8, ["onClick"]);
-                              }),
-                              128
-                              /* KEYED_FRAGMENT */
-                            ))
-                          ]);
-                        }),
-                        64
-                        /* STABLE_FRAGMENT */
-                      ))
+                    vue.createElementVNode("view", { class: "set-target-input" }, [
+                      vue.createVNode(_component_uni_number_box, {
+                        width: 100,
+                        value: targetWaterTemp.value,
+                        step: 100
+                      }, null, 8, ["value"])
+                    ]),
+                    vue.createElementVNode("view", { class: "set-target-btn" }, [
+                      vue.createElementVNode("view", {
+                        class: "btn",
+                        onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
+                      }, "取消"),
+                      vue.createElementVNode("view", {
+                        class: "btn btn-primary",
+                        onClick: _cache[3] || (_cache[3] = ($event) => setTarget())
+                      }, "确定")
                     ])
                   ])
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          ),
-          vue.createCommentVNode(" 饮水记录弹出层 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              class: "record-popup",
-              ref_key: "recordPopupRef",
-              ref: recordPopupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "record-popup-content" }, [
-                  vue.createElementVNode("view", { class: "record-header" }, [
-                    vue.createElementVNode("view", { class: "title" }, "饮水记录")
-                  ]),
-                  vue.unref(waterRecords).length > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                    key: 0,
-                    class: "record-list"
-                  }, [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(vue.unref(waterRecords), (item, index2) => {
-                        return vue.openBlock(), vue.createElementBlock("view", { key: index2 }, [
-                          vue.createVNode(
-                            _component_uni_swipe_action,
-                            null,
-                            {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_uni_swipe_action_item, {
-                                  "right-options": swipeOptions.value,
-                                  onClick: ($event) => deleteRecord($event, item)
-                                }, {
-                                  default: vue.withCtx(() => [
-                                    vue.createElementVNode("view", {
-                                      class: "record-item",
-                                      onClick: ($event) => editRecord(item)
-                                    }, [
-                                      vue.createElementVNode("view", { class: "record-icon" }, [
-                                        vue.createVNode(_component_uni_icons, {
-                                          "custom-prefix": "iconfont",
-                                          type: getWaterObject(item.WaterID).WaterIcon,
-                                          size: "40",
-                                          color: "#00b7ff"
-                                        }, null, 8, ["type"])
-                                      ]),
-                                      vue.createElementVNode(
-                                        "view",
-                                        { class: "record-date" },
-                                        vue.toDisplayString(vue.unref(formatDateToTime)(item.DateTime)),
-                                        1
-                                        /* TEXT */
-                                      ),
-                                      vue.createElementVNode(
-                                        "view",
-                                        { class: "record-water" },
-                                        vue.toDisplayString(getWaterObject(item.WaterID).WaterName),
-                                        1
-                                        /* TEXT */
-                                      ),
-                                      vue.createElementVNode(
-                                        "view",
-                                        { class: "record-amount" },
-                                        vue.toDisplayString(item.Amount) + "ml ",
-                                        1
-                                        /* TEXT */
-                                      )
-                                    ], 8, ["onClick"])
-                                  ]),
-                                  _: 2
-                                  /* DYNAMIC */
-                                }, 1032, ["right-options", "onClick"])
-                              ]),
-                              _: 2
-                              /* DYNAMIC */
-                            },
-                            1024
-                            /* DYNAMIC_SLOTS */
-                          )
-                        ]);
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    ))
-                  ])) : (vue.openBlock(), vue.createElementBlock("view", {
-                    key: 1,
-                    class: "record-empty"
-                  }, " 今天还没有喝水哦 "))
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          ),
-          vue.createCommentVNode(" 设置饮水目标 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              class: "set-target",
-              ref_key: "setTargetRef",
-              ref: setTargetRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "set-target-content" }, [
-                  vue.createElementVNode("view", { class: "set-target-header" }, [
-                    vue.createElementVNode("view", { class: "title" }, "设置饮水目标")
-                  ]),
-                  vue.createElementVNode("view", { class: "set-target-input" }, [
-                    vue.createVNode(_component_uni_number_box, {
-                      width: 100,
-                      value: targetWaterTemp.value,
-                      step: 100
-                    }, null, 8, ["value"])
-                  ]),
-                  vue.createElementVNode("view", { class: "set-target-btn" }, [
-                    vue.createElementVNode("view", {
-                      class: "btn",
-                      onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
-                    }, "取消"),
-                    vue.createElementVNode("view", {
-                      class: "btn btn-primary",
-                      onClick: _cache[3] || (_cache[3] = ($event) => setTarget())
-                    }, "确定")
-                  ])
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -19423,7 +19621,7 @@ if (uni.restoreGlobal) {
       const getDiaries = () => {
         apiGetUserDiaries(getApp().globalData.userInfo.UserID).then((res) => {
           diaries.value = res.data;
-          formatAppLog("log", "at subPackages/diary/index/index.vue:66", "diaries", diaries.value);
+          formatAppLog("log", "at subPackages/diary/index/index.vue:67", "diaries", diaries.value);
         });
       };
       const editDiary = (item) => {
@@ -19455,118 +19653,125 @@ if (uni.restoreGlobal) {
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "diary-list" }, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList(vue.unref(diaries), (item) => {
-                return vue.openBlock(), vue.createElementBlock("view", {
-                  class: "diary-item",
-                  key: item.DiaryID,
-                  onClick: ($event) => editDiary(item),
-                  onLongpress: ($event) => openPopup(item)
-                }, [
-                  vue.createElementVNode("view", { class: "diary-left" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "month" },
-                      vue.toDisplayString(vue.unref(formatDateToMonth)(item.Date)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "view",
-                      { class: "day" },
-                      vue.toDisplayString(vue.unref(formatDateToDay)(item.Date)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "view",
-                      { class: "time" },
-                      vue.toDisplayString(vue.unref(formatDateToTime)(item.Date)),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "diary-right" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "title" },
-                      vue.toDisplayString(item.Title),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", {
-                      class: "diary-content",
-                      innerHTML: item.Content
-                    }, null, 8, ["innerHTML"])
-                  ])
-                ], 40, ["onClick", "onLongpress"]);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ]),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: _cache[0] || (_cache[0] = ($event) => vue.unref(navTo)(`/subPackages/diary/add/index`))
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 更多功能 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-list" }, [
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: deleteDiary
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "备忘录",
+          backgroundImage: "/static/diary-bg.webp"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "diary-list" }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(vue.unref(diaries), (item) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "diary-item theme-bgc",
+                    key: item.DiaryID,
+                    onClick: ($event) => editDiary(item),
+                    onLongpress: ($event) => openPopup(item)
                   }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "trash",
-                        size: "30",
-                        color: "#999"
-                      })
+                    vue.createElementVNode("view", { class: "diary-left" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "month" },
+                        vue.toDisplayString(vue.unref(formatDateToMonth)(item.Date)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "view",
+                        { class: "day" },
+                        vue.toDisplayString(vue.unref(formatDateToDay)(item.Date)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "view",
+                        { class: "time" },
+                        vue.toDisplayString(vue.unref(formatDateToTime)(item.Date)),
+                        1
+                        /* TEXT */
+                      )
                     ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-close",
-                    onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.popupRef.close())
-                  }, "取消")
+                    vue.createElementVNode("view", { class: "diary-right" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(item.Title),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", {
+                        class: "diary-content",
+                        innerHTML: item.Content
+                      }, null, 8, ["innerHTML"])
+                    ])
+                  ], 40, ["onClick", "onLongpress"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: _cache[0] || (_cache[0] = ($event) => vue.unref(navTo)(`/subPackages/diary/add/index`))
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
                 ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 更多功能 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-list" }, [
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: deleteDiary
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "trash",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                    ]),
+                    vue.createElementVNode("view", {
+                      class: "popup-close",
+                      onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.popupRef.close())
+                    }, "取消")
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -20233,7 +20438,7 @@ if (uni.restoreGlobal) {
             });
           } else {
             countdownList.value = res.data;
-            formatAppLog("log", "at subPackages/countdowns/index/index.vue:95", "countdownList", countdownList.value);
+            formatAppLog("log", "at subPackages/countdowns/index/index.vue:96", "countdownList", countdownList.value);
           }
         });
       };
@@ -20277,7 +20482,7 @@ if (uni.restoreGlobal) {
         }
         if (isEdit2.value)
           countdown.CountdownID = activeCountdownID.value;
-        formatAppLog("log", "at subPackages/countdowns/index/index.vue:142", "countdown", countdown);
+        formatAppLog("log", "at subPackages/countdowns/index/index.vue:143", "countdown", countdown);
         let api = isEdit2.value ? apiUpdateCountdown : apiAddCountdown;
         api(countdown).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -20321,195 +20526,202 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_1$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "countdown-list" }, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList(vue.unref(countdownList), (item) => {
-                return vue.openBlock(), vue.createElementBlock("view", {
-                  class: "countdown-item",
-                  key: item.CountdownID,
-                  onClick: ($event) => openAddOrEditCountdown(item, true),
-                  onLongpress: ($event) => openPopup(item)
-                }, [
-                  vue.createElementVNode("view", { class: "countdown-left" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "title" },
-                      vue.toDisplayString(item.Name),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "view",
-                      { class: "date" },
-                      vue.toDisplayString(vue.unref(formatDate)(item.TargetDate)) + " " + vue.toDisplayString(vue.unref(formatDateLunar)(item.TargetDate)),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "countdown-right" }, [
-                    getRemainingDays(item.TargetDate) > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 0,
-                      class: "day-remaining"
-                    }, [
-                      vue.createTextVNode(" 还剩"),
-                      vue.createElementVNode(
-                        "text",
-                        { class: "remaining" },
-                        vue.toDisplayString(getRemainingDays(item.TargetDate)),
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createTextVNode("天 ")
-                    ])) : getRemainingDays(item.TargetDate) < 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 1,
-                      class: "day-remaining"
-                    }, [
-                      vue.createTextVNode(" 已过"),
-                      vue.createElementVNode(
-                        "text",
-                        { class: "remaining" },
-                        vue.toDisplayString(Math.abs(getRemainingDays(item.TargetDate))),
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createTextVNode("天 ")
-                    ])) : (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 2,
-                      class: "day-remaining"
-                    }, [
-                      vue.createElementVNode("text", { class: "today" }, "今天")
-                    ]))
-                  ])
-                ], 40, ["onClick", "onLongpress"]);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ]),
-          vue.createCommentVNode(" 小浮窗 "),
-          vue.createElementVNode("movable-area", { class: "movableArea" }, [
-            vue.createElementVNode("movable-view", {
-              class: "movableView",
-              direction: "all",
-              x: x.value,
-              y: y.value,
-              "out-of-bounds": false
-            }, [
-              vue.createElementVNode("button", {
-                class: "win-service",
-                onClick: openAddOrEditCountdown
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "plusempty",
-                  size: "30",
-                  color: "#fff"
-                })
-              ])
-            ], 8, ["x", "y"])
-          ]),
-          vue.createCommentVNode(" 添加倒计时 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              class: "add-countdown",
-              ref_key: "addCountdownRef",
-              ref: addCountdownRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "add-countdown-content" }, [
-                  vue.createElementVNode("view", { class: "add-countdown-header" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "title" },
-                      vue.toDisplayString(isEdit2.value ? "编辑倒计时" : "添加倒计时"),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "countdown-name" }, [
-                    vue.withDirectives(vue.createElementVNode(
-                      "input",
-                      {
-                        type: "text",
-                        class: "name-input",
-                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => countdownName.value = $event),
-                        placeholder: "倒计时名称"
-                      },
-                      null,
-                      512
-                      /* NEED_PATCH */
-                    ), [
-                      [vue.vModelText, countdownName.value]
-                    ])
-                  ]),
-                  vue.createElementVNode("view", { class: "countdown-date" }, [
-                    vue.createElementVNode("view", { class: "target" }, "目标日"),
-                    vue.createVNode(_component_uni_datetime_picker, {
-                      type: "date",
-                      modelValue: countdownDate.value,
-                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => countdownDate.value = $event)
-                    }, null, 8, ["modelValue"])
-                  ]),
-                  vue.createElementVNode("view", { class: "add-countdown-input" }, [
-                    vue.createElementVNode("view", {
-                      class: "btn",
-                      onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
-                    }, "取消"),
-                    vue.createElementVNode("view", {
-                      class: "btn btn-primary",
-                      onClick: _cache[3] || (_cache[3] = ($event) => addCountdown())
-                    }, "确定")
-                  ])
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          ),
-          vue.createCommentVNode(" 更多功能 "),
-          vue.createVNode(
-            _component_uni_popup,
-            {
-              ref_key: "popupRef",
-              ref: popupRef,
-              "background-color": "#fff"
-            },
-            {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "popup-list" }, [
-                  vue.createElementVNode("view", {
-                    class: "popup-item",
-                    onClick: deleteCountdown
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
+          navTitle: "倒计时",
+          backgroundImage: "static/countdown-bg.png"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "countdown-list" }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(vue.unref(countdownList), (item) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "countdown-item",
+                    key: item.CountdownID,
+                    onClick: ($event) => openAddOrEditCountdown(item, true),
+                    onLongpress: ($event) => openPopup(item)
                   }, [
-                    vue.createElementVNode("view", { class: "popup-icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        type: "trash",
-                        size: "30",
-                        color: "#999"
-                      })
+                    vue.createElementVNode("view", { class: "countdown-left" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(item.Name),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "view",
+                        { class: "date" },
+                        vue.toDisplayString(vue.unref(formatDate)(item.TargetDate)) + " " + vue.toDisplayString(vue.unref(formatDateLunar)(item.TargetDate)),
+                        1
+                        /* TEXT */
+                      )
                     ]),
-                    vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
-                  ]),
-                  vue.createElementVNode("view", {
-                    class: "popup-close",
-                    onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$refs.popupRef.close())
-                  }, "取消")
+                    vue.createElementVNode("view", { class: "countdown-right" }, [
+                      getRemainingDays(item.TargetDate) > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 0,
+                        class: "day-remaining"
+                      }, [
+                        vue.createTextVNode(" 还剩"),
+                        vue.createElementVNode(
+                          "text",
+                          { class: "remaining" },
+                          vue.toDisplayString(getRemainingDays(item.TargetDate)),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createTextVNode("天 ")
+                      ])) : getRemainingDays(item.TargetDate) < 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 1,
+                        class: "day-remaining"
+                      }, [
+                        vue.createTextVNode(" 已过"),
+                        vue.createElementVNode(
+                          "text",
+                          { class: "remaining" },
+                          vue.toDisplayString(Math.abs(getRemainingDays(item.TargetDate))),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createTextVNode("天 ")
+                      ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 2,
+                        class: "day-remaining"
+                      }, [
+                        vue.createElementVNode("text", { class: "today" }, "今天")
+                      ]))
+                    ])
+                  ], 40, ["onClick", "onLongpress"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ]),
+            vue.createCommentVNode(" 小浮窗 "),
+            vue.createElementVNode("movable-area", { class: "movableArea" }, [
+              vue.createElementVNode("movable-view", {
+                class: "movableView",
+                direction: "all",
+                x: x.value,
+                y: y.value,
+                "out-of-bounds": false
+              }, [
+                vue.createElementVNode("button", {
+                  class: "win-service",
+                  onClick: openAddOrEditCountdown
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "plusempty",
+                    size: "30",
+                    color: "#fff"
+                  })
                 ])
-              ]),
-              _: 1
-              /* STABLE */
-            },
-            512
-            /* NEED_PATCH */
-          )
-        ]);
+              ], 8, ["x", "y"])
+            ]),
+            vue.createCommentVNode(" 添加倒计时 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                class: "add-countdown",
+                ref_key: "addCountdownRef",
+                ref: addCountdownRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "add-countdown-content" }, [
+                    vue.createElementVNode("view", { class: "add-countdown-header" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(isEdit2.value ? "编辑倒计时" : "添加倒计时"),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
+                    vue.createElementVNode("view", { class: "countdown-name" }, [
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
+                        {
+                          type: "text",
+                          class: "name-input",
+                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => countdownName.value = $event),
+                          placeholder: "倒计时名称"
+                        },
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, countdownName.value]
+                      ])
+                    ]),
+                    vue.createElementVNode("view", { class: "countdown-date" }, [
+                      vue.createElementVNode("view", { class: "target" }, "目标日"),
+                      vue.createVNode(_component_uni_datetime_picker, {
+                        type: "date",
+                        modelValue: countdownDate.value,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => countdownDate.value = $event)
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    vue.createElementVNode("view", { class: "add-countdown-input" }, [
+                      vue.createElementVNode("view", {
+                        class: "btn",
+                        onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
+                      }, "取消"),
+                      vue.createElementVNode("view", {
+                        class: "btn btn-primary",
+                        onClick: _cache[3] || (_cache[3] = ($event) => addCountdown())
+                      }, "确定")
+                    ])
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            ),
+            vue.createCommentVNode(" 更多功能 "),
+            vue.createVNode(
+              _component_uni_popup,
+              {
+                ref_key: "popupRef",
+                ref: popupRef,
+                "background-color": "#fff"
+              },
+              {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "popup-list" }, [
+                    vue.createElementVNode("view", {
+                      class: "popup-item",
+                      onClick: deleteCountdown
+                    }, [
+                      vue.createElementVNode("view", { class: "popup-icon" }, [
+                        vue.createVNode(_component_uni_icons, {
+                          type: "trash",
+                          size: "30",
+                          color: "#999"
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "popup-text" }, " 删除 ")
+                    ]),
+                    vue.createElementVNode("view", {
+                      class: "popup-close",
+                      onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$refs.popupRef.close())
+                    }, "取消")
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              },
+              512
+              /* NEED_PATCH */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -21069,9 +21281,6 @@ if (uni.restoreGlobal) {
       const popupBottom = vue.ref(0);
       onShow(() => {
         getNovels();
-        setTimeout(() => {
-          deleteBook();
-        }, 1e3);
         uni.onKeyboardHeightChange((res) => {
           if (res.height === 0) {
             popupBottom.value = 0;
@@ -21100,10 +21309,10 @@ if (uni.restoreGlobal) {
         host: `${baseUrl}book/upload`
       });
       const selectedHandler = (selectedData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:199", "Selected data:", selectedData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:197", "Selected data:", selectedData);
       };
       const successHandler = (successData) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:203", "Success data:", successData);
+        formatAppLog("log", "at subPackages/book/index/index.vue:201", "Success data:", successData);
         let res = successData[0];
         if (res.code === 0 || !res.code) {
           uni.showToast({
@@ -21118,14 +21327,14 @@ if (uni.restoreGlobal) {
         }
       };
       const failHandler = (error) => {
-        formatAppLog("error", "at subPackages/book/index/index.vue:219", "Error:", error);
+        formatAppLog("error", "at subPackages/book/index/index.vue:217", "Error:", error);
         uni.showToast({
           icon: "error",
           title: "fail上传失败"
         });
       };
       const processHandler = (progress) => {
-        formatAppLog("log", "at subPackages/book/index/index.vue:227", "Upload progress:", progress);
+        formatAppLog("log", "at subPackages/book/index/index.vue:225", "Upload progress:", progress);
       };
       const popupRef = vue.ref(null);
       const activeBook = vue.ref(null);
@@ -21214,7 +21423,7 @@ if (uni.restoreGlobal) {
       const serverCreateTempFile = () => {
         return new Promise((resolve, reject) => {
           apiDownloadNovel(activeBook.value.NovelID, includeChapterTitle.value).then((res) => {
-            formatAppLog("log", "at subPackages/book/index/index.vue:372", "res", res);
+            formatAppLog("log", "at subPackages/book/index/index.vue:370", "res", res);
             if (res.code === 0 || !res.code) {
               uni.showToast({
                 icon: "error",
@@ -21231,7 +21440,7 @@ if (uni.restoreGlobal) {
       };
       const downloadBook = async () => {
         let tempFilePath = await serverCreateTempFile();
-        formatAppLog("log", "at subPackages/book/index/index.vue:391", "tempFilePath", tempFilePath);
+        formatAppLog("log", "at subPackages/book/index/index.vue:389", "tempFilePath", tempFilePath);
         uni.downloadFile({
           url: `${baseUrl}downloads/${tempFilePath}`,
           //  存储文件到手机本地文件夹
@@ -21242,7 +21451,7 @@ if (uni.restoreGlobal) {
                 //临时路径
                 success: function(data2) {
                   var savedFilePath = data2.savedFilePath;
-                  formatAppLog("log", "at subPackages/book/index/index.vue:403", "savedFilePath", savedFilePath);
+                  formatAppLog("log", "at subPackages/book/index/index.vue:401", "savedFilePath", savedFilePath);
                   let osname = plus.os.name;
                   if (osname == "Android") {
                     uni.showToast({
@@ -21255,17 +21464,17 @@ if (uni.restoreGlobal) {
                     data: activeBook.value.Title,
                     showToast: false,
                     success: function() {
-                      formatAppLog("log", "at subPackages/book/index/index.vue:420", "setClipboardData success");
+                      formatAppLog("log", "at subPackages/book/index/index.vue:418", "setClipboardData success");
                     }
                   });
                   setTimeout(() => {
                     uni.openDocument({
                       filePath: data2.savedFilePath,
                       success: function(ress) {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:430", "成功打开文件");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:428", "成功打开文件");
                       },
                       fail() {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:433", "打开文件失败");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:431", "打开文件失败");
                       }
                     });
                   }, 1e3);
@@ -21303,12 +21512,8 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_yt_uploads = resolveEasycom(vue.resolveDynamicComponent("yt-uploads"), __easycom_1);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-        return vue.openBlock(), vue.createElementBlock(
-          "view",
-          {
-            class: vue.normalizeClass(["content", vue.unref(theme).mode])
-          },
-          [
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "书架" }, {
+          default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "book-list theme-bgc-0" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
@@ -21647,10 +21852,10 @@ if (uni.restoreGlobal) {
               _: 1
               /* STABLE */
             }, 8, ["background-color"])
-          ],
-          2
-          /* CLASS */
-        );
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -23273,11 +23478,36 @@ if (uni.restoreGlobal) {
     state: {
       // 初始化状态
       data: "初始数据",
+      commonCss: {
+        pageNavHeight: "150"
+      },
       theme: {
         mode: "day-mode",
         bgc: "#fff",
         iconColor: "#000"
-      }
+      },
+      tabbarList: [
+        {
+          pagePath: "/pages/index/index",
+          text: "应用",
+          icon: "icon-yingyong"
+        },
+        {
+          pagePath: "/pages/note/index",
+          text: "事项",
+          icon: "icon-note"
+        },
+        {
+          pagePath: "/pages/plan/index",
+          text: "规划",
+          icon: "icon-plan"
+        },
+        {
+          pagePath: "/pages/mine/index",
+          text: "我的",
+          icon: "icon-mine"
+        }
+      ]
     },
     mutations: {
       // 定义 mutations，用于修改状态

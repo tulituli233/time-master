@@ -1,5 +1,5 @@
 <template>
-	<view :class="['content', theme.mode]">
+	<AppPage :showNav="false" :havePadTab="false" :showTab="true" :activeIndex="3">
 		<view class="top">
 			<view class="left">
 				<view class="head">
@@ -22,7 +22,8 @@
 		<view class="bottom theme-bgc">
 			<view class="list-item" v-for="item in list" :key="item.unicode" @click="navTo(item.url)">
 				<view class="left">
-					<uni-icons custom-prefix="iconfont" :type="item.unicode" size="30" :color="theme.iconColor"></uni-icons>
+					<uni-icons custom-prefix="iconfont" :type="item.unicode" size="30"
+						:color="theme.iconColor"></uni-icons>
 				</view>
 				<view class="right">
 					<view class="title">{{ item.title }}</view>
@@ -32,11 +33,12 @@
 				</view>
 			</view>
 		</view>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import AppPage from '@/components/AppPage'
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
 import { useStore } from 'vuex';
@@ -99,7 +101,7 @@ const list = ref([
 .top {
 	width: 670rpx;
 	height: 100rpx;
-	padding: 40rpx 20rpx;
+	padding: 130rpx 20rpx 60rpx;
 	border-radius: 10rpx;
 	margin-bottom: 20rpx;
 	display: flex;

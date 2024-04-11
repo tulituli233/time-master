@@ -174,7 +174,10 @@
 				if (this.backgroundColor === '' || this.backgroundColor === 'none') {
 					return 'transparent'
 				}
-				return this.backgroundColor
+				// by:tuli
+				const vuex = JSON.parse(uni.getStorageSync('vuex'));
+				return vuex.theme.bgc
+				// return this.backgroundColor
 			}
 		},
 		mounted() {

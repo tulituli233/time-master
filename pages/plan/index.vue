@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		<view class="time">
+	<AppPage navTitle="规划" :showTab="true" :activeIndex="2">
+		<view class="time theme-bgc">
 			<view class="date">{{ currDate }}</view>
 			<view class="week">{{ currWeek }}</view>
 		</view>
@@ -10,7 +10,7 @@
 					<view class="swiper-item" v-if="item.plans && item.plans.length">
 						<view v-for="item1 in item.plans" :key="item1.TaskID"
 							@longpress="openMorePopup(item1)">
-							<view class="content-box" v-if="item1.Status !== 2">
+							<view class="content-box theme-bgc" v-if="item1.Status !== 2">
 								<view class="box-left" @click="updateStatus(item1)">
 									<uni-icons custom-prefix="iconfont" :type="statusIcon(item1.Status)" size="20"
 										color="#4c8bf0"></uni-icons>
@@ -109,11 +109,12 @@
 				<view class="popup-close" @click="$refs.popupMore.close()">取消</view>
 			</view>
 		</uni-popup>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import AppPage from '@/components/AppPage'
 import { timestampToTime, getWeek, formatDateTime, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
 import { apiAddTask, apiGetUserTasks, apiUpdateTask } from '@/services/api/tasks';
@@ -123,7 +124,7 @@ const x = ref('600rpx');
 const y = ref('1200rpx');
 
 const todayX = ref('600rpx');
-const todayY = ref('500rpx');
+const todayY = ref('800rpx');
 
 // 获取任务列表
 let tasks = ref([]);

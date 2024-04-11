@@ -1,5 +1,5 @@
 <template>
-    <view class="content">
+    <AppPage navTitle="倒计时" backgroundImage="static/countdown-bg.png">
         <view class="countdown-list">
             <view class="countdown-item" v-for="item in countdownList" :key="item.CountdownID"
                @click="openAddOrEditCountdown(item, true)" @longpress="openPopup(item)">
@@ -66,11 +66,12 @@
                 <view class="popup-close" @click="$refs.popupRef.close()">取消</view>
             </view>
         </uni-popup>
-    </view>
+    </AppPage>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import AppPage from '@/components/AppPage'
 import { apiAddCountdown, apiGetUserCountdowns, apiUpdateCountdown, apiDeleteCountdown } from '@/services/api/countdown'
 import { formatDate, formatDateLunar } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app'
@@ -190,7 +191,7 @@ const deleteCountdown = () => {
 <style lang="scss" scoped>
 .content {
     width: 100vw;
-    background-image: url('@/static/countdown-bg.png');
+    // background-image: url('@/static/countdown-bg.png');
     background-size: cover;
     /* 或者使用 contain，根据需要选择合适的值 */
     background-color: #fff;

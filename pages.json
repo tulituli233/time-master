@@ -3,37 +3,25 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "时间管家"
-			},
-			"meta": {
-				"tabBar": true
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/mine/index",
 			"style": {
-				"navigationBarTitleText": "时间管家"
-			},
-			"meta": {
-				"tabBar": true
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/note/index",
 			"style": {
-				"navigationBarTitleText": "事项"
-			},
-			"meta": {
-				"tabBar": true
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/plan/index",
 			"style": {
-				"navigationBarTitleText": "规划"
-			},
-			"meta": {
-				"tabBar": true
+				"navigationStyle": "custom"
 			}
 		}
 	],
@@ -55,9 +43,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "记账管家",
-						"navigationBarBackgroundColor": "#1baf59",
-						"navigationBarTextStyle": "white"
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -74,7 +60,7 @@
 				{
 					"path": "setting/index",
 					"style": {
-						"navigationBarTitleText": "设置"
+						"navigationStyle": "custom"
 					}
 				}
 			]
@@ -85,7 +71,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "备忘录"
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -102,7 +88,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "喝水"
+						"navigationStyle": "custom"
 					}
 				}
 			]	
@@ -113,7 +99,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "日记"
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -130,7 +116,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "倒计时"
+						"navigationStyle": "custom"
 					}
 				}
 			]
@@ -141,7 +127,7 @@
 				{
 					"path": "index/index",
 					"style": {
-						"navigationBarTitleText": "书架"
+						"navigationStyle": "custom"
 					}
 				},
 				{

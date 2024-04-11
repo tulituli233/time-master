@@ -1,7 +1,7 @@
 <template>
-	<view class="content">
+	<AppPage navTitle="备忘录" backgroundImage="/static/diary-bg.webp">
 		<view class="diary-list">
-			<view class="diary-item" v-for="item in diaries" :key="item.DiaryID" @click="editDiary(item)"
+			<view class="diary-item theme-bgc" v-for="item in diaries" :key="item.DiaryID" @click="editDiary(item)"
 				@longpress="openPopup(item)">
 				<view class="diary-left">
 					<view class="month">
@@ -44,11 +44,12 @@
 				<view class="popup-close" @click="$refs.popupRef.close()">取消</view>
 			</view>
 		</uni-popup>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import AppPage from '@/components/AppPage'
 import { apiGetUserDiaries, apiDeleteDiary } from '@/services/api/diary';
 import { navTo, formatDateToMonth, formatDateToDay, formatDateToTime } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
@@ -108,7 +109,6 @@ const deleteDiary = () => {
 
 .content {
 	width: 100vw;
-	background-image: url('@/static/diary-bg.webp');
 	background-size: cover;
 }
 

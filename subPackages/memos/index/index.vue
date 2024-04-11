@@ -1,16 +1,16 @@
 <template>
-	<view class="content">
+	<AppPage navTitle="备忘录">
 		<view class="select">
-			<view class="select-header">
+			<view class="select-header theme-bgc">
 				<view class="uni-padding-wrap">
 					<uni-segmented-control :current="current" :values="items" :style-type="styleType"
 						:active-color="activeColor" @clickItem="onClickItem" />
 				</view>
 			</view>
-			<view class="content">
+			<view class="note-body">
 				<view>
 					<view class="note-list">
-						<view :class="{ 'note-item': true, 'top': index < 3, 'middle': index % 3 == 1 }"
+						<view :class="{ 'note-item theme-bgc': true, 'top': index < 3, 'middle': index % 3 == 1 }"
 							v-for="(item, index) in newPlanList" :key="item.MemoID" @click="editMemo(item)"
 							@longpress="openPopup(item)">
 							<view class="note-title">
@@ -48,7 +48,7 @@
 				<view class="popup-close" @click="$refs.popupRef.close()">取消</view>
 			</view>
 		</uni-popup>
-	</view>
+	</AppPage>
 </template>
 
 <script setup>
@@ -56,6 +56,7 @@ import { ref, computed } from 'vue';
 import { apiGetUserMemos, apiDeleteMemo } from '@/services/api/memos';
 import { navTo, formatDate } from '@/utils/utils.js';
 import { onShow } from '@dcloudio/uni-app';
+import AppPage from '@/components/AppPage'
 
 const x = ref('600rpx');
 const y = ref('1200rpx');

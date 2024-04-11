@@ -1,5 +1,5 @@
 <template>
-    <view :class="['content', theme.mode]">
+    <AppPage navTitle="书架">
         <view class="book-list theme-bgc-0">
             <view :class="['book-item', index % 3 == 1 ? 'book-middle' : '']" v-for="(item, index) in novels"
                 :key="index">
@@ -144,11 +144,12 @@
                 </view>
             </view>
         </uni-popup>
-    </view>
+    </AppPage>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'; // 导入需要的Vue Composition API
+import AppPage from '@/components/AppPage'
 import { apiGetNovels, apiDeleteNovel, apiCreateNovel, apiUpdateNovel, apiDownloadNovel, apiBatchDeleteNovelChapters } from '@/services/api/book';
 import { onShow } from '@dcloudio/uni-app';
 import { navTo } from '@/utils/utils'
@@ -160,9 +161,6 @@ const includeChapterTitle = ref(false)
 const popupBottom = ref(0);
 onShow(() => {
     getNovels()
-    setTimeout(() => {
-        deleteBook()
-    }, 1000)
     // addPopupRef.value.close()
     // #ifdef APP-PLUS
     uni.onKeyboardHeightChange(res => {

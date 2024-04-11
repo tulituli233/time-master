@@ -1,42 +1,45 @@
 <template>
-    <view class="content">
-        <!-- 已喝水量的百分比 -->
-        <view class="water">
-            <view class="water-percent">
-                {{ percent }}
+    <AppPage navTitle="饮水">
+        <view id="water-card" class="theme-bgc">
+            <!-- 已喝水量的百分比 -->
+            <view class="water">
+                <view class="water-percent">
+                    {{ percent }}
+                </view>
+                <view class="percent">
+                    %
+                </view>
             </view>
-            <view class="percent">
-                %
+            <!-- 温馨提示 -->
+            <view class="tips">
+                {{ tips }}
             </view>
+            <!-- 已喝(ml)、目标(ml)、剩余(ml) -->
+            <view class="info">
+                <view class="info-item" @click="$refs.recordPopupRef.open('bottom')">
+                    <view class="label">已喝(ml)</view>
+                    <view class="value">{{ consumedWater }}</view>
+                </view>
+                <view class="info-item" @click="$refs.setTargetRef.open('bottom')">
+                    <view class="label">目标(ml)</view>
+                    <view class="value">{{ targetWater }}</view>
+                </view>
+                <view class="info-item">
+                    <view class="label">剩余(ml)</view>
+                    <view class="value">{{ targetWater - consumedWater }}</view>
+                </view>
+            </view>
+            <!-- 喝水 -->
+            <view class="water-btn">
+                <uni-icons custom-prefix="iconfont" type="icon-water" size="50" color="#00b7ff"
+                    @click="addWaterRecord" />
+            </view>
+            <!-- 水位 -->
+            <view class="water-level" :style="{ height: (15 + percent) + '%' }"></view>
         </view>
-        <!-- 温馨提示 -->
-        <view class="tips">
-            {{ tips }}
-        </view>
-        <!-- 已喝(ml)、目标(ml)、剩余(ml) -->
-        <view class="info">
-            <view class="info-item" @click="$refs.recordPopupRef.open('bottom')">
-                <view class="label">已喝(ml)</view>
-                <view class="value">{{ consumedWater }}</view>
-            </view>
-            <view class="info-item" @click="$refs.setTargetRef.open('bottom')">
-                <view class="label">目标(ml)</view>
-                <view class="value">{{ targetWater }}</view>
-            </view>
-            <view class="info-item">
-                <view class="label">剩余(ml)</view>
-                <view class="value">{{ targetWater - consumedWater }}</view>
-            </view>
-        </view>
-        <!-- 喝水 -->
-        <view class="water-btn">
-            <uni-icons custom-prefix="iconfont" type="icon-water" size="50" color="#00b7ff" @click="addWaterRecord" />
-        </view>
-        <!-- 水位 -->
-        <view class="water-level" :style="{ height: (15 + percent) + '%' }"></view>
         <!-- 弹出层 -->
         <uni-popup class="popup" ref="popupRef" background-color="#fff">
-            <view class="popup-content">
+            <view class="popup-content theme-font">
                 <view class="popup-header">
                     <view class="title">{{ isEdit ? '编辑饮水' : '添加饮水' }}</view>
                 </view>
@@ -60,18 +63,19 @@
                 <view class="numeric-keypad">
                     <view class="display">{{ waterData.Amount }}</view>
                     <view class="quick-keypad">
-                        <view class="key" v-for="(keyNum, index) in quickKeys" :key="index"
+                        <view class="key theme-bgc" v-for="(keyNum, index) in quickKeys" :key="index"
                             @click="waterData.Amount = keyNum">
                             {{ keyNum }}ml
                         </view>
                     </view>
                     <table>
                         <tr v-for="(row, rowIndex) in keypadLayout" :key="rowIndex">
-                            <td v-for="(key, keyIndex) in row" :key="keyIndex" @click="handleKeyPress(key)">
+                            <td class="theme-bgc" v-for="(key, keyIndex) in row" :key="keyIndex" @click="handleKeyPress(key)">
                                 <view v-if="key != 'date'">{{ key }}</view>
                                 <view v-else>
                                     <!-- 时间选择器 -->
-                                    <picker ref="timePicker" mode="time" :value="waterData.DateTime" @change="bindTimeChange">
+                                    <picker ref="timePicker" mode="time" :value="waterData.DateTime"
+                                        @change="bindTimeChange">
                                         <view class="uni-input">{{ formatDateToTime(waterData.DateTime) }}</view>
                                     </picker>
                                 </view>
@@ -83,7 +87,7 @@
         </uni-popup>
         <!-- 饮水记录弹出层 -->
         <uni-popup class="record-popup" ref="recordPopupRef" background-color="#fff">
-            <view class="record-popup-content">
+            <view class="record-popup-content theme-font">
                 <view class="record-header">
                     <view class="title">饮水记录</view>
                 </view>
@@ -117,7 +121,7 @@
         </uni-popup>
         <!-- 设置饮水目标 -->
         <uni-popup class="set-target" ref="setTargetRef" background-color="#fff">
-            <view class="set-target-content">
+            <view class="set-target-content theme-font">
                 <view class="set-target-header">
                     <view class="title">设置饮水目标</view>
                 </view>
@@ -130,11 +134,12 @@
                 </view>
             </view>
         </uni-popup>
-    </view>
+    </AppPage>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
+import AppPage from '@/components/AppPage'
 import { apiAddWaterRecord, apiGetUserWaterRecords, apiUpdateWaterRecord, apiDeleteWaterRecord, apiGetAllWaterTypes } from '@/services/api/water'
 import { formatDateTime, formatDateToTime } from '@/utils/utils.js';
 import { onShow, onLoad } from '@dcloudio/uni-app'
@@ -348,6 +353,11 @@ const deleteRecord = (e, item) => {
     // 水的颜色
     color: #00b7ff;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#water-card {
+    position: fixed;
+    min-height: 91vh;
 }
 
 .water {
