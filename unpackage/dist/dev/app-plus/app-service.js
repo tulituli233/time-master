@@ -20740,7 +20740,19 @@ if (uni.restoreGlobal) {
     let sdRootList = plus.android.invoke(sdRoot, "listFiles");
     formatAppLog("log", "at components/yt-uploads/files.js:19", "sdRootList", sdRootList);
     let sdRootPathList = [];
-    sdRootList.forEach((v) => {
+    let newSdRootList = sdRootList.sort((a2, b) => {
+      let pathNameA = a2.toString().split("/");
+      let pathNameB = b.toString().split("/");
+      for (let i2 = 0; i2 < Math.min(pathNameA.length, pathNameB.length); i2++) {
+        if (pathNameA[i2] < pathNameB[i2]) {
+          return -1;
+        } else if (pathNameA[i2] > pathNameB[i2]) {
+          return 1;
+        }
+      }
+      return pathNameA.length - pathNameB.length;
+    });
+    newSdRootList.forEach((v) => {
       if (plus.android.invoke(v, "isHidden") == true) {
         return false;
       }
@@ -20759,7 +20771,6 @@ if (uni.restoreGlobal) {
         });
       }
     });
-    formatAppLog("log", "at components/yt-uploads/files.js:46", "sdRootPathList", sdRootPathList);
     return sdRootPathList;
   };
   const getSubDir = (path) => {
@@ -21106,6 +21117,7 @@ if (uni.restoreGlobal) {
       },
       // 成功的方法
       _success(ret) {
+        formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:140", "ret---", ret);
         let _this = this;
         if (ret.errMsg === "chooseImage:ok") {
           let tmp = [];
@@ -21127,6 +21139,7 @@ if (uni.restoreGlobal) {
         }
       },
       _sendData() {
+        formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:162", "-sendData--");
         let _this = this;
         _this.uploadList = [];
         if (_this.chooseList.length < 1) {
@@ -21143,7 +21156,7 @@ if (uni.restoreGlobal) {
               header: this.opts.headers === null ? {} : this.opts.headers,
               formData: this.opts.data === null ? {} : this.opts.data,
               success(ret) {
-                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:180", "success:", ret);
+                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:182", "success:", ret);
                 if (_this._type(ret.data) === "string") {
                   _this.uploadList.push(JSON.parse(ret.data));
                 } else {
@@ -21159,7 +21172,7 @@ if (uni.restoreGlobal) {
                 }
               },
               fail(ret) {
-                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:198", "fail:", ret);
+                formatAppLog("log", "at components/yt-uploads/yt-uploads.vue:200", "fail:", ret);
                 _this.$emit("process", { index: flag, state: 2 });
                 if (_this._type(ret.data) === "string") {
                   _this.uploadList.push(JSON.parse(ret.data));
@@ -21907,22 +21920,23 @@ if (uni.restoreGlobal) {
       });
       const getNovelHistory = () => {
         let novelHistoryArr = uni.getStorageSync("readHistory");
+        let novelHistory2 = null;
         if (novelHistoryArr) {
-          let novelHistory2 = novelHistoryArr.find((item) => {
+          novelHistory2 = novelHistoryArr.find((item) => {
             return item.NovelID == novelID.value;
           });
           if (novelHistory2) {
             return novelHistory2;
           }
-          novelHistory2 = {
-            ChapterNumber: 1,
-            Title: novelName.value,
-            NovelID: novelID.value,
-            ChapterProgress: 0,
-            BookMarkList: []
-          };
-          return novelHistory2;
         }
+        novelHistory2 = {
+          ChapterNumber: 1,
+          Title: novelName.value,
+          NovelID: novelID.value,
+          ChapterProgress: 0,
+          BookMarkList: []
+        };
+        return novelHistory2;
       };
       const init2 = async () => {
         let initChapterNumber = novelHistory.value.ChapterNumber - 1;
@@ -21941,7 +21955,7 @@ if (uni.restoreGlobal) {
         showTab.value = false;
         setTimeout(() => {
           menuScrollTop.value = (novelChapterArr.value[ccIndex.value].ChapterNumber - 1) * 31.18 - 350;
-          formatAppLog("log", "at subPackages/book/read/index.vue:267", "menuScrollTop", menuScrollTop.value);
+          formatAppLog("log", "at subPackages/book/read/index.vue:268", "menuScrollTop", menuScrollTop.value);
         }, 100);
       };
       const closeMenu = () => {
@@ -21984,7 +21998,7 @@ if (uni.restoreGlobal) {
             });
           } else if (res.code === 2) {
             noChapter.value = true;
-            formatAppLog("log", "at subPackages/book/read/index.vue:327", "res", res);
+            formatAppLog("log", "at subPackages/book/read/index.vue:328", "res", res);
           } else {
             novelChapters.value = res.data;
           }
@@ -22075,7 +22089,7 @@ if (uni.restoreGlobal) {
       const goToBookmark = async (chapterNumber, chaProgress) => {
         await goToChapter(chapterNumber);
         let eleHeight = await getElementHeightById(`novel-chapter-0`);
-        formatAppLog("log", "at subPackages/book/read/index.vue:425", "eleHeight", eleHeight);
+        formatAppLog("log", "at subPackages/book/read/index.vue:426", "eleHeight", eleHeight);
         scrollToLastRead(eleHeight, chaProgress);
         showMenu.value = false;
         showStar.value = false;
@@ -22128,7 +22142,6 @@ if (uni.restoreGlobal) {
         } else if (e2.detail.y > screenHeight.value * 2 / 3) {
           scrollTop.value = currScrollTop.value + viewHeight;
         }
-        formatAppLog("log", "at subPackages/book/read/index.vue:483", "scrollTop", scrollTop.value);
       };
       const showSetting = vue.ref(false);
       const openSetting = () => {

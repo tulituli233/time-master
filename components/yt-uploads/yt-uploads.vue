@@ -137,6 +137,7 @@
 			},
 			// 成功的方法
 			_success(ret){
+				console.log('ret---',ret);
 				let _this = this
 				if (ret.errMsg === "chooseImage:ok") { // 文件选择成功
 					let tmp = [] // 初始化选择数据
@@ -158,6 +159,7 @@
 				}
 			},
 			_sendData() {
+				console.log('-sendData--');
 				let _this = this
 				_this.uploadList = []
 				// 上传数据的方法
@@ -221,7 +223,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.list {
 		display: flex;
 		justify-content: flex-start;

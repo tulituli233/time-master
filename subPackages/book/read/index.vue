@@ -225,22 +225,23 @@ onShow(() => {
 })
 const getNovelHistory = () => {
     let novelHistoryArr = uni.getStorageSync('readHistory')
+    let novelHistory = null
     if (novelHistoryArr) {
-        let novelHistory = novelHistoryArr.find((item) => {
+        novelHistory = novelHistoryArr.find((item) => {
             return item.NovelID == novelID.value
         })
         if (novelHistory) {
             return novelHistory
         }
-        novelHistory = {
-            ChapterNumber: 1,
-            Title: novelName.value,
-            NovelID: novelID.value,
-            ChapterProgress: 0,
-            BookMarkList: []
-        }
-        return novelHistory
     }
+    novelHistory = {
+        ChapterNumber: 1,
+        Title: novelName.value,
+        NovelID: novelID.value,
+        ChapterProgress: 0,
+        BookMarkList: []
+    }
+    return novelHistory
 }
 
 // 初始化页面
@@ -480,7 +481,6 @@ const clickContent = (e) => {
     } else if (e.detail.y > screenHeight.value * 2 / 3) {
         scrollTop.value = currScrollTop.value + viewHeight;
     }
-    console.log('scrollTop', scrollTop.value);
 };
 
 const showSetting = ref(false);
