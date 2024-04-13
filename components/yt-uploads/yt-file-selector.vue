@@ -1,11 +1,11 @@
 <template>
 	<view class="yt-content">
 		<view class="file-select-container" @click="_autoClose" v-if="isChoose === true">
-			<view class="file-select-wrap" @click.stop>
+			<view class="file-select-wrap theme" @click.stop>
 				<view class="file-select-header">
 					<text>文件选择</text>
 				</view>
-				<scroll-view class="s-f-scroll-view" scroll-y>
+				<scroll-view class="s-f-scroll-view theme" scroll-y>
 					<view>
 						<view @click.stop="backToPrevent" class="s-f-item" v-if="treeList.length > 1">
 							<view class="s-f-item-path-name">

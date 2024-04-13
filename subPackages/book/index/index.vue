@@ -102,6 +102,14 @@
                         搜索书籍
                     </view>
                 </view>
+                <view class="popup-item" @click="navTo('/subPackages/book/preview/index')">
+                    <view class="popup-icon">
+                        <uni-icons type="search" size="30" color="#999"></uni-icons>
+                    </view>
+                    <view class="popup-text">
+                        查看网页
+                    </view>
+                </view>
                 <view class="popup-close theme-border" @click="$refs.addPopupRef.close()">取消</view>
             </view>
         </uni-popup>
@@ -515,6 +523,7 @@ const deleteBook = () => {
             flex-direction: column;
 
             .book-title {
+                height: 60rpx;
                 padding: 20rpx 10rpx;
                 font-size: 28rpx;
             }

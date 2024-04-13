@@ -153,6 +153,12 @@
 					"style": {
 						"navigationBarTitleText": "搜索"
 					}
+				},
+				{
+					"path": "preview/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

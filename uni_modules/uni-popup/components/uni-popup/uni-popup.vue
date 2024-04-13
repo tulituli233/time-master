@@ -176,7 +176,7 @@
 				}
 				// by:tuli
 				const vuex = JSON.parse(uni.getStorageSync('vuex'));
-				return vuex.theme.bgc
+				return vuex.theme.bgc || this.backgroundColor
 				// return this.backgroundColor
 			}
 		},

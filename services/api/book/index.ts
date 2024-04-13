@@ -137,3 +137,11 @@ export const apiBatchDeleteNovelChapters = (novelId: number, startChapterNumber:
         method: 'GET',
     })
 }
+
+// 根据网址获取网页内容
+export const apiGetHtmlByUrl = (url: string): Promise<string> => {
+    return request({
+        url: `book/getHtmlByUrl?url=${url}`,
+        method: 'GET',
+    })
+}

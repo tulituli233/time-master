@@ -414,6 +414,10 @@
   background-color: #000000 !important;
   color: #ffffff !important;
 }
+.night-mode .theme {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
 .night-mode .theme-font {
   color: #ffffff !important;
 }
