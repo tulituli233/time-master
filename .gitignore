@@ -55,7 +55,6 @@ unpackage/dist/dev/app-plus/pages/index/index.css
 unpackage/dist/dev/app-plus/pages/mine/index.css
 unpackage/dist/dev/app-plus/pages/note/index.css
 unpackage/dist/dev/app-plus/pages/plan/index.css
-subPackages/expenses/index/index.vue
 node_modules/.package-lock.json
 node_modules/mp-html/.eslintignore
 node_modules/mp-html/.eslintrc.json
