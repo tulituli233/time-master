@@ -1,7 +1,9 @@
 <template>
-    <view :class="['content', theme.mode]" :style="{ 'background-image': theme.mode !== 'night-mode' ? `url(${backgroundImage})` : 'none'}">
+    <view :class="['content', theme.mode]"
+        :style="{ 'background-image': theme.mode !== 'night-mode' ? `url(${backgroundImage})` : 'none' }">
         <!-- 顶部导航栏 -->
-        <view v-if="showNav" class="top-nav theme-bgc" :style="{ backgroundColor: navBgColor == '' ? '#fff' : `${navBgColor} !important` }">
+        <view v-if="showNav" class="top-nav theme-bgc"
+            :style="{ backgroundColor: navBgColor == '' ? '#fff' : `${navBgColor} !important` }">
             <view v-if="!showTab" class="back">
                 <uni-icons type="left" size="30" @click="navBack" :color="theme.iconColor"></uni-icons>
             </view>
@@ -18,12 +20,12 @@
         <!-- tabbar -->
         <view v-if="showTab" class="tabbar theme-bgc">
             <view class="tabbar-item" v-for="(item, index) in tabbarList" :key="item.icon"
-                @click="switchTab(item.pagePath)">
+                @click="tabChange(index, item.pagePath)">
                 <view class="icon">
                     <uni-icons custom-prefix="iconfont" :type="item.icon" size="25"
-                        :color="iconColor(index, theme.mode)"></uni-icons>
+                        :color="index == currentTab ? '#4c8bf0' : iconColor"></uni-icons>
                 </view>
-                <view class="text" :style="{ color: iconColor(index, theme.mode) }">{{ item.text }}</view>
+                <view class="text" :style="{ color: index == currentTab ? '#4c8bf0' : iconColor }">{{ item.text }}</view>
             </view>
         </view>
     </view>
@@ -44,6 +46,7 @@ onLoad(() => {
 const store = useStore();
 const theme = computed(() => store.state.theme)
 const commonCss = computed(() => store.state.commonCss)
+const currentTab = computed(() => store.state.currentTab)
 const props = defineProps({
     navTitle: {
         type: String,
@@ -65,10 +68,6 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    activeIndex: {
-        type: Number,
-        default: 0
-    },
     backgroundImage: {
         type: String,
         default: ''
@@ -78,14 +77,18 @@ const navBack = () => {
     uni.navigateBack();
 };
 
-const tabbarList = computed(() => store.state.tabbarList)
-const iconColor = (index, mode) => {
-    if (mode === 'night-mode') {
-        return index === props.activeIndex ? '#4c8bf0' : '#fff';
-    } else {
-        return index === props.activeIndex ? '#4c8bf0' : '#000';
-    }
+const tabChange = (index, pagePath) => {
+    store.dispatch('updateCurrentTab', index)
+    switchTab(pagePath)
 }
+const tabbarList = computed(() => store.state.tabbarList)
+const iconColor = computed(() => {
+    if (theme.value.mode === 'night-mode') {
+        return '#fff';
+    } else {
+        return '#000';
+    }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -93,7 +96,7 @@ const iconColor = (index, mode) => {
     box-sizing: border-box;
     min-height: 100vh;
     // background-image: v-bind('backgroundImage ? `url(${backgroundImage})` : "none"');
-	background-size: cover;
+    background-size: cover;
 }
 
 .top-nav {

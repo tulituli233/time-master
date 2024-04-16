@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$C = {
+  const _sfc_main$E = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -742,7 +742,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$i], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
@@ -2377,7 +2377,7 @@ if (uni.restoreGlobal) {
     this._committing = committing;
   };
   Object.defineProperties(Store.prototype, prototypeAccessors);
-  const _sfc_main$B = {
+  const _sfc_main$D = {
     __name: "index",
     props: {
       navTitle: {
@@ -2525,75 +2525,12 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const AppPage = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-d4a57c02"], ["__file", "E:/HBuilderProjects/time-master/components/AppPage/index.vue"]]);
-  const _sfc_main$A = {
+  const AppPage = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__scopeId", "data-v-d4a57c02"], ["__file", "E:/HBuilderProjects/time-master/components/AppPage/index.vue"]]);
+  const _sfc_main$C = {
     __name: "index",
     setup(__props2) {
-      const list = vue.ref([
-        {
-          title: "备忘录",
-          unicode: "icon-biaoqian",
-          url: "/subPackages/memos/index/index",
-          color: "#1baf59",
-          desc: "记事本"
-        },
-        {
-          title: "记账",
-          unicode: "icon-jizhang",
-          url: "/subPackages/expenses/index/index",
-          color: "#7e7cea",
-          desc: "本月：收入5000，支出3000，结余2000"
-        },
-        {
-          title: "日记",
-          unicode: "icon-rijix",
-          url: "/subPackages/diary/index/index",
-          color: "#4c8bf0",
-          desc: "今天是个好日子，明天也是个好日子"
-        },
-        {
-          title: "纪念日倒数",
-          unicode: "icon-jinianriyingxiao",
-          url: "/subPackages/countdowns/index/index",
-          color: "#f75e3c",
-          desc: "2024年2月24日，距离2024年3月1日还有5天"
-        },
-        {
-          title: "事项",
-          unicode: "icon-note",
-          url: "/pages/note/index",
-          color: "#ffa851",
-          desc: "总数：2个，未完成：1个"
-        },
-        {
-          title: "喝水",
-          unicode: "icon-shui",
-          url: "/subPackages/water/index/index",
-          color: "#00b5ff",
-          desc: "今日：0/1700ml"
-        },
-        {
-          title: "小说",
-          unicode: "icon-xuexi",
-          url: "/subPackages/book/index/index",
-          color: "#ce9178",
-          desc: "已读：1章，未读：5章"
-        },
-        {
-          title: "课程表",
-          unicode: "icon-kechengbiao",
-          url: "/pages/note/index",
-          color: "#ff4962",
-          desc: "小初高大学课程表"
-        },
-        {
-          title: "习惯打卡",
-          unicode: "icon-a-rilidaka",
-          url: "/subPackages/test/NumericKeypad/index",
-          color: "#7e7de8",
-          desc: "习惯成自然"
-        }
-      ]);
+      const store2 = useStore();
+      const list = vue.computed(() => store2.state.homeList);
       const linkTo = (url) => {
         if (url !== "/pages/note/index") {
           navTo(url);
@@ -2615,7 +2552,7 @@ if (uni.restoreGlobal) {
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList(list.value, (item) => {
+                vue.renderList(vue.unref(list), (item) => {
                   return vue.openBlock(), vue.createElementBlock("view", {
                     class: "item theme-bgc",
                     onClick: ($event) => linkTo(item.url),
@@ -2669,9 +2606,9 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
   const _imports_0 = "/static/head.png";
-  const _sfc_main$z = {
+  const _sfc_main$B = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
@@ -2693,7 +2630,7 @@ if (uni.restoreGlobal) {
           title: "应用管理",
           unicode: "icon-yingyong",
           color: "#1baf59",
-          url: "/pages/index/index"
+          url: "/subPackages/mine/management/index"
         },
         {
           title: "高级功能",
@@ -2761,7 +2698,8 @@ if (uni.restoreGlobal) {
                 vue.renderList(middleList.value, (item) => {
                   return vue.openBlock(), vue.createElementBlock("div", {
                     class: "item",
-                    key: item.unicode
+                    key: item.unicode,
+                    onClick: ($event) => vue.unref(navTo)(item.url)
                   }, [
                     vue.createElementVNode("div", { class: "mtop" }, [
                       vue.createVNode(_component_uni_icons, {
@@ -2778,7 +2716,7 @@ if (uni.restoreGlobal) {
                       1
                       /* TEXT */
                     )
-                  ]);
+                  ], 8, ["onClick"]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
@@ -2831,8 +2769,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
-  const _sfc_main$y = {
+  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
+  const _sfc_main$A = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -2881,7 +2819,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2926,7 +2864,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$g], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$h], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -2998,7 +2936,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$x = {
+  const _sfc_main$z = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -3068,7 +3006,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -3165,11 +3103,11 @@ if (uni.restoreGlobal) {
     );
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$x);
+    block0$1(_sfc_main$z);
   if (typeof block1 === "function")
-    block1(_sfc_main$x);
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$f], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$w = {
+    block1(_sfc_main$z);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$g], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$y = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -3195,12 +3133,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$e], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$f], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -3556,7 +3494,7 @@ if (uni.restoreGlobal) {
     }
     return value;
   }
-  const _sfc_main$v = {
+  const _sfc_main$x = {
     props: {
       weeks: {
         type: Object,
@@ -3590,7 +3528,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -3646,7 +3584,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$d], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$e], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -4003,7 +3941,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t: t$4 } = initVueI18n(i18nMessages);
-  const _sfc_main$u = {
+  const _sfc_main$w = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -4604,7 +4542,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -4881,9 +4819,9 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$c], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$d], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$3 } = initVueI18n(i18nMessages);
-  const _sfc_main$t = {
+  const _sfc_main$v = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -5359,7 +5297,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -5652,8 +5590,8 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$b], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$s = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$c], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$u = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -6304,7 +6242,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -6647,7 +6585,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$a], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$b], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
     constructor(options2, _this) {
       this.options = options2;
@@ -6760,7 +6698,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$r = {
+  const _sfc_main$t = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -7011,7 +6949,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -7024,8 +6962,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$9], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$q = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$a], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$s = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -7353,7 +7291,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -7413,7 +7351,7 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$8], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   let BASE_URL = "http://192.168.0.101:3838/";
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
@@ -7524,7 +7462,7 @@ if (uni.restoreGlobal) {
       data: task
     });
   };
-  const _sfc_main$p = {
+  const _sfc_main$r = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -8099,8 +8037,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
-  const _sfc_main$o = {
+  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
+  const _sfc_main$q = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -8635,7 +8573,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
+  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
   const apiLogin = (credentials) => {
     return request({
       url: `users/login`,
@@ -8650,7 +8588,7 @@ if (uni.restoreGlobal) {
       data: userData
     });
   };
-  const _sfc_main$n = {
+  const _sfc_main$p = {
     __name: "index",
     setup(__props2) {
       const isRegister = vue.ref(false);
@@ -8925,7 +8863,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
+  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
   const apiAddExpense = (expense) => {
     return request({
       url: `expenses/add`,
@@ -8958,7 +8896,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$m = {
+  const _sfc_main$o = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -9017,14 +8955,13 @@ if (uni.restoreGlobal) {
         });
         return grouped;
       });
-      const getCategoryInfo = (expense) => {
-        let cate = expenseCateList2.value.find((cate2) => {
-          if (cate2.CategoryID == expense.Category) {
-            return cate2;
-          }
+      const expenseCateMap = vue.computed(() => {
+        const map = {};
+        expenseCateList2.value.forEach((cate) => {
+          map[cate.CategoryID] = cate;
         });
-        return cate;
-      };
+        return map;
+      });
       const addExpense2 = () => {
         uni.navigateTo({
           url: "/subPackages/expenses/add/index"
@@ -9231,12 +9168,12 @@ if (uni.restoreGlobal) {
                                   "view",
                                   {
                                     class: "box-left",
-                                    style: vue.normalizeStyle({ backgroundColor: getCategoryInfo(expense).CategoryColor })
+                                    style: vue.normalizeStyle({ backgroundColor: vue.unref(expenseCateMap)[expense.Category].CategoryColor })
                                   },
                                   [
                                     vue.createVNode(_component_uni_icons, {
                                       "custom-prefix": "iconfont",
-                                      type: getCategoryInfo(expense).CategoryIcon,
+                                      type: vue.unref(expenseCateMap)[expense.Category].CategoryIcon,
                                       color: "#fff",
                                       size: "24"
                                     }, null, 8, ["type"])
@@ -9249,7 +9186,7 @@ if (uni.restoreGlobal) {
                                     vue.createElementVNode(
                                       "text",
                                       { class: "title" },
-                                      vue.toDisplayString(getCategoryInfo(expense).CategoryName),
+                                      vue.toDisplayString(vue.unref(expenseCateMap)[expense.Category].CategoryName),
                                       1
                                       /* TEXT */
                                     )
@@ -9358,8 +9295,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
-  const _sfc_main$l = {
+  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
+  const _sfc_main$n = {
     __name: "index",
     setup(__props) {
       const isEdit = vue.ref(false);
@@ -9665,8 +9602,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
-  const _sfc_main$k = {
+  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
+  const _sfc_main$m = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
@@ -9815,7 +9752,233 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
+  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
+  const _sfc_main$l = {
+    name: "DragSort",
+    props: {
+      // 容器大小
+      containerSize: {
+        type: Object,
+        default: () => ({ wdith: "100vw", height: "100vh" })
+      },
+      // 控件的大小
+      controlsSize: {
+        type: Object,
+        default: () => ({ width: 0, height: 0 })
+      },
+      // 数据列表
+      controlsList: {
+        type: Array,
+        default: () => []
+      }
+    },
+    data() {
+      return {
+        // 控件列表
+        controlsArray: [],
+        // 每行最大存放的个数
+        maxWidthCount: 1,
+        // 控件的间距
+        margin: {
+          margin_x: 0,
+          margin_y: 5
+        },
+        // 记录所有控件的初始位置
+        recordInitControlsPoisitonList: [],
+        // 控件的数据
+        controlsPositionArray: [],
+        // 记录当前手指的位置
+        recordPosition: {
+          x: 0,
+          y: 0
+        },
+        // 记录当前操作的控件数据
+        recordControlsPositionItem: {},
+        // 当前操作的控件的下标
+        curretnControlsIndex: -1,
+        // 是否可以拖拽
+        dragLock: false
+      };
+    },
+    mounted() {
+      this.systemInfo = uni.getSystemInfoSync();
+      this.controlsArray = this.controlsList;
+      this.controlsPositionArray = this.initControlsPosition();
+    },
+    methods: {
+      /** 初始化各个控件的位置 */
+      initControlsPosition() {
+        let tempArray = [];
+        for (let i2 = 0, j = 0; i2 < this.controlsList.length; i2++, j++) {
+          tempArray[i2] = {
+            left: this.margin.margin_x,
+            top: j * (this.controlsSize.height + this.margin.margin_y) + this.margin.margin_y
+          };
+        }
+        this.recordInitControlsPoisitonList = [...tempArray];
+        return tempArray;
+      },
+      /** 长按事件 */
+      handleLongpress(event, index2) {
+        uni.vibrateShort();
+        this.dragLock = true;
+      },
+      /** 处理手指触摸后移动 */
+      handleTouchmove(event) {
+        if (!this.dragLock) {
+          return;
+        }
+        const { pageX, pageY } = event.touches[0];
+        this.controlsPositionArray[this.curretnControlsIndex] = {
+          left: this.controlsPositionArray[this.curretnControlsIndex].left + (pageX - this.recordPosition.x),
+          top: this.controlsPositionArray[this.curretnControlsIndex].top + (pageY - this.recordPosition.y)
+        };
+        this.recordPosition = { x: pageX, y: pageY };
+        if (this.curretnControlsIndex !== this.controlsPositionArray.length - 1 && this.controlsPositionArray[this.curretnControlsIndex].top > this.controlsPositionArray[this.curretnControlsIndex + 1].top) {
+          this._handleChangeControlsPosition(0, this.curretnControlsIndex + 1);
+        } else if (this.curretnControlsIndex !== 0 && this.controlsPositionArray[this.curretnControlsIndex].top < this.controlsPositionArray[this.curretnControlsIndex - 1].top) {
+          this._handleChangeControlsPosition(0, this.curretnControlsIndex - 1);
+        }
+      },
+      /** 处理手指触摸开始事件 */
+      handleTouchstart(event, index2) {
+        const { pageX, pageY } = event.touches[0];
+        this.curretnControlsIndex = index2;
+        this.recordPosition = { x: pageX, y: pageY };
+        this.recordControlsPositionItem = this.controlsPositionArray[index2];
+      },
+      /** 处理手指松开事件 */
+      handleTouchend(event) {
+        if (!this.dragLock) {
+          return;
+        }
+        this.dragLock = false;
+        this.controlsPositionArray[this.curretnControlsIndex] = this.recordInitControlsPoisitonList[this.curretnControlsIndex];
+        this.curretnControlsIndex = -1;
+        this.$emit("success", this.controlsArray);
+      },
+      /**
+       * 处理交换控件位置的方法 - 
+       * @param {number} index	需要与第几个下标交换位置
+       * */
+      _handleChangeControlsPosition(type, index2) {
+        let tempControls = this.controlsArray[this.curretnControlsIndex];
+        this.controlsArray[this.curretnControlsIndex] = this.controlsArray[index2];
+        this.controlsArray[index2] = tempControls;
+        this.controlsPositionArray[index2] = this.controlsPositionArray[this.curretnControlsIndex];
+        this.controlsPositionArray[this.curretnControlsIndex] = this.recordControlsPositionItem;
+        this.curretnControlsIndex = index2;
+        this.recordControlsPositionItem = this.recordInitControlsPoisitonList[this.curretnControlsIndex];
+      }
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "drag-and-drop-sort-B",
+        style: vue.normalizeStyle([$props.containerSize])
+      },
+      [
+        $data.controlsPositionArray.length !== 0 ? (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          { key: 0 },
+          vue.renderList($data.controlsArray, (item, index2) => {
+            return vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: index2,
+                class: "_item",
+                style: vue.normalizeStyle({ "transition": $data.curretnControlsIndex === index2 ? "initial" : ".3s", "z-index": $data.curretnControlsIndex === index2 ? 1 : 0, "width": $props.controlsSize.width + "px", "height": $props.controlsSize.height + "px", "top": $data.controlsPositionArray[index2].top + "px", "left": $data.controlsPositionArray[index2].left + "px" })
+              },
+              [
+                vue.createElementVNode("view", {
+                  class: "drag-item",
+                  onLongpress: ($event) => $options.handleLongpress($event, index2),
+                  onTouchstart: ($event) => $options.handleTouchstart($event, index2),
+                  onTouchmove: _cache[0] || (_cache[0] = (...args) => $options.handleTouchmove && $options.handleTouchmove(...args)),
+                  onTouchend: _cache[1] || (_cache[1] = (...args) => $options.handleTouchend && $options.handleTouchend(...args))
+                }, [
+                  vue.createCommentVNode(" 插槽 "),
+                  vue.renderSlot(_ctx.$slots, "default", { item }, void 0, true)
+                ], 40, ["onLongpress", "onTouchstart"])
+              ],
+              4
+              /* STYLE */
+            );
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        )) : vue.createCommentVNode("v-if", true)
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const DragSort = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-80a093ac"], ["__file", "E:/HBuilderProjects/time-master/components/DragSort/index.vue"]]);
+  const _sfc_main$k = {
+    __name: "index",
+    setup(__props2) {
+      const store2 = useStore();
+      const homeList = vue.computed(() => store2.state.homeList);
+      const onSuccess = (data2) => {
+        formatAppLog("log", "at subPackages/mine/management/index.vue:31", "data", data2);
+        store2.dispatch("updateHomeList", data2);
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "应用管理" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(vue.unref(DragSort), {
+              onSuccess,
+              style: { "display": "flex", "justify-content": "center" },
+              controlsList: vue.unref(homeList),
+              containerSize: { width: "100vw", height: "70vh" },
+              controlsSize: { width: 750, height: 60 }
+            }, {
+              default: vue.withCtx(({ item }) => [
+                vue.createElementVNode("view", { class: "fun-item theme-bgc" }, [
+                  vue.createElementVNode("view", { class: "left" }, [
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: "icon",
+                        style: vue.normalizeStyle({ backgroundColor: item.color })
+                      },
+                      [
+                        vue.createVNode(_component_uni_icons, {
+                          "custom-prefix": "iconfont",
+                          type: item.unicode,
+                          color: "#fff",
+                          size: "20"
+                        }, null, 8, ["type"])
+                      ],
+                      4
+                      /* STYLE */
+                    )
+                  ]),
+                  vue.createElementVNode("view", { class: "right" }, [
+                    vue.createElementVNode(
+                      "text",
+                      { class: "title" },
+                      vue.toDisplayString(item.title),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["controlsList"])
+          ]),
+          _: 1
+          /* STABLE */
+        });
+      };
+    }
+  };
+  const SubPackagesMineManagementIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-c5ac254c"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/management/index.vue"]]);
   const apiGetUserMemos = (userID) => {
     return request({
       url: `memos/list?userID=${userID}`,
@@ -23412,40 +23575,57 @@ if (uni.restoreGlobal) {
   const _sfc_main$1 = {
     __name: "index",
     setup(__props2) {
-      const newData = vue.ref("");
       const store2 = useStore();
-      const data2 = vue.computed(() => store2.state.data);
-      const updateData = () => {
-        store2.dispatch("updateData", newData.value);
-        newData.value = "";
-      };
+      const homeList = vue.computed(() => store2.state.homeList);
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("div", null, [
-          vue.createElementVNode(
-            "p",
-            null,
-            vue.toDisplayString(vue.unref(data2)),
-            1
-            /* TEXT */
-          ),
-          vue.withDirectives(vue.createElementVNode(
-            "input",
-            {
-              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => newData.value = $event),
-              type: "text"
-            },
-            null,
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelText, newData.value]
-          ]),
-          vue.createElementVNode("button", { onClick: updateData }, "更新数据")
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
+          vue.createVNode(vue.unref(DragSort), {
+            style: { "display": "flex", "justify-content": "center" },
+            controlsList: vue.unref(homeList),
+            containerSize: { width: "100vw", height: "100vh" },
+            controlsSize: { width: 750, height: 60 }
+          }, {
+            default: vue.withCtx(({ item }) => [
+              vue.createElementVNode("view", { class: "fun-item" }, [
+                vue.createElementVNode("view", { class: "left" }, [
+                  vue.createElementVNode(
+                    "view",
+                    {
+                      class: "icon",
+                      style: vue.normalizeStyle({ backgroundColor: item.color })
+                    },
+                    [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: item.unicode,
+                        color: "#fff",
+                        size: "20"
+                      }, null, 8, ["type"])
+                    ],
+                    4
+                    /* STYLE */
+                  )
+                ]),
+                vue.createElementVNode("view", { class: "right" }, [
+                  vue.createElementVNode(
+                    "text",
+                    { class: "title" },
+                    vue.toDisplayString(item.title),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ])
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["controlsList"])
         ]);
       };
     }
   };
-  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
+  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-fe972938"], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/mine/index", PagesMineIndex);
   __definePage("pages/note/index", PagesNoteIndex);
@@ -23454,6 +23634,7 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/expenses/index/index", SubPackagesExpensesIndexIndex);
   __definePage("subPackages/expenses/add/index", SubPackagesExpensesAddIndex);
   __definePage("subPackages/mine/setting/index", SubPackagesMineSettingIndex);
+  __definePage("subPackages/mine/management/index", SubPackagesMineManagementIndex);
   __definePage("subPackages/memos/index/index", SubPackagesMemosIndexIndex);
   __definePage("subPackages/memos/add/index", SubPackagesMemosAddIndex);
   __definePage("subPackages/water/index/index", SubPackagesWaterIndexIndex);
@@ -23627,6 +23808,72 @@ if (uni.restoreGlobal) {
           text: "我的",
           icon: "icon-mine"
         }
+      ],
+      // 首页功能列表数据
+      homeList: [
+        {
+          title: "备忘录",
+          unicode: "icon-biaoqian",
+          url: "/subPackages/memos/index/index",
+          color: "#1baf59",
+          desc: "记事本"
+        },
+        {
+          title: "记账",
+          unicode: "icon-jizhang",
+          url: "/subPackages/expenses/index/index",
+          color: "#7e7cea",
+          desc: "本月：收入5000，支出3000，结余2000"
+        },
+        {
+          title: "日记",
+          unicode: "icon-rijix",
+          url: "/subPackages/diary/index/index",
+          color: "#4c8bf0",
+          desc: "今天是个好日子，明天也是个好日子"
+        },
+        {
+          title: "纪念日倒数",
+          unicode: "icon-jinianriyingxiao",
+          url: "/subPackages/countdowns/index/index",
+          color: "#f75e3c",
+          desc: "2024年2月24日，距离2024年3月1日还有5天"
+        },
+        {
+          title: "事项",
+          unicode: "icon-note",
+          url: "/pages/note/index",
+          color: "#ffa851",
+          desc: "总数：2个，未完成：1个"
+        },
+        {
+          title: "喝水",
+          unicode: "icon-shui",
+          url: "/subPackages/water/index/index",
+          color: "#00b5ff",
+          desc: "今日：0/1700ml"
+        },
+        {
+          title: "小说",
+          unicode: "icon-xuexi",
+          url: "/subPackages/book/index/index",
+          color: "#ce9178",
+          desc: "已读：1章，未读：5章"
+        },
+        {
+          title: "课程表",
+          unicode: "icon-kechengbiao",
+          url: "/pages/note/index",
+          color: "#ff4962",
+          desc: "小初高大学课程表"
+        },
+        {
+          title: "习惯打卡",
+          unicode: "icon-a-rilidaka",
+          url: "/subPackages/test/NumericKeypad/index",
+          color: "#7e7de8",
+          desc: "习惯成自然"
+        }
       ]
     },
     mutations: {
@@ -23636,6 +23883,9 @@ if (uni.restoreGlobal) {
       },
       setTheme(state, newTheme) {
         state.theme = newTheme;
+      },
+      setHomeList(state, newHomeList) {
+        state.homeList = newHomeList;
       }
     },
     actions: {
@@ -23645,6 +23895,9 @@ if (uni.restoreGlobal) {
       },
       updateTheme({ commit }, newTheme) {
         commit("setTheme", newTheme);
+      },
+      updateHomeList({ commit }, newHomeList) {
+        commit("setHomeList", newHomeList);
       }
     },
     plugins: [

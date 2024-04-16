@@ -62,6 +62,18 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "management/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "custom/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

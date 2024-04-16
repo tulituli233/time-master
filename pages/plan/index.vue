@@ -1,5 +1,5 @@
 <template>
-	<AppPage navTitle="规划" :showTab="true" :activeIndex="2">
+	<AppPage navTitle="规划" :showTab="true">
 		<view class="time theme-bgc">
 			<view class="date">{{ currDate }}</view>
 			<view class="week">{{ currWeek }}</view>

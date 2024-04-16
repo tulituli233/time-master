@@ -1,5 +1,5 @@
 <template>
-	<AppPage :showNav="false" :havePadTab="false" :showTab="true" :activeIndex="3">
+	<AppPage :showNav="false" :havePadTab="false" :showTab="true">
 		<view class="top">
 			<view class="left">
 				<view class="head">
@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="middle theme-bgc">
-			<div class="item" v-for="item in middleList" :key="item.unicode">
+			<div class="item" v-for="item in middleList" :key="item.unicode" @click="navTo(item.url)">
 				<div class="mtop">
 					<uni-icons custom-prefix="iconfont" :type="item.unicode" :color="item.color" size="30"></uni-icons>
 				</div>
@@ -57,13 +57,13 @@ const middleList = ref([
 		title: '自定义APP',
 		unicode: 'icon-shoujizhendong',
 		color: '#f75e3c',
-		url: '/pages/index/index'
+		url: '/subPackages/mine/custom/index'
 	},
 	{
 		title: '应用管理',
 		unicode: 'icon-yingyong',
 		color: '#1baf59',
-		url: '/pages/index/index'
+		url: '/subPackages/mine/management/index'
 	},
 	{
 		title: '高级功能',

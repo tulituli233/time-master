@@ -1,5 +1,5 @@
 <template>
-	<AppPage navTitle="事项" :showTab="true" :activeIndex="1">
+	<AppPage navTitle="事项" :showTab="true">
 		<view id="select">
 			<view class="select-header theme-bgc">
 				<view class="uni-padding-wrap">
