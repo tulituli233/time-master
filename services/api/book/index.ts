@@ -39,9 +39,9 @@ export interface NovelChapter {
 }
 
 // 获取小说列表
-export const apiGetNovels = (): Promise<Novel[]> => {
+export const apiGetNovels = (UserID: number): Promise<Novel[]> => {
     return request({
-        url: 'book/list',
+        url: `book/list?UserID=${UserID}`,
         method: 'GET',
     });
 }
@@ -80,7 +80,7 @@ export const apiDeleteNovel = (novelID: number): Promise<Novel> => {
 }
 
 // 创建小说
-export const apiCreateNovel = (data: { Title: string, Author: string }): Promise<Novel> => {
+export const apiCreateNovel = (data: { UserID: number, Title: string, Author: string }): Promise<Novel> => {
     return request({
         url: 'book/create',
         method: 'POST',

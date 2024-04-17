@@ -679,8 +679,8 @@ if (uni.restoreGlobal) {
   ];
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
-    for (const [key2, val] of props) {
-      target[key2] = val;
+    for (const [key, val] of props) {
+      target[key] = val;
     }
     return target;
   };
@@ -688,7 +688,7 @@ if (uni.restoreGlobal) {
     const reg2 = /^[0-9]*$/g;
     return typeof val === "number" || reg2.test(val) ? val + "px" : val;
   };
-  const _sfc_main$E = {
+  const _sfc_main$F = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$i], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$i], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
@@ -825,16 +825,16 @@ if (uni.restoreGlobal) {
             this.clear();
           }
         },
-        set: function(key2, value) {
+        set: function(key, value) {
           if (!cache)
             cache = {};
-          cache[key2] = value;
-          return cache[key2];
+          cache[key] = value;
+          return cache[key];
         },
-        get: function(key2) {
+        get: function(key) {
           if (!cache)
             cache = {};
-          return cache[key2];
+          return cache[key];
         },
         clear: function() {
           cache = null;
@@ -1446,14 +1446,14 @@ if (uni.restoreGlobal) {
    * @license MIT
    */
   var storeKey = "store";
-  function useStore(key2) {
-    if (key2 === void 0)
-      key2 = null;
-    return vue.inject(key2 !== null ? key2 : storeKey);
+  function useStore(key) {
+    if (key === void 0)
+      key = null;
+    return vue.inject(key !== null ? key : storeKey);
   }
   function forEachValue(obj, fn) {
-    Object.keys(obj).forEach(function(key2) {
-      return fn(obj[key2], key2);
+    Object.keys(obj).forEach(function(key) {
+      return fn(obj[key], key);
     });
   }
   function isObject$1(obj) {
@@ -1502,14 +1502,14 @@ if (uni.restoreGlobal) {
     var computedCache = {};
     var scope = vue.effectScope(true);
     scope.run(function() {
-      forEachValue(wrappedGetters, function(fn, key2) {
-        computedObj[key2] = partial(fn, store2);
-        computedCache[key2] = vue.computed(function() {
-          return computedObj[key2]();
+      forEachValue(wrappedGetters, function(fn, key) {
+        computedObj[key] = partial(fn, store2);
+        computedCache[key] = vue.computed(function() {
+          return computedObj[key]();
         });
-        Object.defineProperty(store2.getters, key2, {
+        Object.defineProperty(store2.getters, key, {
           get: function() {
-            return computedCache[key2].value;
+            return computedCache[key].value;
           },
           enumerable: true
           // for local getters
@@ -1558,21 +1558,21 @@ if (uni.restoreGlobal) {
       });
     }
     var local = module.context = makeLocalContext(store2, namespace, path);
-    module.forEachMutation(function(mutation, key2) {
-      var namespacedType = namespace + key2;
+    module.forEachMutation(function(mutation, key) {
+      var namespacedType = namespace + key;
       registerMutation(store2, namespacedType, mutation, local);
     });
-    module.forEachAction(function(action, key2) {
-      var type = action.root ? key2 : namespace + key2;
+    module.forEachAction(function(action, key) {
+      var type = action.root ? key : namespace + key;
       var handler = action.handler || action;
       registerAction(store2, type, handler, local);
     });
-    module.forEachGetter(function(getter, key2) {
-      var namespacedType = namespace + key2;
+    module.forEachGetter(function(getter, key) {
+      var namespacedType = namespace + key;
       registerGetter(store2, namespacedType, getter, local);
     });
-    module.forEachChild(function(child, key2) {
-      installModule(store2, rootState, path.concat(key2), child, hot);
+    module.forEachChild(function(child, key) {
+      installModule(store2, rootState, path.concat(key), child, hot);
     });
   }
   function makeLocalContext(store2, namespace, path) {
@@ -1703,8 +1703,8 @@ if (uni.restoreGlobal) {
     }, { deep: true, flush: "sync" });
   }
   function getNestedState(state, path) {
-    return path.reduce(function(state2, key2) {
-      return state2[key2];
+    return path.reduce(function(state2, key) {
+      return state2[key];
     }, state);
   }
   function unifyObjectStyle(type, payload, options2) {
@@ -1900,22 +1900,22 @@ if (uni.restoreGlobal) {
     getters = path === "root" ? getters : getters[path];
     var gettersKeys = Object.keys(getters);
     var storeState = {
-      state: Object.keys(module.state).map(function(key2) {
+      state: Object.keys(module.state).map(function(key) {
         return {
-          key: key2,
+          key,
           editable: true,
-          value: module.state[key2]
+          value: module.state[key]
         };
       })
     };
     if (gettersKeys.length) {
       var tree = transformPathsToObjectTree(getters);
-      storeState.getters = Object.keys(tree).map(function(key2) {
+      storeState.getters = Object.keys(tree).map(function(key) {
         return {
-          key: key2.endsWith("/") ? extractNameFromPath(key2) : key2,
+          key: key.endsWith("/") ? extractNameFromPath(key) : key,
           editable: false,
           value: canThrow(function() {
-            return tree[key2];
+            return tree[key];
           })
         };
       });
@@ -1924,8 +1924,8 @@ if (uni.restoreGlobal) {
   }
   function transformPathsToObjectTree(getters) {
     var result = {};
-    Object.keys(getters).forEach(function(key2) {
-      var path = key2.split("/");
+    Object.keys(getters).forEach(function(key) {
+      var path = key.split("/");
       if (path.length > 1) {
         var target = result;
         var leafKey = path.pop();
@@ -1943,11 +1943,11 @@ if (uni.restoreGlobal) {
           target = target[p]._custom.value;
         });
         target[leafKey] = canThrow(function() {
-          return getters[key2];
+          return getters[key];
         });
       } else {
-        result[key2] = canThrow(function() {
-          return getters[key2];
+        result[key] = canThrow(function() {
+          return getters[key];
         });
       }
     });
@@ -1986,17 +1986,17 @@ if (uni.restoreGlobal) {
   prototypeAccessors$1.namespaced.get = function() {
     return !!this._rawModule.namespaced;
   };
-  Module.prototype.addChild = function addChild(key2, module) {
-    this._children[key2] = module;
+  Module.prototype.addChild = function addChild(key, module) {
+    this._children[key] = module;
   };
-  Module.prototype.removeChild = function removeChild(key2) {
-    delete this._children[key2];
+  Module.prototype.removeChild = function removeChild(key) {
+    delete this._children[key];
   };
-  Module.prototype.getChild = function getChild(key2) {
-    return this._children[key2];
+  Module.prototype.getChild = function getChild(key) {
+    return this._children[key];
   };
-  Module.prototype.hasChild = function hasChild(key2) {
-    return key2 in this._children;
+  Module.prototype.hasChild = function hasChild(key) {
+    return key in this._children;
   };
   Module.prototype.update = function update2(rawModule) {
     this._rawModule.namespaced = rawModule.namespaced;
@@ -2033,15 +2033,15 @@ if (uni.restoreGlobal) {
     this.register([], rawRootModule, false);
   };
   ModuleCollection.prototype.get = function get(path) {
-    return path.reduce(function(module, key2) {
-      return module.getChild(key2);
+    return path.reduce(function(module, key) {
+      return module.getChild(key);
     }, this.root);
   };
   ModuleCollection.prototype.getNamespace = function getNamespace(path) {
     var module = this.root;
-    return path.reduce(function(namespace, key2) {
-      module = module.getChild(key2);
-      return namespace + (module.namespaced ? key2 + "/" : "");
+    return path.reduce(function(namespace, key) {
+      module = module.getChild(key);
+      return namespace + (module.namespaced ? key + "/" : "");
     }, "");
   };
   ModuleCollection.prototype.update = function update$1(rawRootModule) {
@@ -2062,19 +2062,19 @@ if (uni.restoreGlobal) {
       parent.addChild(path[path.length - 1], newModule);
     }
     if (rawModule.modules) {
-      forEachValue(rawModule.modules, function(rawChildModule, key2) {
-        this$1$1.register(path.concat(key2), rawChildModule, runtime);
+      forEachValue(rawModule.modules, function(rawChildModule, key) {
+        this$1$1.register(path.concat(key), rawChildModule, runtime);
       });
     }
   };
   ModuleCollection.prototype.unregister = function unregister(path) {
     var parent = this.get(path.slice(0, -1));
-    var key2 = path[path.length - 1];
-    var child = parent.getChild(key2);
+    var key = path[path.length - 1];
+    var child = parent.getChild(key);
     if (!child) {
       {
         console.warn(
-          "[vuex] trying to unregister module '" + key2 + "', which is not registered"
+          "[vuex] trying to unregister module '" + key + "', which is not registered"
         );
       }
       return;
@@ -2082,13 +2082,13 @@ if (uni.restoreGlobal) {
     if (!child.runtime) {
       return;
     }
-    parent.removeChild(key2);
+    parent.removeChild(key);
   };
   ModuleCollection.prototype.isRegistered = function isRegistered(path) {
     var parent = this.get(path.slice(0, -1));
-    var key2 = path[path.length - 1];
+    var key = path[path.length - 1];
     if (parent) {
-      return parent.hasChild(key2);
+      return parent.hasChild(key);
     }
     return false;
   };
@@ -2098,19 +2098,19 @@ if (uni.restoreGlobal) {
     }
     targetModule.update(newModule);
     if (newModule.modules) {
-      for (var key2 in newModule.modules) {
-        if (!targetModule.getChild(key2)) {
+      for (var key in newModule.modules) {
+        if (!targetModule.getChild(key)) {
           {
             console.warn(
-              "[vuex] trying to add a new module '" + key2 + "' on hot reloading, manual reload is needed"
+              "[vuex] trying to add a new module '" + key + "' on hot reloading, manual reload is needed"
             );
           }
           return;
         }
         update(
-          path.concat(key2),
-          targetModule.getChild(key2),
-          newModule.modules[key2]
+          path.concat(key),
+          targetModule.getChild(key),
+          newModule.modules[key]
         );
       }
     }
@@ -2133,21 +2133,21 @@ if (uni.restoreGlobal) {
     actions: objectAssert
   };
   function assertRawModule(path, rawModule) {
-    Object.keys(assertTypes).forEach(function(key2) {
-      if (!rawModule[key2]) {
+    Object.keys(assertTypes).forEach(function(key) {
+      if (!rawModule[key]) {
         return;
       }
-      var assertOptions = assertTypes[key2];
-      forEachValue(rawModule[key2], function(value, type) {
+      var assertOptions = assertTypes[key];
+      forEachValue(rawModule[key], function(value, type) {
         assert(
           assertOptions.assert(value),
-          makeAssertionMessage(path, key2, type, value, assertOptions.expected)
+          makeAssertionMessage(path, key, type, value, assertOptions.expected)
         );
       });
     });
   }
-  function makeAssertionMessage(path, key2, type, value, expected) {
-    var buf = key2 + " should be " + expected + ' but "' + key2 + "." + type + '"';
+  function makeAssertionMessage(path, key, type, value, expected) {
+    var buf = key + " should be " + expected + ' but "' + key + "." + type + '"';
     if (path.length > 0) {
       buf += ' in module "' + path.join(".") + '"';
     }
@@ -2377,7 +2377,7 @@ if (uni.restoreGlobal) {
     this._committing = committing;
   };
   Object.defineProperties(Store.prototype, prototypeAccessors);
-  const _sfc_main$D = {
+  const _sfc_main$E = {
     __name: "index",
     props: {
       navTitle: {
@@ -2400,17 +2400,12 @@ if (uni.restoreGlobal) {
         type: Boolean,
         default: false
       },
-      activeIndex: {
-        type: Number,
-        default: 0
-      },
       backgroundImage: {
         type: String,
         default: ""
       }
     },
     setup(__props2) {
-      const props = __props2;
       vue.useCssVars((_ctx) => ({
         'd4a57c02-backgroundImage ? `url(${backgroundImage})` : "none"': __props2.backgroundImage ? `url(${__props2.backgroundImage})` : "none",
         'd4a57c02-commonCss.pageNavHeight + "rpx"': vue.unref(commonCss).pageNavHeight + "rpx",
@@ -2418,22 +2413,27 @@ if (uni.restoreGlobal) {
       }));
       onLoad(() => {
         uni.hideTabBar();
-        formatAppLog("log", "at components/AppPage/index.vue:41", "hideTabBar");
+        formatAppLog("log", "at components/AppPage/index.vue:43", "hideTabBar");
       });
       const store2 = useStore();
       const theme = vue.computed(() => store2.state.theme);
       const commonCss = vue.computed(() => store2.state.commonCss);
+      const currentTab = vue.computed(() => store2.state.currentTab);
       const navBack = () => {
         uni.navigateBack();
       };
-      const tabbarList = vue.computed(() => store2.state.tabbarList);
-      const iconColor = (index2, mode) => {
-        if (mode === "night-mode") {
-          return index2 === props.activeIndex ? "#4c8bf0" : "#fff";
-        } else {
-          return index2 === props.activeIndex ? "#4c8bf0" : "#000";
-        }
+      const tabChange = (index2, pagePath) => {
+        store2.dispatch("updateCurrentTab", index2);
+        switchTab(pagePath);
       };
+      const tabbarList = vue.computed(() => store2.state.tabbarList);
+      const iconColor = vue.computed(() => {
+        if (theme.value.mode === "night-mode") {
+          return "#fff";
+        } else {
+          return "#000";
+        }
+      });
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock(
@@ -2492,21 +2492,21 @@ if (uni.restoreGlobal) {
                   return vue.openBlock(), vue.createElementBlock("view", {
                     class: "tabbar-item",
                     key: item.icon,
-                    onClick: ($event) => vue.unref(switchTab)(item.pagePath)
+                    onClick: ($event) => tabChange(index2, item.pagePath)
                   }, [
                     vue.createElementVNode("view", { class: "icon" }, [
                       vue.createVNode(_component_uni_icons, {
                         "custom-prefix": "iconfont",
                         type: item.icon,
                         size: "25",
-                        color: iconColor(index2, vue.unref(theme).mode)
+                        color: index2 == vue.unref(currentTab) ? "#4c8bf0" : vue.unref(iconColor)
                       }, null, 8, ["type", "color"])
                     ]),
                     vue.createElementVNode(
                       "view",
                       {
                         class: "text",
-                        style: vue.normalizeStyle({ color: iconColor(index2, vue.unref(theme).mode) })
+                        style: vue.normalizeStyle({ color: index2 == vue.unref(currentTab) ? "#4c8bf0" : vue.unref(iconColor) })
                       },
                       vue.toDisplayString(item.text),
                       5
@@ -2525,8 +2525,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const AppPage = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__scopeId", "data-v-d4a57c02"], ["__file", "E:/HBuilderProjects/time-master/components/AppPage/index.vue"]]);
-  const _sfc_main$C = {
+  const AppPage = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["__scopeId", "data-v-d4a57c02"], ["__file", "E:/HBuilderProjects/time-master/components/AppPage/index.vue"]]);
+  const _sfc_main$D = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
@@ -2544,8 +2544,7 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
           navTitle: "时间管家",
-          showTab: true,
-          activeIndex: 0
+          showTab: true
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "list" }, [
@@ -2606,9 +2605,9 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__file", "E:/HBuilderProjects/time-master/pages/index/index.vue"]]);
   const _imports_0 = "/static/head.png";
-  const _sfc_main$B = {
+  const _sfc_main$C = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
@@ -2624,7 +2623,7 @@ if (uni.restoreGlobal) {
           title: "自定义APP",
           unicode: "icon-shoujizhendong",
           color: "#f75e3c",
-          url: "/pages/index/index"
+          url: "/subPackages/mine/custom/index"
         },
         {
           title: "应用管理",
@@ -2667,8 +2666,7 @@ if (uni.restoreGlobal) {
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
           showNav: false,
           havePadTab: false,
-          showTab: true,
-          activeIndex: 3
+          showTab: true
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "top" }, [
@@ -2769,8 +2767,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
-  const _sfc_main$A = {
+  const PagesMineIndex = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "E:/HBuilderProjects/time-master/pages/mine/index.vue"]]);
+  const _sfc_main$B = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -2864,7 +2862,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$h], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$h], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -2936,7 +2934,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$z = {
+  const _sfc_main$A = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -3103,11 +3101,11 @@ if (uni.restoreGlobal) {
     );
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$z);
+    block0$1(_sfc_main$A);
   if (typeof block1 === "function")
-    block1(_sfc_main$z);
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$g], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$y = {
+    block1(_sfc_main$A);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$g], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$z = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -3138,7 +3136,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$f], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$f], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -3494,7 +3492,7 @@ if (uni.restoreGlobal) {
     }
     return value;
   }
-  const _sfc_main$x = {
+  const _sfc_main$y = {
     props: {
       weeks: {
         type: Object,
@@ -3584,7 +3582,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$e], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$e], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -3673,7 +3671,7 @@ if (uni.restoreGlobal) {
   const LOCALE_FR = "fr";
   const LOCALE_ES = "es";
   const hasOwnProperty = Object.prototype.hasOwnProperty;
-  const hasOwn = (val, key2) => hasOwnProperty.call(val, key2);
+  const hasOwn = (val, key) => hasOwnProperty.call(val, key);
   const defaultFormatter = new BaseFormatter();
   function include(str, parts) {
     return !!parts.find((part) => str.indexOf(part) !== -1);
@@ -3759,9 +3757,9 @@ if (uni.restoreGlobal) {
         if (override) {
           Object.assign(curMessages, message);
         } else {
-          Object.keys(message).forEach((key2) => {
-            if (!hasOwn(curMessages, key2)) {
-              curMessages[key2] = message[key2];
+          Object.keys(message).forEach((key) => {
+            if (!hasOwn(curMessages, key)) {
+              curMessages[key] = message[key];
             }
           });
         }
@@ -3772,7 +3770,7 @@ if (uni.restoreGlobal) {
     f(message, values, delimiters) {
       return this.formater.interpolate(message, values, delimiters).join("");
     }
-    t(key2, locale, values) {
+    t(key, locale, values) {
       let message = this.message;
       if (typeof locale === "string") {
         locale = normalizeLocale(locale, this.messages);
@@ -3780,11 +3778,11 @@ if (uni.restoreGlobal) {
       } else {
         values = locale;
       }
-      if (!hasOwn(message, key2)) {
-        console.warn(`Cannot translate the value of keypath ${key2}. Use the value of keypath as default.`);
-        return key2;
+      if (!hasOwn(message, key)) {
+        console.warn(`Cannot translate the value of keypath ${key}. Use the value of keypath as default.`);
+        return key;
       }
-      return this.formater.interpolate(message[key2], values).join("");
+      return this.formater.interpolate(message[key], values).join("");
     }
   }
   function watchAppLocale(appVm, i18n) {
@@ -3826,14 +3824,14 @@ if (uni.restoreGlobal) {
       messages,
       watcher
     });
-    let t2 = (key2, values) => {
+    let t2 = (key, values) => {
       if (typeof getApp !== "function") {
-        t2 = function(key3, values2) {
-          return i18n.t(key3, values2);
+        t2 = function(key2, values2) {
+          return i18n.t(key2, values2);
         };
       } else {
         let isWatchedAppLocale = false;
-        t2 = function(key3, values2) {
+        t2 = function(key2, values2) {
           const appVm = getApp().$vm;
           if (appVm) {
             appVm.$locale;
@@ -3842,18 +3840,18 @@ if (uni.restoreGlobal) {
               watchAppLocale(appVm, i18n);
             }
           }
-          return i18n.t(key3, values2);
+          return i18n.t(key2, values2);
         };
       }
-      return t2(key2, values);
+      return t2(key, values);
     };
     return {
       i18n,
       f(message, values, delimiters) {
         return i18n.f(message, values, delimiters);
       },
-      t(key2, values) {
-        return t2(key2, values);
+      t(key, values) {
+        return t2(key, values);
       },
       add(locale2, message, override = true) {
         return i18n.add(locale2, message, override);
@@ -3941,7 +3939,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t: t$4 } = initVueI18n(i18nMessages);
-  const _sfc_main$w = {
+  const _sfc_main$x = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -4819,9 +4817,9 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$d], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$d], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$3 } = initVueI18n(i18nMessages);
-  const _sfc_main$v = {
+  const _sfc_main$w = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -5590,8 +5588,8 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$c], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$u = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$c], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$v = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -6585,7 +6583,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$b], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$b], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
     constructor(options2, _this) {
       this.options = options2;
@@ -6698,7 +6696,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$t = {
+  const _sfc_main$u = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -6962,8 +6960,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$a], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$s = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$a], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$t = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -7351,7 +7349,7 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   let BASE_URL = "http://192.168.0.101:3838/";
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
@@ -7378,7 +7376,7 @@ if (uni.restoreGlobal) {
       });
     });
   };
-  const pingRange = (oldUrl, start = 101, end = 120) => {
+  const pingRange = (oldUrl, start = 100, end = 120) => {
     return new Promise(async (resolve, reject) => {
       let timeOut = setTimeout(() => {
         formatAppLog("log", "at utils/request.ts:41", `开始ping 192.168.0.${start}到192.168.0.${end}`);
@@ -7435,7 +7433,7 @@ if (uni.restoreGlobal) {
     if (uni.getStorageSync("BASE_URL")) {
       BASE_URL = uni.getStorageSync("BASE_URL");
     }
-    pingRange(BASE_URL, 101, 120);
+    pingRange(BASE_URL, 100, 120);
   };
   init();
   const setBaseUrl = (url) => {
@@ -7462,7 +7460,7 @@ if (uni.restoreGlobal) {
       data: task
     });
   };
-  const _sfc_main$r = {
+  const _sfc_main$s = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -7769,8 +7767,7 @@ if (uni.restoreGlobal) {
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
           navTitle: "事项",
-          showTab: true,
-          activeIndex: 1
+          showTab: true
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { id: "select" }, [
@@ -8037,8 +8034,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
-  const _sfc_main$q = {
+  const PagesNoteIndex = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__file", "E:/HBuilderProjects/time-master/pages/note/index.vue"]]);
+  const _sfc_main$r = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -8054,7 +8051,6 @@ if (uni.restoreGlobal) {
         return new Promise((resolve, reject) => {
           apiGetUserTasks(getApp().globalData.userInfo.UserID).then((res) => {
             tasks.value = res.data;
-            formatAppLog("log", "at pages/plan/index.vue:135", "tasks", tasks.value);
             filterPlans(previewDays, tasks, dayPlan);
             resolve();
           }).catch((error) => {
@@ -8066,7 +8062,6 @@ if (uni.restoreGlobal) {
       onShow(async () => {
         await getTasks();
         uni.onKeyboardHeightChange((res) => {
-          formatAppLog("log", "at pages/plan/index.vue:149", "键盘高度变化----", res.height);
           if (res.height === 0) {
             popupBottom.value = 0;
           } else {
@@ -8082,6 +8077,7 @@ if (uni.restoreGlobal) {
           currentDate.setDate(currentDate.getDate() - (Math.floor(days / 2) - index2));
           return { date: currentDate.toISOString().split("T")[0], plans: [] };
         });
+        formatAppLog("log", "at pages/plan/index.vue:167", "dayPlanArray", dayPlanArray);
         return dayPlanArray;
       };
       const dayPlan = vue.ref(initializeDayPlanArray(previewDays));
@@ -8090,7 +8086,10 @@ if (uni.restoreGlobal) {
         tasks2.value.forEach((task) => {
           const taskDate = new Date(formatDate(task.DueDate));
           const firstDate = new Date(formatDate(dayPlan2.value[0].date));
-          const diffTime = Math.abs(firstDate - taskDate);
+          const diffTime = taskDate - firstDate;
+          if (diffTime < 0) {
+            return;
+          }
           const diffDays = Math.ceil(diffTime / (1e3 * 60 * 60 * 24));
           if (diffDays <= days) {
             const index2 = diffDays;
@@ -8172,7 +8171,6 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at pages/plan/index.vue:270", "plan", plan);
         apiAddTask(plan).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -8266,8 +8264,7 @@ if (uni.restoreGlobal) {
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
           navTitle: "规划",
-          showTab: true,
-          activeIndex: 2
+          showTab: true
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "time theme-bgc" }, [
@@ -8573,7 +8570,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
+  const PagesPlanIndex = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "E:/HBuilderProjects/time-master/pages/plan/index.vue"]]);
   const apiLogin = (credentials) => {
     return request({
       url: `users/login`,
@@ -8588,7 +8585,7 @@ if (uni.restoreGlobal) {
       data: userData
     });
   };
-  const _sfc_main$p = {
+  const _sfc_main$q = {
     __name: "index",
     setup(__props2) {
       const isRegister = vue.ref(false);
@@ -8863,7 +8860,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
+  const SubPackagesLoginIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-680a29cd"], ["__file", "E:/HBuilderProjects/time-master/subPackages/login/index/index.vue"]]);
   const apiAddExpense = (expense) => {
     return request({
       url: `expenses/add`,
@@ -8896,7 +8893,7 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const _sfc_main$o = {
+  const _sfc_main$p = {
     __name: "index",
     setup(__props2) {
       vue.useCssVars((_ctx) => ({
@@ -9295,8 +9292,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
-  const _sfc_main$n = {
+  const SubPackagesExpensesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/index/index.vue"]]);
+  const _sfc_main$o = {
     __name: "index",
     setup(__props) {
       const isEdit = vue.ref(false);
@@ -9316,7 +9313,7 @@ if (uni.restoreGlobal) {
       const expenseData = vue.reactive({
         UserID: getApp().globalData.userInfo.UserID,
         Date: formatDateTime(/* @__PURE__ */ new Date()),
-        Amount: 0,
+        Amount: "",
         Category: 1,
         Note: ""
       });
@@ -9324,7 +9321,6 @@ if (uni.restoreGlobal) {
       const getExpenseCate = () => {
         apiGetAllExpensesCategory().then((res) => {
           expenseCateList.value = res.data;
-          formatAppLog("log", "at subPackages/expenses/add/index.vue:91", "expenseCateList", expenseCateList.value);
         });
       };
       const incomeCate = vue.computed(() => {
@@ -9337,7 +9333,7 @@ if (uni.restoreGlobal) {
           return cate.CategoryType === 2;
         });
       });
-      const tabs = ["支出", "收入", "转账"];
+      const tabs = ["支出", "收入"];
       const activeTab = vue.ref(0);
       const selectTab = (index2) => {
         activeTab.value = index2;
@@ -9364,24 +9360,46 @@ if (uni.restoreGlobal) {
           expenseData.Amount = expenseData.Amount + "";
           expenseData.Amount = expenseData.Amount.slice(0, -1);
         } else if (key === "=") {
-          expenseData.Amount = eval(expenseData.Amount);
+          if (!calculate()) {
+            return;
+          }
         } else if (key === "完成") {
+          if (!calculate()) {
+            return;
+          }
           addExpense();
         } else {
+          key += "";
           expenseData.Amount += key;
         }
       };
+      const calculate = () => {
+        try {
+          expenseData.Amount = eval(expenseData.Amount).toFixed(2);
+        } catch (error) {
+          uni.showToast({
+            icon: "error",
+            title: "计算错误,输入有误"
+          });
+          return false;
+        }
+        return true;
+      };
       vue.ref(formatDateTime(/* @__PURE__ */ new Date()));
       const selectDate = (e2) => {
-        formatAppLog("log", "at subPackages/expenses/add/index.vue:152", "选择日期", e2);
       };
       const addExpense = async () => {
-        expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
         expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
         expenseData.Date = formatDateTime(expenseData.Date);
         let errMsg = "";
-        if (!expenseData.Amount) {
+        if (expenseData.Amount == "") {
           errMsg = "请输入金额";
+        } else if (isNaN(parseFloat(expenseData.Amount))) {
+          errMsg = "请输入正确的金额";
+          expenseData.Amount = "";
+        } else if (expenseData.Amount < 0) {
+          errMsg = "不能输入负金额";
+          expenseData.Amount = Math.abs(expenseData.Amount);
         } else if (!expenseData.Date) {
           errMsg = "请选择日期";
         }
@@ -9392,6 +9410,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
+        expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
         let api = isEdit.value ? apiUpdateExpense : apiAddExpense;
         let res = await api(expenseData);
         if (res.code === 0 || !res.code) {
@@ -9399,6 +9418,7 @@ if (uni.restoreGlobal) {
             icon: "error",
             title: res.msg || "网络异常"
           });
+          expenseData.Amount = Math.abs(expenseData.Amount);
         } else {
           uni.showToast({
             title: res.msg
@@ -9582,11 +9602,11 @@ if (uni.restoreGlobal) {
                     (vue.openBlock(true), vue.createElementBlock(
                       vue.Fragment,
                       null,
-                      vue.renderList(row, (key2, keyIndex) => {
+                      vue.renderList(row, (key, keyIndex) => {
                         return vue.openBlock(), vue.createElementBlock("td", {
                           key: keyIndex,
-                          onClick: ($event) => handleKeyPress(key2)
-                        }, vue.toDisplayString(key2), 9, ["onClick"]);
+                          onClick: ($event) => handleKeyPress(key)
+                        }, vue.toDisplayString(key), 9, ["onClick"]);
                       }),
                       128
                       /* KEYED_FRAGMENT */
@@ -9602,8 +9622,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
-  const _sfc_main$m = {
+  const SubPackagesExpensesAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "E:/HBuilderProjects/time-master/subPackages/expenses/add/index.vue"]]);
+  const _sfc_main$n = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
@@ -9752,8 +9772,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
-  const _sfc_main$l = {
+  const SubPackagesMineSettingIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-db9de88e"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/setting/index.vue"]]);
+  const _sfc_main$m = {
     name: "DragSort",
     props: {
       // 容器大小
@@ -9766,10 +9786,19 @@ if (uni.restoreGlobal) {
         type: Object,
         default: () => ({ width: 0, height: 0 })
       },
+      dargItemSize: {
+        type: Object,
+        default: () => ({ width: 100 })
+      },
       // 数据列表
       controlsList: {
         type: Array,
         default: () => []
+      },
+      // 拖拽方向横向还是纵向
+      isHorizontal: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -9810,9 +9839,13 @@ if (uni.restoreGlobal) {
       initControlsPosition() {
         let tempArray = [];
         for (let i2 = 0, j = 0; i2 < this.controlsList.length; i2++, j++) {
+          let screenWidth = this.$store.state.Screen.width;
+          const left = this.isHorizontal ? j * (this.controlsSize.width / 100 * screenWidth + this.margin.margin_x) + this.margin.margin_x : this.margin.margin_x;
+          let top = this.isHorizontal ? this.margin.margin_y : j * (this.controlsSize.height + this.margin.margin_y) + this.margin.margin_y;
+          top = top + 10;
           tempArray[i2] = {
-            left: this.margin.margin_x,
-            top: j * (this.controlsSize.height + this.margin.margin_y) + this.margin.margin_y
+            left,
+            top
           };
         }
         this.recordInitControlsPoisitonList = [...tempArray];
@@ -9834,10 +9867,18 @@ if (uni.restoreGlobal) {
           top: this.controlsPositionArray[this.curretnControlsIndex].top + (pageY - this.recordPosition.y)
         };
         this.recordPosition = { x: pageX, y: pageY };
-        if (this.curretnControlsIndex !== this.controlsPositionArray.length - 1 && this.controlsPositionArray[this.curretnControlsIndex].top > this.controlsPositionArray[this.curretnControlsIndex + 1].top) {
-          this._handleChangeControlsPosition(0, this.curretnControlsIndex + 1);
-        } else if (this.curretnControlsIndex !== 0 && this.controlsPositionArray[this.curretnControlsIndex].top < this.controlsPositionArray[this.curretnControlsIndex - 1].top) {
-          this._handleChangeControlsPosition(0, this.curretnControlsIndex - 1);
+        if (!this.isHorizontal) {
+          if (this.curretnControlsIndex !== this.controlsPositionArray.length - 1 && this.controlsPositionArray[this.curretnControlsIndex].top > this.controlsPositionArray[this.curretnControlsIndex + 1].top) {
+            this._handleChangeControlsPosition(0, this.curretnControlsIndex + 1);
+          } else if (this.curretnControlsIndex !== 0 && this.controlsPositionArray[this.curretnControlsIndex].top < this.controlsPositionArray[this.curretnControlsIndex - 1].top) {
+            this._handleChangeControlsPosition(0, this.curretnControlsIndex - 1);
+          }
+        } else {
+          if (this.curretnControlsIndex !== this.controlsPositionArray.length - 1 && this.controlsPositionArray[this.curretnControlsIndex].left > this.controlsPositionArray[this.curretnControlsIndex + 1].left) {
+            this._handleChangeControlsPosition(0, this.curretnControlsIndex + 1);
+          } else if (this.curretnControlsIndex !== 0 && this.controlsPositionArray[this.curretnControlsIndex].left < this.controlsPositionArray[this.curretnControlsIndex - 1].left) {
+            this._handleChangeControlsPosition(0, this.curretnControlsIndex - 1);
+          }
         }
       },
       /** 处理手指触摸开始事件 */
@@ -9889,11 +9930,12 @@ if (uni.restoreGlobal) {
               {
                 key: index2,
                 class: "_item",
-                style: vue.normalizeStyle({ "transition": $data.curretnControlsIndex === index2 ? "initial" : ".3s", "z-index": $data.curretnControlsIndex === index2 ? 1 : 0, "width": $props.controlsSize.width + "px", "height": $props.controlsSize.height + "px", "top": $data.controlsPositionArray[index2].top + "px", "left": $data.controlsPositionArray[index2].left + "px" })
+                style: vue.normalizeStyle({ "transition": $data.curretnControlsIndex === index2 ? "initial" : ".3s", "z-index": $data.curretnControlsIndex === index2 ? 1 : 0, "width": $props.controlsSize.width + "vw", "height": $props.controlsSize.height + "px", "top": $data.controlsPositionArray[index2].top + "px", "left": $data.controlsPositionArray[index2].left + "px" })
               },
               [
                 vue.createElementVNode("view", {
                   class: "drag-item",
+                  style: vue.normalizeStyle({ "width": $props.dargItemSize.width + "vw" }),
                   onLongpress: ($event) => $options.handleLongpress($event, index2),
                   onTouchstart: ($event) => $options.handleTouchstart($event, index2),
                   onTouchmove: _cache[0] || (_cache[0] = (...args) => $options.handleTouchmove && $options.handleTouchmove(...args)),
@@ -9901,7 +9943,7 @@ if (uni.restoreGlobal) {
                 }, [
                   vue.createCommentVNode(" 插槽 "),
                   vue.renderSlot(_ctx.$slots, "default", { item }, void 0, true)
-                ], 40, ["onLongpress", "onTouchstart"])
+                ], 44, ["onLongpress", "onTouchstart"])
               ],
               4
               /* STYLE */
@@ -9915,14 +9957,13 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const DragSort = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-80a093ac"], ["__file", "E:/HBuilderProjects/time-master/components/DragSort/index.vue"]]);
-  const _sfc_main$k = {
+  const DragSort = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$8], ["__scopeId", "data-v-80a093ac"], ["__file", "E:/HBuilderProjects/time-master/components/DragSort/index.vue"]]);
+  const _sfc_main$l = {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
       const homeList = vue.computed(() => store2.state.homeList);
       const onSuccess = (data2) => {
-        formatAppLog("log", "at subPackages/mine/management/index.vue:31", "data", data2);
         store2.dispatch("updateHomeList", data2);
       };
       return (_ctx, _cache) => {
@@ -9934,7 +9975,7 @@ if (uni.restoreGlobal) {
               style: { "display": "flex", "justify-content": "center" },
               controlsList: vue.unref(homeList),
               containerSize: { width: "100vw", height: "70vh" },
-              controlsSize: { width: 750, height: 60 }
+              controlsSize: { width: 100, height: 60 }
             }, {
               default: vue.withCtx(({ item }) => [
                 vue.createElementVNode("view", { class: "fun-item theme-bgc" }, [
@@ -9978,7 +10019,61 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const SubPackagesMineManagementIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-c5ac254c"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/management/index.vue"]]);
+  const SubPackagesMineManagementIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-c5ac254c"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/management/index.vue"]]);
+  const _sfc_main$k = {
+    __name: "index",
+    setup(__props2) {
+      const store2 = useStore();
+      const theme = vue.computed(() => store2.state.theme);
+      const tabbarList = vue.computed(() => store2.state.tabbarList);
+      const onSuccess = (data2) => {
+        store2.dispatch("updateTabbarList", data2);
+      };
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "自定义APP" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(vue.unref(DragSort), {
+              onSuccess,
+              style: { "display": "flex", "justify-content": "center" },
+              isHorizontal: true,
+              controlsList: vue.unref(tabbarList),
+              containerSize: { width: "100vw", height: "70vh" },
+              controlsSize: { width: 25, height: 60 },
+              dargItemSize: { width: 20 }
+            }, {
+              default: vue.withCtx(({ item }) => [
+                vue.createElementVNode("view", { class: "fun-item theme-bgc" }, [
+                  vue.createElementVNode("view", { class: "left" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
+                      vue.createVNode(_component_uni_icons, {
+                        "custom-prefix": "iconfont",
+                        type: item.icon,
+                        color: vue.unref(theme).iconColor,
+                        size: "20"
+                      }, null, 8, ["type", "color"])
+                    ]),
+                    vue.createElementVNode(
+                      "text",
+                      { class: "title" },
+                      vue.toDisplayString(item.text),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["controlsList"])
+          ]),
+          _: 1
+          /* STABLE */
+        });
+      };
+    }
+  };
+  const SubPackagesMineCustomIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-1f62ae53"], ["__file", "E:/HBuilderProjects/time-master/subPackages/mine/custom/index.vue"]]);
   const apiGetUserMemos = (userID) => {
     return request({
       url: `memos/list?userID=${userID}`,
@@ -10396,11 +10491,11 @@ if (uni.restoreGlobal) {
       const info = list[i2].split(":");
       if (info.length < 2)
         continue;
-      const key2 = info.shift().trim().toLowerCase();
+      const key = info.shift().trim().toLowerCase();
       let value = info.join(":").trim();
       if (value[0] === "-" && value.lastIndexOf("-") > 0 || value.includes("safe")) {
-        tmp += `;${key2}:${value}`;
-      } else if (!styleObj[key2] || value.includes("import") || !styleObj[key2].includes("import")) {
+        tmp += `;${key}:${value}`;
+      } else if (!styleObj[key] || value.includes("import") || !styleObj[key].includes("import")) {
         if (value.includes("url")) {
           let j = value.indexOf("(") + 1;
           if (j) {
@@ -10412,7 +10507,7 @@ if (uni.restoreGlobal) {
         } else if (value.includes("rpx")) {
           value = value.replace(/[0-9.]+\s*rpx/g, ($) => parseFloat($) * windowWidth / 750 + "px");
         }
-        styleObj[key2] = value;
+        styleObj[key] = value;
       }
     }
     node2.attrs.style = tmp;
@@ -10557,9 +10652,9 @@ if (uni.restoreGlobal) {
         this.popNode();
         return;
       }
-      for (const key2 in styleObj) {
-        if (styleObj[key2]) {
-          attrs.style += `;${key2}:${styleObj[key2].replace(" !important", "")}`;
+      for (const key in styleObj) {
+        if (styleObj[key]) {
+          attrs.style += `;${key}:${styleObj[key].replace(" !important", "")}`;
         }
       }
       attrs.style = attrs.style.substr(1) || void 0;
@@ -10991,12 +11086,12 @@ if (uni.restoreGlobal) {
     if (children.length >= 50 && (node2.c || editable) && !(styleObj.display || "").includes("flex")) {
       mergeNodes(children);
     }
-    for (const key2 in styleObj) {
-      if (styleObj[key2]) {
-        const val = `;${key2}:${styleObj[key2].replace(" !important", "")}`;
-        if (flex && (key2.includes("flex") && key2 !== "flex-direction" || key2 === "align-self" || key2.includes("grid") || styleObj[key2][0] === "-" || key2.includes("width") && val.includes("%"))) {
+    for (const key in styleObj) {
+      if (styleObj[key]) {
+        const val = `;${key}:${styleObj[key].replace(" !important", "")}`;
+        if (flex && (key.includes("flex") && key !== "flex-direction" || key === "align-self" || key.includes("grid") || styleObj[key][0] === "-" || key.includes("width") && val.includes("%"))) {
           node2.f += val;
-          if (key2 === "width") {
+          if (key === "width") {
             attrs.style += ";width:100%";
           }
         } else {
@@ -17021,15 +17116,15 @@ if (uni.restoreGlobal) {
     }
   };
   function Search(vm) {
-    vm.search = function(key2, anchor, style = "background-color:yellow") {
+    vm.search = function(key, anchor, style = "background-color:yellow") {
       const res = [];
       const stack = [];
       (function traversal(nodes) {
         for (let i2 = 0; i2 < nodes.length; i2++) {
           let node2 = nodes[i2];
-          if (node2.type === "text" && key2) {
+          if (node2.type === "text" && key) {
             const text = node2.text;
-            const arr = text.split(key2);
+            const arr = text.split(key);
             if (arr.length > 1) {
               node2 = {
                 name: "span",
@@ -17058,14 +17153,14 @@ if (uni.restoreGlobal) {
                     c: 1,
                     children: [{
                       type: "text",
-                      text: key2 instanceof RegExp ? key2.exec(text)[0] : key2
+                      text: key instanceof RegExp ? key.exec(text)[0] : key
                     }]
                   });
                   res.push(node2.children[node2.children.length - 1].attrs);
                 }
               }
-              if (key2 instanceof RegExp) {
-                key2.exec(text);
+              if (key instanceof RegExp) {
+                key.exec(text);
               }
               if (anchor) {
                 for (let l = stack.length; l--; ) {
@@ -17091,7 +17186,7 @@ if (uni.restoreGlobal) {
               type: "text",
               text
             });
-            if (key2 && (key2 instanceof RegExp ? key2.test(text) : text.includes(key2))) {
+            if (key && (key instanceof RegExp ? key.test(text) : text.includes(key))) {
               i2--;
             }
           } else if (node2.children) {
@@ -17341,18 +17436,18 @@ if (uni.restoreGlobal) {
     }
   };
   function match(node2, keys) {
-    function matchItem(key2) {
-      if (key2[0] === "#") {
-        if (node2.attrs.id && node2.attrs.id.trim() === key2.substr(1))
+    function matchItem(key) {
+      if (key[0] === "#") {
+        if (node2.attrs.id && node2.attrs.id.trim() === key.substr(1))
           return 3;
-      } else if (key2[0] === ".") {
-        key2 = key2.substr(1);
+      } else if (key[0] === ".") {
+        key = key.substr(1);
         const selectors = (node2.attrs.class || "").split(" ");
         for (let i2 = 0; i2 < selectors.length; i2++) {
-          if (selectors[i2].trim() === key2)
+          if (selectors[i2].trim() === key)
             return 2;
         }
-      } else if (node2.name === key2) {
+      } else if (node2.name === key) {
         return 1;
       }
       return 0;
@@ -17380,7 +17475,7 @@ if (uni.restoreGlobal) {
     this.i = 0;
     vm.imgCache = {
       get list() {
-        return uni.getStorageInfoSync().keys.filter((key2) => key2.startsWith(data.prefix)).map((key2) => key2.split(data.prefix)[1]);
+        return uni.getStorageInfoSync().keys.filter((key) => key.startsWith(data.prefix)).map((key) => key.split(data.prefix)[1]);
       },
       get(url) {
         return uni.getStorageSync(data.prefix + url);
@@ -17404,8 +17499,8 @@ if (uni.restoreGlobal) {
         return null;
       },
       clear() {
-        uni.getStorageInfoSync().keys.filter((key2) => key2.startsWith(data.prefix)).forEach((key2) => {
-          uni.removeStorageSync(key2);
+        uni.getStorageInfoSync().keys.filter((key) => key.startsWith(data.prefix)).forEach((key) => {
+          uni.removeStorageSync(key);
         });
         plus.io.resolveLocalFileSystemURL(`_doc/${data.name}/`, (entry) => {
           entry.removeRecursively(
@@ -19187,8 +19282,11 @@ if (uni.restoreGlobal) {
       });
       const getWaterRecords = () => {
         apiGetUserWaterRecords(getApp().globalData.userInfo.UserID).then((res) => {
+          if (res.data.length === 0) {
+            return;
+          }
           waterRecords.value = res.data;
-          formatAppLog("log", "at subPackages/water/index/index.vue:168", "waterRecords", waterRecords.value);
+          formatAppLog("log", "at subPackages/water/index/index.vue:171", "waterRecords", waterRecords.value);
         });
       };
       const percent = vue.computed(() => {
@@ -19209,11 +19307,13 @@ if (uni.restoreGlobal) {
         for (let i2 = 0; i2 < waterTypes.value.length; i2 += 10) {
           arr.push(waterTypes.value.slice(i2, i2 + 10));
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:192", "arr", arr);
+        formatAppLog("log", "at subPackages/water/index/index.vue:195", "arr", arr);
         return arr;
       });
-      const selectWater = (WaterID) => {
-        waterData.WaterID = WaterID;
+      const tempWaterTip = vue.ref("");
+      const selectWater = (WaterTypes) => {
+        waterData.WaterID = WaterTypes.WaterID;
+        tempWaterTip.value = WaterTypes.WaterTip;
       };
       const keypadLayout2 = [
         [1, 2, 3, "date"],
@@ -19228,23 +19328,23 @@ if (uni.restoreGlobal) {
         const minutes = date.getMinutes();
         return `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}`;
       };
-      const handleKeyPress2 = (key2) => {
-        if (key2 === "DEL") {
+      const handleKeyPress2 = (key) => {
+        if (key === "DEL") {
           waterData.Amount = waterData.Amount + "";
           waterData.Amount = waterData.Amount.slice(0, -1);
-        } else if (key2 === "AC") {
+        } else if (key === "AC") {
           waterData.Amount = "";
-        } else if (key2 === "完成") {
+        } else if (key === "完成") {
           addWater();
-        } else if (key2 === "date") {
-          formatAppLog("log", "at subPackages/water/index/index.vue:224", "timePicker.value", timePicker.value);
+        } else if (key === "date") {
+          formatAppLog("log", "at subPackages/water/index/index.vue:228", "timePicker.value", timePicker.value);
         } else {
-          waterData.Amount += key2;
+          waterData.Amount += key;
         }
       };
       const timePicker = vue.ref(null);
       const bindTimeChange = (e2) => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:233", "picker发送选择改变,携带值为", e2.detail.value);
+        formatAppLog("log", "at subPackages/water/index/index.vue:237", "picker发送选择改变,携带值为", e2.detail.value);
         waterData.DateTime = convertToTodayTime(e2.detail.value) + "";
       };
       const addWaterRecord = () => {
@@ -19261,7 +19361,7 @@ if (uni.restoreGlobal) {
         } else {
           waterData.Amount = "";
           waterData.DateTime = (/* @__PURE__ */ new Date()).getTime();
-          formatAppLog("log", "at subPackages/water/index/index.vue:250", "waterData.DateTime", waterData.DateTime);
+          formatAppLog("log", "at subPackages/water/index/index.vue:254", "waterData.DateTime", waterData.DateTime);
           waterData.WaterID = 1;
         }
         popupRef.value.open("bottom");
@@ -19274,7 +19374,7 @@ if (uni.restoreGlobal) {
       });
       const isEdit2 = vue.ref(false);
       const addWater = () => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:264", "waterData.DateTime", waterData.DateTime);
+        formatAppLog("log", "at subPackages/water/index/index.vue:268", "waterData.DateTime", waterData.DateTime);
         waterData.DateTime = formatDateTime(waterData.DateTime);
         let errMsg = "";
         if (!waterData.Amount) {
@@ -19287,7 +19387,7 @@ if (uni.restoreGlobal) {
           });
           return;
         }
-        formatAppLog("log", "at subPackages/water/index/index.vue:277", "waterData", waterData);
+        formatAppLog("log", "at subPackages/water/index/index.vue:281", "waterData", waterData);
         let api = isEdit2.value ? apiUpdateWaterRecord : apiAddWaterRecord;
         api(waterData).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -19299,6 +19399,7 @@ if (uni.restoreGlobal) {
             uni.showToast({
               title: res.msg
             });
+            tips.value = tempWaterTip.value;
             getWaterRecords();
             popupRef.value.close();
           }
@@ -19336,7 +19437,7 @@ if (uni.restoreGlobal) {
       ]);
       const recordPopupRef = vue.ref(null);
       const deleteRecord = (e2, item) => {
-        formatAppLog("log", "at subPackages/water/index/index.vue:335", "item", item);
+        formatAppLog("log", "at subPackages/water/index/index.vue:340", "item", item);
         apiDeleteWaterRecord(item.RecordID).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
@@ -19482,7 +19583,7 @@ if (uni.restoreGlobal) {
                                   return vue.openBlock(), vue.createElementBlock("view", {
                                     class: "water-item",
                                     key: index3,
-                                    onClick: ($event) => selectWater(item1.WaterID)
+                                    onClick: ($event) => selectWater(item1)
                                   }, [
                                     vue.createElementVNode(
                                       "view",
@@ -19551,16 +19652,16 @@ if (uni.restoreGlobal) {
                               (vue.openBlock(true), vue.createElementBlock(
                                 vue.Fragment,
                                 null,
-                                vue.renderList(row, (key2, keyIndex) => {
+                                vue.renderList(row, (key, keyIndex) => {
                                   return vue.openBlock(), vue.createElementBlock("td", {
                                     class: "theme-bgc",
                                     key: keyIndex,
-                                    onClick: ($event) => handleKeyPress2(key2)
+                                    onClick: ($event) => handleKeyPress2(key)
                                   }, [
-                                    key2 != "date" ? (vue.openBlock(), vue.createElementBlock(
+                                    key != "date" ? (vue.openBlock(), vue.createElementBlock(
                                       "view",
                                       { key: 0 },
-                                      vue.toDisplayString(key2),
+                                      vue.toDisplayString(key),
                                       1
                                       /* TEXT */
                                     )) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
@@ -21369,9 +21470,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
-  const apiGetNovels = () => {
+  const apiGetNovels = (UserID) => {
     return request({
-      url: "book/list",
+      url: `book/list?UserID=${UserID}`,
       method: "GET"
     });
   };
@@ -21473,7 +21574,7 @@ if (uni.restoreGlobal) {
       });
       const novels = vue.ref([]);
       const getNovels = () => {
-        apiGetNovels().then((res) => {
+        apiGetNovels(getApp().globalData.userInfo.UserID).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
@@ -21488,7 +21589,7 @@ if (uni.restoreGlobal) {
       const baseUrl = uni.getStorageSync("BASE_URL");
       const options2 = vue.ref({
         type: 2,
-        host: `${baseUrl}book/upload`
+        host: `${baseUrl}book/upload?UserID=${getApp().globalData.userInfo.UserID}`
       });
       const selectedHandler = (selectedData) => {
         formatAppLog("log", "at subPackages/book/index/index.vue:205", "Selected data:", selectedData);
@@ -21548,6 +21649,7 @@ if (uni.restoreGlobal) {
       const isEdit2 = vue.ref(false);
       const createOreditPopupRef = vue.ref(null);
       const bookInfo = vue.reactive({
+        UserID: getApp().globalData.userInfo.UserID,
         Title: "",
         Author: ""
       });
@@ -21605,7 +21707,7 @@ if (uni.restoreGlobal) {
       const serverCreateTempFile = () => {
         return new Promise((resolve, reject) => {
           apiDownloadNovel(activeBook.value.NovelID, includeChapterTitle.value).then((res) => {
-            formatAppLog("log", "at subPackages/book/index/index.vue:378", "res", res);
+            formatAppLog("log", "at subPackages/book/index/index.vue:379", "res", res);
             if (res.code === 0 || !res.code) {
               uni.showToast({
                 icon: "error",
@@ -21622,7 +21724,7 @@ if (uni.restoreGlobal) {
       };
       const downloadBook = async () => {
         let tempFilePath = await serverCreateTempFile();
-        formatAppLog("log", "at subPackages/book/index/index.vue:397", "tempFilePath", tempFilePath);
+        formatAppLog("log", "at subPackages/book/index/index.vue:398", "tempFilePath", tempFilePath);
         uni.downloadFile({
           url: `${baseUrl}downloads/${tempFilePath}`,
           //  存储文件到手机本地文件夹
@@ -21633,7 +21735,7 @@ if (uni.restoreGlobal) {
                 //临时路径
                 success: function(data2) {
                   var savedFilePath = data2.savedFilePath;
-                  formatAppLog("log", "at subPackages/book/index/index.vue:409", "savedFilePath", savedFilePath);
+                  formatAppLog("log", "at subPackages/book/index/index.vue:410", "savedFilePath", savedFilePath);
                   let osname = plus.os.name;
                   if (osname == "Android") {
                     uni.showToast({
@@ -21646,17 +21748,17 @@ if (uni.restoreGlobal) {
                     data: activeBook.value.Title,
                     showToast: false,
                     success: function() {
-                      formatAppLog("log", "at subPackages/book/index/index.vue:426", "setClipboardData success");
+                      formatAppLog("log", "at subPackages/book/index/index.vue:427", "setClipboardData success");
                     }
                   });
                   setTimeout(() => {
                     uni.openDocument({
                       filePath: data2.savedFilePath,
                       success: function(ress) {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:436", "成功打开文件");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:437", "成功打开文件");
                       },
                       fail() {
-                        formatAppLog("log", "at subPackages/book/index/index.vue:439", "打开文件失败");
+                        formatAppLog("log", "at subPackages/book/index/index.vue:440", "打开文件失败");
                       }
                     });
                   }, 1e3);
@@ -21907,7 +22009,7 @@ if (uni.restoreGlobal) {
                   }, [
                     vue.createElementVNode("view", { class: "popup-icon" }, [
                       vue.createVNode(_component_uni_icons, {
-                        type: "search",
+                        type: "eye",
                         size: "30",
                         color: "#999"
                       })
@@ -23576,52 +23678,52 @@ if (uni.restoreGlobal) {
     __name: "index",
     setup(__props2) {
       const store2 = useStore();
-      const homeList = vue.computed(() => store2.state.homeList);
+      const theme = vue.computed(() => store2.state.theme);
+      const tabbarList = vue.computed(() => store2.state.tabbarList);
+      const onSuccess = (data2) => {
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:30", "data", data2);
+      };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createVNode(vue.unref(DragSort), {
-            style: { "display": "flex", "justify-content": "center" },
-            controlsList: vue.unref(homeList),
-            containerSize: { width: "100vw", height: "100vh" },
-            controlsSize: { width: 750, height: 60 }
-          }, {
-            default: vue.withCtx(({ item }) => [
-              vue.createElementVNode("view", { class: "fun-item" }, [
-                vue.createElementVNode("view", { class: "left" }, [
-                  vue.createElementVNode(
-                    "view",
-                    {
-                      class: "icon",
-                      style: vue.normalizeStyle({ backgroundColor: item.color })
-                    },
-                    [
+        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "应用管理" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(vue.unref(DragSort), {
+              onSuccess,
+              style: { "display": "flex", "justify-content": "center" },
+              isHorizontal: true,
+              controlsList: vue.unref(tabbarList),
+              containerSize: { width: "100vw", height: "70vh" },
+              controlsSize: { width: 25, height: 60 },
+              dargItemSize: { width: 20 }
+            }, {
+              default: vue.withCtx(({ item }) => [
+                vue.createElementVNode("view", { class: "fun-item theme-bgc" }, [
+                  vue.createElementVNode("view", { class: "left" }, [
+                    vue.createElementVNode("view", { class: "icon" }, [
                       vue.createVNode(_component_uni_icons, {
                         "custom-prefix": "iconfont",
-                        type: item.unicode,
-                        color: "#fff",
+                        type: item.icon,
+                        color: vue.unref(theme).iconColor,
                         size: "20"
-                      }, null, 8, ["type"])
-                    ],
-                    4
-                    /* STYLE */
-                  )
-                ]),
-                vue.createElementVNode("view", { class: "right" }, [
-                  vue.createElementVNode(
-                    "text",
-                    { class: "title" },
-                    vue.toDisplayString(item.title),
-                    1
-                    /* TEXT */
-                  )
+                      }, null, 8, ["type", "color"])
+                    ]),
+                    vue.createElementVNode(
+                      "text",
+                      { class: "title" },
+                      vue.toDisplayString(item.text),
+                      1
+                      /* TEXT */
+                    )
+                  ])
                 ])
-              ])
-            ]),
-            _: 1
-            /* STABLE */
-          }, 8, ["controlsList"])
-        ]);
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["controlsList"])
+          ]),
+          _: 1
+          /* STABLE */
+        });
       };
     }
   };
@@ -23635,6 +23737,7 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/expenses/add/index", SubPackagesExpensesAddIndex);
   __definePage("subPackages/mine/setting/index", SubPackagesMineSettingIndex);
   __definePage("subPackages/mine/management/index", SubPackagesMineManagementIndex);
+  __definePage("subPackages/mine/custom/index", SubPackagesMineCustomIndex);
   __definePage("subPackages/memos/index/index", SubPackagesMemosIndexIndex);
   __definePage("subPackages/memos/add/index", SubPackagesMemosAddIndex);
   __definePage("subPackages/water/index/index", SubPackagesWaterIndexIndex);
@@ -23649,19 +23752,33 @@ if (uni.restoreGlobal) {
   __definePage("subPackages/book/preview/index", SubPackagesBookPreviewIndex);
   __definePage("subPackages/test/NumericKeypad/index", SubPackagesTestNumericKeypadIndex);
   const _sfc_main = {
-    onLaunch: function() {
+    onLaunch: async function() {
       formatAppLog("log", "at App.vue:4", "App Launch");
       const token = uni.getStorageSync("token");
       if (!token) {
         uni.navigateTo({ url: "/subPackages/login/index/index" });
       }
+      const screen = await this.getScreen();
+      this.$store.dispatch("updateScreen", screen);
     },
     onShow: function() {
       getApp().globalData.userInfo = uni.getStorageSync("userInfo");
-      formatAppLog("log", "at App.vue:12", "App Show");
+      formatAppLog("log", "at App.vue:16", "App Show");
     },
     onHide: function() {
-      formatAppLog("log", "at App.vue:15", "App Hide");
+      formatAppLog("log", "at App.vue:19", "App Hide");
+    },
+    methods: {
+      // 获取屏幕宽高
+      getScreen: () => {
+        return new Promise((resolve, reject) => {
+          uni.getSystemInfo({
+            success: function(res) {
+              resolve({ width: res.windowWidth, height: res.windowHeight });
+            }
+          });
+        });
+      }
     },
     globalData: {
       // 定义全局变量
@@ -23779,6 +23896,10 @@ if (uni.restoreGlobal) {
     state: {
       // 初始化状态
       data: "初始数据",
+      Screen: {
+        width: 0,
+        height: 0
+      },
       commonCss: {
         pageNavHeight: "150"
       },
@@ -23787,6 +23908,7 @@ if (uni.restoreGlobal) {
         bgc: "#fff",
         iconColor: "#000"
       },
+      currentTab: 0,
       tabbarList: [
         {
           pagePath: "/pages/index/index",
@@ -23816,14 +23938,14 @@ if (uni.restoreGlobal) {
           unicode: "icon-biaoqian",
           url: "/subPackages/memos/index/index",
           color: "#1baf59",
-          desc: "记事本"
+          desc: "记录灵感，避免遗忘"
         },
         {
           title: "记账",
           unicode: "icon-jizhang",
           url: "/subPackages/expenses/index/index",
           color: "#7e7cea",
-          desc: "本月：收入5000，支出3000，结余2000"
+          desc: "记录收支，掌握财务状况"
         },
         {
           title: "日记",
@@ -23837,28 +23959,28 @@ if (uni.restoreGlobal) {
           unicode: "icon-jinianriyingxiao",
           url: "/subPackages/countdowns/index/index",
           color: "#f75e3c",
-          desc: "2024年2月24日，距离2024年3月1日还有5天"
+          desc: "生日，节日，纪念日，日日不忘"
         },
         {
           title: "事项",
           unicode: "icon-note",
           url: "/pages/note/index",
           color: "#ffa851",
-          desc: "总数：2个，未完成：1个"
+          desc: "日程计划，代办清单"
         },
         {
           title: "喝水",
           unicode: "icon-shui",
           url: "/subPackages/water/index/index",
           color: "#00b5ff",
-          desc: "今日：0/1700ml"
+          desc: "每日8杯水"
         },
         {
-          title: "小说",
+          title: "阅读",
           unicode: "icon-xuexi",
           url: "/subPackages/book/index/index",
           color: "#ce9178",
-          desc: "已读：1章，未读：5章"
+          desc: "阅读笔记，书单"
         },
         {
           title: "课程表",
@@ -23881,8 +24003,17 @@ if (uni.restoreGlobal) {
       setData(state, newData) {
         state.data = newData;
       },
+      setScreen(state, newScreen) {
+        state.Screen = newScreen;
+      },
       setTheme(state, newTheme) {
         state.theme = newTheme;
+      },
+      setCurrentTab(state, newCurrentTab) {
+        state.currentTab = newCurrentTab;
+      },
+      setTabbarList(state, newTabbarList) {
+        state.tabbarList = newTabbarList;
       },
       setHomeList(state, newHomeList) {
         state.homeList = newHomeList;
@@ -23893,8 +24024,17 @@ if (uni.restoreGlobal) {
       updateData({ commit }, newData) {
         commit("setData", newData);
       },
+      updateScreen({ commit }, newScreen) {
+        commit("setScreen", newScreen);
+      },
       updateTheme({ commit }, newTheme) {
         commit("setTheme", newTheme);
+      },
+      updateCurrentTab({ commit }, newCurrentTab) {
+        commit("setCurrentTab", newCurrentTab);
+      },
+      updateTabbarList({ commit }, newTabbarList) {
+        commit("setTabbarList", newTabbarList);
       },
       updateHomeList({ commit }, newHomeList) {
         commit("setHomeList", newHomeList);
@@ -23903,9 +24043,9 @@ if (uni.restoreGlobal) {
     plugins: [
       a({
         storage: {
-          getItem: (key2) => uni.getStorageSync(key2),
-          setItem: (key2, value) => uni.setStorageSync(key2, value),
-          removeItem: (key2) => uni.removeStorageSync(key2)
+          getItem: (key) => uni.getStorageSync(key),
+          setItem: (key, value) => uni.setStorageSync(key, value),
+          removeItem: (key) => uni.removeStorageSync(key)
         }
       })
     ]

@@ -104,7 +104,7 @@
                 </view>
                 <view class="popup-item" @click="navTo('/subPackages/book/preview/index')">
                     <view class="popup-icon">
-                        <uni-icons type="search" size="30" color="#999"></uni-icons>
+                        <uni-icons type="eye" size="30" color="#999"></uni-icons>
                     </view>
                     <view class="popup-text">
                         查看网页
@@ -183,7 +183,7 @@ onShow(() => {
 
 const novels = ref([])
 const getNovels = () => {
-    apiGetNovels().then(res => {
+    apiGetNovels(getApp().globalData.userInfo.UserID).then(res => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',
@@ -199,7 +199,7 @@ const getNovels = () => {
 const baseUrl = uni.getStorageSync('BASE_URL');
 const options = ref({
     type: 2,
-    host: `${baseUrl}book/upload`,
+    host: `${baseUrl}book/upload?UserID=${getApp().globalData.userInfo.UserID}`,
 });
 const selectedHandler = (selectedData) => {
     console.log('Selected data:', selectedData);
@@ -266,6 +266,7 @@ const openEditPopup = () => {
 const isEdit = ref(false)
 const createOreditPopupRef = ref(null)
 const bookInfo = reactive({
+    UserID: getApp().globalData.userInfo.UserID,
     Title: '',
     Author: ''
 })

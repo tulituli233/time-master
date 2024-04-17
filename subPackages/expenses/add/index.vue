@@ -80,7 +80,7 @@ onLoad((e) => {
 const expenseData = reactive({
     UserID: getApp().globalData.userInfo.UserID,
     Date: formatDateTime(new Date()),
-    Amount: 0,
+    Amount: '',
     Category: 1,
     Note: '',
 });
@@ -88,7 +88,6 @@ let expenseCateList = ref([]);
 const getExpenseCate = () => {
     apiGetAllExpensesCategory().then((res) => {
         expenseCateList.value = res.data;
-        console.log('expenseCateList', expenseCateList.value);
     })
 }
 
@@ -103,7 +102,7 @@ const expenseCate = computed(() => {
     })
 })
 
-const tabs = ['支出', '收入', '转账'];
+const tabs = ['支出', '收入'];
 const activeTab = ref(0);
 
 const selectTab = (index) => {
@@ -138,27 +137,50 @@ const handleKeyPress = (key) => {
         expenseData.Amount = expenseData.Amount + ''
         expenseData.Amount = expenseData.Amount.slice(0, -1);
     } else if (key === '=') {
-        expenseData.Amount = eval(expenseData.Amount);
+        if (!calculate()) {
+            return
+        }
     } else if (key === '完成') {
+        if (!calculate()) {
+            return
+        }
         addExpense();
     } else {
+        key += '';
         expenseData.Amount += key;
     }
 };
+// 使用eval计算
+const calculate = () => {
+    try {
+        expenseData.Amount = eval(expenseData.Amount).toFixed(2);
+    } catch (error) {
+        uni.showToast({
+            icon: 'error',
+            title: '计算错误,输入有误'
+        })
+        return false
+    }
+    return true
+}
 const dateValue = ref(formatDateTime(new Date()));
 // 选择日期
 const selectDate = (e) => {
     // 弹出uni日期选择器
-    console.log('选择日期', e);
 }
 // ##region 新增记账
 const addExpense = async () => {
-    expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
     expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
     expenseData.Date = formatDateTime(expenseData.Date);
     let errMsg = ''
-    if (!expenseData.Amount) {
+    if (expenseData.Amount == '') {
         errMsg = '请输入金额'
+    } else if (isNaN(parseFloat(expenseData.Amount))) {
+        errMsg = '请输入正确的金额'
+        expenseData.Amount = ''
+    } else if (expenseData.Amount < 0) {
+        errMsg = '不能输入负金额'
+        expenseData.Amount = Math.abs(expenseData.Amount)
     } else if (!expenseData.Date) {
         errMsg = '请选择日期'
     }
@@ -169,6 +191,7 @@ const addExpense = async () => {
         })
         return
     }
+    expenseData.Amount = activeTab.value === 0 ? -expenseData.Amount : expenseData.Amount;
     let api = isEdit.value ? apiUpdateExpense : apiAddExpense
     let res = await api(expenseData);
     if (res.code === 0 || !res.code) {
@@ -176,6 +199,7 @@ const addExpense = async () => {
             icon: 'error',
             title: res.msg || '网络异常'
         })
+        expenseData.Amount = Math.abs(expenseData.Amount)
     } else {
         uni.showToast({
             title: res.msg

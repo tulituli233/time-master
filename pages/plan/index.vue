@@ -132,7 +132,6 @@ const getTasks = () => {
 	return new Promise((resolve, reject) => {
 		apiGetUserTasks(getApp().globalData.userInfo.UserID).then(res => {
 			tasks.value = res.data;
-			console.log('tasks', tasks.value);
 			filterPlans(previewDays, tasks, dayPlan);
 			resolve();
 		}).catch(error => {
@@ -146,7 +145,6 @@ onShow(async () => {
 	await getTasks();
 	// #ifdef APP-PLUS
 	uni.onKeyboardHeightChange(res => {
-		console.log('键盘高度变化----', res.height)
 		if (res.height === 0) {
 			popupBottom.value = 0
 		} else {
@@ -166,6 +164,7 @@ const initializeDayPlanArray = (days) => {
 		currentDate.setDate(currentDate.getDate() - (Math.floor(days / 2) - index)); // 计算近指定天数的日期
 		return { date: currentDate.toISOString().split('T')[0], plans: [] };
 	});
+	console.log('dayPlanArray', dayPlanArray);
 	return dayPlanArray;
 };
 
@@ -181,7 +180,11 @@ const filterPlans = (days, tasks, dayPlan) => {
 	tasks.value.forEach(task => {
 		const taskDate = new Date(formatDate(task.DueDate));
 		const firstDate = new Date(formatDate(dayPlan.value[0].date)); // 数组第一天的日期
-		const diffTime = Math.abs(firstDate - taskDate);
+		const diffTime = taskDate - firstDate;
+		// 如果diffTime小于0，说明taskDate在firstDate之前，直接跳过
+		if (diffTime < 0) {
+			return;
+		}
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		if (diffDays <= days) {
 			const index = diffDays; // 计算日期在dayPlan数组中的索引
@@ -267,7 +270,6 @@ const addPlan = () => {
 		})
 		return
 	}
-	console.log('plan', plan);
 	apiAddTask(plan).then(res => {
 		if (res.code === 0 || !res.code) {
 			uni.showToast({

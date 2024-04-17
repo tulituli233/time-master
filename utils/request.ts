@@ -34,7 +34,7 @@ interface PingResult {
     code: number;
     msg: string;
 }
-export const pingRange = (oldUrl: string, start: number = 101, end: number = 120): Promise<PingResult> => {
+export const pingRange = (oldUrl: string, start: number = 100, end: number = 120): Promise<PingResult> => {
     return new Promise<PingResult>(async (resolve, reject) => {
         let timeOut = setTimeout(() => {
             // 查找新地址
@@ -94,7 +94,7 @@ const init = () => {
     if (uni.getStorageSync('BASE_URL')) {
         BASE_URL = uni.getStorageSync('BASE_URL');
     }
-    pingRange(BASE_URL, 101, 120);
+    pingRange(BASE_URL, 100, 120);
 }
 // 初始化
 init();

@@ -47,7 +47,7 @@
                     <swiper :indicator-dots="true" :autoplay="false">
                         <swiper-item class="swiper-page" v-for="(item, index) in swiperList" :key="index">
                             <view class="water-item" v-for="(item1, index) in item" :key="index"
-                                @click="selectWater(item1.WaterID)">
+                                @click="selectWater(item1)">
                                 <view :class="['water-icon', waterData.WaterID == item1.WaterID ? 'active' : '']">
                                     <uni-icons custom-prefix="iconfont" :type="item1.WaterIcon" size="50"
                                         color="#00b7ff" />
@@ -164,6 +164,9 @@ onShow(() => {
 })
 const getWaterRecords = () => {
     apiGetUserWaterRecords(getApp().globalData.userInfo.UserID).then(res => {
+        if (res.data.length === 0) {
+            return
+        }
         waterRecords.value = res.data
         console.log('waterRecords', waterRecords.value)
     })
@@ -192,9 +195,10 @@ const swiperList = computed(() => {
     console.log('arr', arr);
     return arr
 })
-
-const selectWater = (WaterID) => {
-    waterData.WaterID = WaterID
+const tempWaterTip = ref('')
+const selectWater = (WaterTypes) => {
+    waterData.WaterID = WaterTypes.WaterID
+    tempWaterTip.value = WaterTypes.WaterTip
 }
 
 // 键盘
@@ -256,7 +260,7 @@ const waterData = reactive({
     UserID: getApp().globalData.userInfo.UserID,
     WaterID: 1,
     DateTime: getTime(),
-    Amount: ''
+    Amount: '',
 })
 const isEdit = ref(false)
 // 添加饮水记录
@@ -286,6 +290,7 @@ const addWater = () => {
             uni.showToast({
                 title: res.msg
             })
+            tips.value = tempWaterTip.value
             getWaterRecords()
             popupRef.value.close()
         }
