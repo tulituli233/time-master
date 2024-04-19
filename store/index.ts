@@ -5,6 +5,11 @@ export default createStore({
   state: {
     // 初始化状态
     data: '初始数据',
+    baseUrl: {
+      type: 0,
+      local: 'http://192.168.0.101:3838/',
+      production: 'http://47.120.36.121:3838/'
+    },
     Screen: {
       width: 0,
       height: 0
@@ -112,6 +117,9 @@ export default createStore({
     setData(state, newData) {
       state.data = newData;
     },
+    setBaseUrl(state, newBaseUrl) {
+      state.baseUrl = newBaseUrl;
+    },
     setScreen(state, newScreen) {
       state.Screen = newScreen;
     },
@@ -132,6 +140,9 @@ export default createStore({
     // 可选的，用于处理异步操作，最终提交 mutations
     updateData({ commit }, newData) {
       commit('setData', newData);
+    },
+    updateBaseUrl({ commit }, newBaseUrl) {
+      commit('setBaseUrl', newBaseUrl);
     },
     updateScreen({ commit }, newScreen) {
       commit('setScreen', newScreen);

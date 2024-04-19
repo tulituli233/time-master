@@ -123,9 +123,9 @@ export const apiGetNovelUrlByAuthor = (author: string): Promise<string> => {
 }
 
 // 根据网页链接获取小说的内容
-export const apiGetNovelByUrl = (url: string): Promise<string> => {
+export const apiGetNovelByUrl = (url: string, UserID: number): Promise<string> => {
     return request({
-        url: `book/getNovelByUrl?url=${url}`,
+        url: `book/getNovelByUrl?url=${url}&UserID=${UserID}`,
         method: 'GET',
     })
 }

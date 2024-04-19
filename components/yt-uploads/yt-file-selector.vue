@@ -36,6 +36,7 @@
 
 <script>
 import files from "./files.js"
+import permision from "@/js_sdk/wa-permission/permission.js"
 export default {
 	props: {
 		autoclose: {
@@ -81,8 +82,47 @@ export default {
 			this.$emit("selected", this.checkDataList)
 			this.closeHandle()
 		},
-		choose() {
+		// vue的method里编写如下代码
+		async requestAndroidPermission(permisionID) {
+			var result = await permision.requestAndroidPermission(permisionID)
+			var strStatus
+			if (result == 1) {
+				strStatus = "已获得授权"
+			} else if (result == 0) {
+				strStatus = "未获得授权"
+			} else {
+				strStatus = "被永久拒绝权限"
+			}
+			return {
+				result: result,
+				strStatus: strStatus
+			}
+			uni.showModal({
+				content: permisionID + strStatus,
+				showCancel: false
+			});
+		},
+		async choose() {
 			console.log("choose");
+			// 判断是否有文档权限
+			// #ifdef APP-PLUS
+			const permissionStatus = await this.requestAndroidPermission("android.permission.READ_EXTERNAL_STORAGE")
+			console.log("permissionStatus", permissionStatus);
+			if (permissionStatus.result != 1) {
+				// 通知用户（使用confirm），并申请权限
+				uni.showModal({
+					content: `该功能需要您授权应用读取文件,是否前往授权?`,
+					confirmText: "去授权",
+					cancelText: "取消",
+					success: (res) => {
+						if (res.confirm) {
+							permision.gotoAppPermissionSetting()
+						}
+					}
+				})
+				return
+			}
+			// #endif
 			// #ifdef H5
 			uni.showModal({
 				title: "警告",

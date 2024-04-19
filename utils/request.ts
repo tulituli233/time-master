@@ -1,7 +1,8 @@
 // request.ts
 import { UniAppRequestOptions, UniAppRequestSuccessCallback, UniAppRequestFailCallback } from 'uni';
 
-let BASE_URL = 'http://192.168.0.101:3838/';
+// let BASE_URL = 'http://192.168.0.101:3838/';
+let BASE_URL = 'http://47.120.36.121:3838/';
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json'
@@ -90,11 +91,11 @@ export const pingRange = (oldUrl: string, start: number = 100, end: number = 120
     });
 }
 
-const init = () => {
+const init = () => {    
     if (uni.getStorageSync('BASE_URL')) {
         BASE_URL = uni.getStorageSync('BASE_URL');
     }
-    pingRange(BASE_URL, 100, 120);
+    // pingRange(BASE_URL, 100, 120);
 }
 // 初始化
 init();

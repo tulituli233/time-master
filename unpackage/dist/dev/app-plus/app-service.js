@@ -742,7 +742,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -757,7 +757,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$i], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$j], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const ON_SHOW = "onShow";
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
@@ -1462,9 +1462,9 @@ if (uni.restoreGlobal) {
   function isPromise(val) {
     return val && typeof val.then === "function";
   }
-  function assert(condition, msg2) {
+  function assert(condition, msg) {
     if (!condition) {
-      throw new Error("[vuex] " + msg2);
+      throw new Error("[vuex] " + msg);
     }
   }
   function partial(fn, arg) {
@@ -1545,16 +1545,16 @@ if (uni.restoreGlobal) {
     }
     if (!isRoot && !hot) {
       var parentState = getNestedState(rootState, path.slice(0, -1));
-      var moduleName = path[path.length - 1];
+      var moduleName2 = path[path.length - 1];
       store2._withCommit(function() {
         {
-          if (moduleName in parentState) {
+          if (moduleName2 in parentState) {
             console.warn(
-              '[vuex] state field "' + moduleName + '" was overridden by a module with the same name at "' + path.join(".") + '"'
+              '[vuex] state field "' + moduleName2 + '" was overridden by a module with the same name at "' + path.join(".") + '"'
             );
           }
         }
-        parentState[moduleName] = module.state;
+        parentState[moduleName2] = module.state;
       });
     }
     var local = module.context = makeLocalContext(store2, namespace, path);
@@ -1875,10 +1875,10 @@ if (uni.restoreGlobal) {
       label: extractNameFromPath(path),
       tags: module.namespaced ? [TAG_NAMESPACED] : [],
       children: Object.keys(module._children).map(
-        function(moduleName) {
+        function(moduleName2) {
           return formatStoreForInspectorTree(
-            module._children[moduleName],
-            path + moduleName + "/"
+            module._children[moduleName2],
+            path + moduleName2 + "/"
           );
         }
       )
@@ -1892,8 +1892,8 @@ if (uni.restoreGlobal) {
         tags: module.namespaced ? [TAG_NAMESPACED] : []
       });
     }
-    Object.keys(module._children).forEach(function(moduleName) {
-      flattenStoreForInspectorTree(result, module._children[moduleName], filter, path + moduleName + "/");
+    Object.keys(module._children).forEach(function(moduleName2) {
+      flattenStoreForInspectorTree(result, module._children[moduleName2], filter, path + moduleName2 + "/");
     });
   }
   function formatStoreForInspectorState(module, getters, path) {
@@ -1958,10 +1958,10 @@ if (uni.restoreGlobal) {
       return n2;
     });
     return names.reduce(
-      function(module, moduleName, i2) {
-        var child = module[moduleName];
+      function(module, moduleName2, i2) {
+        var child = module[moduleName2];
         if (!child) {
-          throw new Error('Missing module "' + moduleName + '" for path "' + path + '".');
+          throw new Error('Missing module "' + moduleName2 + '" for path "' + path + '".');
         }
         return i2 === names.length - 1 ? child : child._children;
       },
@@ -2817,7 +2817,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2862,7 +2862,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$h], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$i], ["__scopeId", "data-v-86aa1171"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -2991,10 +2991,10 @@ if (uni.restoreGlobal) {
       /**
        * 获取父元素实例
        */
-      getSwipeAction(name = "uniSwipeAction") {
+      getSwipeAction(name2 = "uniSwipeAction") {
         let parent = this.$parent;
         let parentName = parent.$options.name;
-        while (parentName !== name) {
+        while (parentName !== name2) {
           parent = parent.$parent;
           if (!parent)
             return false;
@@ -3004,7 +3004,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -3104,7 +3104,7 @@ if (uni.restoreGlobal) {
     block0$1(_sfc_main$A);
   if (typeof block1 === "function")
     block1(_sfc_main$A);
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$g], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$h], ["__scopeId", "data-v-8ff2a577"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
   const _sfc_main$z = {
     name: "uniSwipeAction",
     data() {
@@ -3131,12 +3131,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$f], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$g], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -3526,7 +3526,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -3582,7 +3582,7 @@ if (uni.restoreGlobal) {
       /* CLASS, HYDRATE_EVENTS */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$e], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$f], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -4429,9 +4429,9 @@ if (uni.restoreGlobal) {
         return str.charAt(0).toUpperCase() + str.slice(1);
       },
       // 检查当前值是否在范围内，不在则当前值重置为可选范围第一项
-      checkValue(name, value, values) {
+      checkValue(name2, value, values) {
         if (values.indexOf(value) === -1) {
-          this[name] = values[0];
+          this[name2] = values[0];
         }
       },
       // 每个月的实际天数
@@ -4540,7 +4540,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -4817,7 +4817,7 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$d], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$e], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const { t: t$3 } = initVueI18n(i18nMessages);
   const _sfc_main$w = {
     components: {
@@ -5223,7 +5223,7 @@ if (uni.restoreGlobal) {
        * 派发事件
        * @param {Object} name
        */
-      setEmit(name) {
+      setEmit(name2) {
         if (!this.range) {
           if (!this.calendar.fullDate) {
             this.calendar = this.cale.getInfo(/* @__PURE__ */ new Date());
@@ -5240,7 +5240,7 @@ if (uni.restoreGlobal) {
           fullDate,
           extraInfo
         } = this.calendar;
-        this.$emit(name, {
+        this.$emit(name2, {
           range: this.cale.multipleStatus,
           year,
           month,
@@ -5295,7 +5295,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -5588,7 +5588,7 @@ if (uni.restoreGlobal) {
       /* HYDRATE_EVENTS */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$c], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$d], ["__scopeId", "data-v-1d379219"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
   const _sfc_main$v = {
     name: "UniDatetimePicker",
     options: {
@@ -6240,7 +6240,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -6583,7 +6583,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$b], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$c], ["__scopeId", "data-v-9802168a"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   class MPAnimation {
     constructor(options2, _this) {
       this.options = options2;
@@ -6942,12 +6942,12 @@ if (uni.restoreGlobal) {
         };
       },
       // 驼峰转中横线
-      toLine(name) {
-        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      toLine(name2) {
+        return name2.replace(/([A-Z])/g, "-$1").toLowerCase();
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -6960,7 +6960,7 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$a], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$b], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   const _sfc_main$t = {
     name: "uniPopup",
     components: {},
@@ -7289,7 +7289,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -7349,8 +7349,8 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  let BASE_URL = "http://192.168.0.101:3838/";
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$a], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  let BASE_URL = "http://47.120.36.121:3838/";
   const DEFAULT_HEADERS = {
     "Content-Type": "application/json"
   };
@@ -7379,7 +7379,7 @@ if (uni.restoreGlobal) {
   const pingRange = (oldUrl, start = 100, end = 120) => {
     return new Promise(async (resolve, reject) => {
       let timeOut = setTimeout(() => {
-        formatAppLog("log", "at utils/request.ts:41", `开始ping 192.168.0.${start}到192.168.0.${end}`);
+        formatAppLog("log", "at utils/request.ts:42", `开始ping 192.168.0.${start}到192.168.0.${end}`);
         let i2 = start;
         const timer = setInterval(async () => {
           if (i2 > end) {
@@ -7405,18 +7405,18 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (error) {
-            formatAppLog("log", "at utils/request.ts:67", `192.168.0.${currentI} ping 失败`);
+            formatAppLog("log", "at utils/request.ts:68", `192.168.0.${currentI} ping 失败`);
           }
         }, 1e3);
       }, 3e3);
       try {
-        formatAppLog("log", "at utils/request.ts:73", `开始ping ${oldUrl}`);
+        formatAppLog("log", "at utils/request.ts:74", `开始ping ${oldUrl}`);
         const oldRes = await request({
           url: `users/ping`,
           method: "GET"
         }, oldUrl);
         if (oldRes) {
-          formatAppLog("log", "at utils/request.ts:79", `旧地址${oldUrl} ping成功`);
+          formatAppLog("log", "at utils/request.ts:80", `旧地址${oldUrl} ping成功`);
           resolve({
             code: 2,
             msg: oldUrl
@@ -7425,7 +7425,7 @@ if (uni.restoreGlobal) {
           return;
         }
       } catch (error) {
-        formatAppLog("log", "at utils/request.ts:88", `旧地址${oldUrl} ping失败`);
+        formatAppLog("log", "at utils/request.ts:89", `旧地址${oldUrl} ping失败`);
       }
     });
   };
@@ -7433,7 +7433,6 @@ if (uni.restoreGlobal) {
     if (uni.getStorageSync("BASE_URL")) {
       BASE_URL = uni.getStorageSync("BASE_URL");
     }
-    pingRange(BASE_URL, 100, 120);
   };
   init();
   const setBaseUrl = (url) => {
@@ -7691,16 +7690,16 @@ if (uni.restoreGlobal) {
           DueDate: planDate.value,
           Type: selectedType.value
         };
-        let errMsg = "";
+        let errMsg2 = "";
         if (!plan.Title) {
-          errMsg = "请填写计划标题";
+          errMsg2 = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg = "请选择计划日期";
+          errMsg2 = "请选择计划日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -7733,16 +7732,16 @@ if (uni.restoreGlobal) {
           DueDate: formatDateTime(new Date(planDate.value)),
           Type: selectedType.value
         };
-        let errMsg = "";
+        let errMsg2 = "";
         if (!plan.Title) {
-          errMsg = "请填写计划标题";
+          errMsg2 = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg = "请选择计划日期";
+          errMsg2 = "请选择计划日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -8158,16 +8157,16 @@ if (uni.restoreGlobal) {
           DueDate: planDate.value,
           Type: selectedType.value
         };
-        let errMsg = "";
+        let errMsg2 = "";
         if (!plan.Title) {
-          errMsg = "请填写计划标题";
+          errMsg2 = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg = "请选择计划日期";
+          errMsg2 = "请选择计划日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -8202,16 +8201,16 @@ if (uni.restoreGlobal) {
           DueDate: formatDateTime(new Date(planDate.value)),
           Type: selectedType.value
         };
-        let errMsg = "";
+        let errMsg2 = "";
         if (!plan.Title) {
-          errMsg = "请填写计划标题";
+          errMsg2 = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg = "请选择计划日期";
+          errMsg2 = "请选择计划日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -9391,22 +9390,22 @@ if (uni.restoreGlobal) {
       const addExpense = async () => {
         expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
         expenseData.Date = formatDateTime(expenseData.Date);
-        let errMsg = "";
+        let errMsg2 = "";
         if (expenseData.Amount == "") {
-          errMsg = "请输入金额";
+          errMsg2 = "请输入金额";
         } else if (isNaN(parseFloat(expenseData.Amount))) {
-          errMsg = "请输入正确的金额";
+          errMsg2 = "请输入正确的金额";
           expenseData.Amount = "";
         } else if (expenseData.Amount < 0) {
-          errMsg = "不能输入负金额";
+          errMsg2 = "不能输入负金额";
           expenseData.Amount = Math.abs(expenseData.Amount);
         } else if (!expenseData.Date) {
-          errMsg = "请选择日期";
+          errMsg2 = "请选择日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -9634,6 +9633,22 @@ if (uni.restoreGlobal) {
         baseUrl.value = uni.getStorageSync("BASE_URL");
         setBaseUrlPopupRef.value.open("bottom");
       };
+      let serverStatus = vue.ref(store2.state.baseUrl.type);
+      const changeServer = () => {
+        serverStatus.value = serverStatus.value === 0 ? 1 : 0;
+        if (serverStatus.value === 0) {
+          let baseUrlObj = store2.state.baseUrl;
+          baseUrlObj.local = baseUrl.value;
+          baseUrlObj.type = 0;
+          store2.dispatch("updateBaseUrl", baseUrlObj);
+          baseUrl.value = baseUrlObj.production;
+          setBaseUrl(baseUrl.value);
+        } else {
+          baseUrl.value = store2.state.baseUrl.local;
+          setBaseUrl(baseUrl.value);
+          refreshBaseUrl();
+        }
+      };
       const setUrl = () => {
         if (baseUrl.value) {
           setBaseUrl(baseUrl.value);
@@ -9646,13 +9661,14 @@ if (uni.restoreGlobal) {
       };
       const refreshBaseUrl = async () => {
         let res = await pingRange(uni.getStorageSync("BASE_URL"));
-        formatAppLog("log", "at subPackages/mine/setting/index.vue:66", "res", res);
+        formatAppLog("log", "at subPackages/mine/setting/index.vue:87", "res", res);
         if (res.code === 0) {
           uni.showToast({
             title: "服务器地址更新失败",
             icon: "error"
           });
         } else {
+          let msg;
           if (res.code === 2)
             msg = "服务器地址未改变";
           msg = `当前服务器地址为${res.msg}`;
@@ -9660,6 +9676,10 @@ if (uni.restoreGlobal) {
             title: msg,
             icon: "success"
           });
+          let baseUrlObj = store2.state.baseUrl;
+          baseUrlObj.type = 1;
+          store2.dispatch("updateBaseUrl", baseUrlObj);
+          baseUrl.value = uni.getStorageSync("BASE_URL");
         }
       };
       const changeTheme = () => {
@@ -9691,12 +9711,12 @@ if (uni.restoreGlobal) {
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "书架" }, {
           default: vue.withCtx(() => [
-            vue.createCommentVNode(" 设置服务请求地址 "),
+            vue.createCommentVNode(" 设置服务器地址 "),
             vue.createElementVNode("view", {
               class: "setting-item theme-bgc",
               onClick: openSetBaseUrl
             }, [
-              vue.createElementVNode("view", { class: "title" }, "设置服务请求地址"),
+              vue.createElementVNode("view", { class: "title" }, "设置服务器地址"),
               vue.createElementVNode("view", {
                 class: "icon",
                 onClick: vue.withModifiers(refreshBaseUrl, ["stop"])
@@ -9730,9 +9750,22 @@ if (uni.restoreGlobal) {
               default: vue.withCtx(() => [
                 vue.createElementVNode("view", { class: "popup-content" }, [
                   vue.createElementVNode("view", { class: "popup-header" }, [
-                    vue.createElementVNode("view", { class: "title" }, "设置服务请求地址")
+                    vue.createElementVNode("view", { class: "title" }, "设置服务器地址")
                   ]),
                   vue.createElementVNode("view", { class: "popup-body" }, [
+                    vue.createCommentVNode(" 切换到云服务器或者本地服务器 "),
+                    vue.createElementVNode("view", { class: "change-server" }, [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: "btn",
+                          onClick: changeServer
+                        },
+                        "切换到" + vue.toDisplayString(vue.unref(serverStatus) !== 0 ? "云服务器" : "本地服务器"),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
                     vue.createElementVNode("view", { class: "input-item" }, [
                       vue.createElementVNode("view", { class: "input-label" }, "地址:"),
                       vue.withDirectives(vue.createElementVNode(
@@ -9740,7 +9773,7 @@ if (uni.restoreGlobal) {
                         {
                           class: "input",
                           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => baseUrl.value = $event),
-                          placeholder: "请输入服务请求地址"
+                          placeholder: "请输入服务器地址"
                         },
                         null,
                         512
@@ -9913,7 +9946,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -9957,7 +9990,7 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const DragSort = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$8], ["__scopeId", "data-v-80a093ac"], ["__file", "E:/HBuilderProjects/time-master/components/DragSort/index.vue"]]);
+  const DragSort = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$9], ["__scopeId", "data-v-80a093ac"], ["__file", "E:/HBuilderProjects/time-master/components/DragSort/index.vue"]]);
   const _sfc_main$l = {
     __name: "index",
     setup(__props2) {
@@ -10513,36 +10546,36 @@ if (uni.restoreGlobal) {
     node2.attrs.style = tmp;
     return styleObj;
   };
-  Parser$1.prototype.onTagName = function(name) {
-    this.tagName = this.xml ? name : name.toLowerCase();
+  Parser$1.prototype.onTagName = function(name2) {
+    this.tagName = this.xml ? name2 : name2.toLowerCase();
     if (this.tagName === "svg") {
       this.xml = (this.xml || 0) + 1;
       config$1.ignoreTags.style = void 0;
     }
   };
-  Parser$1.prototype.onAttrName = function(name) {
-    name = this.xml ? name : name.toLowerCase();
-    if (name.substr(0, 5) === "data-") {
-      if (name === "data-src" && !this.attrs.src) {
+  Parser$1.prototype.onAttrName = function(name2) {
+    name2 = this.xml ? name2 : name2.toLowerCase();
+    if (name2.substr(0, 5) === "data-") {
+      if (name2 === "data-src" && !this.attrs.src) {
         this.attrName = "src";
       } else if (this.tagName === "img" || this.tagName === "a") {
-        this.attrName = name;
+        this.attrName = name2;
       } else {
         this.attrName = void 0;
       }
     } else {
-      this.attrName = name;
-      this.attrs[name] = "T";
+      this.attrName = name2;
+      this.attrs[name2] = "T";
     }
   };
   Parser$1.prototype.onAttrVal = function(val) {
-    const name = this.attrName || "";
-    if (name === "style" || name === "href") {
-      this.attrs[name] = decodeEntity(val, true);
-    } else if (name.includes("src")) {
-      this.attrs[name] = this.getUrl(decodeEntity(val, true));
-    } else if (name) {
-      this.attrs[name] = val;
+    const name2 = this.attrName || "";
+    if (name2 === "style" || name2 === "href") {
+      this.attrs[name2] = decodeEntity(val, true);
+    } else if (name2.includes("src")) {
+      this.attrs[name2] = this.getUrl(decodeEntity(val, true));
+    } else if (name2) {
+      this.attrs[name2] = val;
     }
   };
   Parser$1.prototype.onOpenTag = function(selfClose) {
@@ -10667,24 +10700,24 @@ if (uni.restoreGlobal) {
     }
     siblings.push(node2);
   };
-  Parser$1.prototype.onCloseTag = function(name) {
-    name = this.xml ? name : name.toLowerCase();
+  Parser$1.prototype.onCloseTag = function(name2) {
+    name2 = this.xml ? name2 : name2.toLowerCase();
     let i2;
     for (i2 = this.stack.length; i2--; ) {
-      if (this.stack[i2].name === name)
+      if (this.stack[i2].name === name2)
         break;
     }
     if (i2 !== -1) {
       while (this.stack.length > i2) {
         this.popNode();
       }
-    } else if (name === "p" || name === "br") {
+    } else if (name2 === "p" || name2 === "br") {
       const siblings = this.stack.length ? this.stack[this.stack.length - 1].children : this.nodes;
       siblings.push({
-        name,
+        name: name2,
         attrs: {
-          class: tagSelector[name] || "",
-          style: this.tagStyle[name] || ""
+          class: tagSelector[name2] || "",
+          style: this.tagStyle[name2] || ""
         }
       });
     }
@@ -10728,8 +10761,8 @@ if (uni.restoreGlobal) {
           src += node3.text;
           return;
         }
-        const name = config$1.svgDict[node3.name] || node3.name;
-        if (name === "foreignObject") {
+        const name2 = config$1.svgDict[node3.name] || node3.name;
+        if (name2 === "foreignObject") {
           for (const child of node3.children || []) {
             if (child.attrs && !child.attrs.xmlns) {
               child.attrs.xmlns = "http://www.w3.org/1999/xhtml";
@@ -10737,7 +10770,7 @@ if (uni.restoreGlobal) {
             }
           }
         }
-        src += "<" + name;
+        src += "<" + name2;
         for (const item in node3.attrs) {
           const val = node3.attrs[item];
           if (val) {
@@ -10751,7 +10784,7 @@ if (uni.restoreGlobal) {
           for (let i2 = 0; i2 < node3.children.length; i2++) {
             traversal(node3.children[i2]);
           }
-          src += "</" + name + ">";
+          src += "</" + name2 + ">";
         }
       })(node2);
       node2.name = "img";
@@ -11327,7 +11360,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "card",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args)),
@@ -11373,7 +11406,7 @@ if (uni.restoreGlobal) {
       })
     ], 12, ["data-i"]);
   }
-  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$7], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
+  const myCard = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$8], ["__scopeId", "data-v-69a90445"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/card/card.vue"]]);
   const block0 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("handler");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["handler"] = "3052a0dc";
@@ -11633,28 +11666,28 @@ if (uni.restoreGlobal) {
                 const style = parent.childs[i2].attrs.style || "";
                 let newStyle = "";
                 const item = items[tapIndex];
-                let name;
+                let name2;
                 let value;
                 if (item === "斜体") {
-                  name = "font-style";
+                  name2 = "font-style";
                   value = "italic";
                 } else if (item === "粗体") {
-                  name = "font-weight";
+                  name2 = "font-weight";
                   value = "bold";
                 } else if (item === "下划线") {
-                  name = "text-decoration";
+                  name2 = "text-decoration";
                   value = "underline";
                 } else if (item === "居中") {
-                  name = "text-align";
+                  name2 = "text-align";
                   value = "center";
                 } else if (item === "缩进") {
-                  name = "text-indent";
+                  name2 = "text-indent";
                   value = "2em";
                 }
-                if (style.includes(name + ":")) {
-                  newStyle = style.replace(new RegExp(name + ":[^;]+"), "");
+                if (style.includes(name2 + ":")) {
+                  newStyle = style.replace(new RegExp(name2 + ":[^;]+"), "");
                 } else {
-                  newStyle = style + ";" + name + ":" + value;
+                  newStyle = style + ";" + name2 + ":" + value;
                 }
                 this.root._editVal(`${parent.opts[7]}.${i2}.attrs.style`, style, newStyle, true);
               }
@@ -11707,12 +11740,12 @@ if (uni.restoreGlobal) {
           }, 50);
         }
       },
-      changeStyle(name, i2, value, oldVal) {
+      changeStyle(name2, i2, value, oldVal) {
         let style = this.childs[i2].attrs.style || "";
-        if (style.includes(";" + name + ":" + oldVal)) {
-          style = style.replace(";" + name + ":" + oldVal, ";" + name + ":" + value);
+        if (style.includes(";" + name2 + ":" + oldVal)) {
+          style = style.replace(";" + name2 + ":" + oldVal, ";" + name2 + ":" + value);
         } else {
-          style += ";" + name + ":" + value;
+          style += ";" + name2 + ":" + value;
         }
         this.root._setData(`${this.opts[7]}.${i2}.attrs.style`, style);
       },
@@ -11990,7 +12023,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node", true);
     const _component_my_card = vue.resolveComponent("my-card");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -12330,7 +12363,7 @@ if (uni.restoreGlobal) {
   }
   if (typeof block0 === "function")
     block0(_sfc_main$h);
-  const node = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$6], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
+  const node = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$7], ["__scopeId", "data-v-52cead80"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/node/node.vue"]]);
   /*!
    * marked - a markdown parser
    * Copyright (c) 2011-2020, Christopher Jeffrey. (MIT Licensed)
@@ -17245,16 +17278,16 @@ if (uni.restoreGlobal) {
     new Lexer(this).parse(content);
     return this.styles;
   };
-  Parser.prototype.onSelector = function(name) {
-    if (name.includes("[") || name.includes("*") || name.includes("@"))
+  Parser.prototype.onSelector = function(name2) {
+    if (name2.includes("[") || name2.includes("*") || name2.includes("@"))
       return;
     const selector = {};
-    if (name.includes(":")) {
-      const info = name.split(":");
+    if (name2.includes(":")) {
+      const info = name2.split(":");
       const pseudo = info.pop();
       if (pseudo === "before" || pseudo === "after") {
         selector.pseudo = pseudo;
-        name = info[0];
+        name2 = info[0];
       } else
         return;
     }
@@ -17274,9 +17307,9 @@ if (uni.restoreGlobal) {
         return arr;
       }
     }
-    if (name.includes(" ")) {
+    if (name2.includes(" ")) {
       selector.list = [];
-      const list = name.split(" ");
+      const list = name2.split(" ");
       for (let i2 = 0; i2 < list.length; i2++) {
         if (list[i2].length) {
           const arr = list[i2].split(">");
@@ -17289,7 +17322,7 @@ if (uni.restoreGlobal) {
         }
       }
     } else {
-      selector.key = splitItem(name);
+      selector.key = splitItem(name2);
     }
     this.selectors.push(selector);
   };
@@ -17552,10 +17585,10 @@ if (uni.restoreGlobal) {
         return;
       taskQueue.add(url);
       const suffix = /.+\.(jpg|jpeg|png|bmp|gif|webp)/.exec(url);
-      const name = `${makeid(8)}_${Date.now()}${suffix ? "." + suffix[1] : ""}`;
+      const name2 = `${makeid(8)}_${Date.now()}${suffix ? "." + suffix[1] : ""}`;
       const task = plus.downloader.createDownload(
         url,
-        { filename: `_doc/${data.name}/${name}` },
+        { filename: `_doc/${data.name}/${name2}` },
         (download2, status) => {
           taskQueue.delete(url);
           resolve(status === 200 ? download2.filename : null);
@@ -18302,16 +18335,16 @@ if (uni.restoreGlobal) {
       /**
        * @description 调用插件钩子函数
        */
-      _hook(name) {
+      _hook(name2) {
         for (let i2 = plugins.length; i2--; ) {
-          if (this.plugins[i2][name]) {
-            this.plugins[i2][name]();
+          if (this.plugins[i2][name2]) {
+            this.plugins[i2][name2]();
           }
         }
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node");
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -18417,7 +18450,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$5], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
+  const mpHtml = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$6], ["__scopeId", "data-v-436c2b7f"], ["__file", "E:/HBuilderProjects/time-master/uni-app/components/mp-html/mp-html.vue"]]);
   function upload$1(src, type) {
     return new Promise((resolve, reject) => {
       formatAppLog("log", "at subPackages/memos/add/index.vue:98", "上传", type === "img" ? "图片" : "视频", "：", src);
@@ -18734,14 +18767,14 @@ if (uni.restoreGlobal) {
               Content: content,
               Type: this.type
             };
-            let errMsg = "";
+            let errMsg2 = "";
             if (!memo.Title) {
-              errMsg = "请填写备忘录标题";
+              errMsg2 = "请填写备忘录标题";
             }
-            if (errMsg) {
+            if (errMsg2) {
               uni.showToast({
                 icon: "error",
-                title: errMsg
+                title: errMsg2
               });
               return;
             }
@@ -18765,7 +18798,7 @@ if (uni.restoreGlobal) {
     return __setup__$1(props, ctx);
   } : __injectCSSVars__$1;
   const _sfc_main$f = __default__$1;
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -19041,7 +19074,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$4], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
+  const SubPackagesMemosAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$5], ["__file", "E:/HBuilderProjects/time-master/subPackages/memos/add/index.vue"]]);
   const _sfc_main$e = {
     name: "UniNumberBox",
     emits: ["change", "input", "update:modelValue", "blur", "focus"],
@@ -19171,7 +19204,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-numbox" }, [
       vue.createElementVNode(
         "view",
@@ -19230,7 +19263,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$3], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$4], ["__scopeId", "data-v-7ae2ee72"], ["__file", "E:/HBuilderProjects/time-master/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
   const apiAddWaterRecord = (record) => {
     return request({
       url: `water/add`,
@@ -19376,14 +19409,14 @@ if (uni.restoreGlobal) {
       const addWater = () => {
         formatAppLog("log", "at subPackages/water/index/index.vue:268", "waterData.DateTime", waterData.DateTime);
         waterData.DateTime = formatDateTime(waterData.DateTime);
-        let errMsg = "";
+        let errMsg2 = "";
         if (!waterData.Amount) {
-          errMsg = "请输入饮水量";
+          errMsg2 = "请输入饮水量";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -20350,14 +20383,14 @@ if (uni.restoreGlobal) {
               Title: this.diaryTitle,
               Content: content
             };
-            let errMsg = "";
+            let errMsg2 = "";
             if (!diary.Title) {
-              errMsg = "请填写日记标题";
+              errMsg2 = "请填写日记标题";
             }
-            if (errMsg) {
+            if (errMsg2) {
               uni.showToast({
                 icon: "error",
-                title: errMsg
+                title: errMsg2
               });
               return;
             }
@@ -20381,7 +20414,7 @@ if (uni.restoreGlobal) {
     return __setup__(props, ctx);
   } : __injectCSSVars__;
   const _sfc_main$b = __default__;
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mp_html = vue.resolveComponent("mp-html");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "editor_toolbox" }, [
@@ -20657,7 +20690,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$2], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
+  const SubPackagesDiaryAddIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$3], ["__file", "E:/HBuilderProjects/time-master/subPackages/diary/add/index.vue"]]);
   const apiGetUserCountdowns = (userID) => {
     return request({
       url: `countdown/list?userID=${userID}`,
@@ -20731,16 +20764,16 @@ if (uni.restoreGlobal) {
           Name: countdownName.value,
           TargetDate: formatDate(countdownDate.value)
         };
-        let errMsg = "";
+        let errMsg2 = "";
         if (!countdown.Name) {
-          errMsg = "请输入倒计时名称";
+          errMsg2 = "请输入倒计时名称";
         } else if (!countdown.TargetDate) {
-          errMsg = "请选择目标日期";
+          errMsg2 = "请选择目标日期";
         }
-        if (errMsg) {
+        if (errMsg2) {
           uni.showToast({
             icon: "error",
-            title: errMsg
+            title: errMsg2
           });
           return;
         }
@@ -21072,6 +21105,229 @@ if (uni.restoreGlobal) {
     getRootDir,
     getSubDir
   };
+  var isIos;
+  isIos = plus.os.name == "iOS";
+  function judgeIosPermissionPush() {
+    var result = false;
+    var UIApplication = plus.ios.import("UIApplication");
+    var app = UIApplication.sharedApplication();
+    var enabledTypes = 0;
+    if (app.currentUserNotificationSettings) {
+      var settings = app.currentUserNotificationSettings();
+      enabledTypes = settings.plusGetAttribute("types");
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:19", "enabledTypes1:" + enabledTypes);
+      if (enabledTypes == 0) {
+        formatAppLog("log", "at js_sdk/wa-permission/permission.js:21", "推送权限没有开启");
+      } else {
+        result = true;
+        formatAppLog("log", "at js_sdk/wa-permission/permission.js:24", "已经开启推送功能!");
+      }
+      plus.ios.deleteObject(settings);
+    } else {
+      enabledTypes = app.enabledRemoteNotificationTypes();
+      if (enabledTypes == 0) {
+        formatAppLog("log", "at js_sdk/wa-permission/permission.js:30", "推送权限没有开启!");
+      } else {
+        result = true;
+        formatAppLog("log", "at js_sdk/wa-permission/permission.js:33", "已经开启推送功能!");
+      }
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:35", "enabledTypes2:" + enabledTypes);
+    }
+    plus.ios.deleteObject(app);
+    plus.ios.deleteObject(UIApplication);
+    return result;
+  }
+  function judgeIosPermissionLocation() {
+    var result = false;
+    var cllocationManger = plus.ios.import("CLLocationManager");
+    var status = cllocationManger.authorizationStatus();
+    result = status != 2;
+    formatAppLog("log", "at js_sdk/wa-permission/permission.js:48", "定位权限开启：" + result);
+    plus.ios.deleteObject(cllocationManger);
+    return result;
+  }
+  function judgeIosPermissionRecord() {
+    var result = false;
+    var avaudiosession = plus.ios.import("AVAudioSession");
+    var avaudio = avaudiosession.sharedInstance();
+    var permissionStatus = avaudio.recordPermission();
+    formatAppLog("log", "at js_sdk/wa-permission/permission.js:70", "permissionStatus:" + permissionStatus);
+    if (permissionStatus == 1684369017 || permissionStatus == 1970168948) {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:72", "麦克风权限没有开启");
+    } else {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:75", "麦克风权限已经开启");
+    }
+    plus.ios.deleteObject(avaudiosession);
+    return result;
+  }
+  function judgeIosPermissionCamera() {
+    var result = false;
+    var AVCaptureDevice = plus.ios.import("AVCaptureDevice");
+    var authStatus = AVCaptureDevice.authorizationStatusForMediaType("vide");
+    formatAppLog("log", "at js_sdk/wa-permission/permission.js:86", "authStatus:" + authStatus);
+    if (authStatus == 3) {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:89", "相机权限已经开启");
+    } else {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:91", "相机权限没有开启");
+    }
+    plus.ios.deleteObject(AVCaptureDevice);
+    return result;
+  }
+  function judgeIosPermissionPhotoLibrary() {
+    var result = false;
+    var PHPhotoLibrary = plus.ios.import("PHPhotoLibrary");
+    var authStatus = PHPhotoLibrary.authorizationStatus();
+    formatAppLog("log", "at js_sdk/wa-permission/permission.js:102", "authStatus:" + authStatus);
+    if (authStatus == 3) {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:105", "相册权限已经开启");
+    } else {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:107", "相册权限没有开启");
+    }
+    plus.ios.deleteObject(PHPhotoLibrary);
+    return result;
+  }
+  function judgeIosPermissionContact() {
+    var result = false;
+    var CNContactStore = plus.ios.import("CNContactStore");
+    var cnAuthStatus = CNContactStore.authorizationStatusForEntityType(0);
+    if (cnAuthStatus == 3) {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:120", "通讯录权限已经开启");
+    } else {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:122", "通讯录权限没有开启");
+    }
+    plus.ios.deleteObject(CNContactStore);
+    return result;
+  }
+  function judgeIosPermissionCalendar() {
+    var result = false;
+    var EKEventStore = plus.ios.import("EKEventStore");
+    var ekAuthStatus = EKEventStore.authorizationStatusForEntityType(0);
+    if (ekAuthStatus == 3) {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:135", "日历权限已经开启");
+    } else {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:137", "日历权限没有开启");
+    }
+    plus.ios.deleteObject(EKEventStore);
+    return result;
+  }
+  function judgeIosPermissionMemo() {
+    var result = false;
+    var EKEventStore = plus.ios.import("EKEventStore");
+    var ekAuthStatus = EKEventStore.authorizationStatusForEntityType(1);
+    if (ekAuthStatus == 3) {
+      result = true;
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:150", "备忘录权限已经开启");
+    } else {
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:152", "备忘录权限没有开启");
+    }
+    plus.ios.deleteObject(EKEventStore);
+    return result;
+  }
+  function requestAndroidPermission(permissionID) {
+    return new Promise((resolve, reject) => {
+      plus.android.requestPermissions(
+        [permissionID],
+        // 理论上支持多个权限同时查询，但实际上本函数封装只处理了一个权限的情况。有需要的可自行扩展封装
+        function(resultObj) {
+          var result = 0;
+          for (var i2 = 0; i2 < resultObj.granted.length; i2++) {
+            var grantedPermission = resultObj.granted[i2];
+            formatAppLog("log", "at js_sdk/wa-permission/permission.js:167", "已获取的权限：" + grantedPermission);
+            result = 1;
+          }
+          for (var i2 = 0; i2 < resultObj.deniedPresent.length; i2++) {
+            var deniedPresentPermission = resultObj.deniedPresent[i2];
+            formatAppLog("log", "at js_sdk/wa-permission/permission.js:172", "拒绝本次申请的权限：" + deniedPresentPermission);
+            result = 0;
+          }
+          for (var i2 = 0; i2 < resultObj.deniedAlways.length; i2++) {
+            var deniedAlwaysPermission = resultObj.deniedAlways[i2];
+            formatAppLog("log", "at js_sdk/wa-permission/permission.js:177", "永久拒绝申请的权限：" + deniedAlwaysPermission);
+            result = -1;
+          }
+          resolve(result);
+        },
+        function(error) {
+          formatAppLog("log", "at js_sdk/wa-permission/permission.js:187", "申请权限错误：" + error.code + " = " + error.message);
+          resolve({
+            code: error.code,
+            message: error.message
+          });
+        }
+      );
+    });
+  }
+  function judgeIosPermission(permissionID) {
+    if (permissionID == "location") {
+      return judgeIosPermissionLocation();
+    } else if (permissionID == "camera") {
+      return judgeIosPermissionCamera();
+    } else if (permissionID == "photoLibrary") {
+      return judgeIosPermissionPhotoLibrary();
+    } else if (permissionID == "record") {
+      return judgeIosPermissionRecord();
+    } else if (permissionID == "push") {
+      return judgeIosPermissionPush();
+    } else if (permissionID == "contact") {
+      return judgeIosPermissionContact();
+    } else if (permissionID == "calendar") {
+      return judgeIosPermissionCalendar();
+    } else if (permissionID == "memo") {
+      return judgeIosPermissionMemo();
+    }
+    return false;
+  }
+  function gotoAppPermissionSetting() {
+    if (isIos) {
+      var UIApplication = plus.ios.import("UIApplication");
+      var application2 = UIApplication.sharedApplication();
+      var NSURL2 = plus.ios.import("NSURL");
+      var setting2 = NSURL2.URLWithString("app-settings:");
+      application2.openURL(setting2);
+      plus.ios.deleteObject(setting2);
+      plus.ios.deleteObject(NSURL2);
+      plus.ios.deleteObject(application2);
+    } else {
+      var Intent = plus.android.importClass("android.content.Intent");
+      var Settings = plus.android.importClass("android.provider.Settings");
+      var Uri = plus.android.importClass("android.net.Uri");
+      var mainActivity = plus.android.runtimeMainActivity();
+      var intent = new Intent();
+      intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+      var uri = Uri.fromParts("package", mainActivity.getPackageName(), null);
+      intent.setData(uri);
+      mainActivity.startActivity(intent);
+    }
+  }
+  function checkSystemEnableLocation() {
+    if (isIos) {
+      var result = false;
+      var cllocationManger = plus.ios.import("CLLocationManager");
+      var result = cllocationManger.locationServicesEnabled();
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:253", "系统定位开启:" + result);
+      plus.ios.deleteObject(cllocationManger);
+      return result;
+    } else {
+      var context = plus.android.importClass("android.content.Context");
+      var locationManager = plus.android.importClass("android.location.LocationManager");
+      var main = plus.android.runtimeMainActivity();
+      var mainSvr = main.getSystemService(context.LOCATION_SERVICE);
+      var result = mainSvr.isProviderEnabled(locationManager.GPS_PROVIDER);
+      formatAppLog("log", "at js_sdk/wa-permission/permission.js:262", "系统定位开启:" + result);
+      return result;
+    }
+  }
+  const permision = {
+    judgeIosPermission,
+    requestAndroidPermission,
+    checkSystemEnableLocation,
+    gotoAppPermissionSetting
+  };
   const _sfc_main$9 = {
     props: {
       autoclose: {
@@ -21118,11 +21374,42 @@ if (uni.restoreGlobal) {
         this.$emit("selected", this.checkDataList);
         this.closeHandle();
       },
-      choose() {
-        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:85", "choose");
+      // vue的method里编写如下代码
+      async requestAndroidPermission(permisionID) {
+        var result = await permision.requestAndroidPermission(permisionID);
+        var strStatus;
+        if (result == 1) {
+          strStatus = "已获得授权";
+        } else if (result == 0) {
+          strStatus = "未获得授权";
+        } else {
+          strStatus = "被永久拒绝权限";
+        }
+        return {
+          result,
+          strStatus
+        };
+      },
+      async choose() {
+        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:106", "choose");
+        const permissionStatus = await this.requestAndroidPermission("android.permission.READ_EXTERNAL_STORAGE");
+        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:110", "permissionStatus", permissionStatus);
+        if (permissionStatus.result != 1) {
+          uni.showModal({
+            content: `该功能需要您授权应用读取文件,是否前往授权?`,
+            confirmText: "去授权",
+            cancelText: "取消",
+            success: (res) => {
+              if (res.confirm) {
+                permision.gotoAppPermissionSetting();
+              }
+            }
+          });
+          return;
+        }
         this.isChoose = true;
         this.flileList = files.getRootDir();
-        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:106", "this.flileList===", this.flileList);
+        formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:146", "this.flileList===", this.flileList);
       },
       backToPrevent() {
         let r2 = this.flag - 1;
@@ -21160,14 +21447,14 @@ if (uni.restoreGlobal) {
               _this.setOrDelSelectData(path.toString(), r2.size);
             },
             fail(err) {
-              formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:144", "err:", err);
+              formatAppLog("log", "at components/yt-uploads/yt-file-selector.vue:184", "err:", err);
             }
           });
         }
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "yt-content" }, [
       $data.isChoose === true ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -21256,7 +21543,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$1], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
+  const ytFileSelector = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$2], ["__scopeId", "data-v-a6488321"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-file-selector.vue"]]);
   let options = {
     // 选则图片或者视频 图片:0 视频:1
     type: 0,
@@ -21459,7 +21746,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_yt_file_selector = vue.resolveComponent("yt-file-selector");
     return vue.openBlock(), vue.createElementBlock("view", { class: "yt-uploads" }, [
       vue.createVNode(_component_yt_file_selector, {
@@ -21469,7 +21756,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["onSelected"])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$1], ["__scopeId", "data-v-be00ec14"], ["__file", "E:/HBuilderProjects/time-master/components/yt-uploads/yt-uploads.vue"]]);
   const apiGetNovels = (UserID) => {
     return request({
       url: `book/list?UserID=${UserID}`,
@@ -21534,9 +21821,9 @@ if (uni.restoreGlobal) {
       method: "GET"
     });
   };
-  const apiGetNovelByUrl = (url) => {
+  const apiGetNovelByUrl = (url, UserID) => {
     return request({
-      url: `book/getNovelByUrl?url=${url}`,
+      url: `book/getNovelByUrl?url=${url}&UserID=${UserID}`,
       method: "GET"
     });
   };
@@ -23488,7 +23775,7 @@ if (uni.restoreGlobal) {
         if (!url) {
           return;
         }
-        apiGetNovelByUrl(url).then((res) => {
+        apiGetNovelByUrl(url, getApp().globalData.userInfo.UserID).then((res) => {
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
@@ -23674,60 +23961,66 @@ if (uni.restoreGlobal) {
     }
   };
   const SubPackagesBookPreviewIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-8d3ba962"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/preview/index.vue"]]);
+  const { registerUTSInterface, initUTSProxyClass, initUTSProxyFunction, initUTSPackageName, initUTSIndexClassName, initUTSClassName } = uni;
+  const name = "laoqianjunziAlarm";
+  const moduleName = "安卓系统闹钟提醒";
+  const moduleType = "";
+  const errMsg = ``;
+  const is_uni_modules = true;
+  const pkg = /* @__PURE__ */ initUTSPackageName(name, is_uni_modules);
+  const cls = /* @__PURE__ */ initUTSIndexClassName(name, is_uni_modules);
+  const alarmAdd = /* @__PURE__ */ initUTSProxyFunction(false, { moduleName, moduleType, errMsg, main: true, package: pkg, class: cls, name: "alarmAddByJs", params: [{ "name": "opts", "type": "UTSSDKModulesLaoqianjunziAlarmAddOptionsJSONObject" }], return: "" });
+  const alarmDelete = /* @__PURE__ */ initUTSProxyFunction(false, { moduleName, moduleType, errMsg, main: true, package: pkg, class: cls, name: "alarmDeleteByJs", params: [], return: "" });
+  getApp();
   const _sfc_main$1 = {
-    __name: "index",
-    setup(__props2) {
-      const store2 = useStore();
-      const theme = vue.computed(() => store2.state.theme);
-      const tabbarList = vue.computed(() => store2.state.tabbarList);
-      const onSuccess = (data2) => {
-        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:30", "data", data2);
-      };
-      return (_ctx, _cache) => {
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "应用管理" }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(vue.unref(DragSort), {
-              onSuccess,
-              style: { "display": "flex", "justify-content": "center" },
-              isHorizontal: true,
-              controlsList: vue.unref(tabbarList),
-              containerSize: { width: "100vw", height: "70vh" },
-              controlsSize: { width: 25, height: 60 },
-              dargItemSize: { width: 20 }
-            }, {
-              default: vue.withCtx(({ item }) => [
-                vue.createElementVNode("view", { class: "fun-item theme-bgc" }, [
-                  vue.createElementVNode("view", { class: "left" }, [
-                    vue.createElementVNode("view", { class: "icon" }, [
-                      vue.createVNode(_component_uni_icons, {
-                        "custom-prefix": "iconfont",
-                        type: item.icon,
-                        color: vue.unref(theme).iconColor,
-                        size: "20"
-                      }, null, 8, ["type", "color"])
-                    ]),
-                    vue.createElementVNode(
-                      "text",
-                      { class: "title" },
-                      vue.toDisplayString(item.text),
-                      1
-                      /* TEXT */
-                    )
-                  ])
-                ])
-              ]),
-              _: 1
-              /* STABLE */
-            }, 8, ["controlsList"])
-          ]),
-          _: 1
-          /* STABLE */
+    data() {
+      return {};
+    },
+    methods: {
+      doUtsAdd() {
+        let params = {
+          name: "dida",
+          //闹铃名称
+          weekday: "123456",
+          //重复星期
+          hour: 10,
+          //闹铃时
+          minutes: 14,
+          //分钟
+          ringtone: "https://jubaomusics.oss-cn-beijing.aliyuncs.com/%E4%B8%89%E5%8F%AA%E5%B0%8F%E7%8C%AA/%E4%B8%89%E5%8F%AA%E5%B0%8F%E7%8C%AA.mp3"
+          //铃声
+        };
+        alarmAdd({
+          params,
+          success: (res) => {
+            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:40", "success", res);
+          },
+          fail: (res) => {
+            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:44", "fail", res);
+          },
+          complete: () => {
+            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:47", "complete");
+          }
         });
-      };
+      },
+      doUtsDelete() {
+        alarmDelete();
+      }
     }
   };
-  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-fe972938"], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", {
+        class: "btn",
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.doUtsAdd && $options.doUtsAdd(...args))
+      }, " Uts添加闹铃 "),
+      vue.createElementVNode("view", {
+        class: "btn",
+        onClick: _cache[1] || (_cache[1] = (...args) => $options.doUtsDelete && $options.doUtsDelete(...args))
+      }, " Uts删除闹铃 ")
+    ]);
+  }
+  const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/mine/index", PagesMineIndex);
   __definePage("pages/note/index", PagesNoteIndex);
@@ -23896,6 +24189,11 @@ if (uni.restoreGlobal) {
     state: {
       // 初始化状态
       data: "初始数据",
+      baseUrl: {
+        type: 0,
+        local: "http://192.168.0.101:3838/",
+        production: "http://47.120.36.121:3838/"
+      },
       Screen: {
         width: 0,
         height: 0
@@ -24003,6 +24301,9 @@ if (uni.restoreGlobal) {
       setData(state, newData) {
         state.data = newData;
       },
+      setBaseUrl(state, newBaseUrl) {
+        state.baseUrl = newBaseUrl;
+      },
       setScreen(state, newScreen) {
         state.Screen = newScreen;
       },
@@ -24023,6 +24324,9 @@ if (uni.restoreGlobal) {
       // 可选的，用于处理异步操作，最终提交 mutations
       updateData({ commit }, newData) {
         commit("setData", newData);
+      },
+      updateBaseUrl({ commit }, newBaseUrl) {
+        commit("setBaseUrl", newBaseUrl);
       },
       updateScreen({ commit }, newScreen) {
         commit("setScreen", newScreen);

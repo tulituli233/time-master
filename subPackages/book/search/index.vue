@@ -53,7 +53,7 @@ const getNovelByUrl = (url, index) => {
     if (!url) {
         return
     }
-    apiGetNovelByUrl(url).then((res) => {
+    apiGetNovelByUrl(url, getApp().globalData.userInfo.UserID).then((res) => {
         if (res.code === 0 || !res.code) {
             uni.showToast({
                 icon: 'error',
