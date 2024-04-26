@@ -87,8 +87,9 @@ class AlarmUtils {
 	/**
 	 * 删除事件
 	 */
-	deleteEvent() {
-		let clock_name : string = 'dida';
+	deleteEvent(clockName : string) {
+		//let clock_name : string = 'dida';
+		let clock_name : string = clockName;
 		var hour = '05';
 		var minutes = '40';
 		let intent : Intent = new Intent(AlarmClock.ACTION_DISMISS_ALARM);
@@ -107,16 +108,16 @@ class AlarmUtils {
 			intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
 			intent.putExtra(AlarmClock.EXTRA_MINUTES, minutes);
 		}
-		intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		//intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+		//intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		let packageManager = UTSAndroid.getUniActivity()!.getPackageManager();
 		var component = intent.resolveActivity(packageManager);
 		if (component != null) {
 			UTSAndroid.getUniActivity()!.startActivity(intent);
+			console.log('startActivity')
 		}
 	}
-
 }
 
 /**
@@ -156,8 +157,8 @@ export function alarmAdd(opts : AddOptions) {
 /**
  * 删除闹钟
  */
-export function alarmDelete() {
+export function alarmDelete(alarmName : string) {
 	let alarm_utils = new AlarmUtils();
 	console.log("======alarmDelete");
-	alarm_utils.deleteEvent();
+	alarm_utils.deleteEvent(alarmName);
 }

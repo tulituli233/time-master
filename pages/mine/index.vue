@@ -66,28 +66,28 @@ const middleList = ref([
 		url: '/subPackages/mine/management/index'
 	},
 	{
-		title: '高级功能',
+		title: '通知管理',
 		unicode: 'icon-gaojigongneng',
 		color: '#7e7cea',
-		url: '/pages/index/index'
+		url: ''
 	},
 	{
 		title: '桌面小组件',
 		unicode: 'icon-zhuomianzujianguanli',
 		color: '#4c8bf0',
-		url: '/pages/index/index'
+		url: ''
 	}
 ])
 const list = ref([
 	{
 		title: '我的消息',
 		unicode: 'icon-xiaoxi',
-		url: '/pages/index/index'
+		url: ''
 	},
 	{
 		title: '帮助中心',
 		unicode: 'icon-bangzhu',
-		url: '/pages/index/index'
+		url: ''
 	},
 	{
 		title: '设置',

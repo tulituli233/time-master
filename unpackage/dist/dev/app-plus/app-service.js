@@ -762,6 +762,9 @@ if (uni.restoreGlobal) {
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
   const ON_UNLOAD = "onUnload";
+  function requireNativePlugin(name) {
+    return weex.requireModule(name);
+  }
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -1245,6 +1248,14 @@ if (uni.restoreGlobal) {
   })(LunarCalendar$1);
   const LunarCalendar = LunarCalendarExports;
   const navTo = (url) => {
+    if (!url) {
+      uni.showToast({
+        title: "该功能暂未开放，敬请期待！",
+        icon: "none",
+        duration: 2e3
+      });
+      return;
+    }
     uni.navigateTo({
       url
     });
@@ -1545,16 +1556,16 @@ if (uni.restoreGlobal) {
     }
     if (!isRoot && !hot) {
       var parentState = getNestedState(rootState, path.slice(0, -1));
-      var moduleName2 = path[path.length - 1];
+      var moduleName = path[path.length - 1];
       store2._withCommit(function() {
         {
-          if (moduleName2 in parentState) {
+          if (moduleName in parentState) {
             console.warn(
-              '[vuex] state field "' + moduleName2 + '" was overridden by a module with the same name at "' + path.join(".") + '"'
+              '[vuex] state field "' + moduleName + '" was overridden by a module with the same name at "' + path.join(".") + '"'
             );
           }
         }
-        parentState[moduleName2] = module.state;
+        parentState[moduleName] = module.state;
       });
     }
     var local = module.context = makeLocalContext(store2, namespace, path);
@@ -1875,10 +1886,10 @@ if (uni.restoreGlobal) {
       label: extractNameFromPath(path),
       tags: module.namespaced ? [TAG_NAMESPACED] : [],
       children: Object.keys(module._children).map(
-        function(moduleName2) {
+        function(moduleName) {
           return formatStoreForInspectorTree(
-            module._children[moduleName2],
-            path + moduleName2 + "/"
+            module._children[moduleName],
+            path + moduleName + "/"
           );
         }
       )
@@ -1892,8 +1903,8 @@ if (uni.restoreGlobal) {
         tags: module.namespaced ? [TAG_NAMESPACED] : []
       });
     }
-    Object.keys(module._children).forEach(function(moduleName2) {
-      flattenStoreForInspectorTree(result, module._children[moduleName2], filter, path + moduleName2 + "/");
+    Object.keys(module._children).forEach(function(moduleName) {
+      flattenStoreForInspectorTree(result, module._children[moduleName], filter, path + moduleName + "/");
     });
   }
   function formatStoreForInspectorState(module, getters, path) {
@@ -1958,10 +1969,10 @@ if (uni.restoreGlobal) {
       return n2;
     });
     return names.reduce(
-      function(module, moduleName2, i2) {
-        var child = module[moduleName2];
+      function(module, moduleName, i2) {
+        var child = module[moduleName];
         if (!child) {
-          throw new Error('Missing module "' + moduleName2 + '" for path "' + path + '".');
+          throw new Error('Missing module "' + moduleName + '" for path "' + path + '".');
         }
         return i2 === names.length - 1 ? child : child._children;
       },
@@ -2632,28 +2643,28 @@ if (uni.restoreGlobal) {
           url: "/subPackages/mine/management/index"
         },
         {
-          title: "高级功能",
+          title: "通知管理",
           unicode: "icon-gaojigongneng",
           color: "#7e7cea",
-          url: "/pages/index/index"
+          url: ""
         },
         {
           title: "桌面小组件",
           unicode: "icon-zhuomianzujianguanli",
           color: "#4c8bf0",
-          url: "/pages/index/index"
+          url: ""
         }
       ]);
       const list = vue.ref([
         {
           title: "我的消息",
           unicode: "icon-xiaoxi",
-          url: "/pages/index/index"
+          url: ""
         },
         {
           title: "帮助中心",
           unicode: "icon-bangzhu",
-          url: "/pages/index/index"
+          url: ""
         },
         {
           title: "设置",
@@ -2991,10 +3002,10 @@ if (uni.restoreGlobal) {
       /**
        * 获取父元素实例
        */
-      getSwipeAction(name2 = "uniSwipeAction") {
+      getSwipeAction(name = "uniSwipeAction") {
         let parent = this.$parent;
         let parentName = parent.$options.name;
-        while (parentName !== name2) {
+        while (parentName !== name) {
           parent = parent.$parent;
           if (!parent)
             return false;
@@ -4429,9 +4440,9 @@ if (uni.restoreGlobal) {
         return str.charAt(0).toUpperCase() + str.slice(1);
       },
       // 检查当前值是否在范围内，不在则当前值重置为可选范围第一项
-      checkValue(name2, value, values) {
+      checkValue(name, value, values) {
         if (values.indexOf(value) === -1) {
-          this[name2] = values[0];
+          this[name] = values[0];
         }
       },
       // 每个月的实际天数
@@ -5223,7 +5234,7 @@ if (uni.restoreGlobal) {
        * 派发事件
        * @param {Object} name
        */
-      setEmit(name2) {
+      setEmit(name) {
         if (!this.range) {
           if (!this.calendar.fullDate) {
             this.calendar = this.cale.getInfo(/* @__PURE__ */ new Date());
@@ -5240,7 +5251,7 @@ if (uni.restoreGlobal) {
           fullDate,
           extraInfo
         } = this.calendar;
-        this.$emit(name2, {
+        this.$emit(name, {
           range: this.cale.multipleStatus,
           year,
           month,
@@ -6942,8 +6953,8 @@ if (uni.restoreGlobal) {
         };
       },
       // 驼峰转中横线
-      toLine(name2) {
-        return name2.replace(/([A-Z])/g, "-$1").toLowerCase();
+      toLine(name) {
+        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
       }
     }
   };
@@ -7690,16 +7701,16 @@ if (uni.restoreGlobal) {
           DueDate: planDate.value,
           Type: selectedType.value
         };
-        let errMsg2 = "";
+        let errMsg = "";
         if (!plan.Title) {
-          errMsg2 = "请填写计划标题";
+          errMsg = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg2 = "请选择计划日期";
+          errMsg = "请选择计划日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -7732,16 +7743,16 @@ if (uni.restoreGlobal) {
           DueDate: formatDateTime(new Date(planDate.value)),
           Type: selectedType.value
         };
-        let errMsg2 = "";
+        let errMsg = "";
         if (!plan.Title) {
-          errMsg2 = "请填写计划标题";
+          errMsg = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg2 = "请选择计划日期";
+          errMsg = "请选择计划日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -8096,7 +8107,7 @@ if (uni.restoreGlobal) {
           }
         });
       };
-      const todayIndex = Math.ceil(previewDays / 2 - 1);
+      const todayIndex = Math.ceil(previewDays / 2);
       let currentIndex = vue.ref(todayIndex);
       const swiperChange = (e2) => {
         currDate.value = timestampToTime(dayPlan.value[e2.detail.current].date);
@@ -8157,16 +8168,16 @@ if (uni.restoreGlobal) {
           DueDate: planDate.value,
           Type: selectedType.value
         };
-        let errMsg2 = "";
+        let errMsg = "";
         if (!plan.Title) {
-          errMsg2 = "请填写计划标题";
+          errMsg = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg2 = "请选择计划日期";
+          errMsg = "请选择计划日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -8201,16 +8212,16 @@ if (uni.restoreGlobal) {
           DueDate: formatDateTime(new Date(planDate.value)),
           Type: selectedType.value
         };
-        let errMsg2 = "";
+        let errMsg = "";
         if (!plan.Title) {
-          errMsg2 = "请填写计划标题";
+          errMsg = "请填写计划标题";
         } else if (!plan.DueDate) {
-          errMsg2 = "请选择计划日期";
+          errMsg = "请选择计划日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -9390,22 +9401,22 @@ if (uni.restoreGlobal) {
       const addExpense = async () => {
         expenseData.Category = activeTab.value === 0 ? selectedExpenseCateID.value : selectedIncomeCateID.value;
         expenseData.Date = formatDateTime(expenseData.Date);
-        let errMsg2 = "";
+        let errMsg = "";
         if (expenseData.Amount == "") {
-          errMsg2 = "请输入金额";
+          errMsg = "请输入金额";
         } else if (isNaN(parseFloat(expenseData.Amount))) {
-          errMsg2 = "请输入正确的金额";
+          errMsg = "请输入正确的金额";
           expenseData.Amount = "";
         } else if (expenseData.Amount < 0) {
-          errMsg2 = "不能输入负金额";
+          errMsg = "不能输入负金额";
           expenseData.Amount = Math.abs(expenseData.Amount);
         } else if (!expenseData.Date) {
-          errMsg2 = "请选择日期";
+          errMsg = "请选择日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -10546,36 +10557,36 @@ if (uni.restoreGlobal) {
     node2.attrs.style = tmp;
     return styleObj;
   };
-  Parser$1.prototype.onTagName = function(name2) {
-    this.tagName = this.xml ? name2 : name2.toLowerCase();
+  Parser$1.prototype.onTagName = function(name) {
+    this.tagName = this.xml ? name : name.toLowerCase();
     if (this.tagName === "svg") {
       this.xml = (this.xml || 0) + 1;
       config$1.ignoreTags.style = void 0;
     }
   };
-  Parser$1.prototype.onAttrName = function(name2) {
-    name2 = this.xml ? name2 : name2.toLowerCase();
-    if (name2.substr(0, 5) === "data-") {
-      if (name2 === "data-src" && !this.attrs.src) {
+  Parser$1.prototype.onAttrName = function(name) {
+    name = this.xml ? name : name.toLowerCase();
+    if (name.substr(0, 5) === "data-") {
+      if (name === "data-src" && !this.attrs.src) {
         this.attrName = "src";
       } else if (this.tagName === "img" || this.tagName === "a") {
-        this.attrName = name2;
+        this.attrName = name;
       } else {
         this.attrName = void 0;
       }
     } else {
-      this.attrName = name2;
-      this.attrs[name2] = "T";
+      this.attrName = name;
+      this.attrs[name] = "T";
     }
   };
   Parser$1.prototype.onAttrVal = function(val) {
-    const name2 = this.attrName || "";
-    if (name2 === "style" || name2 === "href") {
-      this.attrs[name2] = decodeEntity(val, true);
-    } else if (name2.includes("src")) {
-      this.attrs[name2] = this.getUrl(decodeEntity(val, true));
-    } else if (name2) {
-      this.attrs[name2] = val;
+    const name = this.attrName || "";
+    if (name === "style" || name === "href") {
+      this.attrs[name] = decodeEntity(val, true);
+    } else if (name.includes("src")) {
+      this.attrs[name] = this.getUrl(decodeEntity(val, true));
+    } else if (name) {
+      this.attrs[name] = val;
     }
   };
   Parser$1.prototype.onOpenTag = function(selfClose) {
@@ -10700,24 +10711,24 @@ if (uni.restoreGlobal) {
     }
     siblings.push(node2);
   };
-  Parser$1.prototype.onCloseTag = function(name2) {
-    name2 = this.xml ? name2 : name2.toLowerCase();
+  Parser$1.prototype.onCloseTag = function(name) {
+    name = this.xml ? name : name.toLowerCase();
     let i2;
     for (i2 = this.stack.length; i2--; ) {
-      if (this.stack[i2].name === name2)
+      if (this.stack[i2].name === name)
         break;
     }
     if (i2 !== -1) {
       while (this.stack.length > i2) {
         this.popNode();
       }
-    } else if (name2 === "p" || name2 === "br") {
+    } else if (name === "p" || name === "br") {
       const siblings = this.stack.length ? this.stack[this.stack.length - 1].children : this.nodes;
       siblings.push({
-        name: name2,
+        name,
         attrs: {
-          class: tagSelector[name2] || "",
-          style: this.tagStyle[name2] || ""
+          class: tagSelector[name] || "",
+          style: this.tagStyle[name] || ""
         }
       });
     }
@@ -10761,8 +10772,8 @@ if (uni.restoreGlobal) {
           src += node3.text;
           return;
         }
-        const name2 = config$1.svgDict[node3.name] || node3.name;
-        if (name2 === "foreignObject") {
+        const name = config$1.svgDict[node3.name] || node3.name;
+        if (name === "foreignObject") {
           for (const child of node3.children || []) {
             if (child.attrs && !child.attrs.xmlns) {
               child.attrs.xmlns = "http://www.w3.org/1999/xhtml";
@@ -10770,7 +10781,7 @@ if (uni.restoreGlobal) {
             }
           }
         }
-        src += "<" + name2;
+        src += "<" + name;
         for (const item in node3.attrs) {
           const val = node3.attrs[item];
           if (val) {
@@ -10784,7 +10795,7 @@ if (uni.restoreGlobal) {
           for (let i2 = 0; i2 < node3.children.length; i2++) {
             traversal(node3.children[i2]);
           }
-          src += "</" + name2 + ">";
+          src += "</" + name + ">";
         }
       })(node2);
       node2.name = "img";
@@ -11666,28 +11677,28 @@ if (uni.restoreGlobal) {
                 const style = parent.childs[i2].attrs.style || "";
                 let newStyle = "";
                 const item = items[tapIndex];
-                let name2;
+                let name;
                 let value;
                 if (item === "斜体") {
-                  name2 = "font-style";
+                  name = "font-style";
                   value = "italic";
                 } else if (item === "粗体") {
-                  name2 = "font-weight";
+                  name = "font-weight";
                   value = "bold";
                 } else if (item === "下划线") {
-                  name2 = "text-decoration";
+                  name = "text-decoration";
                   value = "underline";
                 } else if (item === "居中") {
-                  name2 = "text-align";
+                  name = "text-align";
                   value = "center";
                 } else if (item === "缩进") {
-                  name2 = "text-indent";
+                  name = "text-indent";
                   value = "2em";
                 }
-                if (style.includes(name2 + ":")) {
-                  newStyle = style.replace(new RegExp(name2 + ":[^;]+"), "");
+                if (style.includes(name + ":")) {
+                  newStyle = style.replace(new RegExp(name + ":[^;]+"), "");
                 } else {
-                  newStyle = style + ";" + name2 + ":" + value;
+                  newStyle = style + ";" + name + ":" + value;
                 }
                 this.root._editVal(`${parent.opts[7]}.${i2}.attrs.style`, style, newStyle, true);
               }
@@ -11740,12 +11751,12 @@ if (uni.restoreGlobal) {
           }, 50);
         }
       },
-      changeStyle(name2, i2, value, oldVal) {
+      changeStyle(name, i2, value, oldVal) {
         let style = this.childs[i2].attrs.style || "";
-        if (style.includes(";" + name2 + ":" + oldVal)) {
-          style = style.replace(";" + name2 + ":" + oldVal, ";" + name2 + ":" + value);
+        if (style.includes(";" + name + ":" + oldVal)) {
+          style = style.replace(";" + name + ":" + oldVal, ";" + name + ":" + value);
         } else {
-          style += ";" + name2 + ":" + value;
+          style += ";" + name + ":" + value;
         }
         this.root._setData(`${this.opts[7]}.${i2}.attrs.style`, style);
       },
@@ -17278,16 +17289,16 @@ if (uni.restoreGlobal) {
     new Lexer(this).parse(content);
     return this.styles;
   };
-  Parser.prototype.onSelector = function(name2) {
-    if (name2.includes("[") || name2.includes("*") || name2.includes("@"))
+  Parser.prototype.onSelector = function(name) {
+    if (name.includes("[") || name.includes("*") || name.includes("@"))
       return;
     const selector = {};
-    if (name2.includes(":")) {
-      const info = name2.split(":");
+    if (name.includes(":")) {
+      const info = name.split(":");
       const pseudo = info.pop();
       if (pseudo === "before" || pseudo === "after") {
         selector.pseudo = pseudo;
-        name2 = info[0];
+        name = info[0];
       } else
         return;
     }
@@ -17307,9 +17318,9 @@ if (uni.restoreGlobal) {
         return arr;
       }
     }
-    if (name2.includes(" ")) {
+    if (name.includes(" ")) {
       selector.list = [];
-      const list = name2.split(" ");
+      const list = name.split(" ");
       for (let i2 = 0; i2 < list.length; i2++) {
         if (list[i2].length) {
           const arr = list[i2].split(">");
@@ -17322,7 +17333,7 @@ if (uni.restoreGlobal) {
         }
       }
     } else {
-      selector.key = splitItem(name2);
+      selector.key = splitItem(name);
     }
     this.selectors.push(selector);
   };
@@ -17585,10 +17596,10 @@ if (uni.restoreGlobal) {
         return;
       taskQueue.add(url);
       const suffix = /.+\.(jpg|jpeg|png|bmp|gif|webp)/.exec(url);
-      const name2 = `${makeid(8)}_${Date.now()}${suffix ? "." + suffix[1] : ""}`;
+      const name = `${makeid(8)}_${Date.now()}${suffix ? "." + suffix[1] : ""}`;
       const task = plus.downloader.createDownload(
         url,
-        { filename: `_doc/${data.name}/${name2}` },
+        { filename: `_doc/${data.name}/${name}` },
         (download2, status) => {
           taskQueue.delete(url);
           resolve(status === 200 ? download2.filename : null);
@@ -18335,10 +18346,10 @@ if (uni.restoreGlobal) {
       /**
        * @description 调用插件钩子函数
        */
-      _hook(name2) {
+      _hook(name) {
         for (let i2 = plugins.length; i2--; ) {
-          if (this.plugins[i2][name2]) {
-            this.plugins[i2][name2]();
+          if (this.plugins[i2][name]) {
+            this.plugins[i2][name]();
           }
         }
       }
@@ -18767,14 +18778,14 @@ if (uni.restoreGlobal) {
               Content: content,
               Type: this.type
             };
-            let errMsg2 = "";
+            let errMsg = "";
             if (!memo.Title) {
-              errMsg2 = "请填写备忘录标题";
+              errMsg = "请填写备忘录标题";
             }
-            if (errMsg2) {
+            if (errMsg) {
               uni.showToast({
                 icon: "error",
-                title: errMsg2
+                title: errMsg
               });
               return;
             }
@@ -19409,14 +19420,14 @@ if (uni.restoreGlobal) {
       const addWater = () => {
         formatAppLog("log", "at subPackages/water/index/index.vue:268", "waterData.DateTime", waterData.DateTime);
         waterData.DateTime = formatDateTime(waterData.DateTime);
-        let errMsg2 = "";
+        let errMsg = "";
         if (!waterData.Amount) {
-          errMsg2 = "请输入饮水量";
+          errMsg = "请输入饮水量";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -20383,14 +20394,14 @@ if (uni.restoreGlobal) {
               Title: this.diaryTitle,
               Content: content
             };
-            let errMsg2 = "";
+            let errMsg = "";
             if (!diary.Title) {
-              errMsg2 = "请填写日记标题";
+              errMsg = "请填写日记标题";
             }
-            if (errMsg2) {
+            if (errMsg) {
               uni.showToast({
                 icon: "error",
-                title: errMsg2
+                title: errMsg
               });
               return;
             }
@@ -20764,16 +20775,16 @@ if (uni.restoreGlobal) {
           Name: countdownName.value,
           TargetDate: formatDate(countdownDate.value)
         };
-        let errMsg2 = "";
+        let errMsg = "";
         if (!countdown.Name) {
-          errMsg2 = "请输入倒计时名称";
+          errMsg = "请输入倒计时名称";
         } else if (!countdown.TargetDate) {
-          errMsg2 = "请选择目标日期";
+          errMsg = "请选择目标日期";
         }
-        if (errMsg2) {
+        if (errMsg) {
           uni.showToast({
             icon: "error",
-            title: errMsg2
+            title: errMsg
           });
           return;
         }
@@ -23961,63 +23972,45 @@ if (uni.restoreGlobal) {
     }
   };
   const SubPackagesBookPreviewIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-8d3ba962"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/preview/index.vue"]]);
-  const { registerUTSInterface, initUTSProxyClass, initUTSProxyFunction, initUTSPackageName, initUTSIndexClassName, initUTSClassName } = uni;
-  const name = "laoqianjunziAlarm";
-  const moduleName = "安卓系统闹钟提醒";
-  const moduleType = "";
-  const errMsg = ``;
-  const is_uni_modules = true;
-  const pkg = /* @__PURE__ */ initUTSPackageName(name, is_uni_modules);
-  const cls = /* @__PURE__ */ initUTSIndexClassName(name, is_uni_modules);
-  const alarmAdd = /* @__PURE__ */ initUTSProxyFunction(false, { moduleName, moduleType, errMsg, main: true, package: pkg, class: cls, name: "alarmAddByJs", params: [{ "name": "opts", "type": "UTSSDKModulesLaoqianjunziAlarmAddOptionsJSONObject" }], return: "" });
-  const alarmDelete = /* @__PURE__ */ initUTSProxyFunction(false, { moduleName, moduleType, errMsg, main: true, package: pkg, class: cls, name: "alarmDeleteByJs", params: [], return: "" });
-  getApp();
   const _sfc_main$1 = {
     data() {
-      return {};
+      return {
+        title: ""
+      };
+    },
+    onLoad() {
     },
     methods: {
-      doUtsAdd() {
-        let params = {
-          name: "dida",
-          //闹铃名称
-          weekday: "123456",
-          //重复星期
-          hour: 10,
-          //闹铃时
-          minutes: 14,
-          //分钟
-          ringtone: "https://jubaomusics.oss-cn-beijing.aliyuncs.com/%E4%B8%89%E5%8F%AA%E5%B0%8F%E7%8C%AA/%E4%B8%89%E5%8F%AA%E5%B0%8F%E7%8C%AA.mp3"
-          //铃声
-        };
-        alarmAdd({
-          params,
-          success: (res) => {
-            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:40", "success", res);
-          },
-          fail: (res) => {
-            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:44", "fail", res);
-          },
-          complete: () => {
-            formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:47", "complete");
-          }
+      showRichAlert() {
+        const dcRichAlert = requireNativePlugin("CRGG-Plugin");
+        dcRichAlert.setcalendar({
+          title: "我是提醒",
+          location: "上海市普陀区",
+          allDay: "1",
+          description: "测试测试描述",
+          startDate: "2020-04-15 15:40:33",
+          endDate: "2020-04-15 15:40:32",
+          alarmArray_ios: ["-7.f", "-17.f", "-27.5f"],
+          alarmArray_android: [1, 2, 10]
+        }, (result) => {
+          if (result.type == "0")
+            ;
         });
-      },
-      doUtsDelete() {
-        alarmDelete();
       }
+      // 			nvueclick() {
+      // 				uni.navigateTo({
+      // 					url: '/pages/nvue/index2'
+      // 				});
+      // 			}
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createElementVNode("view", {
-        class: "btn",
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.doUtsAdd && $options.doUtsAdd(...args))
-      }, " Uts添加闹铃 "),
-      vue.createElementVNode("view", {
-        class: "btn",
-        onClick: _cache[1] || (_cache[1] = (...args) => $options.doUtsDelete && $options.doUtsDelete(...args))
-      }, " Uts删除闹铃 ")
+    return vue.openBlock(), vue.createElementBlock("view", { class: "button-sp-area" }, [
+      vue.createElementVNode("button", {
+        type: "primary",
+        plain: "true",
+        onClick: _cache[0] || (_cache[0] = ($event) => $options.showRichAlert())
+      }, "点击显示弹窗")
     ]);
   }
   const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
@@ -24053,13 +24046,14 @@ if (uni.restoreGlobal) {
       }
       const screen = await this.getScreen();
       this.$store.dispatch("updateScreen", screen);
+      this.$store.dispatch("openAppInitParams");
     },
     onShow: function() {
       getApp().globalData.userInfo = uni.getStorageSync("userInfo");
-      formatAppLog("log", "at App.vue:16", "App Show");
+      formatAppLog("log", "at App.vue:18", "App Show");
     },
     onHide: function() {
-      formatAppLog("log", "at App.vue:19", "App Hide");
+      formatAppLog("log", "at App.vue:21", "App Hide");
     },
     methods: {
       // 获取屏幕宽高
@@ -24279,20 +24273,6 @@ if (uni.restoreGlobal) {
           url: "/subPackages/book/index/index",
           color: "#ce9178",
           desc: "阅读笔记，书单"
-        },
-        {
-          title: "课程表",
-          unicode: "icon-kechengbiao",
-          url: "/pages/note/index",
-          color: "#ff4962",
-          desc: "小初高大学课程表"
-        },
-        {
-          title: "习惯打卡",
-          unicode: "icon-a-rilidaka",
-          url: "/subPackages/test/NumericKeypad/index",
-          color: "#7e7de8",
-          desc: "习惯成自然"
         }
       ]
     },
@@ -24300,6 +24280,9 @@ if (uni.restoreGlobal) {
       // 定义 mutations，用于修改状态
       setData(state, newData) {
         state.data = newData;
+      },
+      setAppInitParams(state) {
+        state.currentTab = 0;
       },
       setBaseUrl(state, newBaseUrl) {
         state.baseUrl = newBaseUrl;
@@ -24324,6 +24307,9 @@ if (uni.restoreGlobal) {
       // 可选的，用于处理异步操作，最终提交 mutations
       updateData({ commit }, newData) {
         commit("setData", newData);
+      },
+      openAppInitParams({ commit }, params) {
+        commit("setAppInitParams");
       },
       updateBaseUrl({ commit }, newBaseUrl) {
         commit("setBaseUrl", newBaseUrl);

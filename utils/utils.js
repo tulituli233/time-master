@@ -2,6 +2,14 @@ import LunarCalendar from 'lunar-calendar';
 
 // 跳转
 export const navTo = (url) => {
+    if (!url) {
+        uni.showToast({
+            title: '该功能暂未开放，敬请期待！',
+            icon: 'none',
+            duration: 2000
+        })
+        return
+    }
     uni.navigateTo({
         url
     })

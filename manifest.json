@@ -50,7 +50,14 @@
             },
             /* SDK配置 */
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : true,
+                        "vivo" : {}
+                    }
+                }
             },
             "icons" : {
                 "android" : {
@@ -84,7 +91,8 @@
                     }
                 }
             }
-        }
+        },
+        "nativePlugins" : {}
     },
     /* 快应用特有相关 */
     "quickapp" : {},

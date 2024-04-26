@@ -95,20 +95,6 @@ export default createStore({
         url: '/subPackages/book/index/index',
         color: '#ce9178',
         desc: '阅读笔记，书单'
-      },
-      {
-        title: '课程表',
-        unicode: 'icon-kechengbiao',
-        url: '/pages/note/index',
-        color: '#ff4962',
-        desc: '小初高大学课程表'
-      },
-      {
-        title: '习惯打卡',
-        unicode: 'icon-a-rilidaka',
-        url: '/subPackages/test/NumericKeypad/index',
-        color: '#7e7de8',
-        desc: '习惯成自然'
       }
     ]
   },
@@ -116,6 +102,9 @@ export default createStore({
     // 定义 mutations，用于修改状态
     setData(state, newData) {
       state.data = newData;
+    },
+    setAppInitParams(state) {
+      state.currentTab = 0;
     },
     setBaseUrl(state, newBaseUrl) {
       state.baseUrl = newBaseUrl;
@@ -140,6 +129,9 @@ export default createStore({
     // 可选的，用于处理异步操作，最终提交 mutations
     updateData({ commit }, newData) {
       commit('setData', newData);
+    },
+    openAppInitParams({ commit }, params) {
+      commit('setAppInitParams');
     },
     updateBaseUrl({ commit }, newBaseUrl) {
       commit('setBaseUrl', newBaseUrl);

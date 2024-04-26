@@ -10,6 +10,8 @@ export default {
 		// 获取屏幕宽高
 		const screen = await this.getScreen();
 		this.$store.dispatch('updateScreen', screen);
+		// 打开应用初始化参数
+		this.$store.dispatch('openAppInitParams');
 	},
 	onShow: function () {
 		getApp().globalData.userInfo = uni.getStorageSync('userInfo');
