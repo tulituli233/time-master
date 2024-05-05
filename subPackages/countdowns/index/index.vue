@@ -114,6 +114,9 @@ const openAddOrEditCountdown = (countdown, openEdit = false) => {
         activeCountdownID.value = countdown.CountdownID
         countdownName.value = countdown.Name
         countdownDate.value = countdown.TargetDate
+    } else {
+        countdownName.value = ''
+        countdownDate.value = ''
     }
     addCountdownRef.value.open('bottom')
 }

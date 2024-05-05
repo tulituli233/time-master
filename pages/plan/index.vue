@@ -192,7 +192,7 @@ const filterPlans = (days, tasks, dayPlan) => {
 		}
 	});
 }
-const todayIndex = Math.ceil(previewDays / 2)
+const todayIndex = Math.ceil(previewDays / 2 - 1);
 let currentIndex = ref(todayIndex);
 const swiperChange = (e) => {
 	currDate.value = timestampToTime(dayPlan.value[e.detail.current].date)

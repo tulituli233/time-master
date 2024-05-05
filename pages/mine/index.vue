@@ -69,13 +69,13 @@ const middleList = ref([
 		title: '通知管理',
 		unicode: 'icon-gaojigongneng',
 		color: '#7e7cea',
-		url: ''
+		url: '/subPackages/test/NumericKeypad/index'
 	},
 	{
 		title: '桌面小组件',
 		unicode: 'icon-zhuomianzujianguanli',
 		color: '#4c8bf0',
-		url: ''
+		url: '/subPackages/book/preview/index'
 	}
 ])
 const list = ref([

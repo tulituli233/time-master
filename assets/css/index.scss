@@ -68,6 +68,10 @@
 	text-overflow: ellipsis;
 }
 
+.ellipsis-1 {
+	-webkit-line-clamp: 1;
+}
+
 // 模式切换
 .day-mode {
 	background-color: #f8f8f8;

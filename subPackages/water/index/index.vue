@@ -20,7 +20,7 @@
                     <view class="label">已喝(ml)</view>
                     <view class="value">{{ consumedWater }}</view>
                 </view>
-                <view class="info-item" @click="$refs.setTargetRef.open('bottom')">
+                <view class="info-item">
                     <view class="label">目标(ml)</view>
                     <view class="value">{{ targetWater }}</view>
                 </view>
@@ -126,7 +126,7 @@
                     <view class="title">设置饮水目标</view>
                 </view>
                 <view class="set-target-input">
-                    <uni-number-box :width="100" :value="targetWaterTemp" :step="100" />
+                    <uni-number-box :width="100" :value="targetWaterTemp" :min="500" :max="10000" :step="100" />
                 </view>
                 <view class="set-target-btn">
                     <view class="btn" @click="$refs.setTargetRef.close()">取消</view>
@@ -314,7 +314,7 @@ const getWaterObject = (WaterID) => {
 }
 
 const setTargetRef = ref(null)
-const targetWaterTemp = ref(1700)
+const targetWaterTemp = ref(2000)
 const setTarget = () => {
     targetWater.value = targetWaterTemp.value
     setTargetRef.value.close()

@@ -395,6 +395,10 @@
   text-overflow: ellipsis;
 }
 
+.ellipsis-1 {
+  -webkit-line-clamp: 1;
+}
+
 .day-mode {
   background-color: #f8f8f8;
   color: #000000;

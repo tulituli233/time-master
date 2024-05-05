@@ -119,7 +119,7 @@ function remove(src) {
 export default {
     data() {
         return {
-            content: '<div>Hello World!</div>',
+            content: '<div></div>',
             keyboardHeight: 0,
             modal: null,
             dialog: false,
@@ -418,8 +418,9 @@ export default {
         },
         // 保存备忘录
         saveDiary(diary) {
+            console.log('this.isEdit', this.isEdit);
             if (this.isEdit) diary.DiaryID = this.diary.DiaryID
-            let api = this.editable ? apiUpdateDiary : apiAddDiary
+            let api = this.isEdit ? apiUpdateDiary : apiAddDiary
             api(diary).then(res => {
                 console.log('res', res);
                 if (res.code === 0 || !res.code) {

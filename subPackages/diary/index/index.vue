@@ -1,5 +1,5 @@
 <template>
-	<AppPage navTitle="备忘录" backgroundImage="/static/diary-bg.webp">
+	<AppPage navTitle="日记" backgroundImage="/static/diary-bg.png">
 		<view class="diary-list">
 			<view class="diary-item theme-bgc" v-for="item in diaries" :key="item.DiaryID" @click="editDiary(item)"
 				@longpress="openPopup(item)">

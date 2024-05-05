@@ -119,7 +119,7 @@ function remove(src) {
 export default {
     data() {
         return {
-            content: '<div>Hello World!</div>',
+            content: '<div></div>',
             keyboardHeight: 0,
             modal: null,
             dialog: false,

@@ -762,9 +762,6 @@ if (uni.restoreGlobal) {
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
   const ON_UNLOAD = "onUnload";
-  function requireNativePlugin(name) {
-    return weex.requireModule(name);
-  }
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -2646,13 +2643,13 @@ if (uni.restoreGlobal) {
           title: "通知管理",
           unicode: "icon-gaojigongneng",
           color: "#7e7cea",
-          url: ""
+          url: "/subPackages/test/NumericKeypad/index"
         },
         {
           title: "桌面小组件",
           unicode: "icon-zhuomianzujianguanli",
           color: "#4c8bf0",
-          url: ""
+          url: "/subPackages/book/preview/index"
         }
       ]);
       const list = vue.ref([
@@ -8107,7 +8104,7 @@ if (uni.restoreGlobal) {
           }
         });
       };
-      const todayIndex = Math.ceil(previewDays / 2);
+      const todayIndex = Math.ceil(previewDays / 2 - 1);
       let currentIndex = vue.ref(todayIndex);
       const swiperChange = (e2) => {
         currDate.value = timestampToTime(dayPlan.value[e2.detail.current].date);
@@ -18474,7 +18471,7 @@ if (uni.restoreGlobal) {
   const __default__$1 = {
     data() {
       return {
-        content: "<div>Hello World!</div>",
+        content: "<div></div>",
         keyboardHeight: 0,
         modal: null,
         dialog: false,
@@ -19462,7 +19459,7 @@ if (uni.restoreGlobal) {
         return waterTypes.value.find((item) => item.WaterID === WaterID);
       };
       const setTargetRef = vue.ref(null);
-      const targetWaterTemp = vue.ref(1700);
+      const targetWaterTemp = vue.ref(2e3);
       const setTarget = () => {
         targetWater.value = targetWaterTemp.value;
         setTargetRef.value.close();
@@ -19540,10 +19537,7 @@ if (uni.restoreGlobal) {
                     /* TEXT */
                   )
                 ]),
-                vue.createElementVNode("view", {
-                  class: "info-item",
-                  onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.setTargetRef.open("bottom"))
-                }, [
+                vue.createElementVNode("view", { class: "info-item" }, [
                   vue.createElementVNode("view", { class: "label" }, "目标(ml)"),
                   vue.createElementVNode(
                     "view",
@@ -19862,17 +19856,19 @@ if (uni.restoreGlobal) {
                       vue.createVNode(_component_uni_number_box, {
                         width: 100,
                         value: targetWaterTemp.value,
+                        min: 500,
+                        max: 1e4,
                         step: 100
                       }, null, 8, ["value"])
                     ]),
                     vue.createElementVNode("view", { class: "set-target-btn" }, [
                       vue.createElementVNode("view", {
                         class: "btn",
-                        onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$refs.setTargetRef.close())
+                        onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$refs.setTargetRef.close())
                       }, "取消"),
                       vue.createElementVNode("view", {
                         class: "btn btn-primary",
-                        onClick: _cache[3] || (_cache[3] = ($event) => setTarget())
+                        onClick: _cache[2] || (_cache[2] = ($event) => setTarget())
                       }, "确定")
                     ])
                   ])
@@ -19962,8 +19958,8 @@ if (uni.restoreGlobal) {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
         const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
         return vue.openBlock(), vue.createBlock(vue.unref(AppPage), {
-          navTitle: "备忘录",
-          backgroundImage: "/static/diary-bg.webp"
+          navTitle: "日记",
+          backgroundImage: "/static/diary-bg.png"
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "diary-list" }, [
@@ -20096,7 +20092,7 @@ if (uni.restoreGlobal) {
   const __default__ = {
     data() {
       return {
-        content: "<div>Hello World!</div>",
+        content: "<div></div>",
         keyboardHeight: 0,
         modal: null,
         dialog: false,
@@ -20366,11 +20362,12 @@ if (uni.restoreGlobal) {
       },
       // 保存备忘录
       saveDiary(diary) {
+        formatAppLog("log", "at subPackages/diary/add/index.vue:421", "this.isEdit", this.isEdit);
         if (this.isEdit)
           diary.DiaryID = this.diary.DiaryID;
-        let api = this.editable ? apiUpdateDiary : apiAddDiary;
+        let api = this.isEdit ? apiUpdateDiary : apiAddDiary;
         api(diary).then((res) => {
-          formatAppLog("log", "at subPackages/diary/add/index.vue:424", "res", res);
+          formatAppLog("log", "at subPackages/diary/add/index.vue:425", "res", res);
           if (res.code === 0 || !res.code) {
             uni.showToast({
               icon: "error",
@@ -20405,7 +20402,7 @@ if (uni.restoreGlobal) {
               });
               return;
             }
-            formatAppLog("log", "at subPackages/diary/add/index.vue:459", "diary", diary);
+            formatAppLog("log", "at subPackages/diary/add/index.vue:460", "diary", diary);
             this.saveDiary(diary);
           } else {
             this.editable = true;
@@ -20764,6 +20761,9 @@ if (uni.restoreGlobal) {
           activeCountdownID.value = countdown.CountdownID;
           countdownName.value = countdown.Name;
           countdownDate.value = countdown.TargetDate;
+        } else {
+          countdownName.value = "";
+          countdownDate.value = "";
         }
         addCountdownRef.value.open("bottom");
       };
@@ -20790,7 +20790,7 @@ if (uni.restoreGlobal) {
         }
         if (isEdit2.value)
           countdown.CountdownID = activeCountdownID.value;
-        formatAppLog("log", "at subPackages/countdowns/index/index.vue:143", "countdown", countdown);
+        formatAppLog("log", "at subPackages/countdowns/index/index.vue:146", "countdown", countdown);
         let api = isEdit2.value ? apiUpdateCountdown : apiAddCountdown;
         api(countdown).then((res) => {
           if (res.code === 0 || !res.code) {
@@ -21841,12 +21841,6 @@ if (uni.restoreGlobal) {
   const apiBatchDeleteNovelChapters = (novelId, startChapterNumber, endChapterNumber) => {
     return request({
       url: `book/batchDelete?startChapterNumber=${startChapterNumber}&endChapterNumber=${endChapterNumber}&novelId=${novelId}`,
-      method: "GET"
-    });
-  };
-  const apiGetHtmlByUrl = (url) => {
-    return request({
-      url: `book/getHtmlByUrl?url=${url}`,
       method: "GET"
     });
   };
@@ -23888,47 +23882,119 @@ if (uni.restoreGlobal) {
   const _sfc_main$2 = {
     __name: "index",
     setup(__props2) {
-      const searchString = vue.ref("");
-      const searchResults = vue.ref("");
-      const showClearIcon = vue.computed(() => searchString.value.length > 0);
+      vue.useCssVars((_ctx) => ({
+        "8d3ba962-showSetting ? 1 : 0": showSetting.value ? 1 : 0
+      }));
+      var wv2;
+      onReady(() => {
+        var currentWebview = vue.getCurrentInstance().proxy.$scope.$getAppWebview();
+        setTimeout(() => {
+          wv2 = currentWebview.children()[0];
+          formatAppLog("log", "at subPackages/book/preview/index.vue:65", "wv", wv2);
+          wv2.setStyle({ top: 80, scalable: true, opacity: 0.5 });
+          wv2.setCssText("*{ color: white!important; background-color: #000!important; }");
+        }, 1e3);
+      });
+      const store2 = useStore();
+      const theme = vue.computed(() => store2.state.theme);
+      const preViewUrl = vue.ref("");
+      const webUrl = vue.ref("https://wap.cool18.com/index.php?app=index&act=view&cid=5616945");
+      const showClearIcon = vue.computed(() => preViewUrl.value.length > 0);
       const clearIcon = () => {
-        searchString.value = "";
+        preViewUrl.value = "";
       };
       const search = () => {
-        getHtmlByUrl(searchString.value);
+        webUrl.value = preViewUrl.value;
       };
-      const getHtmlByUrl = (url) => {
-        apiGetHtmlByUrl(url).then((res) => {
-          if (res.code === 0 || !res.code) {
-            uni.showToast({
-              icon: "error",
-              title: res.msg || "网络异常"
-            });
-          } else {
-            searchResults.value = res.data;
-            formatAppLog("log", "at subPackages/book/preview/index.vue:39", "searchResults", searchResults.value);
-          }
-        });
+      const navBack = () => {
+        uni.navigateBack();
       };
-      const tipMsg = vue.ref("");
+      const closeFooter = () => {
+        wv2.setStyle({ height: 700 });
+      };
+      const readSetting = vue.ref({
+        fontSizePercent: 30,
+        brightnessPercent: 90
+      });
+      const showSetting = vue.ref(false);
+      const showOrHideFunBtn = () => {
+        formatAppLog("log", "at subPackages/book/preview/index.vue:96", "showOrHideFunBtn");
+        wv2.setStyle({ height: 500 });
+        showSetting.value = !showSetting.value;
+      };
+      const setThirdPartyFontSize = (num) => {
+        formatAppLog("log", "at subPackages/book/preview/index.vue:102", "setThirdPartyFontSize", num);
+        formatAppLog("log", "at subPackages/book/preview/index.vue:103", "wv", wv2);
+        wv2.setCssText("*{ font-size: 60px!important; }");
+      };
+      const setThirdPartyOpacity = (num) => {
+        formatAppLog("log", "at subPackages/book/preview/index.vue:111", "setThirdPartyOpacity", num);
+        wv2.setCssText("*{ opacity: " + num + " }");
+      };
+      const updateBrightness = (e2) => {
+        readSetting.value.brightnessPercent = e2.detail.value;
+        setThirdPartyOpacity(readSetting.value.brightnessPercent / 100);
+      };
+      const updateFontSize = (e2) => {
+        readSetting.value.fontSizePercent = e2.detail.value;
+        setThirdPartyFontSize(readSetting.value.fontSizePercent);
+      };
+      const setBrightness = (num) => {
+        readSetting.value.brightnessPercent = parseInt(readSetting.value.brightnessPercent);
+        readSetting.value.brightnessPercent += num;
+        setThirdPartyOpacity(readSetting.value.brightnessPercent / 100);
+      };
+      const setFontSize = (num) => {
+        readSetting.value.fontSizePercent = parseInt(readSetting.value.fontSizePercent);
+        readSetting.value.fontSizePercent += num;
+        setThirdPartyFontSize(readSetting.value.fontSizePercent);
+      };
+      const starList = vue.ref([
+        "https://sexinsex.net/bbs/thread-8908821-1-1.html",
+        "https://wap.cool18.com/index.php?app=index&act=view&cid=5616945"
+      ]);
+      const showList = vue.ref(false);
+      const showOrHideStarList = () => {
+        showSetting.value = false;
+        wv2.setStyle({ height: 500 });
+        showList.value = !showList.value;
+      };
+      const goTo = (item) => {
+        webUrl.value = item;
+        showList.value = false;
+      };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-        return vue.openBlock(), vue.createBlock(vue.unref(AppPage), { navTitle: "预览网页" }, {
-          default: vue.withCtx(() => [
-            vue.createElementVNode("view", { id: "search" }, [
+        return vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            class: vue.normalizeClass(["content", vue.unref(theme).mode])
+          },
+          [
+            vue.createElementVNode("view", {
+              id: "preview-search",
+              class: "theme-bgc"
+            }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "left",
+                size: "30",
+                color: vue.unref(theme).iconColor,
+                onClick: navBack
+              }, null, 8, ["color"]),
               vue.withDirectives(vue.createElementVNode(
                 "input",
                 {
                   class: "author-input",
                   type: "text",
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => searchString.value = $event),
-                  placeholder: "请输入网址"
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => preViewUrl.value = $event),
+                  placeholder: "请输入网址",
+                  onFocus: showOrHideStarList
                 },
                 null,
-                512
-                /* NEED_PATCH */
+                544
+                /* HYDRATE_EVENTS, NEED_PATCH */
               ), [
-                [vue.vModelText, searchString.value]
+                [vue.vModelText, preViewUrl.value]
               ]),
               vue.withDirectives(vue.createVNode(
                 _component_uni_icons,
@@ -23947,70 +24013,147 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("view", {
                 class: "search-btn",
                 onClick: search
-              }, "预览")
+              }, "预览"),
+              vue.createVNode(_component_uni_icons, {
+                type: "gear-filled",
+                size: "30",
+                color: vue.unref(theme).iconColor,
+                onClick: showOrHideFunBtn
+              }, null, 8, ["color"]),
+              vue.createCommentVNode(" 关闭按钮 "),
+              vue.createElementVNode("view", {
+                class: "close-btn",
+                onClick: closeFooter
+              }, "关闭"),
+              vue.createCommentVNode(" 设置 "),
+              vue.withDirectives(vue.createElementVNode(
+                "view",
+                { class: "sidebar-setting theme-bgc" },
+                [
+                  vue.createElementVNode("view", { class: "setting-item" }, [
+                    vue.createElementVNode("view", {
+                      class: "setting-icon",
+                      onClick: _cache[1] || (_cache[1] = ($event) => setBrightness(-1))
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-liangdu-4",
+                        size: "30"
+                      })
+                    ]),
+                    vue.createElementVNode("input", {
+                      class: "range-input",
+                      type: "range",
+                      value: readSetting.value.brightnessPercent,
+                      onInput: updateBrightness
+                    }, null, 40, ["value"]),
+                    vue.createElementVNode("view", {
+                      class: "setting-icon",
+                      onClick: _cache[2] || (_cache[2] = ($event) => setBrightness(1))
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-liang-8",
+                        size: "30"
+                      })
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "setting-item" }, [
+                    vue.createElementVNode("view", {
+                      class: "setting-icon",
+                      onClick: _cache[3] || (_cache[3] = ($event) => setFontSize(-1))
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-ziti-jian",
+                        size: "30"
+                      })
+                    ]),
+                    vue.createElementVNode("input", {
+                      class: "range-input",
+                      type: "range",
+                      value: readSetting.value.fontSizePercent,
+                      onInput: updateFontSize
+                    }, null, 40, ["value"]),
+                    vue.createElementVNode("view", {
+                      class: "setting-icon",
+                      onClick: _cache[4] || (_cache[4] = ($event) => setFontSize(1))
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        class: "theme-font",
+                        "custom-prefix": "iconfont",
+                        type: "icon-ziti-jia",
+                        size: "30"
+                      })
+                    ])
+                  ])
+                ],
+                512
+                /* NEED_PATCH */
+              ), [
+                [vue.vShow, showSetting.value]
+              ]),
+              vue.createCommentVNode(" 收藏的网址列表 "),
+              vue.withDirectives(vue.createElementVNode(
+                "view",
+                { class: "star-list theme-bgc" },
+                [
+                  (vue.openBlock(true), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(starList.value, (item, index2) => {
+                      return vue.openBlock(), vue.createElementBlock("view", {
+                        class: "list-item ellipsis ellipsis-1",
+                        key: index2,
+                        onClick: ($event) => goTo(item)
+                      }, vue.toDisplayString(item), 9, ["onClick"]);
+                    }),
+                    128
+                    /* KEYED_FRAGMENT */
+                  ))
+                ],
+                512
+                /* NEED_PATCH */
+              ), [
+                [vue.vShow, showList.value]
+              ])
             ]),
-            searchResults.value ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 0,
-              id: "book-list"
-            }, [
-              vue.createElementVNode("view", { innerHTML: searchResults.value }, null, 8, ["innerHTML"])
-            ])) : (vue.openBlock(), vue.createElementBlock(
-              "view",
-              {
-                key: 1,
-                id: "empty"
-              },
-              vue.toDisplayString(tipMsg.value),
-              1
-              /* TEXT */
-            ))
-          ]),
-          _: 1
-          /* STABLE */
-        });
+            vue.createElementVNode("view", { id: "webview-container" }, [
+              vue.createElementVNode("web-view", {
+                id: "webview",
+                src: webUrl.value
+              }, null, 8, ["src"])
+            ])
+          ],
+          2
+          /* CLASS */
+        );
       };
     }
   };
   const SubPackagesBookPreviewIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-8d3ba962"], ["__file", "E:/HBuilderProjects/time-master/subPackages/book/preview/index.vue"]]);
+  var wv;
   const _sfc_main$1 = {
-    data() {
-      return {
-        title: ""
-      };
-    },
-    onLoad() {
-    },
-    methods: {
-      showRichAlert() {
-        const dcRichAlert = requireNativePlugin("CRGG-Plugin");
-        dcRichAlert.setcalendar({
-          title: "我是提醒",
-          location: "上海市普陀区",
-          allDay: "1",
-          description: "测试测试描述",
-          startDate: "2020-04-15 15:40:33",
-          endDate: "2020-04-15 15:40:32",
-          alarmArray_ios: ["-7.f", "-17.f", "-27.5f"],
-          alarmArray_android: [1, 2, 10]
-        }, (result) => {
-          if (result.type == "0")
-            ;
-        });
-      }
-      // 			nvueclick() {
-      // 				uni.navigateTo({
-      // 					url: '/pages/nvue/index2'
-      // 				});
-      // 			}
+    onReady() {
+      var currentWebview = this.$scope.$getAppWebview();
+      setTimeout(function() {
+        wv = currentWebview.children()[0];
+        formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:130", "wv", wv);
+        wv.evalJS("alert(1);");
+        try {
+          wv.setCssText("*{ color: white!important; background-color: #000!important; }");
+        } catch (error) {
+          formatAppLog("log", "at subPackages/test/NumericKeypad/index.vue:150", error);
+        }
+      }, 1e3);
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "button-sp-area" }, [
-      vue.createElementVNode("button", {
-        type: "primary",
-        plain: "true",
-        onClick: _cache[0] || (_cache[0] = ($event) => $options.showRichAlert())
-      }, "点击显示弹窗")
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("web-view", { src: "https://sexinsex.net/bbs/thread-8908821-1-1.html" })
     ]);
   }
   const SubPackagesTestNumericKeypadIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/HBuilderProjects/time-master/subPackages/test/NumericKeypad/index.vue"]]);
