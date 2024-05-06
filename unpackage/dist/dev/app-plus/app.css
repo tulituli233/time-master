@@ -399,6 +399,10 @@
   -webkit-line-clamp: 1;
 }
 
+.ellipsis-2 {
+  -webkit-line-clamp: 2;
+}
+
 .day-mode {
   background-color: #f8f8f8;
   color: #000000;

@@ -23885,20 +23885,28 @@ if (uni.restoreGlobal) {
       vue.useCssVars((_ctx) => ({
         "8d3ba962-showSetting ? 1 : 0": showSetting.value ? 1 : 0
       }));
+      const starList = vue.ref([]);
+      onLoad(() => {
+        starList.value = store2.state.siteStarList;
+        webUrl.value = starList.value[0];
+      });
+      onShow(() => {
+        readSetting.value = store2.state.preViewSetting;
+      });
       var wv2;
       onReady(() => {
         var currentWebview = vue.getCurrentInstance().proxy.$scope.$getAppWebview();
         setTimeout(() => {
           wv2 = currentWebview.children()[0];
-          formatAppLog("log", "at subPackages/book/preview/index.vue:65", "wv", wv2);
-          wv2.setStyle({ top: 80, scalable: true, opacity: 0.5 });
+          formatAppLog("log", "at subPackages/book/preview/index.vue:98", "wv", wv2);
+          wv2.setStyle({ top: 80, scalable: true, height: 650, opacity: readSetting.value.brightnessPercent / 100 });
           wv2.setCssText("*{ color: white!important; background-color: #000!important; }");
         }, 1e3);
       });
       const store2 = useStore();
       const theme = vue.computed(() => store2.state.theme);
       const preViewUrl = vue.ref("");
-      const webUrl = vue.ref("https://wap.cool18.com/index.php?app=index&act=view&cid=5616945");
+      const webUrl = vue.ref("");
       const showClearIcon = vue.computed(() => preViewUrl.value.length > 0);
       const clearIcon = () => {
         preViewUrl.value = "";
@@ -23907,29 +23915,39 @@ if (uni.restoreGlobal) {
         webUrl.value = preViewUrl.value;
       };
       const navBack = () => {
-        uni.navigateBack();
+        switchTab("/pages/mine/index");
       };
+      const refresh = () => {
+        wv2.reload();
+      };
+      const showFunBox = vue.ref(false);
       const closeFooter = () => {
-        wv2.setStyle({ height: 700 });
+        wv2.setStyle({ height: 650 });
+        showFunBox.value = false;
+      };
+      const goBack = () => {
+        uni.navigateBack();
       };
       const readSetting = vue.ref({
         fontSizePercent: 30,
-        brightnessPercent: 90
+        brightnessPercent: 70
       });
       const showSetting = vue.ref(false);
-      const showOrHideFunBtn = () => {
-        formatAppLog("log", "at subPackages/book/preview/index.vue:96", "showOrHideFunBtn");
-        wv2.setStyle({ height: 500 });
-        showSetting.value = !showSetting.value;
+      const openSetting = () => {
+        showFunBox.value = true;
+        showList.value = false;
+        wv2.setStyle({ height: 450 });
+        showSetting.value = true;
       };
       const setThirdPartyFontSize = (num) => {
-        formatAppLog("log", "at subPackages/book/preview/index.vue:102", "setThirdPartyFontSize", num);
-        formatAppLog("log", "at subPackages/book/preview/index.vue:103", "wv", wv2);
+        formatAppLog("log", "at subPackages/book/preview/index.vue:147", "setThirdPartyFontSize", num);
+        formatAppLog("log", "at subPackages/book/preview/index.vue:148", "wv", wv2);
         wv2.setCssText("*{ font-size: 60px!important; }");
       };
       const setThirdPartyOpacity = (num) => {
-        formatAppLog("log", "at subPackages/book/preview/index.vue:111", "setThirdPartyOpacity", num);
-        wv2.setCssText("*{ opacity: " + num + " }");
+        formatAppLog("log", "at subPackages/book/preview/index.vue:157", "setThirdPartyOpacity", num);
+        wv2.setStyle({ opacity: num });
+        store2.dispatch("updatePreViewSetting", readSetting.value);
       };
       const updateBrightness = (e2) => {
         readSetting.value.brightnessPercent = e2.detail.value;
@@ -23940,6 +23958,7 @@ if (uni.restoreGlobal) {
         setThirdPartyFontSize(readSetting.value.fontSizePercent);
       };
       const setBrightness = (num) => {
+        formatAppLog("log", "at subPackages/book/preview/index.vue:171", "setBrightness", num);
         readSetting.value.brightnessPercent = parseInt(readSetting.value.brightnessPercent);
         readSetting.value.brightnessPercent += num;
         setThirdPartyOpacity(readSetting.value.brightnessPercent / 100);
@@ -23949,19 +23968,27 @@ if (uni.restoreGlobal) {
         readSetting.value.fontSizePercent += num;
         setThirdPartyFontSize(readSetting.value.fontSizePercent);
       };
-      const starList = vue.ref([
-        "https://sexinsex.net/bbs/thread-8908821-1-1.html",
-        "https://wap.cool18.com/index.php?app=index&act=view&cid=5616945"
-      ]);
       const showList = vue.ref(false);
-      const showOrHideStarList = () => {
+      const showStarList = () => {
+        showFunBox.value = true;
         showSetting.value = false;
-        wv2.setStyle({ height: 500 });
-        showList.value = !showList.value;
+        wv2.setStyle({ height: 450 });
+        showList.value = true;
       };
       const goTo = (item) => {
         webUrl.value = item;
-        showList.value = false;
+        closeFooter();
+      };
+      const addStar = () => {
+        let nowUrl = wv2.getURL();
+        if (!starList.value.includes(nowUrl)) {
+          starList.value.push(nowUrl);
+          store2.dispatch("updateSiteStarList", starList.value);
+        }
+      };
+      const removeStar = (index2) => {
+        starList.value.splice(index2, 1);
+        store2.dispatch("updateSiteStarList", starList.value);
       };
       return (_ctx, _cache) => {
         const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
@@ -23971,162 +23998,243 @@ if (uni.restoreGlobal) {
             class: vue.normalizeClass(["content", vue.unref(theme).mode])
           },
           [
-            vue.createElementVNode("view", {
-              id: "preview-search",
-              class: "theme-bgc"
-            }, [
-              vue.createVNode(_component_uni_icons, {
-                type: "left",
-                size: "30",
-                color: vue.unref(theme).iconColor,
-                onClick: navBack
-              }, null, 8, ["color"]),
-              vue.withDirectives(vue.createElementVNode(
-                "input",
-                {
-                  class: "author-input",
-                  type: "text",
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => preViewUrl.value = $event),
-                  placeholder: "请输入网址",
-                  onFocus: showOrHideStarList
-                },
-                null,
-                544
-                /* HYDRATE_EVENTS, NEED_PATCH */
-              ), [
-                [vue.vModelText, preViewUrl.value]
-              ]),
-              vue.withDirectives(vue.createVNode(
-                _component_uni_icons,
-                {
-                  class: "clear",
-                  onClick: clearIcon,
-                  type: "clear",
-                  size: "25"
-                },
-                null,
-                512
-                /* NEED_PATCH */
-              ), [
-                [vue.vShow, vue.unref(showClearIcon)]
-              ]),
-              vue.createElementVNode("view", {
-                class: "search-btn",
-                onClick: search
-              }, "预览"),
-              vue.createVNode(_component_uni_icons, {
-                type: "gear-filled",
-                size: "30",
-                color: vue.unref(theme).iconColor,
-                onClick: showOrHideFunBtn
-              }, null, 8, ["color"]),
-              vue.createCommentVNode(" 关闭按钮 "),
-              vue.createElementVNode("view", {
-                class: "close-btn",
-                onClick: closeFooter
-              }, "关闭"),
-              vue.createCommentVNode(" 设置 "),
-              vue.withDirectives(vue.createElementVNode(
-                "view",
-                { class: "sidebar-setting theme-bgc" },
-                [
-                  vue.createElementVNode("view", { class: "setting-item" }, [
-                    vue.createElementVNode("view", {
-                      class: "setting-icon",
-                      onClick: _cache[1] || (_cache[1] = ($event) => setBrightness(-1))
-                    }, [
-                      vue.createVNode(_component_uni_icons, {
-                        class: "theme-font",
-                        "custom-prefix": "iconfont",
-                        type: "icon-liangdu-4",
-                        size: "30"
-                      })
-                    ]),
-                    vue.createElementVNode("input", {
-                      class: "range-input",
-                      type: "range",
-                      value: readSetting.value.brightnessPercent,
-                      onInput: updateBrightness
-                    }, null, 40, ["value"]),
-                    vue.createElementVNode("view", {
-                      class: "setting-icon",
-                      onClick: _cache[2] || (_cache[2] = ($event) => setBrightness(1))
-                    }, [
-                      vue.createVNode(_component_uni_icons, {
-                        class: "theme-font",
-                        "custom-prefix": "iconfont",
-                        type: "icon-liang-8",
-                        size: "30"
-                      })
-                    ])
-                  ]),
-                  vue.createElementVNode("view", { class: "setting-item" }, [
-                    vue.createElementVNode("view", {
-                      class: "setting-icon",
-                      onClick: _cache[3] || (_cache[3] = ($event) => setFontSize(-1))
-                    }, [
-                      vue.createVNode(_component_uni_icons, {
-                        class: "theme-font",
-                        "custom-prefix": "iconfont",
-                        type: "icon-ziti-jian",
-                        size: "30"
-                      })
-                    ]),
-                    vue.createElementVNode("input", {
-                      class: "range-input",
-                      type: "range",
-                      value: readSetting.value.fontSizePercent,
-                      onInput: updateFontSize
-                    }, null, 40, ["value"]),
-                    vue.createElementVNode("view", {
-                      class: "setting-icon",
-                      onClick: _cache[4] || (_cache[4] = ($event) => setFontSize(1))
-                    }, [
-                      vue.createVNode(_component_uni_icons, {
-                        class: "theme-font",
-                        "custom-prefix": "iconfont",
-                        type: "icon-ziti-jia",
-                        size: "30"
-                      })
-                    ])
-                  ])
-                ],
-                512
-                /* NEED_PATCH */
-              ), [
-                [vue.vShow, showSetting.value]
-              ]),
-              vue.createCommentVNode(" 收藏的网址列表 "),
-              vue.withDirectives(vue.createElementVNode(
-                "view",
-                { class: "star-list theme-bgc" },
-                [
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
+            vue.createElementVNode(
+              "view",
+              {
+                style: vue.normalizeStyle({ "opacity": readSetting.value.brightnessPercent / 100 })
+              },
+              [
+                vue.createElementVNode("view", {
+                  id: "preview-search",
+                  class: "theme-bgc"
+                }, [
+                  vue.createVNode(_component_uni_icons, {
+                    type: "left",
+                    size: "30",
+                    color: vue.unref(theme).iconColor,
+                    onClick: navBack
+                  }, null, 8, ["color"]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "input",
+                    {
+                      class: "author-input",
+                      type: "text",
+                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => preViewUrl.value = $event),
+                      placeholder: "请输入网址",
+                      onFocus: showStarList
+                    },
                     null,
-                    vue.renderList(starList.value, (item, index2) => {
-                      return vue.openBlock(), vue.createElementBlock("view", {
-                        class: "list-item ellipsis ellipsis-1",
-                        key: index2,
-                        onClick: ($event) => goTo(item)
-                      }, vue.toDisplayString(item), 9, ["onClick"]);
-                    }),
-                    128
-                    /* KEYED_FRAGMENT */
-                  ))
-                ],
-                512
-                /* NEED_PATCH */
-              ), [
-                [vue.vShow, showList.value]
-              ])
-            ]),
-            vue.createElementVNode("view", { id: "webview-container" }, [
-              vue.createElementVNode("web-view", {
-                id: "webview",
-                src: webUrl.value
-              }, null, 8, ["src"])
-            ])
+                    544
+                    /* HYDRATE_EVENTS, NEED_PATCH */
+                  ), [
+                    [vue.vModelText, preViewUrl.value]
+                  ]),
+                  vue.withDirectives(vue.createVNode(
+                    _component_uni_icons,
+                    {
+                      class: "clear",
+                      onClick: clearIcon,
+                      type: "clear",
+                      size: "25"
+                    },
+                    null,
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, vue.unref(showClearIcon)]
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "search-btn",
+                    onClick: search
+                  }, "预览"),
+                  vue.createCommentVNode(" 刷新 "),
+                  vue.createVNode(_component_uni_icons, {
+                    type: "refreshempty",
+                    size: "30",
+                    color: vue.unref(theme).iconColor,
+                    onClick: refresh
+                  }, null, 8, ["color"]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { id: "fun-box" },
+                    [
+                      vue.createCommentVNode(" 关闭按钮 "),
+                      vue.createElementVNode("view", {
+                        class: "close-btn",
+                        onClick: closeFooter
+                      }, "关闭"),
+                      vue.createCommentVNode(" 设置 "),
+                      vue.withDirectives(vue.createElementVNode(
+                        "view",
+                        { class: "sidebar-setting theme-bgc" },
+                        [
+                          vue.createElementVNode("view", { class: "setting-item" }, [
+                            vue.createElementVNode("view", {
+                              class: "setting-icon",
+                              onClick: _cache[1] || (_cache[1] = ($event) => setBrightness(-1))
+                            }, [
+                              vue.createVNode(_component_uni_icons, {
+                                class: "theme-font",
+                                "custom-prefix": "iconfont",
+                                type: "icon-liangdu-4",
+                                size: "30"
+                              })
+                            ]),
+                            vue.createElementVNode("input", {
+                              class: "range-input",
+                              type: "range",
+                              value: readSetting.value.brightnessPercent,
+                              onInput: updateBrightness
+                            }, null, 40, ["value"]),
+                            vue.createElementVNode("view", {
+                              class: "setting-icon",
+                              onClick: _cache[2] || (_cache[2] = ($event) => setBrightness(1))
+                            }, [
+                              vue.createVNode(_component_uni_icons, {
+                                class: "theme-font",
+                                "custom-prefix": "iconfont",
+                                type: "icon-liang-8",
+                                size: "30"
+                              })
+                            ])
+                          ]),
+                          vue.createElementVNode("view", { class: "setting-item" }, [
+                            vue.createElementVNode("view", {
+                              class: "setting-icon",
+                              onClick: _cache[3] || (_cache[3] = ($event) => setFontSize(-1))
+                            }, [
+                              vue.createVNode(_component_uni_icons, {
+                                class: "theme-font",
+                                "custom-prefix": "iconfont",
+                                type: "icon-ziti-jian",
+                                size: "30"
+                              })
+                            ]),
+                            vue.createElementVNode("input", {
+                              class: "range-input",
+                              type: "range",
+                              value: readSetting.value.fontSizePercent,
+                              onInput: updateFontSize
+                            }, null, 40, ["value"]),
+                            vue.createElementVNode("view", {
+                              class: "setting-icon",
+                              onClick: _cache[4] || (_cache[4] = ($event) => setFontSize(1))
+                            }, [
+                              vue.createVNode(_component_uni_icons, {
+                                class: "theme-font",
+                                "custom-prefix": "iconfont",
+                                type: "icon-ziti-jia",
+                                size: "30"
+                              })
+                            ])
+                          ])
+                        ],
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vShow, showSetting.value]
+                      ]),
+                      vue.createCommentVNode(" 收藏的网址列表 "),
+                      vue.withDirectives(vue.createElementVNode(
+                        "view",
+                        { class: "star-list theme-bgc" },
+                        [
+                          (vue.openBlock(true), vue.createElementBlock(
+                            vue.Fragment,
+                            null,
+                            vue.renderList(starList.value, (item, index2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", {
+                                class: "list-item",
+                                key: index2
+                              }, [
+                                vue.createElementVNode("view", {
+                                  class: "list-title ellipsis ellipsis-1",
+                                  onClick: ($event) => goTo(item)
+                                }, vue.toDisplayString(item) + '">', 9, ["onClick"]),
+                                vue.createElementVNode("view", {
+                                  class: "list-delete",
+                                  onClick: ($event) => removeStar(index2)
+                                }, [
+                                  vue.createVNode(_component_uni_icons, {
+                                    type: "closeempty",
+                                    size: "30",
+                                    color: "#ccc"
+                                  })
+                                ], 8, ["onClick"])
+                              ]);
+                            }),
+                            128
+                            /* KEYED_FRAGMENT */
+                          ))
+                        ],
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vShow, showList.value]
+                      ])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, showFunBox.value]
+                  ])
+                ]),
+                vue.createElementVNode("view", { id: "webview-container" }, [
+                  vue.createElementVNode("web-view", {
+                    id: "webview",
+                    src: webUrl.value
+                  }, null, 8, ["src"])
+                ]),
+                vue.createCommentVNode(" 底部工具栏 "),
+                vue.createElementVNode("view", {
+                  id: "preview-footer",
+                  class: "theme-bgc"
+                }, [
+                  vue.createElementVNode("view", {
+                    class: "footer-item",
+                    onClick: goBack
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "left",
+                      size: "30",
+                      color: vue.unref(theme).iconColor
+                    }, null, 8, ["color"])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "footer-item",
+                    onClick: addStar
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "star-filled",
+                      size: "30",
+                      color: vue.unref(theme).iconColor
+                    }, null, 8, ["color"])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "footer-item",
+                    onClick: showStarList
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "list",
+                      size: "30",
+                      color: vue.unref(theme).iconColor
+                    }, null, 8, ["color"])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "footer-item",
+                    onClick: openSetting
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "gear-filled",
+                      size: "30",
+                      color: vue.unref(theme).iconColor
+                    }, null, 8, ["color"])
+                  ])
+                ])
+              ],
+              4
+              /* STYLE */
+            )
           ],
           2
           /* CLASS */
@@ -24325,7 +24433,6 @@ if (uni.restoreGlobal) {
   const store = createStore({
     state: {
       // 初始化状态
-      data: "初始数据",
       baseUrl: {
         type: 0,
         local: "http://192.168.0.101:3838/",
@@ -24417,13 +24524,17 @@ if (uni.restoreGlobal) {
           color: "#ce9178",
           desc: "阅读笔记，书单"
         }
-      ]
+      ],
+      // 网址收藏列表
+      siteStarList: [],
+      // 预览设置
+      preViewSetting: {
+        brightnessPercent: 70,
+        fontSizePercent: 30
+      }
     },
     mutations: {
       // 定义 mutations，用于修改状态
-      setData(state, newData) {
-        state.data = newData;
-      },
       setAppInitParams(state) {
         state.currentTab = 0;
       },
@@ -24444,13 +24555,16 @@ if (uni.restoreGlobal) {
       },
       setHomeList(state, newHomeList) {
         state.homeList = newHomeList;
+      },
+      setSiteStarList(state, newSiteStarList) {
+        state.siteStarList = newSiteStarList;
+      },
+      setPreViewSetting(state, newPreViewSetting) {
+        state.preViewSetting = newPreViewSetting;
       }
     },
     actions: {
       // 可选的，用于处理异步操作，最终提交 mutations
-      updateData({ commit }, newData) {
-        commit("setData", newData);
-      },
       openAppInitParams({ commit }, params) {
         commit("setAppInitParams");
       },
@@ -24471,6 +24585,12 @@ if (uni.restoreGlobal) {
       },
       updateHomeList({ commit }, newHomeList) {
         commit("setHomeList", newHomeList);
+      },
+      updateSiteStarList({ commit }, newSiteStarList) {
+        commit("setSiteStarList", newSiteStarList);
+      },
+      updatePreViewSetting({ commit }, newPreViewSetting) {
+        commit("setPreViewSetting", newPreViewSetting);
       }
     },
     plugins: [

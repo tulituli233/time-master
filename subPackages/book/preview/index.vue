@@ -1,51 +1,72 @@
 <template>
     <view :class="['content', theme.mode]">
-        <view id="preview-search" class="theme-bgc">
-            <uni-icons type="left" size="30" :color="theme.iconColor" @click="navBack"></uni-icons>
-            <input class="author-input" type="text" v-model="preViewUrl" placeholder="请输入网址"
-                @focus="showOrHideStarList">
-            <uni-icons class="clear" v-show="showClearIcon" @click="clearIcon" type="clear" size="25"></uni-icons>
-            <view class="search-btn" @click="search">预览</view>
-            <uni-icons type="gear-filled" size="30" :color="theme.iconColor" @click="showOrHideFunBtn"></uni-icons>
-            <!-- 关闭按钮 -->
-            <view class="close-btn" @click="closeFooter">关闭</view>
-            <!-- 设置 -->
-            <view v-show="showSetting" class="sidebar-setting theme-bgc">
-                <view class="setting-item">
-                    <view class="setting-icon" @click="setBrightness(-1)">
-                        <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liangdu-4"
-                            size="30"></uni-icons>
+        <view :style="{ 'opacity': readSetting.brightnessPercent / 100 }">
+            <view id="preview-search" class="theme-bgc">
+                <uni-icons type="left" size="30" :color="theme.iconColor" @click="navBack"></uni-icons>
+                <input class="author-input" type="text" v-model="preViewUrl" placeholder="请输入网址" @focus="showStarList">
+                <uni-icons class="clear" v-show="showClearIcon" @click="clearIcon" type="clear" size="25"></uni-icons>
+                <view class="search-btn" @click="search">预览</view>
+                <!-- 刷新 -->
+                <uni-icons type="refreshempty" size="30" :color="theme.iconColor" @click="refresh"></uni-icons>
+                <view id="fun-box" v-show="showFunBox">
+                    <!-- 关闭按钮 -->
+                    <view class="close-btn" @click="closeFooter">关闭</view>
+                    <!-- 设置 -->
+                    <view v-show="showSetting" class="sidebar-setting theme-bgc">
+                        <view class="setting-item">
+                            <view class="setting-icon" @click="setBrightness(-1)">
+                                <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liangdu-4"
+                                    size="30"></uni-icons>
+                            </view>
+                            <input class="range-input" type="range" :value="readSetting.brightnessPercent"
+                                @input="updateBrightness" />
+                            <view class="setting-icon" @click="setBrightness(1)">
+                                <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liang-8"
+                                    size="30"></uni-icons>
+                            </view>
+                        </view>
+                        <view class="setting-item">
+                            <view class="setting-icon" @click="setFontSize(-1)">
+                                <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jian"
+                                    size="30"></uni-icons>
+                            </view>
+                            <input class="range-input" type="range" :value="readSetting.fontSizePercent"
+                                @input="updateFontSize" />
+                            <view class="setting-icon" @click="setFontSize(1)">
+                                <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jia"
+                                    size="30"></uni-icons>
+                            </view>
+                        </view>
                     </view>
-                    <input class="range-input" type="range" :value="readSetting.brightnessPercent"
-                        @input="updateBrightness" />
-                    <view class="setting-icon" @click="setBrightness(1)">
-                        <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-liang-8"
-                            size="30"></uni-icons>
-                    </view>
-                </view>
-                <view class="setting-item">
-                    <view class="setting-icon" @click="setFontSize(-1)">
-                        <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jian"
-                            size="30"></uni-icons>
-                    </view>
-                    <input class="range-input" type="range" :value="readSetting.fontSizePercent"
-                        @input="updateFontSize" />
-                    <view class="setting-icon" @click="setFontSize(1)">
-                        <uni-icons class="theme-font" custom-prefix="iconfont" type="icon-ziti-jia"
-                            size="30"></uni-icons>
+                    <!-- 收藏的网址列表 -->
+                    <view v-show="showList" class="star-list theme-bgc">
+                        <view class="list-item" v-for="(item, index) in starList" :key="index">
+                            <view class="list-title ellipsis ellipsis-1" @click="goTo(item)">{{ item }}"></view>
+                            <view class="list-delete" @click="removeStar(index)">
+                                <uni-icons type="closeempty" size="30" color="#ccc"></uni-icons>
+                            </view>
+                        </view>
                     </view>
                 </view>
             </view>
-            <!-- 收藏的网址列表 -->
-            <view v-show="showList" class="star-list theme-bgc">
-                <view class="list-item ellipsis ellipsis-1" v-for="(item, index) in starList" :key="index"
-                    @click="goTo(item)">
-                    {{ item }}
+            <view id="webview-container">
+                <web-view id="webview" :src="webUrl"></web-view>
+            </view>
+            <!-- 底部工具栏 -->
+            <view id="preview-footer" class="theme-bgc">
+                <view class="footer-item" @click="goBack">
+                    <uni-icons type="left" size="30" :color="theme.iconColor"></uni-icons>
+                </view>
+                <view class="footer-item" @click="addStar">
+                    <uni-icons type="star-filled" size="30" :color="theme.iconColor"></uni-icons>
+                </view>
+                <view class="footer-item" @click="showStarList">
+                    <uni-icons type="list" size="30" :color="theme.iconColor"></uni-icons>
+                </view>
+                <view class="footer-item" @click="openSetting">
+                    <uni-icons type="gear-filled" size="30" :color="theme.iconColor"></uni-icons>
                 </view>
             </view>
-        </view>
-        <view id="webview-container">
-            <web-view id="webview" :src="webUrl"></web-view>
         </view>
     </view>
 </template>
@@ -53,7 +74,19 @@
 <script setup>
 import { ref, computed, getCurrentInstance } from 'vue';
 import { useStore } from 'vuex';
-import { onReady } from '@dcloudio/uni-app';
+import { onLoad, onReady, onShow } from '@dcloudio/uni-app';
+import { switchTab, navTo } from '@/utils/utils'
+
+const starList = ref([])
+onLoad(() => {
+    starList.value = store.state.siteStarList
+    webUrl.value = starList.value[0]
+})
+
+onShow(() => {
+    readSetting.value = store.state.preViewSetting
+})
+
 var wv
 onReady(() => {
     // #ifdef APP-PLUS
@@ -63,7 +96,7 @@ onReady(() => {
     setTimeout(() => {
         wv = currentWebview.children()[0]
         console.log("wv", wv);
-        wv.setStyle({ top: 80, scalable: true, opacity: 0.5 })
+        wv.setStyle({ top: 80, scalable: true, height: 650, opacity: readSetting.value.brightnessPercent / 100 })
         wv.setCssText("*{ color: white!important; background-color: #000!important; }");
     }, 1000); //如果是页面初始化调用时，需要延时一下
     // #endif
@@ -71,7 +104,7 @@ onReady(() => {
 const store = useStore();
 const theme = computed(() => store.state.theme)
 const preViewUrl = ref('');
-const webUrl = ref('https://wap.cool18.com/index.php?app=index&act=view&cid=5616945')
+const webUrl = ref('')
 const showClearIcon = computed(() => preViewUrl.value.length > 0)
 const clearIcon = () => {
     preViewUrl.value = ''
@@ -80,22 +113,34 @@ const search = () => {
     webUrl.value = preViewUrl.value
 }
 const navBack = () => {
-    uni.navigateBack()
+    switchTab('/pages/mine/index')
+    // navTo('/subPackages/book/index/index')
 }
-// #region 设置
+const refresh = () => {
+    wv.reload()
+}
+// #region 底部功能栏
+const showFunBox = ref(false)
 // 关闭底部功能栏
 const closeFooter = () => {
-    wv.setStyle({ height: 700 })
+    wv.setStyle({ height: 650 })
+    showFunBox.value = false
 }
+// 返回
+const goBack = () => {
+    uni.navigateBack();
+}
+// 设置
 const readSetting = ref({
     fontSizePercent: 30,
-    brightnessPercent: 90,
+    brightnessPercent: 70,
 });
 const showSetting = ref(false)
-const showOrHideFunBtn = () => {
-    console.log("showOrHideFunBtn");
-    wv.setStyle({ height: 500 })
-    showSetting.value = !showSetting.value
+const openSetting = () => {
+    showFunBox.value = true
+    showList.value = false
+    wv.setStyle({ height: 450 })
+    showSetting.value = true
 }
 // 修改第三方网页字体大小
 const setThirdPartyFontSize = (num) => {
@@ -106,10 +151,13 @@ const setThirdPartyFontSize = (num) => {
     wv.setCssText("*{ font-size: 60px!important; }");
     // wv.evalJS("alert(1);");
 }
+
 // 修改第三方网页透明度
 const setThirdPartyOpacity = (num) => {
     console.log("setThirdPartyOpacity", num);
-    wv.setCssText("*{ opacity: " + num + " }");
+    // wv.setCssText("*{ opacity: " + num + " }");
+    wv.setStyle({ opacity: num })
+    store.dispatch('updatePreViewSetting', readSetting.value)
 }
 const updateBrightness = (e) => {
     readSetting.value.brightnessPercent = e.detail.value
@@ -120,6 +168,7 @@ const updateFontSize = (e) => {
     setThirdPartyFontSize(readSetting.value.fontSizePercent)
 }
 const setBrightness = (num) => {
+    console.log("setBrightness", num);
     readSetting.value.brightnessPercent = parseInt(readSetting.value.brightnessPercent)
     readSetting.value.brightnessPercent += num
     setThirdPartyOpacity(readSetting.value.brightnessPercent / 100)
@@ -129,21 +178,28 @@ const setFontSize = (num) => {
     readSetting.value.fontSizePercent += num
     setThirdPartyFontSize(readSetting.value.fontSizePercent)
 }
-// #endregion
-// #region 收藏
-const starList = ref([
-    'https://sexinsex.net/bbs/thread-8908821-1-1.html',
-    'https://wap.cool18.com/index.php?app=index&act=view&cid=5616945'
-])
+// 收藏
 const showList = ref(false)
-const showOrHideStarList = () => {
+const showStarList = () => {
+    showFunBox.value = true
     showSetting.value = false
-    wv.setStyle({ height: 500 })
-    showList.value = !showList.value
+    wv.setStyle({ height: 450 })
+    showList.value = true
 }
 const goTo = (item) => {
     webUrl.value = item
-    showList.value = false
+    closeFooter()
+}
+const addStar = () => {
+    let nowUrl = wv.getURL()
+    if (!starList.value.includes(nowUrl)) {
+        starList.value.push(nowUrl)
+        store.dispatch('updateSiteStarList', starList.value)
+    }
+}
+const removeStar = (index) => {
+    starList.value.splice(index, 1)
+    store.dispatch('updateSiteStarList', starList.value)
 }
 // #endregion
 </script>
@@ -205,76 +261,118 @@ const goTo = (item) => {
     // z-index: v-bind("showSetting ? 1 : 0");
 }
 
-.close-btn {
+#fun-box {
     position: fixed;
-    top: 600px;
-    right: 2.5vw;
-    width: 120rpx;
-    height: 60rpx;
-    border-radius: 20rpx;
-    background-color: #00b5ff;
-    color: #fff;
-    text-align: center;
-    line-height: 60rpx;
-}
+    bottom: 110rpx;
+    left: 0;
+    width: 100vw;
+    height: 420rpx;
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
 
-.star-list {
-    position: fixed;
-    bottom: 20rpx;
-    left: 2.5vw;
-    width: 90vw;
-    height: 300rpx;
-    background-color: #f0f0f0;
-    border-radius: 20rpx;
-    padding: 20rpx;
-
-    .list-item {
-        width: 90vw;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20rpx;
-    }
-}
-
-.sidebar-setting {
-    position: fixed;
-    bottom: 20rpx;
-    left: 2.5vw;
-    width: 90vw;
-    height: 300rpx;
-    background-color: #f0f0f0;
-    border-radius: 20rpx;
-    padding: 20rpx;
-
-    .setting-item {
-        width: 90vw;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20rpx;
-
-        .setting-icon {
-            padding: 10rpx;
-        }
-
-        .range-input {
-            width: 450rpx;
-            padding: 10rpx;
-        }
+    .close-btn {
+        position: absolute;
+        top: 0;
+        right: 2.5vw;
+        width: 120rpx;
+        height: 60rpx;
+        border-radius: 10rpx;
+        background-color: #00b5ff;
+        color: #fff;
+        text-align: center;
+        line-height: 60rpx;
     }
 
-    .bgc-setting {
+    .star-list {
         display: flex;
-        justify-content: space-around;
-        padding: 10rpx;
+        flex-direction: column;
+        align-items: center;
+        width: 90vw;
+        height: 300rpx;
+        background-color: #f0f0f0;
+        border-radius: 20rpx;
+        padding: 20rpx;
+        overflow: scroll;
 
-        .color-item {
-            width: 150rpx;
-            height: 80rpx;
+        .list-item {
+            width: 90vw;
+            height: 60rpx;
+            padding: 10rpx;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20rpx;
+            overflow: hidden;
             border-radius: 10rpx;
-            cursor: pointer;
+            background-color: #000;
+
+            .list-title {
+                flex: 6;
+            }
+
+            .list-delete {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
+    }
+
+    .sidebar-setting {
+        width: 90vw;
+        height: 300rpx;
+        background-color: #f0f0f0;
+        border-radius: 20rpx;
+        padding: 20rpx;
+
+        .setting-item {
+            width: 90vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20rpx;
+
+            .setting-icon {
+                padding: 10rpx;
+            }
+
+            .range-input {
+                width: 450rpx;
+                padding: 10rpx;
+            }
+        }
+
+        .bgc-setting {
+            display: flex;
+            justify-content: space-around;
+            padding: 10rpx;
+
+            .color-item {
+                width: 150rpx;
+                height: 80rpx;
+                border-radius: 10rpx;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+#preview-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+
+    .footer-item {
+        flex: 1;
+        text-align: center;
+        line-height: 100rpx;
     }
 }
 </style>

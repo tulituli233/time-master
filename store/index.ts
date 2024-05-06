@@ -4,7 +4,6 @@ import createPersistedState from 'vuex-persistedstate';
 export default createStore({
   state: {
     // 初始化状态
-    data: '初始数据',
     baseUrl: {
       type: 0,
       local: 'http://192.168.0.101:3838/',
@@ -96,13 +95,17 @@ export default createStore({
         color: '#ce9178',
         desc: '阅读笔记，书单'
       }
-    ]
+    ],
+    // 网址收藏列表
+    siteStarList: [],
+    // 预览设置
+    preViewSetting: {
+      brightnessPercent: 70,
+      fontSizePercent: 30
+    }
   },
   mutations: {
     // 定义 mutations，用于修改状态
-    setData(state, newData) {
-      state.data = newData;
-    },
     setAppInitParams(state) {
       state.currentTab = 0;
     },
@@ -123,13 +126,16 @@ export default createStore({
     },
     setHomeList(state, newHomeList) {
       state.homeList = newHomeList;
+    },
+    setSiteStarList(state, newSiteStarList) {
+      state.siteStarList = newSiteStarList;
+    },
+    setPreViewSetting(state, newPreViewSetting) {
+      state.preViewSetting = newPreViewSetting;
     }
   },
   actions: {
     // 可选的，用于处理异步操作，最终提交 mutations
-    updateData({ commit }, newData) {
-      commit('setData', newData);
-    },
     openAppInitParams({ commit }, params) {
       commit('setAppInitParams');
     },
@@ -150,6 +156,12 @@ export default createStore({
     },
     updateHomeList({ commit }, newHomeList) {
       commit('setHomeList', newHomeList);
+    },
+    updateSiteStarList({ commit }, newSiteStarList) {
+      commit('setSiteStarList', newSiteStarList);
+    },
+    updatePreViewSetting({ commit }, newPreViewSetting) {
+      commit('setPreViewSetting', newPreViewSetting);
     }
   },
   plugins: [
